@@ -6,8 +6,13 @@ class Education {
     return createdNewEducation;
   }
 
-  static async findById({ user_id }) {
-    const education = await EducationModel.findOne({ id: user_id });
+  static async findById({ education_id }) {
+    const education = await EducationModel.findOne({ id: education_id });
+    return education;
+  }
+
+  static async findByUserId({ user_id }) {
+    const education = await EducationModel.findOne({ user_id: user_id });
     return education;
   }
 
@@ -21,7 +26,7 @@ class Education {
       update,
       option
     );
-    return updatedUser;
+    return updatedEducation;
   }
 }
 
