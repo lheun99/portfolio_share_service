@@ -1,31 +1,28 @@
-import { Card, Row, Button, Col } from "react-bootstrap";
+import { Row, Button, Col, Container } from "react-bootstrap";
 
+// Award 컴포넌트에서 award를 입력받아서 award의 title과 description을 나타냄.
+// isEditable이 true일 경우, 편집 버튼을 생성함.
 function AwardCard({ award, setIsEditing, isEditable }) {
   return (
-    <Card className="mb-2 ms-3 mr-5">
-      <Card.Body>
-        <Row className="justify-content-md-center">
-        </Row>
-        <Card.Title>{award?.title}</Card.Title>
-        <Card.Text>{award?.description}</Card.Text>
-
-        {isEditable && (
-          <Col>
-            <Row className="mt-3 text-center text-info">
-              <Col sm={{ span: 20 }}>
-                <Button
-                  variant="outline-info"
-                  size="sm"
-                  onClick={() => setIsEditing(true)}
-                >
-                  편집
-                </Button>
-              </Col>
-            </Row>
-          </Col>
-        )}
-      </Card.Body>
-    </Card>
+    <Container fluid>
+      <Row md="9">
+        <Col className>
+          {award?.title}<br/>
+          {award?.description}
+        </Col>
+        <Col md="3">
+          {isEditable && (
+              <Button
+                variant="outline-info"
+                size="sm"
+                onClick={() => setIsEditing(true)}
+              >
+                편집
+              </Button>
+          )}
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
