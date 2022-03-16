@@ -96,4 +96,19 @@ projectAuthRouter.put(
   }
 );
 
+projectAuthRouter.get(
+  "/projectlist/:user_id",
+  login_required,
+  async function (req, res, next) {
+    try {
+      const user_id = req.params.user_id;
+      // 전체 사용자 목록을 얻음
+      const projects = await projectAuthService.getProjects({ user_id });
+      res.status(200).send(projects);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
 export { projectAuthRouter };
