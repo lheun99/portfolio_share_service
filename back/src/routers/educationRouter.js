@@ -35,11 +35,27 @@ educationRouter.post("/education/create", login_required, async function (req, r
   }
 });
 
-educationRouter.get("/educations/:userId", login_required, async function (req, res, next) {
+educationRouter.get("/educationlist/:user_id", login_required, async function (req, res, next) {
   try {
     // req (request) 에서 데이터 가져오기
-    const userId = req.params.userId;
+    const userId = req.params.user_id;
     const education = await educationService.getEducation({ userId });
+    
+    res.status(200).json(education);
+  } catch (error) {
+    next(error);
+  }
+});
+
+educationRouter.get("/educations/:id", login_required, async function (req, res, next) {
+  try {
+    // req (request) 에서 데이터 가져오기
+    const educationId = req.params.id;
+    const education = await educationService.getEducationInfo({ educationId });
+    
+    if (education?.message) {
+      throw new Error(education.message);
+    }
     
     res.status(200).json(education);
   } catch (error) {

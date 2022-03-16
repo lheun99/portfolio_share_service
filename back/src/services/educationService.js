@@ -46,11 +46,22 @@ class educationService {
 
     return education;
   }
-  
+
   // 학력 사항 불러오기 기능
   static async getEducation({ userId }) {
     console.log("service: ", userId)
     const education = await Education.findByUserId({ userId });
+    return education;
+  }
+
+  // 학력 사항 상세 정보 불러오기 기능
+  static async getEducationInfo({ educationId }) {
+    const education = await Education.findById({ educationId });
+
+    if (!education) {
+      const message = "해당 사항이 이미 삭제되었거나 존재하지 않습니다.";
+      return { message }
+    }
     return education;
   }
 
