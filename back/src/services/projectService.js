@@ -26,6 +26,19 @@ class projectAuthService {
 
     return createdNewProject;
   }
+
+  static async getProjectInfo({ project_id }) {
+    const project = await Project.findByProjectId({ project_id });
+
+    // db에서 찾지 못한 경우, 에러 메시지 반환
+    if (!project) {
+      const errorMessage =
+        "프로젝트가 존재하지 않습니다. 다시 한 번 확인해 주세요.";
+      return { errorMessage };
+    }
+
+    return project;
+  }
 }
 
 export { projectAuthService };
