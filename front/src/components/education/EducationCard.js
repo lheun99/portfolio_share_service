@@ -1,5 +1,6 @@
 import { Button,ButtonGroup } from "react-bootstrap";
 
+// 학력 정보 조회 상세 컴포넌트
 const EducationCard = ({topics}) => {
 
     return (

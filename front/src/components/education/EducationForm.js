@@ -1,23 +1,26 @@
 import { useState } from 'react'
 import {Form, Button} from 'react-bootstrap'
 
+// create 폼 컴포넌트
 const EducationForm = (props) => {
     const [schoolInput, setSchoolInput] = useState('')
     const [majorInput, setMajorInput] = useState('')
 
+    // 학교명 value 값 변경 함수
     const changeHandler1 = (e) => {
         e.preventDefault()
         setSchoolInput(e.target.value)
         console.log(schoolInput)
     }
 
+    // 전공명 value 값 변경 함수
     const changeHandler2 = (e) => {
         e.preventDefault()
         setMajorInput(e.target.value)
         console.log(majorInput)
     }
 
-
+    // create 폼 제출 시 값 전달 및 폼 내부 초기화 / 추가 버튼 활성화
     const submitHandler = (e) => {
         e.preventDefault()
         setSchoolInput('')
@@ -46,6 +49,7 @@ const EducationForm = (props) => {
             <Form.Label>전공명</Form.Label>
             <Form.Control type='text' name='major' value={majorInput} onChange={changeHandler2} placeholder='전공명을 입력해주세요' />
         </Form.Group>
+        
         <div key={"inline-radio"} className="mb-3">
         <Form.Check
             inline
