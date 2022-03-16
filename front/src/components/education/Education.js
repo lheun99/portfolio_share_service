@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import EducationList from './EducationList';
-import EducationInput from './EducationInput';
-import { Button,ButtonGroup } from "react-bootstrap";
+import EducationCard from './EducationCard';
+import EducationForm from './EducationForm';
+import { Button } from "react-bootstrap";
 
 const Education = () => {
     
@@ -38,8 +38,8 @@ const Education = () => {
     return (
         <div style={{padding: 10,border:'2px blue solid'}}>
             <h5>학력</h5>
-            <EducationList topics={topics} />
-            {visible ? <EducationInput
+            <EducationCard topics={topics} />
+            {visible ? <EducationForm
             topics={topics} onCreate={createHandler} clickHandler={clickHandler} /> : 
             <div style={{textAlign: 'center'}}>
                 <Button size='sm' style={{ fontSize: 15,}} onClick={clickHandler}>추가</Button>

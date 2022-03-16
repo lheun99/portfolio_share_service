@@ -1,6 +1,6 @@
 import { Button,ButtonGroup } from "react-bootstrap";
 
-const EducationList = ({topics}) => {
+const EducationCard = ({topics}) => {
 
     return (
         <div>
@@ -24,4 +24,4 @@ const EducationList = ({topics}) => {
 
 }
 
-export default EducationList
+export default EducationCard

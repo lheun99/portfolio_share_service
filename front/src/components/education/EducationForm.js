@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import {Form, Button} from 'react-bootstrap'
 
-const EducationInput = (props) => {
+const EducationForm = (props) => {
     const [schoolInput, setSchoolInput] = useState('')
     const [majorInput, setMajorInput] = useState('')
 
@@ -64,4 +64,4 @@ const EducationInput = (props) => {
     )
 }
 
-export default EducationInput
+export default EducationForm
