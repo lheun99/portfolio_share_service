@@ -11,6 +11,11 @@ class Certificate {
     const createdNewCertificate = await CertificateModel.create(newCertificate);
     return createdNewCertificate;
   }
+
+  static async findByCertificateId({ certificate_id }) {
+    const certificate = await CertificateModel.findOne({ id: certificate_id });
+    return certificate;
+  }
 }
 
 export { Certificate };

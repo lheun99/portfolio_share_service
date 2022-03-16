@@ -25,6 +25,21 @@ class certificateAuthService {
 
     return createdNewCertificate;
   }
+
+  static async getCertificateInfo({ certificate_id }) {
+    const certificate = await Certificate.findByCertificateId({
+      certificate_id,
+    });
+
+    // db에서 찾지 못한 경우, 에러 메시지 반환
+    if (!certificate) {
+      const errorMessage =
+        "자격증 정보가 존재하지 않습니다. 다시 한 번 확인해 주세요.";
+      return { errorMessage };
+    }
+
+    return certificate;
+  }
 }
 
 export { certificateAuthService };
