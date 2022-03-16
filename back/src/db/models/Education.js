@@ -6,27 +6,33 @@ class Education {
     return createdNewEducation;
   }
 
-  static async findById({ education_id }) {
-    const education = await EducationModel.findOne({ id: education_id });
+  static async findById({ educationId }) {
+    const education = await EducationModel.findOne({ id: educationId });
     return education;
   }
 
-  static async findByUserId({ user_id }) {
-    const education = await EducationModel.findOne({ user_id: user_id });
-    return education;
+  static async findByUserId({ userId }) {
+    console.log(userId);
+    const educations = await EducationModel.find({ user_id: userId });
+    return educations;
   }
 
-  static async update({ education_id, fieldToUpdate, newValue }) {
-    const filter = { id: education_id };
-    const update = { [fieldToUpdate]: newValue };
+  static async update({ educationId, fieldToUpdate, newValue }) {
+    const filter = { id: educationId };
+    const toUpdate = { [fieldToUpdate]: newValue };
     const option = { returnOriginal: false };
 
     const updatedEducation = await EducationModel.findOneAndUpdate(
       filter,
-      update,
+      toUpdate,
       option
     );
     return updatedEducation;
+  }
+
+  static async delete({ educationId }) {
+    const deletedEducation = await EducationModel.deleteOne({ id: educationId });
+    return deletedEducation;
   }
 }
 
