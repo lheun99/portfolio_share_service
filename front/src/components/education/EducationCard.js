@@ -9,7 +9,7 @@ const EducationCard = ({topics}) => {
                     <div key={item.id} style={{borderBottom: 'dotted 2px grey'}}>
                         <article style={{display: 'inline-block'}}>
                             <p style={{fontWeight:'bold'}}>{item.school}</p>
-                            <p>{item.major}</p>
+                            <p>{item.major + ` (${item.position})`}</p>
                         </article>
                         <ButtonGroup style={{display: 'inline-block',float: 'right'}} size='sm'>
                             <Button variant="secondary">수정</Button>

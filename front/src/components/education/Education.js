@@ -7,16 +7,16 @@ const Education = () => {
     
     // 확인용
     const [topics, setTopics] = useState([
-        {id:1, school:'서울고등학교', major:'인문계'},
-        {id:2, school:'서울대학교', major:'컴퓨터공학과'},
+        {id:1, school:'서울고등학교', major:'인문계', position:'재학 중'},
+        {id:2, school:'서울대학교', major:'컴퓨터공학과', position:'학사 졸업'},
       ]);
 
     const [nextId, setNextId] = useState(3)
     const [visible, setVisible] = useState(false)
 
-    const createHandler = (school, major) => {
+    const createHandler = (school, major,position) => {
         const copied = [...topics]
-        const newTopic = {id: nextId, school, major}
+        const newTopic = {id: nextId, school, major, position}
         copied.push(newTopic)
         setTopics(copied)
         setNextId(nextId+1)
