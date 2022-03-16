@@ -94,4 +94,21 @@ certificateAuthRouter.put(
   }
 );
 
+certificateAuthRouter.get(
+  "/certificatelist/:user_id",
+  login_required,
+  async function (req, res, next) {
+    try {
+      const user_id = req.params.user_id;
+      // 전체 사용자 목록을 얻음
+      const certificates = await certificateAuthService.getCertificates({
+        user_id,
+      });
+      res.status(200).send(certificates);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
 export { certificateAuthRouter };

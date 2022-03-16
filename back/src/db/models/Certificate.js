@@ -29,6 +29,11 @@ class Certificate {
     );
     return updatedCertificate;
   }
+
+  static async findByUserId({ user_id }) {
+    const certificates = await CertificateModel.find({ user_id });
+    return certificates;
+  }
 }
 
 export { Certificate };
