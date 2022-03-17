@@ -5,7 +5,6 @@ import { Button } from "react-bootstrap";
 import * as Api from '../../api';
 import { UserStateContext } from '../../App';
 
-
 // 최상위 컴포넌트
 const Education = () => {
 
@@ -15,7 +14,6 @@ const Education = () => {
     
     // user_id 값
     const userId = userState.user.id;
-
 
     useEffect(() => {
         Api.get('educationlist', userId)
@@ -30,13 +28,10 @@ const Education = () => {
         Api.post('education/create', newTopic)
     };
 
-
     // "+"" 버튼 활성화 및 비활성화 함수
     const clickHandler = () => {
-
         setVisible(!visible)
         console.log(visible)
-        
     }
 
     // 수정 기능 구현 함수
@@ -53,12 +48,16 @@ const Education = () => {
             else {
                 return { ...v}
             }
-
         })
-
         console.log(mapped)
-
         setTopics(mapped)
+    }
+
+    // 삭제 기능 구현 함수
+    const deleteHandler = (id,value) => {
+        Api.delete(`educations/${id}`, value).then(res => console.log(res.data))
+        const filtered = topics.filter((v) => v.id !== id)
+        setTopics(filtered)
     }
 
     
@@ -66,7 +65,7 @@ const Education = () => {
     return (
         <div style={{padding:5,border: "1px solid lightgrey", borderRadius: "3px"}}>
             <h5>학력</h5>
-            <EducationCardList topics={topics} editHandler={editHandler} />
+            <EducationCardList topics={topics} editHandler={editHandler} deleteHandler={deleteHandler} />
             {visible ? <EducationForm
             topics={topics} onCreate={createHandler} clickHandler={clickHandler} /> : 
             <div style={{textAlign: 'center'}}>
