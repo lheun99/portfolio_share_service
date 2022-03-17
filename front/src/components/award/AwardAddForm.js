@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Form, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
 
-function AwardAddForm({portfolioOwnerId, setAwards, setIsAdding}) {
+function AwardAddForm({ awards, setAwards, setIsAdding}) {
   // 입력받을 award의 title과 description을 담을 state를 지정함.
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -12,14 +12,19 @@ function AwardAddForm({portfolioOwnerId, setAwards, setIsAdding}) {
     e.preventDefault();
 
     // awardlist로 title과 description의 정보를 담아 POST 요청함.
-    const res = await Api.post("awardlist", portfolioOwnerId, {
+    // GET 처리 성공하면 const res = 부분 삭제하고 POST 요청만 보냄.
+    const res = await Api.post("award/create", {
       title,
       description,
     });
-    // 업데이트된 awards 정보는 response의 data임.
-    const updatedAwards = res.data;
-    // 해당 정보로 awards을 세팅함.
-    setAwards(updatedAwards);
+
+    // 해당 정보로 awards을 세팅함. (GET 처리 성공하면 이부분 삭제)
+    setAwards(() => {
+        let newAwards = [...awards];
+        newAwards.push(res.data);
+        console.log(newAwards);
+        return newAwards;
+    })
 
     // isAdding을 false로 세팅함.
     setIsAdding(false);
