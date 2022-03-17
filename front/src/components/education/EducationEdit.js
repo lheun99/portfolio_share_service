@@ -2,20 +2,17 @@ import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 
 // 수정 버튼 클릭 시 나타나는 update용 form
-const EducationEdit = ({ item, onUpdate, handleChanger }) => {
+const EducationEdit = ({ item, onUpdate, editHandler }) => {
     const { user_id, id, school, major, position } = item;
     const [schoolInput, setSchoolInput] = useState(school);
     const [majorInput, setMajorInput] = useState(major);
     const [checking, setChecking]  = useState(position);
 
-
-
+    // 라디오 버튼 check 상태 변경 함수
     const checkHandler = (e) => {
         e.preventDefault()
         setChecking(e.target.value)
     };
-
-
 
     // school value 값 수정 함수
     const changeHandler1 = (e) => {
@@ -31,8 +28,6 @@ const EducationEdit = ({ item, onUpdate, handleChanger }) => {
         console.log(majorInput)
     };
 
-
-
     // 폼 제출 시 값 update 함수
     const submitHandler = (e) => {
         e.preventDefault()
@@ -42,7 +37,7 @@ const EducationEdit = ({ item, onUpdate, handleChanger }) => {
         let p = e.target.group1.value
         
         if (s && m && p) {
-            handleChanger(user_id, id, s, m, p)
+            editHandler(user_id, id, s, m, p)
             onUpdate()
         }
 

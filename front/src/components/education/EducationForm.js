@@ -25,26 +25,20 @@ const EducationForm = (props) => {
     // create 폼 제출 시 값 전달 및 폼 내부 초기화 / 추가 버튼 활성화
     const submitHandler = (e) => {
         e.preventDefault()
-        
 
         let s = e.target.school.value
         let m = e.target.major.value
         let p = e.target.group.value
 
         if (s && m && p) {
-            
             props.onCreate(s,m,p)
             props.clickHandler()
             setSchoolInput('')
             setMajorInput('')
         }
-        
-
-
     }
 
     return (
-        
         <Form style={{margin:10, padding: 10, borderRadius: 3, border: 'lightgrey 2px solid'}} onSubmit={submitHandler}>
         <Form.Group className="mb-3">
             {/* <Form.Label>학교 이름</Form.Label> */}

@@ -2,18 +2,17 @@ import { Button,ButtonGroup } from "react-bootstrap";
 import { useState } from 'react';
 import EducationEdit from './EducationEdit';
 
-// 학력 정보 조회 상세 컴포넌트
-const EducationCard = ({value, handleChanger}) => {
+// 학력 정보 조회 상세 값 컴포넌트
+const EducationCard = ({value, editHandler}) => {
     const { user_id, school, major, position } = value;
     const [isEditing, SetIsEditing] = useState(false);
 
     const updateHandler = () => {
-        // e.preventDefault()
         SetIsEditing(!isEditing)
     };
 
     return (
-        isEditing ? <EducationEdit item={value} handleChanger={handleChanger} onUpdate={updateHandler}/> : 
+        isEditing ? <EducationEdit item={value} editHandler={editHandler} onUpdate={updateHandler}/> : 
         <div key={user_id} style={{margin: '10px 0', display: 'flex',justifyContent: 'space-between'}}>
             <article>
                 <span style={{fontWeight:'bold'}}>{school}</span><br/>
