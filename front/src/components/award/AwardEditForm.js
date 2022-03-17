@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button, Form, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
+import { UserStateContext } from "../../App";
 
-function AwardEditForm({ award, setIsEditing }) {
+const AwardEditForm = ({ award, setIsEditing, setAwards }) => {
   //useState로 title 상태와 description 상태를 지정하며, 기본 상태는 award의 title과 description임.
   const [title, setTitle] = useState(award.title);
   const [description, setDescription] = useState(award.description);
+
+  // useContext를 이용하여 user의 id를 받아옴
+  const userState = useContext(UserStateContext);
+  const userId = userState.user.id;
 
   // submit(확인) 버튼을 클릭하면 실행하는 함수
   const handleSubmit = async (e) => {
@@ -17,6 +22,9 @@ function AwardEditForm({ award, setIsEditing }) {
       description,
     });
 
+    // "awardlist"에서 awards 목록 다시 받아옴
+    await Api.get("awardlist", userId).then((res) => setAwards(res.data));
+
     // isEditing을 false로 세팅함. (편집이 끝난 상태)
     setIsEditing(false);
   };
@@ -24,7 +32,7 @@ function AwardEditForm({ award, setIsEditing }) {
   // bootstrap Form을 이용하여 award의 title과 description을 입력받아 세팅함.
   // 확인 버튼은 submit, 취소 버튼은 setIsEditing을 false로 변경하여 편집을 끝냄.
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form style={{margin:10, padding: 10,}} onSubmit={handleSubmit}>
       <Form.Group controlId="awardEditTitle" className="mb-3">
         <Form.Control
           type="text"
