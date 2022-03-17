@@ -3,7 +3,7 @@ import { Form, Button } from 'react-bootstrap';
 
 // 수정 버튼 클릭 시 나타나는 update용 form
 const EducationEdit = ({ item, onUpdate, handleChanger }) => {
-    const { user_id, school, major, position } = item;
+    const { user_id, id, school, major, position } = item;
     const [schoolInput, setSchoolInput] = useState(school);
     const [majorInput, setMajorInput] = useState(major);
     const [checking, setChecking]  = useState(position);
@@ -42,7 +42,7 @@ const EducationEdit = ({ item, onUpdate, handleChanger }) => {
         let p = e.target.group1.value
         
         if (s && m && p) {
-            handleChanger(user_id,s,m,p)
+            handleChanger(user_id, id, s, m, p)
             onUpdate()
         }
 
@@ -60,7 +60,7 @@ const EducationEdit = ({ item, onUpdate, handleChanger }) => {
             <Form.Control type='text' name='major' value={majorInput} onChange={changeHandler2} placeholder='전공명' />
         </Form.Group>
         
-        <div key={user_id} className="mb-3">
+        <div key={id} className="mb-3">
         <Form.Check
             inline
             label="재학중"
@@ -74,12 +74,12 @@ const EducationEdit = ({ item, onUpdate, handleChanger }) => {
         />
         <Form.Check
             inline
-            label="졸업예정"
-            value="졸업예정"
+            label="석사졸업"
+            value="석사졸업"
             name="group1"
             type="radio"
             id="inline-radio-2"
-            checked={ checking === "졸업예정" ? true : false }
+            checked={ checking === "석사졸업" ? true : false }
             onChange= {checkHandler}
         />
         <Form.Check

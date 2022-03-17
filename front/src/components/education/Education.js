@@ -12,17 +12,19 @@ const Education = () => {
     const [visible, setVisible] = useState(false);
     const [topics, setTopics] = useState([]);
     const userState = useContext(UserStateContext);
-    const id = userState.user.id
+    const userId = userState.user.id
 
     useEffect(() => {
-        Api.get('educations', id)
-            .then(res => setTopics(res.data));
-    }, [visible, id, topics])
+        Api.get('educationlist', userId)
+            .then(res => {
+                setTopics(res.data)
+        });
+    }, [visible, userId])
 
     // EducationCard에 추가할 값 push
     const createHandler = (school, major, position) => {
-        const newTopic = {user_id: id, school, major, position}
-        Api.post('educations/create', newTopic)
+        const newTopic = {user_id: userId, school, major, position}
+        Api.post('education/create', newTopic)
     }
 
 
@@ -35,11 +37,25 @@ const Education = () => {
         
     }
 
-    const handleChanger = (user_id,school,major,position) => {
-        const editTopic = { user_id:id, school, major, position }
+    const handleChanger = (user_id, id, school, major, position) => {
 
+        const editTopic = { user_id, id, school, major, position }
         Api.put(`educations/${id}`, editTopic)
-            .then(res => console.log(res))
+            .then(res => console.log(res.data))
+        
+        const mapped = topics.map((v) => {
+            if (v.id === id) {
+                return { ...v, school, major, position }
+            }
+            else {
+                return { ...v}
+            }
+
+        })
+
+        console.log(mapped)
+
+        setTopics(mapped)
     }
 
     
