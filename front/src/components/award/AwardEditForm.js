@@ -1,16 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Button, Form, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
-import { UserStateContext } from "../../App";
 
-const AwardEditForm = ({ award, setIsEditing, setAwards }) => {
+const AwardEditForm = ({ portfolioOwnerId, award, setIsEditing, setAwards }) => {
   //useState로 title 상태와 description 상태를 지정하며, 기본 상태는 award의 title과 description임.
   const [title, setTitle] = useState(award.title);
   const [description, setDescription] = useState(award.description);
-
-  // useContext를 이용하여 user의 id를 받아옴
-  const userState = useContext(UserStateContext);
-  const userId = userState.user.id;
 
   // submit(확인) 버튼을 클릭하면 실행하는 함수
   const handleSubmit = async (e) => {
@@ -23,7 +18,7 @@ const AwardEditForm = ({ award, setIsEditing, setAwards }) => {
     });
 
     // "awardlist"에서 awards 목록 다시 받아옴
-    await Api.get("awardlist", userId).then((res) => setAwards(res.data));
+    await Api.get("awardlist", portfolioOwnerId).then((res) => setAwards(res.data));
 
     // isEditing을 false로 세팅함. (편집이 끝난 상태)
     setIsEditing(false);
