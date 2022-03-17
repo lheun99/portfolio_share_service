@@ -14,9 +14,7 @@ educationRouter.post("/education/create", login_required, async function (req, r
     }
 
     // req (request) 에서 데이터 가져오기
-    // req.currentId => login_required 에서 로그인 성공한 경우 유저의 id
-    const user_id = req.currentUserId;
-    const { school, major, position } = req.body;
+    const { user_id, school, major, position } = req.body;
     
     const newEducation = await educationService.addEducation({
       user_id,
