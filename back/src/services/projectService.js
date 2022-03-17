@@ -50,14 +50,12 @@ class projectAuthService {
         "프로젝트가 존재하지 않습니다. 다시 한 번 확인해 주세요.";
       return { errorMessage };
     }
-
     // 업데이트 대상에 name이 있다면, 즉 name 값이 null 이 아니라면 업데이트 진행
     if (toUpdate.title) {
       const fieldToUpdate = "title";
       const newValue = toUpdate.title;
       project = await Project.update({ project_id, fieldToUpdate, newValue });
     }
-
     if (toUpdate.description) {
       const fieldToUpdate = "description";
       const newValue = toUpdate.description;
