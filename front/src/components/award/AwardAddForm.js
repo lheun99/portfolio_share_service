@@ -1,16 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Button, Form, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
-import { UserStateContext } from "../../App";
 
-const AwardAddForm = ({ awards, setAwards, setIsAdding}) => {
+const AwardAddForm = ({ portfolioOwnerId, awards, setAwards, setIsAdding}) => {
   // 입력받을 award의 title과 description을 담을 state를 지정함.
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-
-  // useContext를 이용하여 user의 id를 받아옴
-  const userState = useContext(UserStateContext);
-  const userId = userState.user.id;
 
   // submit(확인) 버튼을 클릭하면 실행하는 함수
   const handleSubmit = async (e) => {
@@ -23,7 +18,7 @@ const AwardAddForm = ({ awards, setAwards, setIsAdding}) => {
     });
 
     // "awardlist"에서 awards 목록 다시 받아옴
-    Api.get("awardlist", userId).then((res) => setAwards(res.data));
+    Api.get("awardlist", portfolioOwnerId).then((res) => setAwards(res.data));
 
     // isAdding을 false로 세팅함.
     setIsAdding(false);
