@@ -6,14 +6,14 @@ import * as Api from '../../api';
 import { UserStateContext } from '../../App';
 
 // 최상위 컴포넌트
-const Education = () => {
+const Education = ({ portfolioOwnerId }) => {
 
     const [visible, setVisible] = useState(false);
     const [topics, setTopics] = useState([]);
     const userState = useContext(UserStateContext);
     
     // user_id 값
-    const userId = userState.user.id;
+    const userId = portfolioOwnerId
 
     useEffect(() => {
         Api.get('educationlist', userId)
