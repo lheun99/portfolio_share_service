@@ -18,8 +18,8 @@ function ProjectForm({ setFormOpen }) {
   function handleSubmit(e) {
     e.preventDefault();
     const data = { user_id: userState.user.id, title, description: prjbody, 
-      from_date: startDate.getFullYear()+'-'+startDate.getMonth()+'-'+startDate.getDate(), 
-      to_date: endDate.getFullYear()+'-'+endDate.getMonth()+'-'+endDate.getDate() 
+      from_date: startDate.getFullYear()+'-'+(startDate.getMonth()+1)+'-'+startDate.getDate(), 
+      to_date: endDate.getFullYear()+'-'+(endDate.getMonth()+1)+'-'+endDate.getDate() 
     }
     Api.post('project/create', data);
     setFormOpen(false);

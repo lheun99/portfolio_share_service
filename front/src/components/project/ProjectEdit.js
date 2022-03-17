@@ -16,8 +16,8 @@ function Editor({title, description, from_date, to_date, setEditOpen, id}) {
     function handleSubmit(e) {
         e.preventDefault();
         const data = { user_id: userState.user.id, title, description: udescription, 
-                       from_date: uFromDate.getFullYear()+'-'+uFromDate.getMonth()+'-'+uFromDate.getDate(), 
-                       to_date: uToDate.getFullYear()+'-'+uToDate.getMonth()+'-'+uToDate.getDate() 
+                       from_date: uFromDate.getFullYear()+'-'+(uFromDate.getMonth()+1)+'-'+uFromDate.getDate(), 
+                       to_date: uToDate.getFullYear()+'-'+(uToDate.getMonth()+1)+'-'+uToDate.getDate() 
                     }
         Api.put(`projects/${id}`, data)
             .then(res => console.log(res));

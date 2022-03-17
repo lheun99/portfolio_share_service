@@ -17,7 +17,7 @@ function Project() {
   useEffect(() => {
     Api.get('projectlist', id)
       .then(res => setProjectList(res.data));
-  }, [formOpen, id]);
+  }, [formOpen, id, projectList]);
 
   // 프로젝트 목록, 프로젝트 추가 하는 컴포넌트 반환
   return (
