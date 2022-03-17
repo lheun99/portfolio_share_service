@@ -1,30 +1,30 @@
-import { useState } from 'react';
-import EducationCard from './EducationCard';
+import { useContext, useState, useEffect } from 'react';
+import EducationCardList from './EducationCardList';
 import EducationForm from './EducationForm';
 import { Button } from "react-bootstrap";
+import * as Api from '../../api'
+import { UserStateContext } from '../../App'
+
 
 
 const Education = () => {
-    
-    //  테스트용
-    const [topics, setTopics] = useState([
-        {id:1, school:'서울고등학교', major:'인문계', position:'재학 중'},
-        {id:2, school:'서울대학교', major:'컴퓨터공학과', position:'학사 졸업'},
-      ]);
 
-    const [nextId, setNextId] = useState(3)
-    const [visible, setVisible] = useState(false)
+    const [visible, setVisible] = useState(false);
+    const [topics, setTopics] = useState([]);
+    const userState = useContext(UserStateContext);
+    const id = userState.user.id
+
+    useEffect(() => {
+        Api.get('educations', id)
+            .then(res => setTopics(res.data));
+    }, [visible, id, topics])
 
     // EducationCard에 추가할 값 push
     const createHandler = (school, major, position) => {
-        const copied = [...topics]
-        const newTopic = {id: nextId, school, major, position}
-        copied.push(newTopic)
-        setTopics(copied)
-        setNextId(nextId+1)
-
-        console.log(copied)
+        const newTopic = {user_id: id, school, major, position}
+        Api.post('educations/create', newTopic)
     }
+
 
 
     // 추가 버튼 활성화 및 비활성화
@@ -35,16 +35,23 @@ const Education = () => {
         
     }
 
+    const handleChanger = (user_id,school,major,position) => {
+        const editTopic = { user_id:id, school, major, position }
+
+        Api.put(`educations/${id}`, editTopic)
+            .then(res => console.log(res))
+    }
+
     
 
     return (
-        <div style={{padding: 10,border:'2px blue solid'}}>
+        <div style={{padding:5,border: "1px solid lightgrey", borderRadius: "3px"}}>
             <h5>학력</h5>
-            <EducationCard topics={topics} />
+            <EducationCardList topics={topics} handleChanger={handleChanger} />
             {visible ? <EducationForm
             topics={topics} onCreate={createHandler} clickHandler={clickHandler} /> : 
             <div style={{textAlign: 'center'}}>
-                <Button size='sm' style={{ fontSize: 15,}} onClick={clickHandler}>추가</Button>
+                <Button size='sm' style={{ fontSize: 15,}} onClick={clickHandler}>+</Button>
             </div>}
         </div>
     )
