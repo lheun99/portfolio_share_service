@@ -9,25 +9,23 @@ import Award from "./Award";
 import AwardAddForm from "./AwardAddForm";
 import { UserStateContext } from "../../App";
 
-function Awards({isEditable}) {
+const Awards = ({isEditable}) => {
   // useState 훅을 통해 isAdding 상태를 생성함.
   const [isAdding, setIsAdding] = useState(false);
   // useState 훅을 통해 awards 상태를 생성함.
   const [awards, setAwards] = useState([])
-  const [isEditing, setIsEditing] = useState(false);
+  // useContext를 이용하여 user의 id를 받아옴
   const userState = useContext(UserStateContext);
-  const id = userState.user.id;
-
-  console.log(userState)
+  const userId = userState.user.id;
 
 // "awardlist"로 GET 요청을 하고, awards를 response의 data로 세팅함.
-// isEditing이랑 isAdding이 변할 때 렌더링하게 해서 갱신하려고 했는데... isAdding만 작동함
   useEffect(() => {
-    Api.get("awardlist", id).then((res) => setAwards(res.data));
-    console.log(`id는 ${id}`)
-    console.log('useEffect 실행됨')
-  }, [id]);
-  // [id, isEditing, isAdding]으로 수정
+    const fetch = async () => {
+      const res = await Api.get(`awardlist/${userId}`);
+      setAwards(res.data)
+    }
+    fetch();
+  }, [userId]);
 
 // title은 '수상이력', body는 Award 컴포넌트의 집합으로 이루어진 Card를 생성함.
 // 버튼을 클릭하면 isAdding이 true로 바뀌며, AwardAddForm 컴포넌트가 생성됨.
@@ -37,7 +35,7 @@ function Awards({isEditable}) {
       <Card.Body>
         <Card.Title>수상이력</Card.Title>
         {awards && (awards.map((award) => (
-          <Award key={award.id} award={award} isEditable={isEditable} isEditing={isEditing} setIsEditing={setIsEditing} />)
+          <Award key={award.id} award={award} isEditable={isEditable} setAwards={setAwards} />)
         ))}
         <div style={{ textAlign: "center" }}>
           <Button variant="primary" onClick={() => setIsAdding(true)}>+</Button>
