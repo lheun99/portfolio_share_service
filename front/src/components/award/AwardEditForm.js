@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Form, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
 
-function AwardEditForm({ award, setIsEditing, setAward }) {
+function AwardEditForm({ award, setIsEditing }) {
   //useState로 title 상태와 description 상태를 지정하며, 기본 상태는 award의 title과 description임.
   const [title, setTitle] = useState(award.title);
   const [description, setDescription] = useState(award.description);
@@ -12,14 +12,10 @@ function AwardEditForm({ award, setIsEditing, setAward }) {
     e.preventDefault();
 
     // "awards/유저id" 엔드포인트로 title과 description 정보를 담아 PUT 요청함.
-    const res = await Api.put(`awards/${award.user_id}`, {
+    await Api.put(`awards/${award.id}`, {
       title,
       description,
     });
-    // 업데이트된 award 정보는 response의 data임.
-    const updatedAward = res.data;
-    // 해당 데이터로 award를 세팅함.
-    setAward(updatedAward);
 
     // isEditing을 false로 세팅함. (편집이 끝난 상태)
     setIsEditing(false);
