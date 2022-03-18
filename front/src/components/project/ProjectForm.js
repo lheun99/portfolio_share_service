@@ -5,7 +5,7 @@ import * as Api from '../../api';
 
 import { UserStateContext } from "../../App";
 
-function ProjectForm({ setIsEditing }) {
+function ProjectForm({ setIsEditing, setProjectList, portfolioOwnerId }) {
   const [title, setTitle] = useState('');
   const [prjbody, setPrjBody] = useState('');
 
@@ -15,13 +15,16 @@ function ProjectForm({ setIsEditing }) {
 
   const userState = useContext(UserStateContext);
   // 프로젝트 리스트에 프로젝트 추가
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     const data = { user_id: userState.user.id, title, description: prjbody, 
       from_date: startDate.getFullYear()+'-'+(startDate.getMonth()+1)+'-'+startDate.getDate(), 
       to_date: endDate.getFullYear()+'-'+(endDate.getMonth()+1)+'-'+endDate.getDate() 
     }
-    Api.post('project/create', data);
+    await Api.post('project/create', data);
+
+    const res = await Api.get('projectlist', portfolioOwnerId);
+    setProjectList(res.data);
     setIsEditing(false);
   }
 

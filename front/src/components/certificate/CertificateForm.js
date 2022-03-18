@@ -5,7 +5,7 @@ import * as Api from '../../api';
 
 import { UserStateContext } from "../../App";
 
-function CertificateForm({ setIsEditing }) {
+function CertificateForm({ setIsEditing, setCertificateList, portfolioOwnerId  }) {
   const [title, setTitle] = useState('');
   const [prjbody, setPrjBody] = useState('');
 
@@ -14,12 +14,14 @@ function CertificateForm({ setIsEditing }) {
 
   const userState = useContext(UserStateContext);
   // 프로젝트 리스트에 프로젝트 추가
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     const data = { user_id: userState.user.id, title, description: prjbody, 
       from_date: startDate.getFullYear()+'-'+(startDate.getMonth()+1)+'-'+startDate.getDate(), 
     }
-    Api.post('certificate/create', data);
+    await Api.post('certificate/create', data);
+    const res = await Api.get('certificatelist', portfolioOwnerId)
+    setCertificateList(res.data);
     setIsEditing(false);
   }
 

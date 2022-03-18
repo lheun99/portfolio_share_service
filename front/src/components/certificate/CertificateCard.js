@@ -21,7 +21,7 @@ function CertificateCard({ portfolioOwnerId, isEditable }) {
             {isEditable && (
                 <div style={{ textAlign: "center" }}>
                     {!isEditing && <Card.Body><Button variant="primary" onClick={() => setIsEditing(true)}>+</Button></Card.Body>}
-                    {isEditing && <CertificateForm setIsEditing={setIsEditing}></CertificateForm>}
+                    {isEditing && <CertificateForm setIsEditing={setIsEditing} portfolioOwnerId={portfolioOwnerId} setCertificateList={setCertificateList}></CertificateForm>}
                 </div>
             )}
         </Card.Body>
