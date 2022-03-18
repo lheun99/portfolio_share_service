@@ -1,16 +1,14 @@
-import { useContext, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import EducationCardList from './EducationCardList';
 import EducationForm from './EducationForm';
 import { Button } from "react-bootstrap";
 import * as Api from '../../api';
-import { UserStateContext } from '../../App';
 
 // 최상위 컴포넌트
-const Education = ({ portfolioOwnerId }) => {
+const Education = ({ portfolioOwnerId, isEditable }) => {
 
     const [visible, setVisible] = useState(false);
     const [topics, setTopics] = useState([]);
-    const userState = useContext(UserStateContext);
     
     // user_id 값
     const userId = portfolioOwnerId
@@ -65,11 +63,11 @@ const Education = ({ portfolioOwnerId }) => {
     return (
         <div style={{padding:5,border: "1px solid lightgrey", borderRadius: "3px"}}>
             <h5>학력</h5>
-            <EducationCardList topics={topics} editHandler={editHandler} deleteHandler={deleteHandler} />
+            <EducationCardList topics={topics} editHandler={editHandler} deleteHandler={deleteHandler} isEditable={isEditable} />
             {visible ? <EducationForm
             topics={topics} onCreate={createHandler} clickHandler={clickHandler} /> : 
             <div style={{textAlign: 'center'}}>
-                <Button size='sm' style={{ fontSize: 15,}} onClick={clickHandler}>+</Button>
+                {isEditable ? <Button size='sm' style={{ fontSize: 15,}} onClick={clickHandler}>+</Button> : <></>}
             </div>}
         </div>
     )
