@@ -4,15 +4,16 @@ import { login_required } from "../middlewares/login_required";
 import { awardService } from "../services/awardService";
 
 const awardRouter = Router();
+awardRouter.use(login_required);
 
-awardRouter.post("/award/create", login_required, async function (req, res, next) {
+// POST: /award/create => 수상 내역 추가
+awardRouter.post("/award/create", async (req, res, next) => {
   try {
     if (is.emptyObject(req.body)) {
       throw new Error("headers의 Content-Type을 application/json으로 설정해주세요");
     }
 
-    const user_id = req.currentUserId;
-    const { title, description } = req.body;
+    const { user_id, title, description } = req.body;
 
     const newAward = await awardService.addAward({ user_id, title, description });
     if (newAward.errorMessage) {
@@ -26,7 +27,8 @@ awardRouter.post("/award/create", login_required, async function (req, res, next
   }
 });
 
-awardRouter.get("/awards/:id", login_required, async function (req, res, next) {
+// GET: /awards/:id => id에 해당하는 수상 내역 조회
+awardRouter.get("/awards/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const award = await awardService.getAwardInfo({ id });
@@ -41,8 +43,8 @@ awardRouter.get("/awards/:id", login_required, async function (req, res, next) {
   };
 });
 
-
-awardRouter.put("/awards/:id", login_required, async function (req, res, next) {
+// PUT: /awards/:id => id에 해당하는 수상 내역 업데이트
+awardRouter.put("/awards/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const title = req.body.title ?? null;
@@ -62,7 +64,8 @@ awardRouter.put("/awards/:id", login_required, async function (req, res, next) {
   }
 });
 
-awardRouter.get("/awardlist/:user_id", login_required, async function (req, res, next) {
+// GET: /awardlist/:user_id => 해당 유저의 수상 내역 전체 조회
+awardRouter.get("/awardlist/:user_id", async (req, res, next) => {
   try {
     const { user_id } = req.params;
     const awardList = await awardService.getAwards({ user_id });
@@ -73,7 +76,8 @@ awardRouter.get("/awardlist/:user_id", login_required, async function (req, res,
   }
 });
 
-awardRouter.delete("/awards/:id", login_required, async function (req, res, next) {
+// DELETE: /awards/:id => id에 해당하는 수상 내역 삭제
+awardRouter.delete("/awards/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const deletedAward = await awardService.deleteAward({ id });
