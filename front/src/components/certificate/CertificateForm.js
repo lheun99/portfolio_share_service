@@ -17,7 +17,7 @@ function CertificateForm({ setIsEditing, setCertificateList, portfolioOwnerId  }
   async function handleSubmit(e) {
     e.preventDefault();
     const data = { user_id: userState.user.id, title, description: prjbody, 
-      from_date: startDate.getFullYear()+'-'+(startDate.getMonth()+1)+'-'+startDate.getDate(), 
+      when_date: startDate.getFullYear()+'-'+(startDate.getMonth()+1)+'-'+startDate.getDate(), 
     }
     await Api.post('certificate/create', data);
     const res = await Api.get('certificatelist', portfolioOwnerId)
@@ -31,7 +31,7 @@ function CertificateForm({ setIsEditing, setCertificateList, portfolioOwnerId  }
         <Form.Control
           type="text"
           value={title}
-          placeholder="프로젝트 제목"
+          placeholder="자격증"
           autoComplete="off"
           onChange={(e) => { setTitle(e.target.value) }}
         />
