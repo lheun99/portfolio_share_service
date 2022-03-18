@@ -20,7 +20,7 @@ function ProjectCard({ portfolioOwnerId, isEditable }) {
             <ProjectList projectList={projectList} setProjectList={setProjectList} isEditable={isEditable} portfolioOwnerId={portfolioOwnerId}></ProjectList>
             {isEditable && (
                 <div style={{ textAlign: "center" }}>
-                    <Card.Body><Button variant="primary" onClick={() => setIsEditing(true)}>+</Button></Card.Body>
+                    {!isEditing && <Card.Body><Button variant="primary" onClick={() => setIsEditing(true)}>+</Button></Card.Body>}
                     {isEditing && <ProjectForm setIsEditing={setIsEditing}></ProjectForm>}
                 </div>
             )}

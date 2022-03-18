@@ -50,7 +50,7 @@ function CertificateForm({ setIsEditing }) {
       </Form.Group>
       <Form.Group style={{ textAlign: "center", marginTop: 10 }}>
         <Button variant="primary" type="submit" className="me-3 btn btn-primary">
-          제출
+          확인
         </Button>
         <Button variant="secondary" type="button" className="btn btn-secondary" onClick={() => setIsEditing(false)}>
           취소

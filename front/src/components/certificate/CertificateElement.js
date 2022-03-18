@@ -78,12 +78,12 @@ function CertificateElement({ project, isEditable, setProjectList }) {
                                  id={project.id}
                                  setProjectList={setProjectList}></CertificateEdit> : (
                     <>
-                        <Col sm={11}>
+                        <Col sm={10}>
                             <Card.Subtitle>{project.title}</Card.Subtitle>
                             <Card.Text className="mb-2 text-muted">{project.description} <br /> {project.from_date} ~ {project.to_date}</Card.Text>
                         </Col>
                         {isEditable && (
-                            <Col sm={1}>
+                            <Col sm={2}>
                                 <Button variant="outline-info" size="sm" onClick={() => setEdit(true)}>편집</Button>
                                 <Button variant="outline-danger" size="sm">삭제</Button>
                             </Col>
