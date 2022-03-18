@@ -5,7 +5,7 @@ import DatePicker from "react-datepicker";
 import * as Api from '../../api';
 import { UserStateContext } from "../../App";
 
-function CertificateEdit({ title, description, from_date, to_date, setEdit, id, setProjectList }) {
+function CertificateEdit({ title, description, from_date, to_date, setEdit, id, setCertificateList }) {
     // console.log(id);
     const userState = useContext(UserStateContext);
     const [utitle, setUtitle] = useState(title);
@@ -21,7 +21,7 @@ function CertificateEdit({ title, description, from_date, to_date, setEdit, id, 
         await Api.put(`certificates/${id}`, data);
 
         const res = await Api.get('certificatelist', userState.user.id)
-        setProjectList(res.data);
+        setCertificateList(res.data);
 
         setEdit(false);
     }

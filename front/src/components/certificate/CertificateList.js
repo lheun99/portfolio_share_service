@@ -4,7 +4,7 @@ import CertificateElement from './CertificateElement';
 function CertificateList({ certificateList, setCertificateList, isEditable, portfolioOwnerId }) {
     return (
         certificateList.map((certificate, index) => (
-            <CertificateElement key={index} project={certificate} isEditable={isEditable} setCertificateList={setCertificateList}></CertificateElement>
+            <CertificateElement key={index} certificate={certificate} isEditable={isEditable} setCertificateList={setCertificateList}></CertificateElement>
         ))
     );
 }
