@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 // import { useNavigate, useParams } from "react-router-dom";
-import { Card, Button, Container, Row, Col, Form } from "react-bootstrap";
+import { Card, Button, ButtonGroup, Container, Row, Col, Form } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import * as Api from '../../api';
 import { UserStateContext } from "../../App";
@@ -89,8 +89,10 @@ function ProjectElement({ project, isEditable, setProjectList }) {
                         </Col>
                         {isEditable && (
                             <Col sm={2}>
-                                <Button variant="outline-info" size="sm" onClick={() => setEdit(true)}>편집</Button>
-                                <Button variant="outline-danger" size="sm">삭제</Button>
+                                <ButtonGroup style={{margin: 10,}} size='sm'>
+                                    <Button variant="outline-info" size="sm" onClick={() => setEdit(true)}>편집</Button>
+                                    <Button variant="outline-danger" size="sm">삭제</Button>
+                                </ButtonGroup>
                             </Col>
                         )}
                     </>

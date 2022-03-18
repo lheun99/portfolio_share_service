@@ -11,5 +11,3 @@ function CertificateList({ certificateList, setCertificateList, isEditable, port
 
 
 export default CertificateList;
-
-
