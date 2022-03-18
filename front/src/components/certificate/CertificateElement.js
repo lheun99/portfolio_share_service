@@ -65,7 +65,7 @@ function CertificateEdit({ title, description, from_date, to_date, setEdit, id, 
     )
 }
 
-function ProjectElement({ project, isEditable, setProjectList }) {
+function CertificateElement({ project, isEditable, setProjectList }) {
     const [edit, setEdit] = useState(false);
     return (
         <Container>
@@ -95,4 +95,4 @@ function ProjectElement({ project, isEditable, setProjectList }) {
     )
 }
 
-export default CertificateEdit;
+export default CertificateElement;
