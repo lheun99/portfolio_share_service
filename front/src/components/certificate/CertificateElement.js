@@ -12,15 +12,12 @@ function CertificateEdit({ title, description, when_date, setEdit, id, setCertif
     const [uWhenDate, setUWhenDate] = useState(new Date(when_date));
     console.log(uWhenDate);
     // 프로젝트 편집 기능
-    console.log(id);
     async function handleSubmit(e) {
-        console.log(uWhenDate);
         e.preventDefault();
         const data = {
             user_id: userState.user.id, title:utitle, description: udescription,
             when_date: uWhenDate.getFullYear() + '-' + (uWhenDate.getMonth() + 1) + '-' + uWhenDate.getDate(),
         }
-        console.log(data.when_date);
         await Api.put(`certificates/${id}`, data);
 
         const res = await Api.get('certificatelist', userState.user.id)
@@ -67,7 +64,6 @@ function CertificateEdit({ title, description, when_date, setEdit, id, setCertif
 
 function CertificateElement({ certificate, isEditable, setCertificateList }) {
     const [edit, setEdit] = useState(false);
-    console.log(certificate);
     return (
         <Container>
             <Row>
