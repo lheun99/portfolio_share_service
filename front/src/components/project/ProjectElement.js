@@ -16,7 +16,7 @@ function ProjectEdit({ title, description, from_date, to_date, setEdit, id, setP
     async function handleSubmit(e) {
         e.preventDefault();
         const data = {
-            user_id: userState.user.id, title, description: udescription,
+            user_id: userState.user.id, title:utitle, description: udescription,
             from_date: uFromDate.getFullYear() + '-' + (uFromDate.getMonth() + 1) + '-' + uFromDate.getDate(),
             to_date: uToDate.getFullYear() + '-' + (uToDate.getMonth() + 1) + '-' + uToDate.getDate()
         }
