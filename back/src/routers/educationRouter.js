@@ -1,42 +1,53 @@
 import is from "@sindresorhus/is";
 import { Router } from "express";
 import { login_required } from "../middlewares/login_required";
+// create시 데이터 유효성 검사 middleware
+import { isValidData, invalidCallback } from "../middlewares/validationMiddleware";
 import { educationService } from "../services/educationService";
 
 const educationRouter = Router();
+// 로그인 유저만 사용할 수 있는 기능이므로 전체 기능에 적용
+educationRouter.use(login_required);
 
-educationRouter.post("/education/create", login_required, async function (req, res, next) {
-  try {
-    if (is.emptyObject(req.body)) {
-      throw new Error(
-        "headers의 Content-Type을 application/json으로 설정해주세요"
-      );
+// POST /education/create : 데이터 생성 
+educationRouter.post("/education/create", 
+  isValidData("education"),
+  invalidCallback,
+  async (req, res, next) => {
+    try {
+      if (is.emptyObject(req.body)) {
+        throw new Error(
+          "headers의 Content-Type을 application/json으로 설정해주세요"
+        );
+      }
+      // req(request).body 에서 데이터 가져오기
+      const { user_id, school, major, position } = req.body;
+
+      const newEducation = await educationService.addEducation({
+        user_id,
+        school,
+        major,
+        position
+      });
+
+      // educationService 내에서 감지한 오류가 있는 경우
+      if (newEducation.errorMessage) {
+        throw new Error(newEducation.errorMessage);
+      }
+
+      // status 201: 정상적으로 create 되었을 때
+      res.status(201).json(newEducation);
+    } catch (error) {
+      next(error);
     }
-
-    // req (request) 에서 데이터 가져오기
-    const { user_id, school, major, position } = req.body;
-    
-    const newEducation = await educationService.addEducation({
-      user_id,
-      school,
-      major,
-      position
-    });
-
-    if (newEducation.errorMessage) {
-      throw new Error(newEducation.errorMessage);
-    }
-
-    res.status(201).json(newEducation);
-  } catch (error) {
-    next(error);
-  }
 });
 
-educationRouter.get("/educationlist/:user_id", login_required, async function (req, res, next) {
+// GET /educationlist/:user_id : user의 education 데이터 조회
+educationRouter.get("/educationlist/:user_id", async (req, res, next) => {
   try {
-    // req (request) 에서 데이터 가져오기
+    // URI 파라미터에서 user_id 가져오기
     const userId = req.params.user_id;
+    // userId의 education 데이터를 모두 가져옴
     const education = await educationService.getEducation({ userId });
     
     res.status(200).json(education);
@@ -45,10 +56,12 @@ educationRouter.get("/educationlist/:user_id", login_required, async function (r
   }
 });
 
-educationRouter.get("/educations/:id", login_required, async function (req, res, next) {
+// GET /educations/:id : education 상세 데이터 조회
+educationRouter.get("/educations/:id", async (req, res, next) => {
   try {
-    // req (request) 에서 데이터 가져오기
+    // URI 파라미터에서 id 가져오기
     const educationId = req.params.id;
+    // id에 해당하는 상세 정보 가져옴
     const education = await educationService.getEducationInfo({ educationId });
     
     if (education?.message) {
@@ -61,9 +74,11 @@ educationRouter.get("/educations/:id", login_required, async function (req, res,
   }
 });
 
-educationRouter.put("/educations/:id", login_required, async function (req, res, next) {
+// PUT /educations/:id : education 데이터 수정
+educationRouter.put("/educations/:id", async (req, res, next) => {
     try {
       const educationId = req.params.id;
+      // 값이 넘어오지 않을 경우 (undefined) null로 변경
       const school = req.body.school ?? null;
       const major = req.body.major ?? null;
       const position = req.body.position ?? null;
@@ -83,7 +98,8 @@ educationRouter.put("/educations/:id", login_required, async function (req, res,
   }
 );
 
-educationRouter.delete("/educations/:id", login_required, async function (req, res, next) {
+// DELETE /educations/:id : education 데이터 삭제
+educationRouter.delete("/educations/:id", async (req, res, next) => {
   try {
     const educationId = req.params.id;
     const deletedEducation = await educationService.deleteEducation({ educationId });
