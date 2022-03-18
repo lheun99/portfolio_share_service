@@ -34,7 +34,7 @@ const Awards = ({portfolioOwnerId, isEditable}) => {
           <Award key={award.id} portfolioOwnerId={portfolioOwnerId} award={award} isEditable={isEditable} setAwards={setAwards} />)
         ))}
         <div style={{ textAlign: "center" }}>
-          {isEditable && <Button variant="primary" onClick={() => setIsAdding(true)}>+</Button>}
+          {!isAdding && isEditable && <Button variant="primary" onClick={() => setIsAdding(true)}>+</Button>}
         </div>
         {isAdding && <AwardAddForm awards={awards} portfolioOwnerId={portfolioOwnerId} setAwards={setAwards} setIsAdding={setIsAdding} />}
       </Card.Body>
