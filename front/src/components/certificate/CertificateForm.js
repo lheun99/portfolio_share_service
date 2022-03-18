@@ -5,12 +5,11 @@ import * as Api from '../../api';
 
 import { UserStateContext } from "../../App";
 
-function ProjectForm({ setIsEditing }) {
+function CertificateForm({ setIsEditing }) {
   const [title, setTitle] = useState('');
   const [prjbody, setPrjBody] = useState('');
 
   const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
 
 
   const userState = useContext(UserStateContext);
@@ -19,9 +18,8 @@ function ProjectForm({ setIsEditing }) {
     e.preventDefault();
     const data = { user_id: userState.user.id, title, description: prjbody, 
       from_date: startDate.getFullYear()+'-'+(startDate.getMonth()+1)+'-'+startDate.getDate(), 
-      to_date: endDate.getFullYear()+'-'+(endDate.getMonth()+1)+'-'+endDate.getDate() 
     }
-    Api.post('project/create', data);
+    Api.post('certificate/create', data);
     setIsEditing(false);
   }
 
@@ -49,9 +47,6 @@ function ProjectForm({ setIsEditing }) {
         <div className="col-auto">
           <DatePicker selected={startDate} onChange={date => setStartDate(date)}></DatePicker>
         </div>
-        <div className="col-auto">
-          <DatePicker selected={endDate} onChange={date => setEndDate(date)}></DatePicker>
-        </div>
       </Form.Group>
       <Form.Group style={{ textAlign: "center", marginTop: 10 }}>
         <Button variant="primary" type="submit" className="me-3 btn btn-primary">
@@ -66,4 +61,4 @@ function ProjectForm({ setIsEditing }) {
   );
 }
 
-export default ProjectForm;
+export default CertificateForm;

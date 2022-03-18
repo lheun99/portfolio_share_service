@@ -5,23 +5,27 @@ import DatePicker from "react-datepicker";
 import * as Api from '../../api';
 import { UserStateContext } from "../../App";
 
-// 각각의 프로젝트 리스트마다 편집창을 열고 닫고, 수정을 할 수 있도록 해주는 컴포넌트
-function Editor({title, description, from_date, to_date, setEditOpen, id}) {
+function ProjectEdit({ title, description, from_date, to_date, setEdit, id, setProjectList }) {
+    console.log(id);
     const userState = useContext(UserStateContext);
     const [utitle, setUtitle] = useState(title);
     const [udescription, setUdescription] = useState(description);
     const [uFromDate, setUFromDate] = useState(new Date(from_date));
     const [uToDate, setUToDate] = useState(new Date(to_date));
     // 프로젝트 편집 기능
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
-        const data = { user_id: userState.user.id, title, description: udescription, 
-                       from_date: uFromDate.getFullYear()+'-'+(uFromDate.getMonth()+1)+'-'+uFromDate.getDate(), 
-                       to_date: uToDate.getFullYear()+'-'+(uToDate.getMonth()+1)+'-'+uToDate.getDate() 
-                    }
-        Api.put(`projects/${id}`, data)
-            .then(res => console.log(res));
-        setEditOpen(false);
+        const data = {
+            user_id: userState.user.id, title, description: udescription,
+            from_date: uFromDate.getFullYear() + '-' + (uFromDate.getMonth() + 1) + '-' + uFromDate.getDate(),
+            to_date: uToDate.getFullYear() + '-' + (uToDate.getMonth() + 1) + '-' + uToDate.getDate()
+        }
+        await Api.put(`projects/${id}`, data);
+
+        const res = await Api.get('projectlist', userState.user.id)
+        setProjectList(res.data);
+
+        setEdit(false);
     }
 
     return (
@@ -56,7 +60,7 @@ function Editor({title, description, from_date, to_date, setEditOpen, id}) {
                 <Button variant="primary" type="submit" className="me-3 btn btn-primary">
                     확인
                 </Button>
-                <Button variant="secondary" type="button" className="btn btn-secondary" onClick={() => setEditOpen(false)}>
+                <Button variant="secondary" type="button" className="btn btn-secondary" onClick={() => setEdit(false)}>
                     취소
                 </Button>
             </Form.Group>
@@ -66,37 +70,34 @@ function Editor({title, description, from_date, to_date, setEditOpen, id}) {
     )
 }
 
-
-// 각각의 프로젝트 리스트를 그려준다.
-
-function ProjectEdit({project, id}) {
-    console.log("asdasdasd " + id);
-    const [editOpen, setEditOpen] = useState(false);
+function ProjectElement({ project, isEditable, setProjectList }) {
+    const [edit, setEdit] = useState(false);
     return (
-        <>
-            {editOpen ? (<Editor title={project.title} 
+        <Container>
+            <Row>
+                {edit ? <ProjectEdit title={project.title} 
                                  description={project.description} 
                                  from_date={project.from_date} 
                                  to_date={project.to_date} 
-                                 setEditOpen={setEditOpen}
-                                 id={id}></Editor>): (
-            <>
-            <Container>
-                <Row>
-                    <Col sm={11}>
-                        <Card.Subtitle>{project.title}</Card.Subtitle>
-                        <Card.Text className="mb-2 text-muted">{project.description} <br /> {project.from_date} ~ {project.to_date}</Card.Text>
-                    </Col>
-                    <Col sm={1}>
-                        <Button variant="outline-info" size="sm" onClick={() => setEditOpen(true)}>편집</Button>
-                        <Button variant="outline-danger" size="sm">삭제</Button>
-                    </Col>
-                </Row>
-            </Container>
-            <br />
-            </>)}
-        </>
-    );
+                                 setEdit={setEdit}
+                                 id={project.id}
+                                 setProjectList={setProjectList}></ProjectEdit> : (
+                    <>
+                        <Col sm={11}>
+                            <Card.Subtitle>{project.title}</Card.Subtitle>
+                            <Card.Text className="mb-2 text-muted">{project.description} <br /> {project.from_date} ~ {project.to_date}</Card.Text>
+                        </Col>
+                        {isEditable && (
+                            <Col sm={1}>
+                                <Button variant="outline-info" size="sm" onClick={() => setEdit(true)}>편집</Button>
+                                <Button variant="outline-danger" size="sm">삭제</Button>
+                            </Col>
+                        )}
+                    </>
+                )}
+            </Row>
+        </Container>
+    )
 }
 
-export default ProjectEdit;
+export default ProjectElement;
