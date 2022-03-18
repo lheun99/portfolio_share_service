@@ -4,9 +4,9 @@ import EducationCard from "./EducationCard";
 const EducationCardList = ({topics, editHandler, deleteHandler, isEditable}) => {
 
     return (
-        <div>
-            {topics.map((item) => <EducationCard value={item} editHandler={editHandler} deleteHandler={deleteHandler} isEditable={isEditable}/>)}
-        </div>        
+        <>
+            {topics.map((item) => <EducationCard key={item.id} value={item} editHandler={editHandler} deleteHandler={deleteHandler} isEditable={isEditable}/>)}
+        </>        
     )
 
 };

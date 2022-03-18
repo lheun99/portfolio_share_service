@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import EducationCardList from './EducationCardList';
-import EducationForm from './EducationForm';
-import { Button } from "react-bootstrap";
+import EducationAddForm from './EducationAddForm';
+import { Button, Card } from "react-bootstrap";
 import * as Api from '../../api';
 
 // 최상위 컴포넌트
@@ -61,15 +61,17 @@ const Education = ({ portfolioOwnerId, isEditable }) => {
     
 
     return (
-        <div style={{padding:5,border: "1px solid lightgrey", borderRadius: "3px"}}>
-            <h5>학력</h5>
+        <Card>
+            <Card.Body>
+            <Card.Title>학력</Card.Title>
             <EducationCardList topics={topics} editHandler={editHandler} deleteHandler={deleteHandler} isEditable={isEditable} />
-            {visible ? <EducationForm
+            {visible ? <EducationAddForm
             topics={topics} onCreate={createHandler} clickHandler={clickHandler} /> : 
             <div style={{textAlign: 'center'}}>
                 {isEditable ? <Button size='sm' style={{ fontSize: 15,}} onClick={clickHandler}>+</Button> : <></>}
             </div>}
-        </div>
+            </Card.Body>
+        </Card>
     )
 }
 

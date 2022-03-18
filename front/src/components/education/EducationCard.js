@@ -1,10 +1,10 @@
-import { Button,ButtonGroup } from "react-bootstrap";
+import { Row, Col, Container, Card, Button,ButtonGroup } from "react-bootstrap";
 import { useState } from 'react';
-import EducationEdit from './EducationEdit';
+import EducationEditForm from './EducationEditForm';
 
 // 학력 정보 조회 상세 값 컴포넌트
 const EducationCard = ({value, editHandler, deleteHandler, isEditable}) => {
-    const { user_id, id, school, major, position } = value;
+    const { id, school, major, position } = value;
     const [isEditing, SetIsEditing] = useState(false);
 
     const updateHandler = () => {
@@ -17,17 +17,27 @@ const EducationCard = ({value, editHandler, deleteHandler, isEditable}) => {
     }
 
     return (
-        isEditing ? <EducationEdit item={value} editHandler={editHandler} onUpdate={updateHandler}/> : 
-        <div key={user_id} style={{margin: '10px 0', display: 'flex',justifyContent: 'space-between'}}>
-            <article>
-                <span style={{fontWeight:'bold'}}>{school}</span><br/>
-                <span style={{color: '#6c757d'}}>{major +  ` (${position})`}</span>
-            </article>
-            {isEditable ? <ButtonGroup style={{margin: 10,}} size='sm'>
-                <Button variant="secondary" onClick={updateHandler}>수정</Button>
-                <Button variant="danger" onClick={handleDelete}>삭제</Button>
-            </ButtonGroup> : <></>}
-        </div>
+        isEditing ? 
+        <EducationEditForm 
+            item={value} 
+            editHandler={editHandler} 
+            onUpdate={updateHandler}/> : 
+        <Container style={{margin:10, padding: 10,}}>
+            <Row>
+                <Col sm={10}>
+                    <Card.Subtitle>{school}</Card.Subtitle>
+                    <Card.Text className="text-muted">{major +  ` (${position})`}</Card.Text>
+                </Col>
+
+                {isEditable ? 
+                    <Col sm={2}>
+                        <ButtonGroup style={{margin: 10,}} size='sm'>
+                            <Button variant="outline-info" onClick={updateHandler}>편집</Button>
+                            <Button variant="outline-danger" onClick={handleDelete}>삭제</Button>
+                        </ButtonGroup>
+                    </Col> : <></>}
+            </Row>
+        </Container>
         )
 };
 
