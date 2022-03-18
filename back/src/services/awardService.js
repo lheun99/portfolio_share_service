@@ -1,9 +1,14 @@
-import { Award } from "../db";
+import { User, Award } from "../db";
 import { v4 as uuidv4 } from "uuid";
+
 
 class awardService {
   static async addAward({ user_id, title, description }) {
-    // 중복 내용인지 확인하는 기능 추가
+    // user_id가 유효하지 않은 경우
+    const user = await User.findById({ id: user_id });
+    if (!user) {
+      return { errorMessage: "해당 유저가 존재하지 않습니다." };
+    }
 
     // id 는 유니크 값 부여
     const id = uuidv4();
@@ -18,7 +23,7 @@ class awardService {
   }
 
   static async getAwardInfo({ id }) {
-    // 이메일 db에 존재 여부 확인
+    // db에 해당 수상 내역 존재 여부 확인
     const award = await Award.findById({ id });
     if (!award) {
       const errorMessage =
@@ -44,7 +49,7 @@ class awardService {
       return { errorMessage };
     }
 
-    // 업데이트 대상에 name이 있다면, 즉 name 값이 null 이 아니라면 업데이트 진행
+    // 수정해야하는 필드에 맞는 값을 업데이트
     if (toUpdate.title) {
       const fieldToUpdate = "title";
       const newValue = toUpdate.title;
@@ -61,6 +66,7 @@ class awardService {
   }
 
   static async deleteAward({ id }) {
+    // 해당 내역 삭제
     const deletedAward = await Award.delete({ id });
     return deletedAward;
   }
