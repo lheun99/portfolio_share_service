@@ -10,6 +10,8 @@ import Awards from "./award/Awards";
 import Project from './project/Project';
 import Certificate from "./certificate/Certificate";
 
+import Education from './education/Education';
+
 function Portfolio() {
   const navigate = useNavigate();
   const params = useParams();
@@ -58,13 +60,15 @@ function Portfolio() {
   return (
     <Container fluid>
       <Row>
-        <Col md="3" lg="3">
+        <Col xs={6} md={4}>
           <User
             portfolioOwnerId={portfolioOwner.id}
             isEditable={portfolioOwner.id === userState.user?.id}
           />
         </Col>
         <Col>
+          <Education portfolioOwnerId={portfolioOwner.id}
+            isEditable={portfolioOwner.id === userState.user?.id}/>
           <Awards
             portfolioOwnerId={portfolioOwner.id}
             isEditable={portfolioOwner.id === userState.user?.id}
