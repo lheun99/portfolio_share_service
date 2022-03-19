@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Row, Col, Button, Form } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import * as Api from '../../api';
 
@@ -29,7 +29,7 @@ function ProjectForm({ setIsEditing, setProjectList, portfolioOwnerId }) {
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form style={{ margin: 10, padding: 10, }} onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Control
           type="text"
@@ -56,13 +56,16 @@ function ProjectForm({ setIsEditing, setProjectList, portfolioOwnerId }) {
           <DatePicker selected={endDate} onChange={date => setEndDate(date)}></DatePicker>
         </div>
       </Form.Group>
-      <Form.Group style={{ textAlign: "center", marginTop: 10 }}>
-        <Button variant="primary" type="submit" className="me-3 btn btn-primary">
-          확인
-        </Button>
-        <Button variant="secondary" type="button" className="btn btn-secondary" onClick={() => setIsEditing(false)}>
-          취소
-        </Button>
+      
+      <Form.Group as={Row} className="mt-3 text-center">
+        <Col sm={{ span: 20 }}>
+          <Button size='sm' variant="primary" type="submit" className="me-3 btn btn-primary">
+            확인
+          </Button>
+          <Button size='sm' variant="secondary" type="button" className="btn btn-secondary" onClick={() => setIsEditing(false)}>
+            취소
+          </Button>
+        </Col>  
       </Form.Group>
 
     </Form>

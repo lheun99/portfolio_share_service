@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Row, Col } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import * as Api from '../../api';
 
@@ -26,7 +26,7 @@ function CertificateForm({ setIsEditing, setCertificateList, portfolioOwnerId  }
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form style={{ margin: 10, padding: 10, }} onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Control
           type="text"
@@ -50,15 +50,17 @@ function CertificateForm({ setIsEditing, setCertificateList, portfolioOwnerId  }
           <DatePicker selected={startDate} onChange={date => setStartDate(date)}></DatePicker>
         </div>
       </Form.Group>
-      <Form.Group style={{ textAlign: "center", marginTop: 10 }}>
-        <Button variant="primary" type="submit" className="me-3 btn btn-primary">
-          확인
-        </Button>
-        <Button variant="secondary" type="button" className="btn btn-secondary" onClick={() => setIsEditing(false)}>
-          취소
-        </Button>
-      </Form.Group>
 
+      <Form.Group as={Row} className="mt-3 text-center">
+        <Col sm={{ span: 20 }}>
+          <Button size= "sm" variant="primary" type="submit" className="me-3 btn btn-primary">
+            확인
+          </Button>
+          <Button size= "sm" variant="secondary" type="button" className="btn btn-secondary" onClick={() => setIsEditing(false)}>
+            취소
+          </Button>
+        </Col>  
+      </Form.Group>
     </Form>
   );
 }

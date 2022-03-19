@@ -27,7 +27,7 @@ function CertificateEdit({ title, description, when_date, setEdit, id, setCertif
     }
 
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form style={{ margin: 10, padding: 10, }} onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Control
                     type="text"
@@ -47,16 +47,20 @@ function CertificateEdit({ title, description, when_date, setEdit, id, setCertif
             </Form.Group>
 
             <Form.Group className="mt-3 row">
-                <DatePicker selected={uWhenDate} onChange={date => setUWhenDate(date)}></DatePicker>
-                
+                <div className="col-auto">
+                    <DatePicker selected={uWhenDate} onChange={date => setUWhenDate(date)}></DatePicker>
+                </div>
             </Form.Group>
-            <Form.Group style={{ textAlign: "center", marginTop: 10 }}>
-                <Button variant="primary" type="submit" className="me-3 btn btn-primary">
-                    확인
-                </Button>
-                <Button variant="secondary" type="button" className="btn btn-secondary" onClick={() => setEdit(false)}>
-                    취소
-                </Button>
+
+            <Form.Group as={Row} className="mt-3 text-center">
+                <Col sm={{ span: 20 }}>
+                    <Button size='sm' variant="primary" type="submit" className="me-3 btn btn-primary">
+                        확인
+                    </Button>
+                    <Button size='sm' variant="secondary" type="button" className="btn btn-secondary" onClick={() => setEdit(false)}>
+                        취소
+                    </Button>
+                </Col>
             </Form.Group>
         </Form>
     )
@@ -65,32 +69,29 @@ function CertificateEdit({ title, description, when_date, setEdit, id, setCertif
 function CertificateElement({ certificate, isEditable, setCertificateList }) {
     const [edit, setEdit] = useState(false);
     return (
-        <Container>
-            <Row>
-                {edit ? <CertificateEdit title={certificate.title} 
-                                 description={certificate.description} 
-                                 when_date={certificate.when_date} 
-                                 setEdit={setEdit}
-                                 id={certificate.id}
-                                 setCertificateList={setCertificateList}></CertificateEdit> : (
-                    <>
-                        <Col sm={10}>
-                            <Card.Subtitle>{certificate.title}</Card.Subtitle>
-                            <Card.Text className="mb-2 text-muted">{certificate.description} <br /> {certificate.when_date}</Card.Text>
+        edit ? <CertificateEdit title={certificate.title} 
+                            description={certificate.description} 
+                            when_date={certificate.when_date} 
+                            setEdit={setEdit}
+                            id={certificate.id}
+                            setCertificateList={setCertificateList}></CertificateEdit> : 
+            <Container style={{ margin: 10, padding: 10, }}>
+                <Row>
+                    <Col sm={10}>
+                        <Card.Subtitle>{certificate.title}</Card.Subtitle>
+                        <Card.Text className="mb-2 text-muted">{certificate.description} <br /> {certificate.when_date}</Card.Text>
+                    </Col>
+                    {isEditable && (
+                        <Col sm={2}>
+                            <ButtonGroup style={{margin: 10,}} size='sm'>
+                                <Button variant="outline-info" size="sm" onClick={() => setEdit(true)}>편집</Button>
+                                <Button variant="outline-danger" size="sm">삭제</Button>
+                            </ButtonGroup>
                         </Col>
-                        {isEditable && (
-                            <Col sm={2}>
-                                <ButtonGroup style={{margin: 10,}} size='sm'>
-                                    <Button variant="outline-info" size="sm" onClick={() => setEdit(true)}>편집</Button>
-                                    <Button variant="outline-danger" size="sm">삭제</Button>
-                                </ButtonGroup>
-                            </Col>
-                        )}
-                    </>
-                )}
-            </Row>
-        </Container>
-    )
+                    )}
+                </Row>
+            </Container>
+        )
 }
 
 export default CertificateElement;

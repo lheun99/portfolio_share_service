@@ -85,7 +85,7 @@ const Education = ({ portfolioOwnerId, isEditable }) => {
 					/> :
 					<div style={{ textAlign: 'center' }}>
 						{isEditable ? 
-						<Button size='sm' style={{ fontSize: 15, }} onClick={clickHandler}>+</Button> : <></>}
+						<Button size='sm' onClick={clickHandler}>+</Button> : <></>}
 					</div>}
 			</Card.Body>
 		</Card>

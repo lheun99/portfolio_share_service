@@ -46,10 +46,10 @@ const AwardEditForm = ({ portfolioOwnerId, award, setIsEditing, setAwards }) => 
 
       <Form.Group as={Row} className="mt-3 text-center">
         <Col sm={{ span: 20 }}>
-          <Button variant="primary" type="submit" className="me-3">
+          <Button size="sm" variant="primary" type="submit" className="me-3">
             확인
           </Button>
-          <Button variant="secondary" onClick={() => setIsEditing(false)}>
+          <Button size="sm" variant="secondary" onClick={() => setIsEditing(false)}>
             취소
           </Button>
         </Col>

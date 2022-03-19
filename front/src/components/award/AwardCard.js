@@ -24,7 +24,7 @@ const AwardCard = ({ portfolioOwnerId, award, setIsEditing, isEditable, setAward
           <Card.Text className="text-muted">{award?.description}</Card.Text>
         </Col>
         <Col sm={2}>
-          <ButtonGroup>
+          <ButtonGroup style={{ margin: 10, }} size='sm'>
             {isEditable && (
                 <Button
                   variant="outline-info"

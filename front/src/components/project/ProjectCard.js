@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 // import { useNavigate, useParams } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
 import * as Api from '../../api';
@@ -20,7 +20,7 @@ function ProjectCard({ portfolioOwnerId, isEditable }) {
             <ProjectList projectList={projectList} setProjectList={setProjectList} isEditable={isEditable} portfolioOwnerId={portfolioOwnerId}></ProjectList>
             {isEditable && (
                 <div style={{ textAlign: "center" }}>
-                    {!isEditing && <Card.Body><Button variant="primary" onClick={() => setIsEditing(true)}>+</Button></Card.Body>}
+                    {!isEditing && <Card.Body><Button size='sm' variant="primary" onClick={() => setIsEditing(true)}>+</Button></Card.Body>}
                     {isEditing && <ProjectForm setIsEditing={setIsEditing} setProjectList={setProjectList} portfolioOwnerId={portfolioOwnerId}></ProjectForm>}
                 </div>
             )}

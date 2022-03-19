@@ -59,24 +59,31 @@ function Portfolio() {
 
   return (
     <Container fluid>
-      <Row>
-        <Col md="3" lg="3">
+      <Row className="justify-content-md-center">
+        <Col lg={3} style={{margin: "0 15px 0 0"}}>
           <User
             portfolioOwnerId={portfolioOwner.id}
             isEditable={portfolioOwner.id === userState.user?.id}
           />
         </Col>
-        <Col>
+        <Col style={{margin: "0 15px 0 15px"}}>
           <Education portfolioOwnerId={portfolioOwner.id}
-            isEditable={portfolioOwner.id === userState.user?.id}/>
+            isEditable={portfolioOwner.id === userState.user?.id}
+          />
+          <br/>
           <Awards
             portfolioOwnerId={portfolioOwner.id}
             isEditable={portfolioOwner.id === userState.user?.id}
           />
+          <br/>
           <Project portfolioOwnerId={portfolioOwner.id}
-            isEditable={portfolioOwner.id === userState.user?.id} />
+            isEditable={portfolioOwner.id === userState.user?.id} 
+          />
+          <br/>
           <Certificate portfolioOwnerId={portfolioOwner.id}
-            isEditable={portfolioOwner.id === userState.user?.id} />
+            isEditable={portfolioOwner.id === userState.user?.id} 
+          />
+          <br/>
         </Col>
       </Row>
     </Container>

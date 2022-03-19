@@ -29,7 +29,7 @@ function ProjectEdit({ title, description, from_date, to_date, setEdit, id, setP
     }
 
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form style={{ margin: 10, padding: 10, }} onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Control
                     type="text"
@@ -56,13 +56,15 @@ function ProjectEdit({ title, description, from_date, to_date, setEdit, id, setP
                     <DatePicker selected={uToDate} onChange={date => setUToDate(date)}></DatePicker>
                 </div>
             </Form.Group>
-            <Form.Group style={{ textAlign: "center", marginTop: 10 }}>
-                <Button variant="primary" type="submit" className="me-3 btn btn-primary">
-                    확인
-                </Button>
-                <Button variant="secondary" type="button" className="btn btn-secondary" onClick={() => setEdit(false)}>
-                    취소
-                </Button>
+            <Form.Group as={Row} className="mt-3 text-center">
+                <Col sm={{ span: 20 }}>
+                    <Button size='sm' variant="primary" type="submit" className="me-3 btn btn-primary">
+                        확인
+                    </Button>
+                    <Button size='sm' variant="secondary" type="button" className="btn btn-secondary" onClick={() => setEdit(false)}>
+                        취소
+                    </Button>
+                </Col>
             </Form.Group>
 
         </Form>
@@ -73,32 +75,29 @@ function ProjectEdit({ title, description, from_date, to_date, setEdit, id, setP
 function ProjectElement({ project, isEditable, setProjectList }) {
     const [edit, setEdit] = useState(false);
     return (
-        <Container style={{ margin: 10, padding: 10, }}>
-            <Row>
-                {edit ? <ProjectEdit title={project.title}
-                    description={project.description}
-                    from_date={project.from_date}
-                    to_date={project.to_date}
-                    setEdit={setEdit}
-                    id={project.id}
-                    setProjectList={setProjectList}></ProjectEdit> : (
-                    <>
-                        <Col sm={10}>
-                            <Card.Subtitle>{project.title}</Card.Subtitle>
-                            <Card.Text className="mb-2 text-muted">{project.description} <br /> {project.from_date} ~ {project.to_date}</Card.Text>
+        edit ? <ProjectEdit title={project.title}
+            description={project.description}
+            from_date={project.from_date}
+            to_date={project.to_date}
+            setEdit={setEdit}
+            id={project.id}
+            setProjectList={setProjectList}></ProjectEdit> :
+            <Container style={{ margin: 10, padding: 10, }}>
+                <Row>
+                    <Col sm={10}>
+                        <Card.Subtitle>{project.title}</Card.Subtitle>
+                        <Card.Text className="text-muted">{project.description} <br /> {project.from_date} ~ {project.to_date}</Card.Text>
+                    </Col>
+                    {isEditable && (
+                        <Col sm={2}>
+                            <ButtonGroup style={{margin: 10,}} size='sm'>
+                                <Button variant="outline-info" size="sm" onClick={() => setEdit(true)}>편집</Button>
+                                <Button variant="outline-danger" size="sm">삭제</Button>
+                            </ButtonGroup>
                         </Col>
-                        {isEditable && (
-                            <Col sm={2}>
-                                <ButtonGroup style={{margin: 10,}} size='sm'>
-                                    <Button variant="outline-info" size="sm" onClick={() => setEdit(true)}>편집</Button>
-                                    <Button variant="outline-danger" size="sm">삭제</Button>
-                                </ButtonGroup>
-                            </Col>
-                        )}
-                    </>
-                )}
-            </Row>
-        </Container>
+                    )}
+                </Row>
+            </Container>     
     )
 }
 
