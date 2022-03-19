@@ -13,6 +13,7 @@ const AwardAddForm = ({ portfolioOwnerId, awards, setAwards, setIsAdding}) => {
 
     // awardlist로 title과 description의 정보를 담아 POST 요청함.
     Api.post("award/create", {
+      user_id: portfolioOwnerId,
       title,
       description,
     });

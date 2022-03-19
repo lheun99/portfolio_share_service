@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 class awardService {
   static async addAward({ user_id, title, description }) {
     // user_id가 유효하지 않은 경우
-    const user = await User.findById({ id: user_id });
+    const user = await User.findById({ user_id });
     if (!user) {
       return { errorMessage: "해당 유저가 존재하지 않습니다." };
     }
