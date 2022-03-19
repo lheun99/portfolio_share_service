@@ -5,6 +5,12 @@ import { Container, Col, Row } from "react-bootstrap";
 import { UserStateContext } from "../App";
 import * as Api from "../api";
 import User from "./user/User";
+import Awards from "./award/Awards";
+
+import Project from './project/Project';
+import Certificate from "./certificate/Certificate";
+
+import Education from './education/Education';
 
 function Portfolio() {
   const navigate = useNavigate();
@@ -53,19 +59,31 @@ function Portfolio() {
 
   return (
     <Container fluid>
-      <Row>
-        <Col md="3" lg="3">
+      <Row className="justify-content-md-center">
+        <Col lg={3} style={{margin: "0 15px 0 0"}}>
           <User
             portfolioOwnerId={portfolioOwner.id}
             isEditable={portfolioOwner.id === userState.user?.id}
           />
         </Col>
-        <Col>
-
-          <div style={{ textAlign: "center" }}>
-            학력 목록, 수상이력 목록, 프로젝트 목록, 자격증 목록 만들기
-          </div>
-
+        <Col style={{margin: "0 15px 0 15px"}}>
+          <Education portfolioOwnerId={portfolioOwner.id}
+            isEditable={portfolioOwner.id === userState.user?.id}
+          />
+          <br/>
+          <Awards
+            portfolioOwnerId={portfolioOwner.id}
+            isEditable={portfolioOwner.id === userState.user?.id}
+          />
+          <br/>
+          <Project portfolioOwnerId={portfolioOwner.id}
+            isEditable={portfolioOwner.id === userState.user?.id} 
+          />
+          <br/>
+          <Certificate portfolioOwnerId={portfolioOwner.id}
+            isEditable={portfolioOwner.id === userState.user?.id} 
+          />
+          <br/>
         </Col>
       </Row>
     </Container>
