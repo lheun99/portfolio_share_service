@@ -12,15 +12,15 @@ const AwardAddForm = ({ portfolioOwnerId, awards, setAwards, setIsAdding}) => {
     e.preventDefault();
 
     // awardlist로 title과 description의 정보를 담아 POST 요청함.
-    Api.post("award/create", {
+    await Api.post("award/create", {
       user_id: portfolioOwnerId,
       title,
       description,
     });
 
     // "awardlist"에서 awards 목록 다시 받아옴
-    Api.get("awardlist", portfolioOwnerId).then((res) => setAwards(res.data));
-
+    await Api.get("awardlist", portfolioOwnerId).then((res) => setAwards(res.data));
+    
     // isAdding을 false로 세팅함.
     setIsAdding(false);
   };

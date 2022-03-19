@@ -14,7 +14,7 @@ awardRouter.post("/award/create", async (req, res, next) => {
     }
 
     const { user_id, title, description } = req.body;
-    console.log(user_id);
+    
     const newAward = await awardService.addAward({ user_id, title, description });
     if (newAward.errorMessage) {
       throw new Error(newAward.errorMessage);
