@@ -9,20 +9,20 @@ class Education {
   }
 
   // data의 ID를 통해 검색
-  static async findById({ educationId }) {
-    const education = await EducationModel.findOne({ id: educationId });
+  static async findById({ education_id }) {
+    const education = await EducationModel.findOne({ id: education_id });
     return education;
   }
 
   // user_id가 같은 모든 data 검색
-  static async findByUserId({ userId }) {
-    const educations = await EducationModel.find({ user_id: userId });
+  static async findByUserId({ user_id }) {
+    const educations = await EducationModel.find({ user_id });
     return educations;
   }
   
   // filter에 맞는 data의 변경할 필드(fieldToUpdate)에 변경할 내용(newValue)을 업데이트
-  static async update({ educationId, fieldToUpdate, newValue }) {
-    const filter = { id: educationId };
+  static async update({ education_id, fieldToUpdate, newValue }) {
+    const filter = { id: education_id };
     const toUpdate = { [fieldToUpdate]: newValue };
     const option = { returnOriginal: false };
 
@@ -35,8 +35,8 @@ class Education {
   }
 
   // id를 이용하여 data 삭제
-  static async delete({ educationId }) {
-    const deletedEducation = await EducationModel.deleteOne({ id: educationId });
+  static async delete({ education_id }) {
+    const deletedEducation = await EducationModel.deleteOne({ id: education_id });
     return deletedEducation;
   }
 }
