@@ -1,6 +1,11 @@
 import is from "@sindresorhus/is";
 import { Router } from "express";
 import { login_required } from "../middlewares/login_required";
+import {
+  isValidData,
+  invalidCallback,
+} from "../middlewares/validationMiddleware";
+
 import { projectAuthService } from "../services/projectService";
 
 const projectAuthRouter = Router();
@@ -8,7 +13,9 @@ const projectAuthRouter = Router();
 projectAuthRouter.post(
   "/project/create",
   login_required,
-  async function (req, res, next) {
+  isValidData("project"),
+  invalidCallback,
+  async (req, res, next) => {
     try {
       if (is.emptyObject(req.body)) {
         throw new Error(
@@ -40,67 +47,55 @@ projectAuthRouter.post(
   }
 );
 
-projectAuthRouter.get(
-  "/projects/:id",
-  login_required,
-  async function (req, res, next) {
-    try {
-      const project_id = req.params.id;
-      const currentProjectInfo = await projectAuthService.getProjectInfo({
-        project_id,
-      });
+projectAuthRouter.get("/projects/:id", async (req, res, next) => {
+  try {
+    const project_id = req.params.id;
+    const currentProjectInfo = await projectAuthService.getProjectInfo({
+      project_id,
+    });
 
-      if (currentProjectInfo.errorMessage) {
-        throw new Error(currentProjectInfo.errorMessage);
-      }
-
-      res.status(200).send(currentProjectInfo);
-    } catch (error) {
-      next(error);
+    if (currentProjectInfo.errorMessage) {
+      throw new Error(currentProjectInfo.errorMessage);
     }
+
+    res.status(200).send(currentProjectInfo);
+  } catch (error) {
+    next(error);
   }
-);
+});
 
-projectAuthRouter.put(
-  "/projects/:id",
-  login_required,
-  async function (req, res, next) {
-    try {
-      const project_id = req.params.id;
+projectAuthRouter.put("/projects/:id", async (req, res, next) => {
+  try {
+    const project_id = req.params.id;
 
-      const title = req.body.title ?? null;
-      const description = req.body.description ?? null;
-      const from_date = req.body.from_date ?? null;
-      const to_date = req.body.to_date ?? null;
+    const title = req.body.title ?? null;
+    const description = req.body.description ?? null;
+    const from_date = req.body.from_date ?? null;
+    const to_date = req.body.to_date ?? null;
 
-      const toUpdate = { title, description, from_date, to_date };
+    const toUpdate = { title, description, from_date, to_date };
 
-      const updatedProject = await projectAuthService.setProject({
-        project_id,
-        toUpdate,
-      });
-      if (updatedProject.errorMessage) {
-        throw new Error(updatedProject.errorMessage);
-      }
-      res.status(200).json(updatedProject);
-    } catch (error) {
-      next(error);
+    const updatedProject = await projectAuthService.setProject({
+      project_id,
+      toUpdate,
+    });
+    if (updatedProject.errorMessage) {
+      throw new Error(updatedProject.errorMessage);
     }
+    res.status(200).json(updatedProject);
+  } catch (error) {
+    next(error);
   }
-);
+});
 
-projectAuthRouter.get(
-  "/projectlist/:user_id",
-  login_required,
-  async function (req, res, next) {
-    try {
-      const user_id = req.params.user_id;
-      const projects = await projectAuthService.getProjects({ user_id });
-      res.status(200).send(projects);
-    } catch (error) {
-      next(error);
-    }
+projectAuthRouter.get("/projectlist/:user_id", async (req, res, next) => {
+  try {
+    const user_id = req.params.user_id;
+    const projects = await projectAuthService.getProjects({ user_id });
+    res.status(200).send(projects);
+  } catch (error) {
+    next(error);
   }
-);
+});
 
 export { projectAuthRouter };

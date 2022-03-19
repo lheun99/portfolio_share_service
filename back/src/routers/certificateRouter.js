@@ -1,6 +1,10 @@
 import is from "@sindresorhus/is";
 import { Router } from "express";
 import { login_required } from "../middlewares/login_required";
+import {
+  isValidData,
+  invalidCallback,
+} from "../middlewares/validationMiddleware";
 import { certificateAuthService } from "../services/certificateService";
 
 const certificateAuthRouter = Router();
@@ -8,7 +12,9 @@ const certificateAuthRouter = Router();
 certificateAuthRouter.post(
   "/certificate/create",
   login_required,
-  async function (req, res, next) {
+  isValidData("certificate"),
+  invalidCallback,
+  async (req, res, next) => {
     try {
       if (is.emptyObject(req.body)) {
         throw new Error(
@@ -39,60 +45,51 @@ certificateAuthRouter.post(
   }
 );
 
-certificateAuthRouter.get(
-  "/certificates/:id",
-  login_required,
-  async function (req, res, next) {
-    try {
-      const certificate_id = req.params.id;
-      const currentCertificateInfo =
-        await certificateAuthService.getCertificateInfo({
-          certificate_id,
-        });
-
-      if (currentCertificateInfo.errorMessage) {
-        throw new Error(currentCertificateInfo.errorMessage);
-      }
-
-      res.status(200).send(currentCertificateInfo);
-    } catch (error) {
-      next(error);
-    }
-  }
-);
-
-certificateAuthRouter.put(
-  "/certificates/:id",
-  login_required,
-  async function (req, res, next) {
-    try {
-      const certificate_id = req.params.id;
-
-      const title = req.body.title ?? null;
-      const description = req.body.description ?? null;
-      const when_date = req.body.when_date ?? null;
-      const toUpdate = { title, description, when_date };
-
-      const updatedCertificate = await certificateAuthService.setCertificate({
+certificateAuthRouter.get("/certificates/:id", async (req, res, next) => {
+  try {
+    const certificate_id = req.params.id;
+    const currentCertificateInfo =
+      await certificateAuthService.getCertificateInfo({
         certificate_id,
-        toUpdate,
       });
 
-      if (updatedCertificate.errorMessage) {
-        throw new Error(updatedCertificate.errorMessage);
-      }
-
-      res.status(200).json(updatedCertificate);
-    } catch (error) {
-      next(error);
+    if (currentCertificateInfo.errorMessage) {
+      throw new Error(currentCertificateInfo.errorMessage);
     }
+
+    res.status(200).send(currentCertificateInfo);
+  } catch (error) {
+    next(error);
   }
-);
+});
+
+certificateAuthRouter.put("/certificates/:id", async (req, res, next) => {
+  try {
+    const certificate_id = req.params.id;
+
+    const title = req.body.title ?? null;
+    const description = req.body.description ?? null;
+    const when_date = req.body.when_date ?? null;
+    const toUpdate = { title, description, when_date };
+
+    const updatedCertificate = await certificateAuthService.setCertificate({
+      certificate_id,
+      toUpdate,
+    });
+
+    if (updatedCertificate.errorMessage) {
+      throw new Error(updatedCertificate.errorMessage);
+    }
+
+    res.status(200).json(updatedCertificate);
+  } catch (error) {
+    next(error);
+  }
+});
 
 certificateAuthRouter.get(
   "/certificatelist/:user_id",
-  login_required,
-  async function (req, res, next) {
+  async (req, res, next) => {
     try {
       const user_id = req.params.user_id;
       const certificates = await certificateAuthService.getCertificates({
