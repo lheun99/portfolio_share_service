@@ -2,7 +2,7 @@ import is from "@sindresorhus/is";
 import { Router } from "express";
 import { login_required } from "../middlewares/login_required";
 // create시 데이터 유효성 검사 middleware
-// import { isValidData, invalidCallback } from "../middlewares/validationMiddleware";
+import { isValidData, invalidCallback } from "../middlewares/validationMiddleware";
 import { educationService } from "../services/educationService";
 
 const educationRouter = Router();
@@ -11,8 +11,8 @@ educationRouter.use(login_required);
 
 // POST /education/create : 데이터 생성 
 educationRouter.post("/education/create", 
-  // isValidData("education"),
-  // invalidCallback,
+  isValidData("education"),
+  invalidCallback,
   async (req, res, next) => {
     try {
       if (is.emptyObject(req.body)) {
@@ -46,9 +46,9 @@ educationRouter.post("/education/create",
 educationRouter.get("/educationlist/:user_id", async (req, res, next) => {
   try {
     // URI 파라미터에서 user_id 가져오기
-    const userId = req.params.user_id;
+    const { user_id } = req.params;
     // userId의 education 데이터를 모두 가져옴
-    const education = await educationService.getEducation({ userId });
+    const education = await educationService.getEducation({ user_id });
     
     res.status(200).json(education);
   } catch (error) {
@@ -60,9 +60,9 @@ educationRouter.get("/educationlist/:user_id", async (req, res, next) => {
 educationRouter.get("/educations/:id", async (req, res, next) => {
   try {
     // URI 파라미터에서 id 가져오기
-    const educationId = req.params.id;
+    const education_id = req.params.id;
     // id에 해당하는 상세 정보 가져옴
-    const education = await educationService.getEducationInfo({ educationId });
+    const education = await educationService.getEducationInfo({ education_id });
     
     if (education?.message) {
       throw new Error(education.message);
@@ -77,7 +77,7 @@ educationRouter.get("/educations/:id", async (req, res, next) => {
 // PUT /educations/:id : education 데이터 수정
 educationRouter.put("/educations/:id", async (req, res, next) => {
     try {
-      const educationId = req.params.id;
+      const education_id = req.params.id;
       // 값이 넘어오지 않을 경우 (undefined) null로 변경
       const school = req.body.school ?? null;
       const major = req.body.major ?? null;
@@ -85,7 +85,7 @@ educationRouter.put("/educations/:id", async (req, res, next) => {
 
       const toUpdate = { school, major, position };
 
-      const updatedEducation = await educationService.updateEducation({ educationId, toUpdate });
+      const updatedEducation = await educationService.updateEducation({ education_id, toUpdate });
 
       if (updatedEducation.errorMessage) {
         throw new Error(updatedEducation.errorMessage);
@@ -101,8 +101,8 @@ educationRouter.put("/educations/:id", async (req, res, next) => {
 // DELETE /educations/:id : education 데이터 삭제
 educationRouter.delete("/educations/:id", async (req, res, next) => {
   try {
-    const educationId = req.params.id;
-    const deletedEducation = await educationService.deleteEducation({ educationId });
+    const education_id = req.params.id;
+    const deletedEducation = await educationService.deleteEducation({ education_id });
 
     if (deletedEducation?.message) {
       throw new Error(deletedEducation.message);

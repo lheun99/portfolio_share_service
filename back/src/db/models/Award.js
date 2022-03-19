@@ -8,8 +8,8 @@ class Award {
   }
 
   // 수상 내역 조회
-  static async findById({ id }) {
-    const award = await AwardModel.findOne({ id });
+  static async findById({ award_id }) {
+    const award = await AwardModel.findOne({ id: award_id });
     return award;
   }
 
@@ -20,8 +20,8 @@ class Award {
   }
 
   // 수상 내역 업데이트
-  static async update({ id, fieldToUpdate, newValue }) {
-    const filter = { id: id };
+  static async update({ award_id, fieldToUpdate, newValue }) {
+    const filter = { id: award_id };
     const update = { [fieldToUpdate]: newValue };
     const option = { returnOriginal: false };
 
@@ -34,8 +34,8 @@ class Award {
   }
 
   // 수상 내역 삭제
-  static async delete({ id }) {
-    const deletedAward = await AwardModel.deleteOne({ id });
+  static async delete({ award_id }) {
+    const deletedAward = await AwardModel.deleteOne({ id: award_id });
     return deletedAward;
   }
 }

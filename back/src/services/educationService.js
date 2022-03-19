@@ -24,8 +24,8 @@ class educationService {
   }
 
   // 학력 사항 수정
-  static async updateEducation({ educationId, toUpdate }) {
-    let education = await Education.findById({ educationId })
+  static async updateEducation({ education_id, toUpdate }) {
+    let education = await Education.findById({ education_id })
 
     if (!education) {
       const errorMessage = "해당 학력 정보가 존재하지 않습니다. 다시 시도해주세요.";
@@ -36,33 +36,33 @@ class educationService {
     if (toUpdate.school) {
       const fieldToUpdate = "school";
       const newValue = toUpdate.school;
-      education = await Education.update({ educationId, fieldToUpdate, newValue });
+      education = await Education.update({ education_id, fieldToUpdate, newValue });
     }
 
     if (toUpdate.major) {
       const fieldToUpdate = "major";
       const newValue = toUpdate.major;
-      education = await Education.update({ educationId, fieldToUpdate, newValue });
+      education = await Education.update({ education_id, fieldToUpdate, newValue });
     }
 
     if (toUpdate.position) {
       const fieldToUpdate = "position";
       const newValue = toUpdate.position;
-      education = await Education.update({ educationId, fieldToUpdate, newValue });
+      education = await Education.update({ education_id, fieldToUpdate, newValue });
     }
 
     return education;
   }
 
   // 해당 유저의 학력 사항 불러오기
-  static async getEducation({ userId }) {
-    const education = await Education.findByUserId({ userId });
+  static async getEducation({ user_id }) {
+    const education = await Education.findByUserId({ user_id });
     return education;
   }
 
   // 해당 학력 사항의 상세 정보 불러오기
-  static async getEducationInfo({ educationId }) {
-    const education = await Education.findById({ educationId });
+  static async getEducationInfo({ education_id }) {
+    const education = await Education.findById({ education_id });
 
     if (!education) {
       const message = "해당 사항이 이미 삭제되었거나 존재하지 않습니다.";
@@ -72,8 +72,8 @@ class educationService {
   }
 
   // 학력 사항 삭제
-  static async deleteEducation({ educationId }) {
-    const deletedEducation = await Education.delete({ educationId });
+  static async deleteEducation({ education_id }) {
+    const deletedEducation = await Education.delete({ education_id });
     
     // 삭제가 정상적으로 된 경우
     if (deletedEducation.deletedCount === 1) return;

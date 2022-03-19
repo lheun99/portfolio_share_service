@@ -22,9 +22,9 @@ class awardService {
     return createdNewAward;
   }
 
-  static async getAwardInfo({ id }) {
+  static async getAwardInfo({ award_id }) {
     // db에 해당 수상 내역 존재 여부 확인
-    const award = await Award.findById({ id });
+    const award = await Award.findById({ award_id });
     if (!award) {
       const errorMessage =
         "해당 수상 내역이 존재하지 않습니다.";
@@ -39,8 +39,8 @@ class awardService {
     return awards;
   }
 
-  static async updateAward({ id, toUpdate }) {
-    let award = await Award.findById({ id });
+  static async updateAward({ award_id, toUpdate }) {
+    let award = await Award.findById({ award_id });
 
     // db에서 찾지 못한 경우, 에러 메시지 반환
     if (!award) {
@@ -53,21 +53,21 @@ class awardService {
     if (toUpdate.title) {
       const fieldToUpdate = "title";
       const newValue = toUpdate.title;
-      award = await Award.update({ id, fieldToUpdate, newValue });
+      award = await Award.update({ award_id, fieldToUpdate, newValue });
     }
 
     if (toUpdate.description) {
       const fieldToUpdate = "description";
       const newValue = toUpdate.description;
-      award = await Award.update({ id, fieldToUpdate, newValue });
+      award = await Award.update({ award_id, fieldToUpdate, newValue });
     }
 
     return award;
   }
 
-  static async deleteAward({ id }) {
+  static async deleteAward({ award_id }) {
     // 해당 내역 삭제
-    const deletedAward = await Award.delete({ id });
+    const deletedAward = await Award.delete({ award_id });
     return deletedAward;
   }
 }
