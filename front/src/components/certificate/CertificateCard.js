@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-// import { useNavigate, useParams } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
 import * as Api from '../../api';
 import CertificateList from './CertificateList';
 import CertificateForm from './CertificateForm';
 
-function CertificateCard({ portfolioOwnerId, isEditable }) {
+const CertificateCard = ({ portfolioOwnerId, isEditable }) => {
 
     const [certificateList, setCertificateList] = useState([]);
     const [isEditing, setIsEditing] = useState(false);

@@ -5,7 +5,7 @@ import * as Api from '../../api';
 
 import { UserStateContext } from "../../App";
 
-function ProjectForm({ setIsEditing, setProjectList, portfolioOwnerId }) {
+const ProjectForm = ({ setIsEditing, setProjectList, portfolioOwnerId }) => {
   const [title, setTitle] = useState('');
   const [prjbody, setPrjBody] = useState('');
 

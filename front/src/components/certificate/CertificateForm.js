@@ -5,7 +5,7 @@ import * as Api from '../../api';
 
 import { UserStateContext } from "../../App";
 
-function CertificateForm({ setIsEditing, setCertificateList, portfolioOwnerId  }) {
+const CertificateForm = ({ setIsEditing, setCertificateList, portfolioOwnerId  }) => {
   const [title, setTitle] = useState('');
   const [prjbody, setPrjBody] = useState('');
 

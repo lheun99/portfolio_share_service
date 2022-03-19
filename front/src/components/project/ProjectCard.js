@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-// import { useNavigate, useParams } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
 import * as Api from '../../api';
 import ProjectList from './ProjectList';
 import ProjectForm from './ProjectForm';
 
-function ProjectCard({ portfolioOwnerId, isEditable }) {
+const ProjectCard = ({ portfolioOwnerId, isEditable }) => {
 
     const [projectList, setProjectList] = useState([]);
     const [isEditing, setIsEditing] = useState(false);

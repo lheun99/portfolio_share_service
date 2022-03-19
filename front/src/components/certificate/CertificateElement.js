@@ -1,16 +1,14 @@
 import React, { useContext, useState } from "react";
-// import { useNavigate, useParams } from "react-router-dom";
 import { Card, Button, ButtonGroup, Container, Row, Col, Form } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import * as Api from '../../api';
 import { UserStateContext } from "../../App";
 
-function CertificateEdit({ title, description, when_date, setEdit, id, setCertificateList }) {
+const CertificateEdit = ({ title, description, when_date, setEdit, id, setCertificateList }) => {
     const userState = useContext(UserStateContext);
     const [utitle, setUtitle] = useState(title);
     const [udescription, setUdescription] = useState(description);
     const [uWhenDate, setUWhenDate] = useState(new Date(when_date));
-    console.log(uWhenDate);
     // 프로젝트 편집 기능
     async function handleSubmit(e) {
         e.preventDefault();

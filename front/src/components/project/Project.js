@@ -2,7 +2,7 @@ import React from "react";
 import ProjectCard from './ProjectCard';
 
 
-function Project({portfolioOwnerId, isEditable}) {
+const Project = ({portfolioOwnerId, isEditable}) => {
     console.log(portfolioOwnerId);
     return (
         <>

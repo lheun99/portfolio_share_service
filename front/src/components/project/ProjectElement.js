@@ -5,8 +5,7 @@ import DatePicker from "react-datepicker";
 import * as Api from '../../api';
 import { UserStateContext } from "../../App";
 
-function ProjectEdit({ title, description, from_date, to_date, setEdit, id, setProjectList }) {
-    console.log(id);
+const ProjectEdit = ({ title, description, from_date, to_date, setEdit, id, setProjectList }) => {
     const userState = useContext(UserStateContext);
     const [utitle, setUtitle] = useState(title);
     const [udescription, setUdescription] = useState(description);
