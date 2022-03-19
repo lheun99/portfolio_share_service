@@ -74,17 +74,6 @@ const EducationEdit = ({ item, onUpdate, editHandler }) => {
 					id="inline-radio-1"
 					checked={checking === "재학중" ? true : false}
 					onChange={checkHandler}
-
-				/>
-				<Form.Check
-					inline
-					label="석사졸업"
-					value="석사졸업"
-					name="group1"
-					type="radio"
-					id="inline-radio-2"
-					checked={checking === "석사졸업" ? true : false}
-					onChange={checkHandler}
 				/>
 				<Form.Check
 					inline
@@ -92,8 +81,18 @@ const EducationEdit = ({ item, onUpdate, editHandler }) => {
 					value="학사졸업"
 					name="group1"
 					type="radio"
-					id="inline-radio-3"
+					id="inline-radio-2"
 					checked={checking === "학사졸업" ? true : false}
+					onChange={checkHandler}
+				/>
+				<Form.Check
+					inline
+					label="석사졸업"
+					value="석사졸업"
+					name="group1"
+					type="radio"
+					id="inline-radio-3"
+					checked={checking === "석사졸업" ? true : false}
 					onChange={checkHandler}
 
 				/>

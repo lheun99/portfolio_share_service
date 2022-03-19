@@ -12,11 +12,9 @@ const EducationCard = ({ value, editHandler, deleteHandler, isEditable }) => {
 		SetIsEditing(!isEditing);
 	};
 
-	// 삭제 처리 함수
+	// 삭제 처리 함수(Education 컴포넌트에서 받아온 delete 요청 함수 사용)
 	const handleDelete = (e) => {
 		e.preventDefault();
-
-		// Education 컴포넌트에서 받아온 delete 요청 함수
 		deleteHandler(id, e.target.value);
 	};
 

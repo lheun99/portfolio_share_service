@@ -12,7 +12,7 @@ const EducationCardList = ({ topics, editHandler, deleteHandler, isEditable }) =
 						editHandler={editHandler} 
 						deleteHandler={deleteHandler} 
 						isEditable={isEditable} 
-						/>)}
+					/>)}
 		</>
 	);
 

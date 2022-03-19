@@ -10,8 +10,8 @@ const Education = ({ portfolioOwnerId, isEditable }) => {
 	
 	// user_id 값
 	const userId = portfolioOwnerId;
+  const [topics, setTopics] = useState([]);
 	const [visible, setVisible] = useState(false);
-	const [topics, setTopics] = useState([]);
 
 	// GET 요청
 	useEffect(() => {

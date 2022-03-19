@@ -6,7 +6,6 @@ const EducationForm = ({ onCreate, clickHandler }) => {
 	const [schoolInput, setSchoolInput] = useState('');
 	const [majorInput, setMajorInput] = useState('');
 
-
 	// school value 값 변경 함수
 	const changeHandler1 = (e) => {
 		e.preventDefault();
@@ -70,16 +69,16 @@ const EducationForm = ({ onCreate, clickHandler }) => {
 				/>
 				<Form.Check
 					inline
-					label="석사졸업"
-					value="석사졸업"
+					label="학사졸업"
+					value="학사졸업"
 					name="group"
 					type="radio"
 					id="inline-radio-2"
 				/>
 				<Form.Check
 					inline
-					label="학사졸업"
-					value="학사졸업"
+					label="석사졸업"
+					value="석사졸업"
 					name="group"
 					type="radio"
 					id="inline-radio-3"
