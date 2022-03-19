@@ -2,7 +2,7 @@ import is from "@sindresorhus/is";
 import { Router } from "express";
 import { login_required } from "../middlewares/login_required";
 // create시 데이터 유효성 검사 middleware
-import { isValidData, invalidCallback } from "../middlewares/validationMiddleware";
+// import { isValidData, invalidCallback } from "../middlewares/validationMiddleware";
 import { educationService } from "../services/educationService";
 
 const educationRouter = Router();
@@ -11,8 +11,8 @@ educationRouter.use(login_required);
 
 // POST /education/create : 데이터 생성 
 educationRouter.post("/education/create", 
-  isValidData("education"),
-  invalidCallback,
+  // isValidData("education"),
+  // invalidCallback,
   async (req, res, next) => {
     try {
       if (is.emptyObject(req.body)) {

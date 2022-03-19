@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { User } from "./models/User";
+import { Education } from "./models/Education";
 import { Project } from "./models/Project";
 import { Certificate } from "./models/Certificate";
 import { Award } from "./models/Award";
