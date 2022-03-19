@@ -1,37 +1,42 @@
 import is from "@sindresorhus/is";
 import { Router } from "express";
 import { login_required } from "../middlewares/login_required";
+// create시 데이터 유효성 검사 middleware
+import { isValidData, invalidCallback } from "../middlewares/validationMiddleware";
 import { awardService } from "../services/awardService";
 
 const awardRouter = Router();
 awardRouter.use(login_required);
 
 // POST: /award/create => 수상 내역 추가
-awardRouter.post("/award/create", async (req, res, next) => {
-  try {
-    if (is.emptyObject(req.body)) {
-      throw new Error("headers의 Content-Type을 application/json으로 설정해주세요");
+awardRouter.post("/award/create", 
+isValidData("award"),
+invalidCallback,
+  async (req, res, next) => {
+    try {
+      if (is.emptyObject(req.body)) {
+        throw new Error("headers의 Content-Type을 application/json으로 설정해주세요");
+      }
+
+      const { user_id, title, description } = req.body;
+      console.log(title, description);
+      const newAward = await awardService.addAward({ user_id, title, description });
+      if (newAward.errorMessage) {
+        throw new Error(newAward.errorMessage);
+      }
+
+      res.status(201).json(newAward);
+
+    } catch (e) {
+      next(e);
     }
-
-    const { user_id, title, description } = req.body;
-    
-    const newAward = await awardService.addAward({ user_id, title, description });
-    if (newAward.errorMessage) {
-      throw new Error(newAward.errorMessage);
-    }
-
-    res.status(201).json(newAward);
-
-  } catch (e) {
-    next(e);
-  }
 });
 
 // GET: /awards/:id => id에 해당하는 수상 내역 조회
 awardRouter.get("/awards/:id", async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const award = await awardService.getAwardInfo({ id });
+    const award_id = req.params.id;
+    const award = await awardService.getAwardInfo({ award_id });
 
     if (award.errorMessage) {
       throw new Error(award.errorMessage);
@@ -46,13 +51,13 @@ awardRouter.get("/awards/:id", async (req, res, next) => {
 // PUT: /awards/:id => id에 해당하는 수상 내역 업데이트
 awardRouter.put("/awards/:id", async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const award_id = req.params.id;
     const title = req.body.title ?? null;
     const description = req.body.description ?? null;
 
     const toUpdate = { title, description };
 
-    const updatedAward = await awardService.updateAward({ id, toUpdate });
+    const updatedAward = await awardService.updateAward({ award_id, toUpdate });
 
     if (updatedAward.errorMessage) {
       throw new Error(updatedAward.errorMessage);
@@ -79,8 +84,8 @@ awardRouter.get("/awardlist/:user_id", async (req, res, next) => {
 // DELETE: /awards/:id => id에 해당하는 수상 내역 삭제
 awardRouter.delete("/awards/:id", async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const deletedAward = await awardService.deleteAward({ id });
+    const award_id = req.params.id;
+    const deletedAward = await awardService.deleteAward({ award_id });
 
     if (deletedAward.deletedCount !== 1) {
       throw new Error("정상적으로 삭제되지 않았습니다.");

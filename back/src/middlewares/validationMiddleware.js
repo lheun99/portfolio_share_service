@@ -5,16 +5,16 @@ const isValidData = (type) => {
     case 'education':
       return ( 
         [ 
-          body("school", "학교 정보가 없습니다.").exists().isString(),
-          body("major", "학과 정보가 없습니다.").exists().isString(),
+          body("school", "학교 정보가 없습니다.").exists().isLength({ min:3 }),
+          body("major", "학과 정보가 없습니다.").exists().isLength({ min:3 }),
           body("position", "position 정보가 없습니다.").exists().isIn(['재학중', '학사졸업', '석사졸업', '박사졸업'])
         ]
       );
     case 'award':
       return (
           [
-            body("title", "수상명이 없습니다.").exists().isString(),
-            body("description", "수상 설명이 없습니다.").exists().isString()
+            body("title", "수상명이 없습니다.").exists().isString().isLength({ min:3 }),
+            body("description", "수상 설명이 없습니다.").exists().isString().isLength({ min:3 })
           ]
       );
   }   
