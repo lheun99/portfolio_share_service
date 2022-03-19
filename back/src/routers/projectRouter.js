@@ -9,10 +9,10 @@ import {
 import { projectAuthService } from "../services/projectService";
 
 const projectAuthRouter = Router();
+projectAuthRouter.use(login_required);
 
 projectAuthRouter.post(
   "/project/create",
-  login_required,
   isValidData("project"),
   invalidCallback,
   async (req, res, next) => {

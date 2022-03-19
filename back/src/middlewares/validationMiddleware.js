@@ -12,14 +12,10 @@ const isValidData = (type) => {
       ];
     case "award":
       return [
-        body("title", "수상명이 없습니다.")
-          .exists()
-          .isString()
-          .isLength({ min: 3 }),
-        body("description", "수상 설명이 없습니다.")
-          .exists()
-          .isString()
-          .isLength({ min: 3 }),
+        body("title", "수상명이 없습니다.").exists().isString(),
+        //.isLength({ min: 3 }),
+        body("description", "수상 설명이 없습니다.").exists().isString(),
+        //.isLength({ min: 3 }),
       ];
 
     case "project":
