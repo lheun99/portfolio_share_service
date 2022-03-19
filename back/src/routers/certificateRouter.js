@@ -8,10 +8,10 @@ import {
 import { certificateAuthService } from "../services/certificateService";
 
 const certificateAuthRouter = Router();
+certificateAuthRouter.use(login_required);
 
 certificateAuthRouter.post(
   "/certificate/create",
-  login_required,
   isValidData("certificate"),
   invalidCallback,
   async (req, res, next) => {
