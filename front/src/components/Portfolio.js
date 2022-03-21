@@ -4,12 +4,12 @@ import { Container, Col, Row } from "react-bootstrap";
 
 import { UserStateContext } from "../App";
 import * as Api from "../api";
+
+import "./Portfolio.css";
 import User from "./user/User";
 import Awards from "./award/Awards";
-
 import Project from './project/Project';
 import Certificate from "./certificate/Certificate";
-
 import Education from './education/Education';
 
 function Portfolio() {
@@ -54,7 +54,19 @@ function Portfolio() {
   }, [params, userState, navigate]);
 
   if (!isFetchCompleted) {
-    return "loading...";
+    return (
+      <div 
+        className="loading" 
+        style={{fontWeight:"bold", fontSize:40, textAlign:"center", height:"50vh", lineHeight:"50vh"}}>
+        <span>L</span>
+        <span>O</span>
+        <span>A</span>
+        <span>D</span>
+        <span>I</span>
+        <span>N</span>
+        <span>G</span>
+      </div>
+    );
   }
 
   return (
