@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
 
 class projectAuthService {
-  static async addProject({ user_id, title, description, from_date, to_date }) {
+  static async addProject({ user_id, title, description, link, from_date, to_date }) {
     const user = await Project.findUserById({ user_id });
     if (user.length === 0) {
       const errorMessage = "존재하지 않는 사용자";
@@ -17,6 +17,7 @@ class projectAuthService {
       user_id,
       title,
       description,
+      link,
       from_date,
       to_date,
     };
@@ -55,6 +56,12 @@ class projectAuthService {
     if (toUpdate.description) {
       const fieldToUpdate = "description";
       const newValue = toUpdate.description;
+      project = await Project.update({ project_id, fieldToUpdate, newValue });
+    }
+
+    if (toUpdate.link) {
+      const fieldToUpdate = "link";
+      const newValue = toUpdate.link;
       project = await Project.update({ project_id, fieldToUpdate, newValue });
     }
 
