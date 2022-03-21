@@ -82,6 +82,13 @@ class educationService {
     const message = "삭제가 정상적으로 이루어지지 않았습니다.";
     return { message };
   }
+
+  // 유저의 학력 사항 모두 삭제
+  static async deleteAllEducation({ user_id }) {
+    const deletedEducations = await Education.deleteAll({ user_id });
+    
+    return;
+  }
 }
 
 export { educationService };

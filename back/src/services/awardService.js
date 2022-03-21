@@ -70,6 +70,11 @@ class awardService {
     const deletedAward = await Award.delete({ award_id });
     return deletedAward;
   }
+
+  static async deleteAllAward({ user_id }) {
+    const deletedAwards = await Award.deleteAll({ user_id });
+    return;
+  }
 }
 
 export { awardService };
