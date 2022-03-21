@@ -76,6 +76,20 @@ class projectAuthService {
     const projects = await Project.findByUserId({ user_id });
     return projects;
   }
+
+  static async deleteProject({ project_id }) {
+    const deletedProject = await Project.deleteProject({
+      project_id,
+    });
+
+    if (!deletedProject) {
+      const errorMessage =
+        "프로젝트 정보가 존재하지 않습니다. 다시 한 번 확인해 주세요.";
+      return { errorMessage };
+    }
+
+    return deletedProject;
+  }
 }
 
 export { projectAuthService };

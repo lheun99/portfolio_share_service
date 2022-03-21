@@ -98,4 +98,21 @@ projectAuthRouter.get("/projectlist/:user_id", async (req, res, next) => {
   }
 });
 
+projectAuthRouter.delete("/projects/:id", async (req, res, next) => {
+  try {
+    const project_id = req.params.id;
+    const deletedProject = await projectAuthService.deleteProject({
+      project_id,
+    });
+
+    if (deletedProject.errorMessage) {
+      throw new Error(deletedProject.errorMessage);
+    }
+
+    res.status(200).send("성공적으로 삭제가 완료되었습니다.");
+  } catch (error) {
+    next(error);
+  }
+});
+
 export { projectAuthRouter };

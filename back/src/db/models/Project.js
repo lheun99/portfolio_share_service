@@ -34,6 +34,13 @@ class Project {
     const projects = await ProjectModel.find({ user_id });
     return projects;
   }
+
+  static async deleteProject({ project_id }) {
+    const deletedProject = await ProjectModel.deleteOne({
+      id: project_id,
+    });
+    return deletedProject;
+  }
 }
 
 export { Project };
