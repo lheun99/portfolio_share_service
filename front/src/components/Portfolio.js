@@ -57,7 +57,7 @@ function Portfolio() {
     return (
       <div 
         className="loading" 
-        style={{fontWeight:"bold", fontSize:40, textAlign:"center", height:"50vh", lineHeight:"50vh"}}>
+        style={{fontWeight:"bold", fontSize:40, textAlign:"center", height:"100vh", lineHeight:"100vh"}}>
         <span>L</span>
         <span>O</span>
         <span>A</span>
