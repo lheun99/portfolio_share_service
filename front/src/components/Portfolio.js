@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Container, Col, Row } from "react-bootstrap";
+import { Container, Col, Row, Nav, Navbar, Form, FormControl, Button } from "react-bootstrap";
 
 import { UserStateContext } from "../App";
 import * as Api from "../api";
@@ -21,6 +21,11 @@ function Portfolio() {
   // 아래 코드를 보면, isFetchCompleted가 false이면 "loading..."만 반환되어서, 화면에 이 로딩 문구만 뜨게 됨.
   const [isFetchCompleted, setIsFetchCompleted] = useState(false);
   const userState = useContext(UserStateContext);
+
+  const [isEducation, setIsEducation] = useState(true)
+  const [isAward, setIsAward] = useState(true)
+  const [isProject, setIsProject] = useState(true)
+  const [isCertificate, setIsCertificate] = useState(true)
 
   const fetchPorfolioOwner = async (ownerId) => {
     // 유저 id를 가지고 "/users/유저id" 엔드포인트로 요청해 사용자 정보를 불러옴.
@@ -79,23 +84,87 @@ function Portfolio() {
           />
         </Col>
         <Col style={{margin: "0 15px 0 15px"}}>
-          <Education portfolioOwnerId={portfolioOwner.id}
+          <Navbar>
+            <Container>
+              <Nav className="me-auto">
+                <Nav.Link 
+                  href="#all"
+                  onClick = {(e) => {
+                    e.preventDefault()
+                    setIsEducation(true)
+                    setIsAward(true)
+                    setIsProject(true)
+                    setIsCertificate(true)
+                  }}>전체 보기</Nav.Link>
+                <Nav.Link 
+                  href="#education"
+                  onClick = {(e) => {
+                    e.preventDefault()
+                    setIsEducation(true)
+                    setIsAward(false)
+                    setIsProject(false)
+                    setIsCertificate(false)
+                  }}>학력</Nav.Link>
+                <Nav.Link 
+                  href="#award"
+                  onClick = {(e) => {
+                    e.preventDefault()
+                    setIsEducation(false)
+                    setIsAward(true)
+                    setIsProject(false)
+                    setIsCertificate(false)
+                  }}>수상 내역</Nav.Link>
+                <Nav.Link 
+                  href="#project"
+                  onClick = {(e) => {
+                    e.preventDefault()
+                    setIsEducation(false)
+                    setIsAward(false)
+                    setIsProject(true)
+                    setIsCertificate(false)
+                  }}>프로젝트</Nav.Link>
+                <Nav.Link 
+                  href="#certificate"
+                  onClick = {(e) => {
+                    e.preventDefault()
+                    setIsEducation(false)
+                    setIsAward(false)
+                    setIsProject(false)
+                    setIsCertificate(true)
+                  }}>자격증</Nav.Link>
+              </Nav>
+              <Form className="d-flex">
+                <FormControl
+                  type="search"
+                  placeholder="Search"
+                  className="me-2"
+                  aria-label="Search"
+                />
+                <Button variant="outline-info">Search</Button>
+              </Form>
+            </Container>
+          </Navbar>
+
+          {isEducation ? <><Education portfolioOwnerId={portfolioOwner.id}
             isEditable={portfolioOwner.id === userState.user?.id}
           />
-          <br/>
-          <Awards
+          <br/></> : <></>}
+
+          {isAward ? <><Awards
             portfolioOwnerId={portfolioOwner.id}
             isEditable={portfolioOwner.id === userState.user?.id}
           />
-          <br/>
-          <Project portfolioOwnerId={portfolioOwner.id}
+          <br/></> : <></>}
+
+          {isProject ? <><Project portfolioOwnerId={portfolioOwner.id}
             isEditable={portfolioOwner.id === userState.user?.id} 
           />
-          <br/>
-          <Certificate portfolioOwnerId={portfolioOwner.id}
+          <br/></> : <></>}
+
+          {isCertificate ? <><Certificate portfolioOwnerId={portfolioOwner.id}
             isEditable={portfolioOwner.id === userState.user?.id} 
           />
-          <br/>
+          <br/></> : <></>}
         </Col>
       </Row>
     </Container>
