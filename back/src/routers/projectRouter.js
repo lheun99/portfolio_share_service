@@ -25,6 +25,7 @@ projectAuthRouter.post(
       const user_id = req.body.user_id;
       const title = req.body.title;
       const description = req.body.description;
+      const link = req.body.link;
       const from_date = req.body.from_date;
       const to_date = req.body.to_date;
 
@@ -32,6 +33,7 @@ projectAuthRouter.post(
         user_id,
         title,
         description,
+        link,
         from_date,
         to_date,
       });
@@ -70,10 +72,11 @@ projectAuthRouter.put("/projects/:id", async (req, res, next) => {
 
     const title = req.body.title ?? null;
     const description = req.body.description ?? null;
+    const link = req.body.link ?? null;
     const from_date = req.body.from_date ?? null;
     const to_date = req.body.to_date ?? null;
 
-    const toUpdate = { title, description, from_date, to_date };
+    const toUpdate = { title, description, link, from_date, to_date };
 
     const updatedProject = await projectAuthService.setProject({
       project_id,
