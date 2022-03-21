@@ -31,26 +31,20 @@ class educationService {
       const errorMessage = "해당 학력 정보가 존재하지 않습니다. 다시 시도해주세요.";
       return { errorMessage };
     }
-
-    // 각 필드별 수정 항목 반영
-    if (toUpdate.school) {
-      const fieldToUpdate = "school";
-      const newValue = toUpdate.school;
-      education = await Education.update({ education_id, fieldToUpdate, newValue });
+    
+    if (!toUpdate.school) {
+      delete toUpdate[school];
     }
 
-    if (toUpdate.major) {
-      const fieldToUpdate = "major";
-      const newValue = toUpdate.major;
-      education = await Education.update({ education_id, fieldToUpdate, newValue });
+    if (!toUpdate.major) {
+      delete toUpdate[major];
     }
 
-    if (toUpdate.position) {
-      const fieldToUpdate = "position";
-      const newValue = toUpdate.position;
-      education = await Education.update({ education_id, fieldToUpdate, newValue });
+    if (!toUpdate.position) {
+      delete toUpdate[position];
     }
-
+    
+    education = await Education.update({ education_id, toUpdate });
     return education;
   }
 
