@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form, Card, Col, Row } from "react-bootstrap";
+import { Button, Form, Card, Col, Row, ButtonGroup } from "react-bootstrap";
 import * as Api from "../../api";
 
 function UserEditForm({ user, setIsEditing, setUser }) {
@@ -9,6 +9,8 @@ function UserEditForm({ user, setIsEditing, setUser }) {
   const [email, setEmail] = useState(user.email);
   //useState로 description 상태를 생성함.
   const [description, setDescription] = useState(user.description);
+  //useState로 job 상태를 생성함.
+  const [job, setJob] = useState(user.job);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,6 +20,7 @@ function UserEditForm({ user, setIsEditing, setUser }) {
       name,
       email,
       description,
+      job,
     });
     // 유저 정보는 response의 data임.
     const updatedUser = res.data;
@@ -50,13 +53,50 @@ function UserEditForm({ user, setIsEditing, setUser }) {
             />
           </Form.Group>
 
-          <Form.Group controlId="userEditDescription">
+          <Form.Group controlId="userEditDescription" className="mb-3">
             <Form.Control
               type="text"
               placeholder="정보, 인사말"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
+          </Form.Group>
+
+          <Form.Group controlId="userEditJob">
+            <ButtonGroup style={{ margin: 10 }} size="sm">
+              <Button
+                variant="outline-info"
+                size="sm"
+                value="프론트엔드"
+                onClick={(e) => setJob(e.target.value)}
+              >
+                프론트엔드
+              </Button>
+              <Button
+                variant="outline-info"
+                size="sm"
+                value="백엔드"
+                onClick={(e) => setJob(e.target.value)}
+              >
+                백엔드
+              </Button>
+              <Button
+                variant="outline-info"
+                size="sm"
+                value="데이터 분석"
+                onClick={(e) => setJob(e.target.value)}
+              >
+                데이터 분석
+              </Button>
+              <Button
+                variant="outline-info"
+                size="sm"
+                value="AI"
+                onClick={(e) => setJob(e.target.value)}
+              >
+                AI
+              </Button>
+            </ButtonGroup>
           </Form.Group>
 
           <Form.Group as={Row} className="mt-3 text-center">

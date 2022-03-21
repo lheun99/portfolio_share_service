@@ -2,17 +2,17 @@ import React, { useEffect, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Row } from "react-bootstrap";
 
-import * as Api from "../../api";
 import UserCard from "./UserCard";
-import SearchBar from "./SearchBar";
+import * as Api from "../../api";
 import { UserStateContext } from "../../App";
+import { useLocation } from "react-router";
+import SearchBar from "./SearchBar";
 
-function Network() {
+function SearchProject() {
   const navigate = useNavigate();
   const userState = useContext(UserStateContext);
-  // useState 훅을 통해 users 상태를 생성함.
   const [users, setUsers] = useState([]);
-
+  const { state } = useLocation();
   useEffect(() => {
     // 만약 전역 상태의 user가 null이라면, 로그인 페이지로 이동함.
     if (!userState.user) {
@@ -23,11 +23,19 @@ function Network() {
     Api.get("userlist").then((res) => setUsers(res.data));
   }, [userState, navigate]);
 
+  let user_list = [];
   return (
     <Container fluid>
       <SearchBar />
       <Row xs="auto" className="jusify-content-center">
-        {users.map((user) => (
+        {users.forEach((user) => {
+          if (user.name.indexOf(state) === -1) {
+            return;
+          }
+          console.log(user);
+          user_list.push(user);
+        })}
+        {user_list.map((user) => (
           <UserCard key={user.id} user={user} isNetwork />
         ))}
       </Row>
@@ -35,4 +43,4 @@ function Network() {
   );
 }
 
-export default Network;
+export default SearchProject;

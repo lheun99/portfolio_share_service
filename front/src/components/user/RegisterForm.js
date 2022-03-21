@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, Col, Row, Form, Button } from "react-bootstrap";
+import {
+  Container,
+  Col,
+  Row,
+  Form,
+  Button,
+  ButtonGroup,
+} from "react-bootstrap";
 
 import * as Api from "../../api";
 
@@ -15,6 +22,8 @@ function RegisterForm() {
   const [confirmPassword, setConfirmPassword] = useState("");
   //useState로 name 상태를 생성함.
   const [name, setName] = useState("");
+  //useState로 job 상태를 생성함.
+  const [job, setJob] = useState("");
 
   //이메일이 abc@example.com 형태인지 regex를 이용해 확인함.
   const validateEmail = (email) => {
@@ -33,10 +42,15 @@ function RegisterForm() {
   const isPasswordSame = password === confirmPassword;
   // 이름이 2글자 이상인지 여부를 확인함.
   const isNameValid = name.length >= 2;
-
+  //관심직무가 선택되었는지 확인
+  const isJobValid = job.length > 0;
   // 위 4개 조건이 모두 동시에 만족되는지 여부를 확인함.
   const isFormValid =
-    isEmailValid && isPasswordValid && isPasswordSame && isNameValid;
+    isEmailValid &&
+    isPasswordValid &&
+    isPasswordSame &&
+    isNameValid &&
+    isJobValid;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,6 +61,7 @@ function RegisterForm() {
         email,
         password,
         name,
+        job,
       });
 
       // 로그인 페이지로 이동함.
@@ -117,6 +132,49 @@ function RegisterForm() {
               {!isNameValid && (
                 <Form.Text className="text-success">
                   이름은 2글자 이상으로 설정해 주세요.
+                </Form.Text>
+              )}
+            </Form.Group>
+
+            <Form.Group controlId="registerJob" className="mt-3">
+              <Form.Label>직무</Form.Label>
+              <ButtonGroup style={{ margin: 10 }} size="sm">
+                <Button
+                  variant="outline-info"
+                  size="sm"
+                  value="프론트엔드"
+                  onClick={(e) => setJob(e.target.value)}
+                >
+                  프론트엔드
+                </Button>
+                <Button
+                  variant="outline-info"
+                  size="sm"
+                  value="백엔드"
+                  onClick={(e) => setJob(e.target.value)}
+                >
+                  백엔드
+                </Button>
+                <Button
+                  variant="outline-info"
+                  size="sm"
+                  value="데이터 분석"
+                  onClick={(e) => setJob(e.target.value)}
+                >
+                  데이터 분석
+                </Button>
+                <Button
+                  variant="outline-info"
+                  size="sm"
+                  value="AI"
+                  onClick={(e) => setJob(e.target.value)}
+                >
+                  AI
+                </Button>
+              </ButtonGroup>
+              {!isJobValid && (
+                <Form.Text className="text-success">
+                  관심 직무를 선택해주세요.
                 </Form.Text>
               )}
             </Form.Group>
