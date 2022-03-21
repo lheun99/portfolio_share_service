@@ -115,6 +115,19 @@ educationRouter.delete("/educations/:id", async (req, res, next) => {
 }
 );
 
+educationRouter.delete("/educationlist/:user_id", async (req, res, next) => {
+  try {
+    // URI 파라미터에서 user_id 가져오기
+    const { user_id } = req.params;
+    // userId의 education 데이터를 모두 삭제함
+    await educationService.deleteAllEducation({ user_id });
+
+    res.status(200).json('success');
+  } catch (error) {
+    next(error);
+  }
+});
+
 
 
 export { educationRouter };

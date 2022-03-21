@@ -98,4 +98,17 @@ projectAuthRouter.get("/projectlist/:user_id", async (req, res, next) => {
   }
 });
 
+projectAuthRouter.delete("/projectlist/:user_id", async (req, res, next) => {
+  try {
+    // URI 파라미터에서 user_id 가져오기
+    const { user_id } = req.params;
+    // userId의 project 데이터를 모두 삭제함
+    await projectAuthService.deleteAllProject({ user_id });
+
+    res.status(200).json('success');
+  } catch (error) {
+    next(error);
+  }
+});
+
 export { projectAuthRouter };
