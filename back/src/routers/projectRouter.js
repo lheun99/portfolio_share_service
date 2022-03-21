@@ -39,7 +39,6 @@ projectAuthRouter.post(
       if (newProject.errorMessage) {
         throw new Error(newProject.errorMessage);
       }
-
       res.status(201).json(newProject);
     } catch (error) {
       next(error);
