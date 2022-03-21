@@ -8,6 +8,7 @@ import { UserStateContext } from "../../App";
 const ProjectForm = ({ setIsEditing, setProjectList, portfolioOwnerId }) => {
   const [title, setTitle] = useState('');
   const [prjbody, setPrjBody] = useState('');
+  const [link, setLink] = useState('');
 
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
@@ -17,7 +18,7 @@ const ProjectForm = ({ setIsEditing, setProjectList, portfolioOwnerId }) => {
   // 프로젝트 리스트에 프로젝트 추가
   async function handleSubmit(e) {
     e.preventDefault();
-    const data = { user_id: userState.user.id, title, description: prjbody, 
+    const data = { user_id: userState.user.id, title, description: prjbody, link: link ? link : '',
       from_date: startDate.getFullYear()+'-'+(startDate.getMonth()+1)+'-'+startDate.getDate(), 
       to_date: endDate.getFullYear()+'-'+(endDate.getMonth()+1)+'-'+endDate.getDate() 
     }
@@ -46,6 +47,14 @@ const ProjectForm = ({ setIsEditing, setProjectList, portfolioOwnerId }) => {
           placeholder="상세내역"
           autoComplete="off"
           onChange={(e) => { setPrjBody(e.target.value) }} />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Control
+                    type="text"
+                    value={link}
+                    placeholder="프로젝트 링크"
+                    autoComplete="off"
+                    onChange={(e) => { setLink(e.target.value) }} />
       </Form.Group>
 
       <Form.Group className="mt-3 row">
