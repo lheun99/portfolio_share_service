@@ -1,4 +1,4 @@
-const { body, validationResult } = require("express-validator");
+import { body, validationResult } from "express-validator";
 
 const isValidData = (type) => {
   switch (type) {
@@ -44,4 +44,4 @@ const invalidCallback = (req, res, next) => {
   next();
 };
 
-module.exports = { isValidData, invalidCallback };
+export { isValidData, invalidCallback };
