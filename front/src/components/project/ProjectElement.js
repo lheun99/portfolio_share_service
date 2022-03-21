@@ -5,17 +5,19 @@ import DatePicker from "react-datepicker";
 import * as Api from '../../api';
 import { UserStateContext } from "../../App";
 
-const ProjectEdit = ({ title, description, from_date, to_date, setEdit, id, setProjectList }) => {
+const ProjectEdit = ({ title, description, link, from_date, to_date, setEdit, id, setProjectList }) => {
     const userState = useContext(UserStateContext);
     const [utitle, setUtitle] = useState(title);
     const [udescription, setUdescription] = useState(description);
+    const [uLink, setULink] = useState(link);
     const [uFromDate, setUFromDate] = useState(new Date(from_date));
     const [uToDate, setUToDate] = useState(new Date(to_date));
+
     // 프로젝트 편집 기능
     async function handleSubmit(e) {
         e.preventDefault();
         const data = {
-            user_id: userState.user.id, title:utitle, description: udescription,
+            user_id: userState.user.id, title:utitle, description: udescription, link: uLink ? uLink : '',
             from_date: uFromDate.getFullYear() + '-' + (uFromDate.getMonth() + 1) + '-' + uFromDate.getDate(),
             to_date: uToDate.getFullYear() + '-' + (uToDate.getMonth() + 1) + '-' + uToDate.getDate()
         }
@@ -45,6 +47,16 @@ const ProjectEdit = ({ title, description, from_date, to_date, setEdit, id, setP
                     placeholder="상세내역"
                     autoComplete="off"
                     onChange={(e) => { setUdescription(e.target.value) }} />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Control
+                    type="text"
+                    value={uLink}
+                    placeholder="프로젝트 링크"
+                    autoComplete="off"
+                    onChange={(e) => { 
+                        setULink(e.target.value)
+                    }} />
             </Form.Group>
 
             <Form.Group className="mt-3 row">
@@ -76,6 +88,7 @@ function ProjectElement({ project, isEditable, setProjectList }) {
     return (
         edit ? <ProjectEdit title={project.title}
             description={project.description}
+            link={project.link}
             from_date={project.from_date}
             to_date={project.to_date}
             setEdit={setEdit}
@@ -85,7 +98,7 @@ function ProjectElement({ project, isEditable, setProjectList }) {
                 <Row>
                     <Col sm={10}>
                         <Card.Subtitle>{project.title}</Card.Subtitle>
-                        <Card.Text className="text-muted">{project.description} <br /> {project.from_date} ~ {project.to_date}</Card.Text>
+                        <Card.Text className="text-muted">{project.description} <br /> {project.link && <a href={project.link}>{project.link}</a>} <br /> {project.from_date} ~ {project.to_date}</Card.Text>
                     </Col>
                     {isEditable && (
                         <Col sm={2}>
