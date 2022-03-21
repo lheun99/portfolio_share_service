@@ -85,6 +85,20 @@ class certificateAuthService {
     const certificates = await Certificate.findByUserId({ user_id });
     return certificates;
   }
+
+  static async deleteCertificate({ certificate_id }) {
+    const deletedCertificate = await Certificate.deleteCertificate({
+      certificate_id,
+    });
+
+    if (!deletedCertificate) {
+      const errorMessage =
+        "자격증 정보가 존재하지 않습니다. 다시 한 번 확인해 주세요.";
+      return { errorMessage };
+    }
+
+    return deletedCertificate;
+  }
 }
 
 export { certificateAuthService };

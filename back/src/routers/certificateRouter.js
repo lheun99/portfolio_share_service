@@ -102,4 +102,21 @@ certificateAuthRouter.get(
   }
 );
 
+certificateAuthRouter.delete("/certificates/:id", async (req, res, next) => {
+  try {
+    const certificate_id = req.params.id;
+    const deletedCertificate = await certificateAuthService.deleteCertificate({
+      certificate_id,
+    });
+
+    if (deletedCertificate.errorMessage) {
+      throw new Error(deletedCertificate.errorMessage);
+    }
+
+    res.status(200).send("성공적으로 삭제가 완료되었습니다.");
+  } catch (error) {
+    next(error);
+  }
+});
+
 export { certificateAuthRouter };
