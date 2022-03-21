@@ -4,8 +4,10 @@ const isValidData = (type) => {
   switch (type) {
     case "education":
       return [
-        body("school", "학교 정보가 없습니다.").exists().isLength({ min: 3 }),
-        body("major", "학과 정보가 없습니다.").exists().isLength({ min: 3 }),
+        body("school", "학교 정보가 없습니다.").exists(),
+        // .isLength({ min: 3 }),
+        body("major", "학과 정보가 없습니다.").exists(),
+        // .isLength({ min: 3 }),
         body("position", "position 정보가 없습니다.")
           .exists()
           .isIn(["재학중", "학사졸업", "석사졸업", "박사졸업"]),
