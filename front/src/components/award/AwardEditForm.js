@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Form, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
 
-const AwardEditForm = ({ portfolioOwnerId, award, setIsEditing, setAwards }) => {
+const AwardEditForm = ({ awards, award, setIsEditing, setAwards }) => {
   //useState로 title 상태와 description 상태를 지정하며, 기본 상태는 award의 title과 description임.
   const [title, setTitle] = useState(award.title);
   const [description, setDescription] = useState(award.description);
@@ -17,8 +17,17 @@ const AwardEditForm = ({ portfolioOwnerId, award, setIsEditing, setAwards }) => 
       description,
     });
 
-    // "awardlist"에서 awards 목록 다시 받아옴
-    await Api.get("awardlist", portfolioOwnerId).then((res) => setAwards(res.data));
+
+    // awards를 수정한 데이터로 변경
+    const newAward = awards.map((v) => {
+      if (v.id === award.id) {
+        return { ...v, title, description }
+      }
+      else {
+        return { ...v }
+      }
+    });
+    setAwards(newAward);
 
     // isEditing을 false로 세팅함. (편집이 끝난 상태)
     setIsEditing(false);

@@ -3,16 +3,16 @@ import * as Api from "../../api";
 
 // Award 컴포넌트에서 award를 입력받아서 award의 title과 description을 나타냄.
 // isEditable이 true일 경우, 편집 버튼을 생성함.
-const AwardCard = ({ portfolioOwnerId, award, setIsEditing, isEditable, setAwards }) => {
+const AwardCard = ({ awards, award, setIsEditing, isEditable, setAwards }) => {
 
   // award를 delete하는 함수
   const handleDelete = async () => {
-      console.log('삭제 시도')
-      console.log(`award id는 ${award.id}`)
-
+      // DELETE 요청
       await Api.delete(`awards/${award.id}`);
 
-      await Api.get("awardlist", portfolioOwnerId).then((res) => setAwards(res.data));
+      // awards에서 delete된 데이터를 제거
+      const newAwards = awards.filter((v) => v.id !== award.id);
+      setAwards(newAwards);
   }
 
   // award 상세 목록 및 편집, 삭제 버튼 생성
