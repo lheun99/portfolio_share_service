@@ -111,7 +111,7 @@ function UserEditForm({ user, setIsEditing, setUser }) {
           />
         </Row>
         <label htmlFor="image_upload"><i className="fa-solid fa-camera"></i></label>
-        <input type="file" id="image_upload" accept="image/png" onChange={changeHandler} style={{display:"none"}}/>
+        <input type="file" id="image_upload" accept="image/*" onChange={changeHandler} style={{display:"none"}}/>
         <label htmlFor="set_default"><i className="fa-solid fa-arrow-rotate-left"></i></label>
         <input type="button" id="set_default" onClick={setDefaultHandler} style={{display:"none"}}/>
         <Form onSubmit={handleSubmit}>
