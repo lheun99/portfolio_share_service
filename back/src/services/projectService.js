@@ -84,11 +84,11 @@ class projectAuthService {
     return projects;
   }
 
-<<<<<<< HEAD
+
   static async deleteAllProject({ user_id }) {
     const deleteProjects = await Project.deleteAll({ user_id });
     return;
-=======
+  }
   static async deleteProject({ project_id }) {
     const deletedProject = await Project.deleteProject({
       project_id,
@@ -101,7 +101,6 @@ class projectAuthService {
     }
 
     return deletedProject;
->>>>>>> 2week-project-mvp-front
   }
 }
 

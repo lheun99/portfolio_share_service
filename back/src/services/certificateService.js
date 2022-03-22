@@ -86,11 +86,11 @@ class certificateAuthService {
     return certificates;
   }
 
-<<<<<<< HEAD
+
   static async deleteAllCertificate({ user_id }) {
     const deleteCertificates = await Certificate.deleteAll({ user_id });
     return;
-=======
+  }
   static async deleteCertificate({ certificate_id }) {
     const deletedCertificate = await Certificate.deleteCertificate({
       certificate_id,
@@ -103,7 +103,7 @@ class certificateAuthService {
     }
 
     return deletedCertificate;
->>>>>>> 2week-project-mvp-front
+
   }
 }
 

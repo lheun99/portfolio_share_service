@@ -102,7 +102,6 @@ certificateAuthRouter.get(
   }
 );
 
-<<<<<<< HEAD
 certificateAuthRouter.delete("/certificatelist/:user_id", async (req, res, next) => {
   try {
     // URI 파라미터에서 user_id 가져오기
@@ -111,7 +110,11 @@ certificateAuthRouter.delete("/certificatelist/:user_id", async (req, res, next)
     await certificateAuthService.deleteAllCertificate({ user_id });
 
     res.status(200).json('success');
-=======
+  } catch (error) {
+    next(error);
+  }
+})
+
 certificateAuthRouter.delete("/certificates/:id", async (req, res, next) => {
   try {
     const certificate_id = req.params.id;
@@ -124,7 +127,7 @@ certificateAuthRouter.delete("/certificates/:id", async (req, res, next) => {
     }
 
     res.status(200).send("성공적으로 삭제가 완료되었습니다.");
->>>>>>> 2week-project-mvp-front
+
   } catch (error) {
     next(error);
   }
