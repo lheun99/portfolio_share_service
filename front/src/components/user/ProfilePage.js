@@ -3,11 +3,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Form, Card, Row, Button, Col } from "react-bootstrap";
 import * as Api from "../../api";
 
+import "./ProfilePage.css";
+
 function ProfilePage() {
   const navigate = useNavigate();
   const params = useParams();
   const [user, setUser] = useState({});
-  const [isEditing, setIsEditing] = useState(false);
 
   const portfolioOwnerId = params.userId;
 
@@ -15,6 +16,7 @@ function ProfilePage() {
     // "users/유저id" 엔드포인트로 GET 요청을 하고, user를 response의 data로 세팅함.
     Api.get("users", portfolioOwnerId).then((res) => setUser(res.data));
   }, [portfolioOwnerId]);
+
 
   const withdrawal = async () => {
     // 회원탈퇴 확인창
@@ -31,65 +33,58 @@ function ProfilePage() {
     // 로그인 페이지로 돌아감
     navigate("/login");
   };
-  console.log(`isEditing: ${isEditing}`)
 
   return (
-    isEditing ? <UserEditForm user={user} setUser={setUser} setIsEditing={setIsEditing}/> :
-      <Card
-        className="mb-2 ms-3 mr-5" 
-        style={{ width: "18rem", cursor: "pointer" }}
-      >
-        <Card.Body>
-          <Row className="justify-content-md-center">
-            <Card.Img
-              style={{ width: "10rem", height: "8rem" }}
-              className="mb-3"
-              src="http://placekitten.com/200/200"
-              alt="랜덤 고양이 사진 (http://placekitten.com API 사용)"
-            />
-          </Row>
-          <Card.Title>{user?.name}</Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">{user?.email}</Card.Subtitle>
-          <Card.Text>{user?.description}</Card.Text>
-
-          <Col>
-            <Row className="mt-3 text-center text-info">
-              <Col sm={{ span: 20 }}>
-                <Button
-                  variant="outline-info"
-                  size="sm"
-                  onClick={() => setIsEditing(true)}
-                >
-                  편집
-                </Button>
-              </Col>
+    <div className="profilePage">
+      <div className="profileCard">
+        <Card
+          className="mb-2 ms-3 mr-5" 
+          style={{ width: "18rem" }}
+        >
+          <Card.Body>
+            <Row className="justify-content-md-center">
+              <Card.Img
+                style={{ width: "10rem", height: "8rem" }}
+                className="mb-3"
+                src="http://placekitten.com/200/200"
+                alt="랜덤 고양이 사진 (http://placekitten.com API 사용)"
+              />
             </Row>
-          <Row className="mt-3 text-center text-info">
-              <Col sm={{ span: 20 }}>
-              <Button
-                  variant="outline-danger"
-                  size="sm"
-                  onClick={withdrawal}
-              >
-                  회원탈퇴
-              </Button>
-              </Col>
-          </Row>
-          </Col>
-        </Card.Body>
-      </Card>
+            <Card.Title>{user?.name}</Card.Title>
+            <Card.Subtitle className="mb-2 text-muted">{user?.email}</Card.Subtitle>
+            <Card.Text>{user?.description}</Card.Text>
+
+            <Col>
+              <Row className="mt-3 text-center text-info">
+                  <Col sm={{ span: 20 }}>
+                  <Button
+                      variant="outline-danger"
+                      size="sm"
+                      onClick={withdrawal}
+                  >
+                      회원탈퇴
+                  </Button>
+                  </Col>
+              </Row>
+            </Col>
+          </Card.Body>
+        </Card>
+      </div>
+      <div className="EditProfile">
+        <h4>프로필 카드 설정</h4>
+        <UserEditForm user={user} setUser={setUser} />
+      </div>
+    </div>
   );
 }
 
-function UserEditForm({ user, setUser, setIsEditing }) {
+function UserEditForm({ user, setUser }) {
   //useState로 name 상태를 생성함.
-  const [name, setName] = useState(user.name);
+  const [name, setName] = useState('');
   //useState로 email 상태를 생성함.
-  const [email, setEmail] = useState(user.email);
+  const [email, setEmail] = useState('');
   //useState로 description 상태를 생성함.
-  const [description, setDescription] = useState(user.description);
-
-  console.log("작동했음")
+  const [description, setDescription] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -105,36 +100,36 @@ function UserEditForm({ user, setUser, setIsEditing }) {
     // 해당 유저 정보로 user을 세팅함.
     setUser(updatedUser);
 
-    setIsEditing(false);
+    alert("프로필 정보가 수정되었습니다.");
   };
 
   return (
-    <Card className="mb-2">
+    <Card className="mb-2" border="light">
       <Card.Body>
+        <p>이름</p>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="useEditName" className="mb-3">
             <Form.Control
               type="text"
-              placeholder="이름"
-              value={name}
+              placeholder={user.name}
               onChange={(e) => setName(e.target.value)}
             />
           </Form.Group>
 
+          <p>이메일</p>
           <Form.Group controlId="userEditEmail" className="mb-3">
             <Form.Control
               type="email"
-              placeholder="이메일"
-              value={email}
+              placeholder={user.email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </Form.Group>
 
+          <p>설명</p>
           <Form.Group controlId="userEditDescription">
             <Form.Control
               type="text"
-              placeholder="정보, 인사말"
-              value={description}
+              placeholder={user.description}
               onChange={(e) => setDescription(e.target.value)}
             />
           </Form.Group>
@@ -142,10 +137,7 @@ function UserEditForm({ user, setUser, setIsEditing }) {
           <Form.Group as={Row} className="mt-3 text-center">
             <Col sm={{ span: 20 }}>
               <Button variant="primary" type="submit" className="me-3">
-                확인
-              </Button>
-              <Button variant="secondary" onClick={() => setIsEditing(false)}>
-                취소
+                설정 저장
               </Button>
             </Col>
           </Form.Group>
