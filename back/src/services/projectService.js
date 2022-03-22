@@ -59,11 +59,7 @@ class projectAuthService {
       project = await Project.update({ project_id, fieldToUpdate, newValue });
     }
 
-    if (toUpdate.link) {
-      const fieldToUpdate = "link";
-      const newValue = toUpdate.link;
-      project = await Project.update({ project_id, fieldToUpdate, newValue });
-    }
+    project = await Project.update({ project_id, fieldToUpdate: "link", newValue: toUpdate.link });
 
     if (toUpdate.from_date) {
       const fieldToUpdate = "from_date";

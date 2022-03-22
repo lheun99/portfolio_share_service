@@ -71,7 +71,7 @@ projectAuthRouter.put("/projects/:id", async (req, res, next) => {
 
     const title = req.body.title ?? null;
     const description = req.body.description ?? null;
-    const link = req.body.link ?? null;
+    const link = req.body.link;
     const from_date = req.body.from_date ?? null;
     const to_date = req.body.to_date ?? null;
 
