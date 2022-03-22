@@ -109,6 +109,12 @@ class userAuthService {
       user = await User.update({ user_id, fieldToUpdate, newValue });
     }
 
+    user = await User.update({ user_id, fieldToUpdate:"github", newValue:toUpdate.github });
+    user = await User.update({ user_id, fieldToUpdate:"gitlab", newValue:toUpdate.gitlab });
+    user = await User.update({ user_id, fieldToUpdate:"twitter", newValue:toUpdate.twitter });
+    user = await User.update({ user_id, fieldToUpdate:"instagram", newValue:toUpdate.instagram });
+    user = await User.update({ user_id, fieldToUpdate:"youtube", newValue:toUpdate.youtube });
+
     return user;
   }
 
