@@ -31,7 +31,7 @@ const Awards = ({portfolioOwnerId, isEditable}) => {
       <Card.Body>
         <Card.Title>수상이력</Card.Title>
         {awards && (awards.map((award) => (
-          <Award key={award.id} portfolioOwnerId={portfolioOwnerId} award={award} isEditable={isEditable} setAwards={setAwards} />)
+          <Award key={award.id} awards={awards} portfolioOwnerId={portfolioOwnerId} award={award} isEditable={isEditable} setAwards={setAwards} />)
         ))}
         <div style={{ textAlign: "center" }}>
           {!isAdding && isEditable && <Button size='sm' variant="primary" onClick={() => setIsAdding(true)}>+</Button>}

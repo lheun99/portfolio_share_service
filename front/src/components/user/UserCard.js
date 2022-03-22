@@ -1,10 +1,32 @@
 import { useNavigate } from "react-router-dom";
 import { Card, Row, Button, Col } from "react-bootstrap";
+import * as Api from "../../api";
 
 function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
   const navigate = useNavigate();
+
+  const withdrawal = async () => {
+    // 회원탈퇴 확인창
+    alert(`${user.name}님, 회원탈퇴가 완료되었습니다.`);
+
+    // 해당 유저의 학력, 수상이력, 프로젝트, 자격증 삭제
+    await Api.delete(`educationlist/${user.id}`);
+    await Api.delete(`awardlist/${user.id}`);
+    await Api.delete(`projectlist/${user.id}`);
+    await Api.delete(`certificatelist/${user.id}`);
+
+    // 해당 유저 DELETE 요청 처리
+    await Api.delete(`users/${user.id}`);
+    // 로그인 페이지로 돌아감
+    navigate("/login");
+  };
+
   return (
-    <Card className="mb-2 ms-3 mr-5" style={{ width: "18rem" }}>
+    <Card 
+      onClick={() => navigate(`/users/${user.id}`)} 
+      className="mb-2 ms-3 mr-5" 
+      style={{ width: "18rem", cursor: "pointer" }}
+    >
       <Card.Body>
         <Row className="justify-content-md-center">
           
@@ -32,10 +54,21 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
                 </Button>
               </Col>
             </Row>
+            <Row className="mt-3 text-center text-info">
+              <Col sm={{ span: 20 }}>
+                <Button
+                  variant="outline-danger"
+                  size="sm"
+                  onClick={withdrawal}
+                >
+                  회원탈퇴
+                </Button>
+              </Col>
+            </Row>
           </Col>
         )}
 
-        {isNetwork && (
+        {/* {isNetwork && (
           <Card.Link
             className="mt-3"
             href="#"
@@ -43,7 +76,7 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
           >
             포트폴리오
           </Card.Link>
-        )}
+        )} */}
       </Card.Body>
     </Card>
   );

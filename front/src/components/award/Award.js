@@ -4,7 +4,7 @@ import React, {useState} from "react";
 import AwardEditForm from "./AwardEditForm";
 import AwardCard from "./AwardCard";
 
-const Award = ({ portfolioOwnerId, award, isEditable, setAwards}) => {
+const Award = ({ awards, portfolioOwnerId, award, isEditable, setAwards}) => {
   // useState 훅을 통해 isEditing 상태를 생성함.
   const [isEditing, setIsEditing] = useState(false);
 
@@ -13,6 +13,7 @@ const Award = ({ portfolioOwnerId, award, isEditable, setAwards}) => {
     <>
         {isEditing ? (
             <AwardEditForm
+            awards={awards}
             award={award}
             setIsEditing={setIsEditing}
             setAwards={setAwards}
@@ -20,6 +21,7 @@ const Award = ({ portfolioOwnerId, award, isEditable, setAwards}) => {
             />
         ) : (
             <AwardCard
+            awards={awards}
             award={award}
             setIsEditing={setIsEditing}
             isEditable={isEditable}

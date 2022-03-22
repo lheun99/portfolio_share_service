@@ -37,6 +37,12 @@ class Education {
     const deletedEducation = await EducationModel.deleteOne({ id: education_id });
     return deletedEducation;
   }
+
+  // user_id를 이용하여 data 삭제
+  static async deleteAll({ user_id }) {
+    const deletedEducations = await EducationModel.deleteMany({ user_id: user_id });
+    return deletedEducations;
+  }
 }
 
 export { Education };

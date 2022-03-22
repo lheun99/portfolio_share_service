@@ -5,25 +5,58 @@ import DatePicker from "react-datepicker";
 import * as Api from '../../api';
 import { UserStateContext } from "../../App";
 
-const ProjectEdit = ({ title, description, from_date, to_date, setEdit, id, setProjectList }) => {
+const ProjectEdit = ({ title, description, link, from_date, to_date, setEdit, id, setProjectList }) => {
     const userState = useContext(UserStateContext);
-    const [utitle, setUtitle] = useState(title);
-    const [udescription, setUdescription] = useState(description);
-    const [uFromDate, setUFromDate] = useState(new Date(from_date));
-    const [uToDate, setUToDate] = useState(new Date(to_date));
     // 프로젝트 편집 기능
+
+    const [projectInfo, setProjectInfo] = useState({
+        title:title,
+        description:description,
+        from_date:new Date(from_date),
+        to_date:new Date(to_date),
+        link:link
+    })
+
+    const handleOnChange = (data, name) => {
+        setProjectInfo(current => ({
+          ...current,
+          [name] : data
+        }))
+    }
+
     async function handleSubmit(e) {
         e.preventDefault();
-        const data = {
-            user_id: userState.user.id, title:utitle, description: udescription,
-            from_date: uFromDate.getFullYear() + '-' + (uFromDate.getMonth() + 1) + '-' + uFromDate.getDate(),
-            to_date: uToDate.getFullYear() + '-' + (uToDate.getMonth() + 1) + '-' + uToDate.getDate()
+
+        if (projectInfo.title === '') {
+            alert('제목을 입력하세요.');
+            return;
         }
-        await Api.put(`projects/${id}`, data);
+        else if (projectInfo.description === '') {
+            alert('상세내역을 입력하세요');
+            return;
+        }
+        else if (!(projectInfo.from_date < projectInfo.to_date)) {
+            alert('옳지않은 기간입니다. 다시 입력하세요.');
+            return;
+        }
+        const data = { user_id: userState.user.id, title:projectInfo.title, description:projectInfo.description, link:projectInfo.link,
+            from_date: projectInfo.from_date.getFullYear()+'-'+(projectInfo.from_date.getMonth()+1)+'-'+projectInfo.from_date.getDate(), 
+            to_date: projectInfo.to_date.getFullYear()+'-'+(projectInfo.to_date.getMonth()+1)+'-'+projectInfo.to_date.getDate() 
+          }
+        
 
-        const res = await Api.get('projectlist', userState.user.id)
-        setProjectList(res.data);
+        const res = await Api.put(`projects/${id}`, data);
 
+        setProjectList(current => {
+            const newProject = [...current];
+            for (let i = 0; i < newProject.length; i++) {
+                if (newProject[i].id === id) {
+                    newProject[i] = {...res.data};
+                    break;
+                }
+            }
+            return newProject;
+        });
         setEdit(false);
     }
 
@@ -32,27 +65,35 @@ const ProjectEdit = ({ title, description, from_date, to_date, setEdit, id, setP
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Control
                     type="text"
-                    value={utitle}
+                    value={projectInfo.title}
                     placeholder="프로젝트 제목"
                     autoComplete="off"
-                    onChange={(e) => { setUtitle(e.target.value) }}
+                    onChange={(e) => (handleOnChange(e.target.value, 'title'))}
                 />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Control
                     type="text"
-                    value={udescription}
+                    value={projectInfo.description}
                     placeholder="상세내역"
                     autoComplete="off"
-                    onChange={(e) => { setUdescription(e.target.value) }} />
+                    onChange={(e) => (handleOnChange(e.target.value, 'description'))} />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Control
+                    type="text"
+                    value={projectInfo.link}
+                    placeholder="프로젝트 링크"
+                    autoComplete="off"
+                    onChange={(e) => (handleOnChange(e.target.value, 'link'))} />
             </Form.Group>
 
             <Form.Group className="mt-3 row">
                 <div className="col-auto">
-                    <DatePicker selected={uFromDate} onChange={date => setUFromDate(date)}></DatePicker>
+                    <DatePicker selected={projectInfo.from_date} onChange={date => (handleOnChange(date, 'from_date'))}></DatePicker>
                 </div>
                 <div className="col-auto">
-                    <DatePicker selected={uToDate} onChange={date => setUToDate(date)}></DatePicker>
+                    <DatePicker selected={projectInfo.to_date} onChange={date => (handleOnChange(date, 'to_date'))}></DatePicker>
                 </div>
             </Form.Group>
             <Form.Group as={Row} className="mt-3 text-center">
@@ -71,11 +112,30 @@ const ProjectEdit = ({ title, description, from_date, to_date, setEdit, id, setP
     )
 }
 
-function ProjectElement({ project, isEditable, setProjectList }) {
+function ProjectElement({ project, isEditable, setProjectList, portfolioOwnerId }) {
     const [edit, setEdit] = useState(false);
+    const handleDelete = async (e) => {
+        e.preventDefault();
+        await Api.delete('projects', project.id);
+        let del_idx = 0;
+        setProjectList(current => {
+            for (let i = 0; i < current.length; i++) {
+                if (current[i].id === project.id) {
+                    del_idx = i;
+                    break;
+                }
+            }
+            current.splice(del_idx, 1);
+            const newProject = [...current];
+            return newProject;
+        })
+
+    }
+
     return (
         edit ? <ProjectEdit title={project.title}
             description={project.description}
+            link={project.link}
             from_date={project.from_date}
             to_date={project.to_date}
             setEdit={setEdit}
@@ -85,13 +145,13 @@ function ProjectElement({ project, isEditable, setProjectList }) {
                 <Row>
                     <Col sm={10}>
                         <Card.Subtitle>{project.title}</Card.Subtitle>
-                        <Card.Text className="text-muted">{project.description} <br /> {project.from_date} ~ {project.to_date}</Card.Text>
+                        <Card.Text className="text-muted">{project.description} <br /> {project.link && <a href={project.link}>{project.link}</a>} <br /> {project.from_date} ~ {project.to_date}</Card.Text>
                     </Col>
                     {isEditable && (
                         <Col sm={2}>
                             <ButtonGroup style={{margin: 10,}} size='sm'>
                                 <Button variant="outline-info" size="sm" onClick={() => setEdit(true)}>편집</Button>
-                                <Button variant="outline-danger" size="sm">삭제</Button>
+                                <Button variant="outline-danger" size="sm" onClick={handleDelete}>삭제</Button>
                             </ButtonGroup>
                         </Col>
                     )}

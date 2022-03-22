@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import * as Api from "./api";
 import { loginReducer } from "./reducer";
+import "./App.css"
 
 import Header from "./components/Header";
 import LoginForm from "./components/user/LoginForm";
@@ -49,7 +50,19 @@ function App() {
   }, []);
 
   if (!isFetchCompleted) {
-    return "loading...";
+    return (
+      <div 
+        className="loading" 
+        style={{fontFamily:"'Poppins', sans-serif", fontWeight:"bold", fontSize:40, textAlign:"center", height:"100vh", lineHeight:"100vh"}}>
+        <span>L</span>
+        <span>O</span>
+        <span>A</span>
+        <span>D</span>
+        <span>I</span>
+        <span>N</span>
+        <span>G</span>
+      </div>
+    );
   }
 
   return (

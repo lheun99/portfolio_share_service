@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, Col, Row, Form, Button } from "react-bootstrap";
+import { Container, Col, Row, Form, Button, Modal } from "react-bootstrap";
 
 import * as Api from "../../api";
 
@@ -15,6 +15,11 @@ function RegisterForm() {
   const [confirmPassword, setConfirmPassword] = useState("");
   //useState로 name 상태를 생성함.
   const [name, setName] = useState("");
+
+  //useState로 modal창의 상태를 생성함(회원가입 성공했을 시)
+  const [successShow, setSuccessShow] = useState(false)
+  //useState로 modal창의 상태를 생성함(회원가입 실패했을 시)
+  const [failShow, setFailShow] = useState(false)
 
   //이메일이 abc@example.com 형태인지 regex를 이용해 확인함.
   const validateEmail = (email) => {
@@ -49,12 +54,24 @@ function RegisterForm() {
         name,
       });
 
-      // 로그인 페이지로 이동함.
-      navigate("/login");
+      setSuccessShow(true)
     } catch (err) {
+      setFailShow(true)
       console.log("회원가입에 실패하였습니다.", err);
     }
   };
+
+  const successHandleClose = (e) => {
+    e.preventDefault();
+    setSuccessShow(false);
+    navigate("/login");
+  }
+
+  const failHandleClose = (e) => {
+    e.preventDefault();
+    setFailShow(false);
+  }
+
 
   return (
     <Container>
@@ -131,12 +148,37 @@ function RegisterForm() {
 
             <Form.Group as={Row} className="mt-3 text-center">
               <Col sm={{ span: 20 }}>
-                <Button variant="light" onClick={() => navigate("/login")}>
+                <Button 
+                  variant="light" 
+                  onClick={() => navigate("/login")}>
                   로그인하기
                 </Button>
               </Col>
             </Form.Group>
           </Form>
+          <Modal show={successShow}>
+          <Modal.Header closeButton>
+          <Modal.Title>회원가입을 축하합니다🎉</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>로그인 페이지로 이동합니다.</Modal.Body>
+          <Modal.Footer>
+          <Button variant="outline-info" onClick={successHandleClose}>
+              확인
+          </Button>
+          </Modal.Footer>
+          </Modal>
+
+          <Modal show={failShow}>
+          <Modal.Header closeButton>
+          <Modal.Title>회원가입에 실패하였습니다.</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>해당 이메일 주소로 가입된 유저가 있습니다.<br/>새로운 이메일 주소를 생성해주세요.</Modal.Body>
+          <Modal.Footer>
+          <Button variant="outline-info" onClick={failHandleClose}>
+              확인
+          </Button>
+          </Modal.Footer>
+          </Modal>
         </Col>
       </Row>
     </Container>

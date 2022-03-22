@@ -18,7 +18,6 @@ const EducationForm = ({ onCreate, clickHandler }) => {
     setMajorInput(e.target.value);
   }
 
-
   // 추가 기능 함수
   const submitHandler = (e) => {
     e.preventDefault();
@@ -57,6 +56,8 @@ const EducationForm = ({ onCreate, clickHandler }) => {
           placeholder='전공'
         />
       </Form.Group>
+
+
 
       <div key={"inline-radio"} className="mb-3">
         <Form.Check

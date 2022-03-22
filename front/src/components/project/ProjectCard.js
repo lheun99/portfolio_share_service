@@ -5,7 +5,6 @@ import ProjectList from './ProjectList';
 import ProjectForm from './ProjectForm';
 
 const ProjectCard = ({ portfolioOwnerId, isEditable }) => {
-
     const [projectList, setProjectList] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
     useEffect(() => {

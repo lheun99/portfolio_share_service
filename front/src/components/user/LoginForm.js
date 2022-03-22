@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, Col, Row, Form, Button } from "react-bootstrap";
+import { Container, Col, Row, Form, Button, Modal } from "react-bootstrap";
 
 import * as Api from "../../api";
 import { DispatchContext } from "../../App";
@@ -13,6 +13,8 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   //useState로 password 상태를 생성함.
   const [password, setPassword] = useState("");
+
+  const [show, setShow] = useState(false)
 
   //이메일이 abc@example.com 형태인지 regex를 이용해 확인함.
   const validateEmail = (email) => {
@@ -55,9 +57,14 @@ function LoginForm() {
       // 기본 페이지로 이동함.
       navigate("/", { replace: true });
     } catch (err) {
+      setShow(true)
       console.log("로그인에 실패하였습니다.\n", err);
     }
   };
+
+  const handleClose = () => {
+    setShow(false)
+  }
 
   return (
     <Container>
@@ -110,6 +117,17 @@ function LoginForm() {
               </Col>
             </Form.Group>
           </Form>
+          <Modal show={show}>
+          <Modal.Header closeButton>
+          <Modal.Title>로그인에 실패했습니다.</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>이메일 주소 또는 비밀번호를 다시 확인해주세요.</Modal.Body>
+          <Modal.Footer>
+          <Button variant="outline-info" onClick={handleClose}>
+              확인
+          </Button>
+          </Modal.Footer>
+          </Modal>
         </Col>
       </Row>
     </Container>

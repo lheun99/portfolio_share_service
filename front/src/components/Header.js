@@ -24,22 +24,31 @@ function Header() {
   };
 
   return (
-    <Nav activeKey={location.pathname}>
-      <Nav.Item className="me-auto mb-5">
-        <Nav.Link disabled>안녕하세요, 포트폴리오 공유 서비스입니다.</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link onClick={() => navigate("/")}>나의 페이지</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link onClick={() => navigate("/network")}>네트워크</Nav.Link>
-      </Nav.Item>
-      {isLogin && (
-        <Nav.Item>
-          <Nav.Link onClick={logout}>로그아웃</Nav.Link>
+    <div style={{padding:"25px 10px"}}>
+      <Nav activeKey={location.pathname} style={{height:50, alignItems:"center", justifyContent:"space-between"}}>
+        <Nav.Item /*className="me-auto mb-5"*/>
+          <Nav.Link disabled>안녕하세요, 포트폴리오 공유 서비스입니다.</Nav.Link>
         </Nav.Item>
-      )}
-    </Nav>
+        <div style={{display:"flex", flexDirection:"row"}}>
+          <Nav.Item>
+            <Nav.Link onClick={() => navigate("/")}>My page</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link onClick={() => navigate("/network")}>Mate</Nav.Link>
+          </Nav.Item>
+          {isLogin && (
+            <>
+              <Nav.Item>
+                <Nav.Link>My profile</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link onClick={logout}>Logout</Nav.Link>
+              </Nav.Item>
+            </>
+          )}
+        </div>
+      </Nav>
+    </div>
   );
 }
 
