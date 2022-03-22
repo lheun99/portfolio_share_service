@@ -84,9 +84,24 @@ class projectAuthService {
     return projects;
   }
 
+<<<<<<< HEAD
   static async deleteAllProject({ user_id }) {
     const deleteProjects = await Project.deleteAll({ user_id });
     return;
+=======
+  static async deleteProject({ project_id }) {
+    const deletedProject = await Project.deleteProject({
+      project_id,
+    });
+
+    if (!deletedProject) {
+      const errorMessage =
+        "프로젝트 정보가 존재하지 않습니다. 다시 한 번 확인해 주세요.";
+      return { errorMessage };
+    }
+
+    return deletedProject;
+>>>>>>> 2week-project-mvp-front
   }
 }
 

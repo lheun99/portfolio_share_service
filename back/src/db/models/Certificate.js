@@ -35,10 +35,18 @@ class Certificate {
     return certificates;
   }
 
+<<<<<<< HEAD
   // user_id를 이용하여 data 삭제
   static async deleteAll({ user_id }) {
     const deletedCertificates = await CertificateModel.deleteMany({ user_id: user_id });
     return deletedCertificates;
+=======
+  static async deleteCertificate({ certificate_id }) {
+    const deletedCertificate = await CertificateModel.deleteOne({
+      id: certificate_id,
+    });
+    return deletedCertificate;
+>>>>>>> 2week-project-mvp-front
   }
 }
 

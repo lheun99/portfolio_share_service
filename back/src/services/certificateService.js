@@ -86,9 +86,24 @@ class certificateAuthService {
     return certificates;
   }
 
+<<<<<<< HEAD
   static async deleteAllCertificate({ user_id }) {
     const deleteCertificates = await Certificate.deleteAll({ user_id });
     return;
+=======
+  static async deleteCertificate({ certificate_id }) {
+    const deletedCertificate = await Certificate.deleteCertificate({
+      certificate_id,
+    });
+
+    if (!deletedCertificate) {
+      const errorMessage =
+        "자격증 정보가 존재하지 않습니다. 다시 한 번 확인해 주세요.";
+      return { errorMessage };
+    }
+
+    return deletedCertificate;
+>>>>>>> 2week-project-mvp-front
   }
 }
 

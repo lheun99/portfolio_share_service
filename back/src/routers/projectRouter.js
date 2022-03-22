@@ -41,7 +41,6 @@ projectAuthRouter.post(
       if (newProject.errorMessage) {
         throw new Error(newProject.errorMessage);
       }
-
       res.status(201).json(newProject);
     } catch (error) {
       next(error);
@@ -101,6 +100,7 @@ projectAuthRouter.get("/projectlist/:user_id", async (req, res, next) => {
   }
 });
 
+<<<<<<< HEAD
 projectAuthRouter.delete("/projectlist/:user_id", async (req, res, next) => {
   try {
     // URI 파라미터에서 user_id 가져오기
@@ -109,6 +109,20 @@ projectAuthRouter.delete("/projectlist/:user_id", async (req, res, next) => {
     await projectAuthService.deleteAllProject({ user_id });
 
     res.status(200).json('success');
+=======
+projectAuthRouter.delete("/projects/:id", async (req, res, next) => {
+  try {
+    const project_id = req.params.id;
+    const deletedProject = await projectAuthService.deleteProject({
+      project_id,
+    });
+
+    if (deletedProject.errorMessage) {
+      throw new Error(deletedProject.errorMessage);
+    }
+
+    res.status(200).send("성공적으로 삭제가 완료되었습니다.");
+>>>>>>> 2week-project-mvp-front
   } catch (error) {
     next(error);
   }

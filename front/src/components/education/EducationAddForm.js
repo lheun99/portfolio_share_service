@@ -5,17 +5,34 @@ import { Form, Button, Col, Row } from 'react-bootstrap';
 const EducationForm = ({ onCreate, clickHandler }) => {
   const [schoolInput, setSchoolInput] = useState('');
   const [majorInput, setMajorInput] = useState('');
+  
+  const [selectUniv, setSelectUniv] = useState('');
+  const [selectMajor, setSelectMajor] = useState('');
 
   // school value 값 변경 함수
   const changeHandler1 = (e) => {
     e.preventDefault();
     setSchoolInput(e.target.value);
+    setSelectUniv('');
+  }
+
+  const handleSelectUniv = (e) => {
+    e.preventDefault();
+    setSelectUniv(e.target.value);
+    setSchoolInput(e.target.value)
   }
 
   // major value 값 변경 함수
   const changeHandler2 = (e) => {
     e.preventDefault();
     setMajorInput(e.target.value);
+    setSelectMajor('');
+  }
+
+  const handleSelectMajor = (e) => {
+    e.preventDefault();
+    setSelectMajor(e.target.value);
+    setMajorInput(e.target.value)
   }
 
 
@@ -38,25 +55,49 @@ const EducationForm = ({ onCreate, clickHandler }) => {
 
   return (
     <Form style={{ margin: 10, padding: 10, }} onSubmit={submitHandler}>
-      <Form.Group className="mb-3">
-        <Form.Control
-          type="text"
-          name='school'
-          value={schoolInput}
-          onChange={changeHandler1}
-          placeholder='학교 이름'
-        />
-      </Form.Group>
+      <Row>
+        <Col>
+          <Form.Group className="mb-3">
+            <Form.Control
+              type="text"
+              name='school'
+              value={schoolInput}
+              onChange={changeHandler1}
+              placeholder='학교 이름'
+            />
+          </Form.Group>
+        </Col>
+        <Col>
+          <Form.Select className="mb-3" value={selectUniv} onChange={handleSelectUniv}>
+            <option value="">선택</option>
+            <option>서울대학교</option>
+            <option>연세대학교</option>
+            <option>고려대학교</option>
+          </Form.Select>
+        </Col>
+      </Row>
 
-      <Form.Group className="mb-3">
-        <Form.Control
-          type='text'
-          name='major'
-          value={majorInput}
-          onChange={changeHandler2}
-          placeholder='전공'
-        />
-      </Form.Group>
+      <Row>
+        <Col>
+          <Form.Group className="mb-3">
+            <Form.Control
+              type='text'
+              name='major'
+              value={majorInput}
+              onChange={changeHandler2}
+              placeholder='전공'
+            />
+          </Form.Group>
+        </Col>
+        <Col>
+          <Form.Select className="mb-3" value={selectMajor} onChange={handleSelectMajor}>
+                <option value="">선택</option>
+                <option>전자전기공학과</option>
+                <option>컴퓨터공학과</option>
+                <option>물리학과</option>
+          </Form.Select>
+        </Col>
+      </Row>
 
       <div key={"inline-radio"} className="mb-3">
         <Form.Check
