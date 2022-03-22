@@ -15,7 +15,7 @@ function User({ portfolioOwnerId, isEditable }) {
 
   return (
     <Card 
-      onClick={() => isEditable ? navigate(`/users/${user.id}/userPage`) : undefined} 
+      onClick={() => isEditable ? navigate(`/users/${user.id}/profilePage`) : undefined} 
       className="mb-2 ms-3 mr-5" 
       style={{ width: "18rem", cursor: "pointer" }}
     >
