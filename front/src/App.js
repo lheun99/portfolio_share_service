@@ -76,7 +76,7 @@ function App() {
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegisterForm />} />
             <Route path="/users/:userId" element={<Portfolio />} />
-            <Route path="/users/:userId/userPage" element={<ProfilePage />} />
+            <Route path="/users/:userId/profilePage" element={<ProfilePage />} />
             <Route path="/network" element={<Network />} />
             <Route path="*" element={<Portfolio />} />
           </Routes>
