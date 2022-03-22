@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, Col, Row, Form, Button, Modal } from "react-bootstrap";
+import { Container, Col, Row, Form, Button, Modal, Card } from "react-bootstrap";
 
 import * as Api from "../../api";
 import { DispatchContext } from "../../App";
@@ -69,6 +69,17 @@ function LoginForm() {
   return (
     <Container>
       <Row className="justify-content-md-center mt-5">
+        <Col style={{textAlign: "-webkit-center",}}>
+          <Card style={{ width: '330px', alignItems:"center" }}>
+            <Card.Img variant="top" src="img/curriculum.png" style={{paddingTop:10, width:"130px", height:"140px"}}/>
+            <Card.Body style={{textAlign:"initial"}}>
+              <Card.Title>나의 기록이 포트폴리오가 되는 공간</Card.Title>
+              <Card.Text>
+                여러분의 포트폴리오를 다른 사람들과 공유하며 소통해보세요.
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
         <Col lg={8}>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="loginEmail">

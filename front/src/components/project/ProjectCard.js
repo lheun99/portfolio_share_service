@@ -12,13 +12,15 @@ const ProjectCard = ({ portfolioOwnerId, isEditable }) => {
             .then(res => setProjectList(res.data));
     }, [portfolioOwnerId]);
 
-    return (<Card>
+    return (<Card style={{width:"740px"}}>
         <Card.Body>
-            <Card.Title>프로젝트</Card.Title>
+            <Card.Title><span class="material-icons" style={{verticalAlign:"middle",}}>storage</span> 프로젝트</Card.Title>
             <ProjectList projectList={projectList} setProjectList={setProjectList} isEditable={isEditable} portfolioOwnerId={portfolioOwnerId}></ProjectList>
             {isEditable && (
-                <div style={{ textAlign: "center" }}>
-                    {!isEditing && <Card.Body><Button size='sm' variant="primary" onClick={() => setIsEditing(true)}>+</Button></Card.Body>}
+                <div style={{ textAlign: "center"}}>
+                    {!isEditing && <Card.Body><Button style={{borderRadius:100,}} size='sm' variant="primary" onClick={() => setIsEditing(true)}>
+                        <span class="material-icons" style={{verticalAlign:'middle',fontSize:15,}}>add</span>
+                    </Button></Card.Body>}
                     {isEditing && <ProjectForm setIsEditing={setIsEditing} setProjectList={setProjectList} portfolioOwnerId={portfolioOwnerId}></ProjectForm>}
                 </div>
             )}
