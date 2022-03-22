@@ -53,7 +53,7 @@ function App() {
     return (
       <div 
         className="loading" 
-        style={{fontWeight:"bold", fontSize:40, textAlign:"center", height:"100vh", lineHeight:"100vh"}}>
+        style={{fontFamily:"'Poppins', sans-serif", fontWeight:"bold", fontSize:40, textAlign:"center", height:"100vh", lineHeight:"100vh"}}>
         <span>L</span>
         <span>O</span>
         <span>A</span>
