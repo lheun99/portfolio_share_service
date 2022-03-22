@@ -22,7 +22,11 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
   };
 
   return (
-    <Card className="mb-2 ms-3 mr-5" style={{ width: "18rem" }}>
+    <Card 
+      onClick={() => navigate(`/users/${user.id}`)} 
+      className="mb-2 ms-3 mr-5" 
+      style={{ width: "18rem", cursor: "pointer" }}
+    >
       <Card.Body>
         <Row className="justify-content-md-center">
           <Card.Img
@@ -63,7 +67,7 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
           </Col>
         )}
 
-        {isNetwork && (
+        {/* {isNetwork && (
           <Card.Link
             className="mt-3"
             href="#"
@@ -71,7 +75,7 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
           >
             포트폴리오
           </Card.Link>
-        )}
+        )} */}
       </Card.Body>
     </Card>
   );
