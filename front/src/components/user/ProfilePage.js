@@ -95,42 +95,67 @@ function UserEditForm({ user, setUser }) {
       email,
       description,
     });
-    // 유저 정보는 response의 data임.
-    const updatedUser = res.data;
     // 해당 유저 정보로 user을 세팅함.
-    setUser(updatedUser);
+    setUser(res.data);
 
     alert("프로필 정보가 수정되었습니다.");
   };
 
   return (
-    <Card className="mb-2" border="light">
+    <Card border="light">
       <Card.Body>
+        <i class="fa-brands fa-github"></i>
         <p>이름</p>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="useEditName" className="mb-3">
             <Form.Control
               type="text"
-              placeholder={user.name}
+              placeholder="이름을 입력하세요"
               onChange={(e) => setName(e.target.value)}
             />
           </Form.Group>
 
-          <p>이메일</p>
-          <Form.Group controlId="userEditEmail" className="mb-3">
+          <p>소개</p>
+          <Form.Group controlId="userEditDescription" className="mb-3">
             <Form.Control
-              type="email"
-              placeholder={user.email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              placeholder="소개를 입력하세요"
+              onChange={(e) => setDescription(e.target.value)}
             />
           </Form.Group>
 
-          <p>설명</p>
-          <Form.Group controlId="userEditDescription">
+          <p>소셜 링크</p>
+          <Form.Group controlId="userEditSocialLink" className="mb-3">
             <Form.Control
               type="text"
-              placeholder={user.description}
-              onChange={(e) => setDescription(e.target.value)}
+              placeholder={<i class="fa-brands fa-github"></i>}
+              className="mb-2"
+            />
+            <Form.Control
+              type="text"
+              placeholder="GitLab 주소를 입력하세요"
+              className="mb-2"
+            />
+            <Form.Control
+              type="text"
+              placeholder="Twiter 주소를 입력하세요"
+              className="mb-2"
+            />
+            <Form.Control
+              type="text"
+              placeholder="Instagram 주소를 입력하세요"
+              className="mb-2"
+            />
+            <Form.Control
+              type="text"
+              placeholder="Youtube 주소를 입력하세요"
+              className="mb-2"
+            />
+            <Form.Control
+              type="text"
+              placeholder="이메일을 입력하세요"
+              className="mb-2"
+              onChange={(e) => setEmail(e.target.value)}
             />
           </Form.Group>
 
