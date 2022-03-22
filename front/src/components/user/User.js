@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Card, Row } from "react-bootstrap";
+import { Card, Row, Col } from "react-bootstrap";
 import * as Api from "../../api";
 
 function User({ portfolioOwnerId, isEditable }) {
@@ -15,14 +15,14 @@ function User({ portfolioOwnerId, isEditable }) {
 
   return (
     <Card 
-      onClick={() => isEditable ? navigate(`/users/${user.id}/profilePage`) : undefined} 
       className="mb-2 ms-3 mr-5" 
-      style={{ width: "18rem", cursor: "pointer" }}
+      style={{ width: "18rem" }}
     >
       <Card.Body>
         <Row className="justify-content-md-center">
           <Card.Img
-            style={{ width: "10rem", height: "8rem" }}
+            onClick={() => isEditable ? navigate(`/users/${user.id}/profilePage`) : undefined} 
+            style={{ width: "10rem", height: "8rem", cursor: "pointer" }}
             className="mb-3"
             src="http://placekitten.com/200/200"
             alt="랜덤 고양이 사진 (http://placekitten.com API 사용)"
@@ -31,6 +31,13 @@ function User({ portfolioOwnerId, isEditable }) {
         <Card.Title>{user?.name}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">{user?.email}</Card.Subtitle>
         <Card.Text>{user?.description}</Card.Text>
+        <Row>
+          <Col>{user?.github && <a href={user?.github} style={{color: "black"}}><i className="fa-brands fa-github"></i></a>}</Col>
+          <Col>{user?.gitlab && <a href={user?.gitlab} style={{color: "black"}}><i className="fa-brands fa-gitlab"></i></a>}</Col>
+          <Col>{user?.twitter && <a href={user?.twitter} style={{color: "black"}}><i className="fa-brands fa-twitter"></i></a>}</Col>
+          <Col>{user?.instagram && <a href={user?.instagram} style={{color: "black"}}><i className="fa-brands fa-instagram"></i></a>}</Col>
+          <Col>{user?.youtube && <a href={user?.youtube} style={{color: "black"}}><i className="fa-brands fa-youtube"></i></a>}</Col>
+        </Row>
       </Card.Body>
     </Card>
   );
