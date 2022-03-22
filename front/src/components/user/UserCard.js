@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Card, Row, Button, Col } from "react-bootstrap";
+import { Card, Row, Button, Col, Badge } from "react-bootstrap";
 import * as Api from "../../api";
 
 function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
@@ -22,9 +22,9 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
   };
 
   return (
-    <Card 
-      onClick={() => navigate(`/users/${user.id}`)} 
-      className="mb-2 ms-3 mr-5" 
+    <Card
+      onClick={() => navigate(`/users/${user.id}`)}
+      className="mb-2 ms-3 mr-5"
       style={{ width: "18rem", cursor: "pointer" }}
     >
       <Card.Body>
@@ -36,7 +36,10 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
             alt="랜덤 고양이 사진 (http://placekitten.com API 사용)"
           />
         </Row>
-        <Card.Title>{user?.name}</Card.Title>
+        <Card.Title>
+          {user?.name}
+          <Badge bg="info"> {user?.job}</Badge>
+        </Card.Title>
         <Card.Subtitle className="mb-2 text-muted">{user?.email}</Card.Subtitle>
         <Card.Text>{user?.description}</Card.Text>
 
@@ -55,11 +58,7 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
             </Row>
             <Row className="mt-3 text-center text-info">
               <Col sm={{ span: 20 }}>
-                <Button
-                  variant="outline-danger"
-                  size="sm"
-                  onClick={withdrawal}
-                >
+                <Button variant="outline-danger" size="sm" onClick={withdrawal}>
                   회원탈퇴
                 </Button>
               </Col>

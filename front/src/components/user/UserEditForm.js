@@ -9,6 +9,8 @@ function UserEditForm({ user, setIsEditing, setUser }) {
   const [email, setEmail] = useState(user.email);
   //useState로 description 상태를 생성함.
   const [description, setDescription] = useState(user.description);
+  //useState로 job 상태를 생성함.
+  const [job, setJob] = useState(user.job);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,6 +20,7 @@ function UserEditForm({ user, setIsEditing, setUser }) {
       name,
       email,
       description,
+      job,
     });
     // 유저 정보는 response의 data임.
     const updatedUser = res.data;
@@ -57,6 +60,19 @@ function UserEditForm({ user, setIsEditing, setUser }) {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
+          </Form.Group>
+
+          <Form.Group controlId="registerJob" className="mt-3">
+            <Form.Select
+              value={job}
+              placeholder="정보, 인사말"
+              onChange={(e) => setJob(e.target.value)}
+            >
+              <option value="프론트엔드">프론트엔드</option>
+              <option value="백엔드">백엔드</option>
+              <option value="데이터 분석">데이터 분석</option>
+              <option value="AI">AI</option>
+            </Form.Select>
           </Form.Group>
 
           <Form.Group as={Row} className="mt-3 text-center">
