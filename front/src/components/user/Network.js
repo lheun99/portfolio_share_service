@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, Row } from "react-bootstrap";
+import { Container, Row, Nav } from "react-bootstrap";
 
 import * as Api from "../../api";
 import UserCard from "./UserCard";
@@ -11,6 +11,11 @@ function Network() {
   const userState = useContext(UserStateContext);
   // useState 훅을 통해 users 상태를 생성함.
   const [users, setUsers] = useState([]);
+  const [isAll, setIsAll] = useState(true);
+  const [isFront, setIsFront] = useState(false);
+  const [isBack, setIsBack] = useState(false);
+  const [isData, setIsData] = useState(false);
+  const [isAI, setIsAI] = useState(false);
 
   useEffect(() => {
     // 만약 전역 상태의 user가 null이라면, 로그인 페이지로 이동함.
@@ -24,11 +29,137 @@ function Network() {
   console.log(users);
   return (
     <Container fluid>
-      <Row xs="auto" className="jusify-content-center">
-        {users.map((user) => (
-          <UserCard key={user.id} user={user} isNetwork />
-        ))}
-      </Row>
+      <Nav className="me-auto">
+        <Nav.Link
+          href="#all"
+          onClick={(e) => {
+            e.preventDefault();
+            setIsAll(true);
+            setIsFront(false);
+            setIsBack(false);
+            setIsData(false);
+            setIsAI(false);
+          }}
+        >
+          전체 보기
+        </Nav.Link>
+        <Nav.Link
+          href="#front"
+          onClick={(e) => {
+            e.preventDefault();
+            setIsAll(false);
+            setIsFront(true);
+            setIsBack(false);
+            setIsData(false);
+            setIsAI(false);
+          }}
+        >
+          프론트엔드
+        </Nav.Link>
+        <Nav.Link
+          href="#back"
+          onClick={(e) => {
+            e.preventDefault();
+            setIsAll(false);
+            setIsFront(false);
+            setIsBack(true);
+            setIsData(false);
+            setIsAI(false);
+          }}
+        >
+          백엔드
+        </Nav.Link>
+        <Nav.Link
+          href="#data"
+          onClick={(e) => {
+            e.preventDefault();
+            setIsAll(false);
+            setIsFront(false);
+            setIsBack(false);
+            setIsData(true);
+            setIsAI(false);
+          }}
+        >
+          데이터 분석
+        </Nav.Link>
+        <Nav.Link
+          href="#ai"
+          onClick={(e) => {
+            e.preventDefault();
+            setIsAll(false);
+            setIsFront(false);
+            setIsBack(false);
+            setIsData(false);
+            setIsAI(true);
+          }}
+        >
+          AI
+        </Nav.Link>
+      </Nav>
+
+      {isAll ? (
+        <>
+          <Row xs="auto" className="jusify-content-center">
+            {users.map((user) => (
+              <UserCard key={user.id} user={user} isNetwork />
+            ))}
+          </Row>
+        </>
+      ) : (
+        <></>
+      )}
+      {isFront ? (
+        <>
+          <Row xs="auto" className="jusify-content-center">
+            {users
+              .filter((user) => user.job === "프론트엔드")
+              .map((user) => (
+                <UserCard key={user.id} user={user} isNetwork />
+              ))}
+          </Row>
+        </>
+      ) : (
+        <></>
+      )}
+      {isBack ? (
+        <>
+          <Row xs="auto" className="jusify-content-center">
+            {users
+              .filter((user) => user.job === "백엔드")
+              .map((user) => (
+                <UserCard key={user.id} user={user} isNetwork />
+              ))}
+          </Row>
+        </>
+      ) : (
+        <></>
+      )}
+      {isData ? (
+        <>
+          <Row xs="auto" className="jusify-content-center">
+            {users
+              .filter((user) => user.job === "데이터 분석")
+              .map((user) => (
+                <UserCard key={user.id} user={user} isNetwork />
+              ))}
+          </Row>
+        </>
+      ) : (
+        <></>
+      )}
+      {isAI ? (
+        <>
+          <Row xs="auto" className="jusify-content-center">
+            {users
+              .filter((user) => user.job === "AI")
+              .map((user) => (
+                <UserCard key={user.id} user={user} isNetwork />
+              ))}
+          </Row>
+        </>
+      ) : (
+        <></>
+      )}
     </Container>
   );
 }

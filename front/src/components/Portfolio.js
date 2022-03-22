@@ -1,15 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  Container,
-  Col,
-  Row,
-  Nav,
-  Navbar,
-  Form,
-  FormControl,
-  Button,
-} from "react-bootstrap";
+import { Container, Col, Row, Nav, Navbar } from "react-bootstrap";
 
 import { UserStateContext } from "../App";
 import * as Api from "../api";
@@ -165,15 +156,6 @@ function Portfolio() {
                   자격증
                 </Nav.Link>
               </Nav>
-              {/* <Form className="d-flex">
-                <FormControl
-                  type="search"
-                  placeholder="Search"
-                  className="me-2"
-                  aria-label="Search"
-                />
-                <Button variant="outline-info">Search</Button>
-              </Form> */}
             </Container>
           </Navbar>
 

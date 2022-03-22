@@ -2,12 +2,11 @@ import React, { useEffect, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Card } from "react-bootstrap";
 
-import * as Api from "../api";
+import * as Api from "../../api";
 import SearchProjectCard from "./SearchProjectCard";
 
-import { UserStateContext } from "../App";
+import { UserStateContext } from "../../App";
 import { useLocation } from "react-router";
-
 function Search() {
   const navigate = useNavigate();
   const userState = useContext(UserStateContext);
@@ -28,11 +27,9 @@ function Search() {
       project.title.toLowerCase().indexOf(state.toLowerCase()) !== -1 ||
       project.description.toLowerCase().indexOf(state.toLowerCase()) !== -1
   );
-
   return (
     <Container fluid>
       <Card.Body>총 {searchedProjects.length}개가 검색되었습니다.</Card.Body>
-
       <Row xs="auto" className="jusify-content-center">
         {searchedProjects.map((project) => (
           <SearchProjectCard key={project.id} project={project} isNetwork />

@@ -4,7 +4,6 @@ import * as Api from "../../api";
 
 function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
   const navigate = useNavigate();
-
   const withdrawal = async () => {
     // 회원탈퇴 확인창
     alert(`${user.name}님, 회원탈퇴가 완료되었습니다.`);

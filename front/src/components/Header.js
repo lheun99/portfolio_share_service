@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Nav } from "react-bootstrap";
 import { UserStateContext, DispatchContext } from "../App";
-import SearchForm from "./SearchForm";
+import SearchForm from "./searchProject/SearchForm";
 
 function Header() {
   const navigate = useNavigate();
@@ -40,7 +40,7 @@ function Header() {
           </Nav.Link>
         </Nav.Item>
         <div style={{ display: "flex", flexDirection: "row" }}>
-          <SearchForm />
+          {isLogin && <SearchForm />}
           <Nav.Item>
             <Nav.Link onClick={() => navigate("/")}>My page</Nav.Link>
           </Nav.Item>
