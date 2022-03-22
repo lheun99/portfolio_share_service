@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import Nav from "react-bootstrap/Nav";
+import { Nav } from "react-bootstrap";
 import { UserStateContext, DispatchContext } from "../App";
+import SearchForm from "./SearchForm";
 
 function Header() {
   const navigate = useNavigate();
@@ -24,12 +25,22 @@ function Header() {
   };
 
   return (
-    <div style={{padding:"25px 10px"}}>
-      <Nav activeKey={location.pathname} style={{height:50, alignItems:"center", justifyContent:"space-between"}}>
+    <div style={{ padding: "25px 10px" }}>
+      <Nav
+        activeKey={location.pathname}
+        style={{
+          height: 50,
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
         <Nav.Item /*className="me-auto mb-5"*/>
-          <Nav.Link disabled>안녕하세요, 포트폴리오 공유 서비스입니다.</Nav.Link>
+          <Nav.Link disabled>
+            안녕하세요, 포트폴리오 공유 서비스입니다.
+          </Nav.Link>
         </Nav.Item>
-        <div style={{display:"flex", flexDirection:"row"}}>
+        <div style={{ display: "flex", flexDirection: "row" }}>
+          <SearchForm />
           <Nav.Item>
             <Nav.Link onClick={() => navigate("/")}>My page</Nav.Link>
           </Nav.Item>

@@ -21,7 +21,7 @@ function Network() {
     // "userlist" 엔드포인트로 GET 요청을 하고, users를 response의 data로 세팅함.
     Api.get("userlist").then((res) => setUsers(res.data));
   }, [userState, navigate]);
-
+  console.log(users);
   return (
     <Container fluid>
       <Row xs="auto" className="jusify-content-center">
