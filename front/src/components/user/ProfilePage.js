@@ -53,6 +53,11 @@ function ProfilePage() {
             <Card.Title>{user?.name}</Card.Title>
             <Card.Subtitle className="mb-2 text-muted">{user?.email}</Card.Subtitle>
             <Card.Text>{user?.description}</Card.Text>
+            <Card.Text><a href={user?.github} style={{color: "black", textDecoration: "none"}}><i className="fa-brands fa-github"></i> {user?.github}</a></Card.Text>
+            <Card.Text><a href={user?.gitlab} style={{color: "black", textDecoration: "none"}}><i className="fa-brands fa-gitlab"></i> {user?.gitlab}</a></Card.Text>
+            <Card.Text><a href={user?.twitter} style={{color: "black", textDecoration: "none"}}><i className="fa-brands fa-twitter"></i> {user?.twitter}</a></Card.Text>
+            <Card.Text><a href={user?.instagram} style={{color: "black", textDecoration: "none"}}><i className="fa-brands fa-instagram"></i> {user?.instagram}</a></Card.Text>
+            <Card.Text><a href={user?.youtube} style={{color: "black", textDecoration: "none"}}><i className="fa-brands fa-youtube"></i> {user?.youtube}</a></Card.Text>
 
             <Col>
               <Row className="mt-3 text-center text-info">
@@ -79,21 +84,34 @@ function ProfilePage() {
 }
 
 function UserEditForm({ user, setUser }) {
-  //useState로 name 상태를 생성함.
-  const [name, setName] = useState('');
-  //useState로 email 상태를 생성함.
-  const [email, setEmail] = useState('');
-  //useState로 description 상태를 생성함.
-  const [description, setDescription] = useState('');
+  const [updateUser, setUpdateUser] = useState({});
+  const [isPassword, setIsPassword] = useState(false);
+
+  useEffect(() => {
+    setUpdateUser({
+      name: "",
+      description: "",
+      github: "",
+      gitlab: "",
+      twitter: "",
+      instagram: "",
+      youtube: ""
+    })
+  },[user])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // "users/유저id" 엔드포인트로 PUT 요청함.
     const res = await Api.put(`users/${user.id}`, {
-      name,
-      email,
-      description,
+      name: updateUser.name,
+      description: updateUser.description,
+      github: updateUser.github,
+      gitlab: updateUser.gitlab,
+      twitter: updateUser.twitter,
+      instagram: updateUser.instagram,
+      youtube: updateUser.youtube,
+      password: updateUser.password
     });
     // 해당 유저 정보로 user을 세팅함.
     setUser(res.data);
@@ -104,14 +122,24 @@ function UserEditForm({ user, setUser }) {
   return (
     <Card border="light">
       <Card.Body>
-        <i class="fa-brands fa-github"></i>
         <p>이름</p>
         <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="useEditName" className="mb-3">
+          <Form.Group controlId="userEditName" className="mb-3">
             <Form.Control
               type="text"
               placeholder="이름을 입력하세요"
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setUpdateUser({...updateUser, name:e.target.value})}
+            />
+          </Form.Group>
+
+          <p>이메일</p>
+          <p style={{fontSize: '11px'}}>이메일은 변경 불가능합니다.</p>
+          <Form.Group controlId="userEmail" className="mb-3">
+            <Form.Control
+              type="email"
+              placeholder={user.email}
+              disabled={true}
+              className="mb-2"
             />
           </Form.Group>
 
@@ -120,42 +148,72 @@ function UserEditForm({ user, setUser }) {
             <Form.Control
               type="text"
               placeholder="소개를 입력하세요"
-              onChange={(e) => setDescription(e.target.value)}
+              onChange={(e) => setUpdateUser({...updateUser, description:e.target.value})}
             />
           </Form.Group>
 
           <p>소셜 링크</p>
-          <Form.Group controlId="userEditSocialLink" className="mb-3">
+          <Form.Group controlId="userEditSocialLinkGitHub" className="mb-3">
             <Form.Control
               type="text"
-              placeholder={<i class="fa-brands fa-github"></i>}
-              className="mb-2"
+              placeholder="GitHub 주소를 입력하세요"
+              onChange={(e) => setUpdateUser({...updateUser, github:e.target.value})}
             />
+          </Form.Group>
+          <Form.Group controlId="userEditSocialLinkGitLab" className="mb-3">
             <Form.Control
               type="text"
               placeholder="GitLab 주소를 입력하세요"
               className="mb-2"
+              onChange={(e) => setUpdateUser({...updateUser, gitlab:e.target.value})}
             />
+          </Form.Group>
+          <Form.Group controlId="userEditSocialLinkTwitter" className="mb-3">
             <Form.Control
               type="text"
-              placeholder="Twiter 주소를 입력하세요"
+              placeholder="Twitter 주소를 입력하세요"
               className="mb-2"
+              onChange={(e) => setUpdateUser({...updateUser, twitter:e.target.value})}
             />
+          </Form.Group>
+          <Form.Group controlId="userEditSocialLinkInstagram" className="mb-3">
             <Form.Control
               type="text"
               placeholder="Instagram 주소를 입력하세요"
               className="mb-2"
+              onChange={(e) => setUpdateUser({...updateUser, instagram:e.target.value})}
             />
+          </Form.Group>
+          <Form.Group controlId="userEditSocialLinkYoutube" className="mb-3">
             <Form.Control
               type="text"
               placeholder="Youtube 주소를 입력하세요"
               className="mb-2"
+              onChange={(e) => setUpdateUser({...updateUser, youtube:e.target.value})}
             />
+          </Form.Group>
+
+          <p>비밀번호</p>
+          <p style={{fontSize: '11px'}}>기존 비밀번호 입력 후 새로운 비밀번호를 입력하면 변경됩니다.</p>
+          <Form.Group controlId="checkPassword" className="mb-3">
             <Form.Control
-              type="text"
-              placeholder="이메일을 입력하세요"
+              type="password"
+              placeholder="기존 비밀번호를 입력하세요"
               className="mb-2"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                if(e.target.value === '1234') {
+                  setIsPassword(true);
+                }
+              }}
+            />
+          </Form.Group>
+          <Form.Group controlId="userEditPassword" className="mb-3">
+            <Form.Control
+              type="password"
+              placeholder={isPassword ? "새로운 비밀번호를 입력하세요" : "기존 비밀번호를 입력하셔야 변경가능합니다"}
+              className="mb-2"
+              disabled={!isPassword}
+              onChange={(e) => setUpdateUser({...updateUser, password:e.target.value})}
             />
           </Form.Group>
 
