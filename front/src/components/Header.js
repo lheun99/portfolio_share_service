@@ -96,8 +96,6 @@ function Header() {
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link>My profile</Nav.Link>
-
                 <Nav.Link
                   className="item"
                   style={{ color: "#79889e" }}

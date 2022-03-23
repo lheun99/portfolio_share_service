@@ -11,14 +11,7 @@ function SearchedProjectCard({ project, setIsEditing, isEditable, isNetwork }) {
       style={{ width: "18rem", cursor: "pointer" }}
     >
       <Card.Body>
-        <Row className="justify-content-md-center">
-          <Card.Img
-            style={{ width: "10rem", height: "8rem" }}
-            className="mb-3"
-            src="http://placekitten.com/200/200"
-            alt="랜덤 고양이 사진 (http://placekitten.com API 사용)"
-          />
-        </Row>
+        <Row className="justify-content-md-center"></Row>
         <Card.Title>{project?.title}</Card.Title>
         <Card.Text>{project?.description}</Card.Text>
       </Card.Body>
