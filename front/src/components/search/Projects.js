@@ -53,6 +53,11 @@ function Projects() {
     <Container fluid>
       <Nav className="me-auto">
         <Nav.Item>
+          <Nav.Link eventKey="disabled" disabled>
+            관심 프로젝트를 검색
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
           <Form className="d-flex" onSubmit={handleSearch}>
             <Form.Control
               type="search"
@@ -62,7 +67,7 @@ function Projects() {
               onChange={handleQuery}
             />
             <Button variant="outline-info" onClick={handleSearch}>
-              Search
+              🔍
             </Button>
           </Form>
         </Nav.Item>
@@ -70,16 +75,14 @@ function Projects() {
           <>
             <Nav.Item>
               <Nav.Link eventKey="disabled" disabled>
-                🔍총 {filteredProjects.length}개가 검색되었습니다.
+                총 {filteredProjects.length}개가 검색되었습니다.
               </Nav.Link>
             </Nav.Item>
           </>
         ) : (
           <>
             <Nav.Item>
-              <Nav.Link eventKey="disabled" disabled>
-                🔍
-              </Nav.Link>
+              <Nav.Link eventKey="disabled" disabled></Nav.Link>
             </Nav.Item>
           </>
         )}
