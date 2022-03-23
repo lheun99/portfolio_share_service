@@ -47,6 +47,11 @@ const UserSchema = new Schema(
       type: String,
       required: false
     },
+    projectNum: {
+      type: Number,
+      required: false,
+      default: 0
+    },
   },
   {
     timestamps: true,

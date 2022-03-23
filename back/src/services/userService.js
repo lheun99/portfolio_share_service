@@ -115,6 +115,12 @@ class userAuthService {
       user = await User.update({ user_id, fieldToUpdate, newValue });
     }
 
+    if (toUpdate.projectNum) {
+      const fieldToUpdate = "projectNum";
+      const newValue = toUpdate.projectNum;
+      user = await User.update({ user_id, fieldToUpdate, newValue });
+    }
+
     user = await User.update({ user_id, fieldToUpdate:"github", newValue:toUpdate.github });
     user = await User.update({ user_id, fieldToUpdate:"gitlab", newValue:toUpdate.gitlab });
     user = await User.update({ user_id, fieldToUpdate:"twitter", newValue:toUpdate.twitter });
