@@ -15,7 +15,7 @@ const ProjectCard = ({ portfolioOwnerId, isEditable }) => {
     return (<Card style={{width:"740px"}}>
         <Card.Body>
             <Card.Title><span class="material-icons" style={{verticalAlign:"middle",}}>storage</span> 프로젝트</Card.Title>
-            <ProjectList projectList={projectList} setProjectList={setProjectList} isEditable={isEditable} portfolioOwnerId={portfolioOwnerId}></ProjectList>
+            <ProjectList portfolioOwnerId={portfolioOwnerId} projectList={projectList} setProjectList={setProjectList} isEditable={isEditable} portfolioOwnerId={portfolioOwnerId}></ProjectList>
             {isEditable && (
                 <div style={{ textAlign: "center"}}>
                     {!isEditing && <Card.Body><Button style={{borderRadius:100,}} size='sm' variant="primary" onClick={() => setIsEditing(true)}>
