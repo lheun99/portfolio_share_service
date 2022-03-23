@@ -23,6 +23,8 @@ function ProfilePage() {
 
   const withdrawal = async () => {
 
+    if(!window.confirm("정말로 회원탈퇴하시겠습니까?")) return;
+
     // 해당 유저의 학력, 수상이력, 프로젝트, 자격증 삭제
     await Api.delete(`educationlist/${user.id}`);
     await Api.delete(`awardlist/${user.id}`);
