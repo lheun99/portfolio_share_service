@@ -2,7 +2,7 @@ import { Career, User } from "../db";
 import { v4 as uuidv4 } from "uuid";
 
 class careerService {
-  static async addCareer({ user_id, name, job_position, achievement, from_date, to_date }) {
+  static async addCareer({ user_id, company, job_position, achievement, from_date, to_date }) {
     // user 확인
     const user = await User.findById({ user_id });
     if (!user) {
@@ -11,7 +11,7 @@ class careerService {
     }
 
     const id = uuidv4();
-    const newCareer = { id, user_id, name, job_position, achievement, from_date, to_date };
+    const newCareer = { id, user_id, company, job_position, achievement, from_date, to_date };
 
     const createdNewCareer = await Career.create({ newCareer });
     // 문제 없이 db 저장 완료되었으므로 에러가 없음.
@@ -30,23 +30,23 @@ class careerService {
     }
     
     if (!toUpdate.name) {
-      delete toUpdate[name];
+      delete toUpdate["company"];
     }
 
     if (!toUpdate.job_position) {
-      delete toUpdate[job_position];
+      delete toUpdate["job_position"];
     }
 
     if (!toUpdate.achievement) {
-      delete toUpdate[achievement];
+      delete toUpdate["achievement"];
     }
 
     if (!toUpdate.from_date) {
-      delete toUpdate[from_date];
+      delete toUpdate["from_date"];
     }
 
     if (!toUpdate.to_date) {
-      delete toUpdate[to_date];
+      delete toUpdate["to_date"];
     }
     
     career = await Career.update({ career_id, toUpdate });

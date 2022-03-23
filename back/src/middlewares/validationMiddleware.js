@@ -31,6 +31,20 @@ const isValidData = (type) => {
         body("title", "자격증명이 없습니다.").exists().isString(),
         body("description", "자격증 설명이 없습니다.").exists().isString(),
       ];
+    
+    case "career":
+      return [
+        body("company", "회사명이 없습니다.").exists().isString(),
+        body("job_position", "직급이 없습니다.").exists().isString(),
+        body("from_date", "근무 시작 날짜가 없거나 형태가 올바르지 않습니다.")
+          .exists()
+          .isString()
+          .matches(/^(19|20)\d{2}-(0[1-9]|1[012])-([012][1-9]|3[01])$/),
+        body("to_date", "근무 종료 날짜가 없거나 형태가 올바르지 않습니다.")
+          .exists()
+          .isString()
+          .matches(/^(19|20)\d{2}-(0[1-9]|1[012])-([012][1-9]|3[01])$/),
+      ];
   }
 };
 

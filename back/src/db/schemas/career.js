@@ -11,7 +11,7 @@ const CareerSchema = new Schema(
       ref: "User",
       required: true,
     },
-    name: {
+    company: {
       type: String,
       required: true,
     },

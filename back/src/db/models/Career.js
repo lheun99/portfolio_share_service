@@ -6,7 +6,7 @@ class Career {
     return createdNewCareer;
   }
 
-  static async findByCareerId({ career_id }) {
+  static async findById({ career_id }) {
     const career = await CareerModel.findOne({ id: career_id });
     return career;
   }
