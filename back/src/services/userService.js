@@ -170,6 +170,26 @@ class userAuthService {
 
     return user;
   }
+
+  static async resetPassword({ email, tempPassword }) {
+    let user = await User.findByEmail({ email });
+
+    if (!user) {
+      const errorMessage =
+        "해당 이메일은 존재하지 않습니다. 다시 한 번 확인해 주세요.";
+      return { errorMessage };
+    }
+
+    const hashedPassword = await bcrypt.hash(tempPassword, 10); 
+    
+    user = await User.update({ 
+      user_id: user.id,
+      fieldToUpdate: "password", 
+      newValue: hashedPassword 
+    });
+    
+    return user;
+  }
 }
 
 export { userAuthService };

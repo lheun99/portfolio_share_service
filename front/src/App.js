@@ -12,6 +12,7 @@ import RegisterForm from "./components/user/RegisterForm";
 import Portfolio from "./components/Portfolio";
 import Projects from "./components/search/Projects";
 import ProfilePage from "./components/user/ProfilePage";
+import PasswordResetForm from "./components/user/PasswordResetForm";
 
 export const UserStateContext = createContext(null);
 export const DispatchContext = createContext(null);
@@ -92,6 +93,7 @@ function App() {
             />
             <Route path="/network" element={<Network />} />
             <Route path="/projects" element={<Projects />} />
+            <Route path="/password-reset" element={<PasswordResetForm />}/>
             <Route path="*" element={<Portfolio />} />
           </Routes>
         </Router>
