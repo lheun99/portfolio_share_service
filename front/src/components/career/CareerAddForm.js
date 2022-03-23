@@ -68,7 +68,7 @@ const EducationForm = ({ onCreate, clickHandler }) => {
       <Form.Group className="mb-3">
         <Form.Control
           type='text'
-          name='job_positon'
+          name='job_position'
           value={careerInfo.job_position}
           onChange={(e) => handleOnChange(e.target.value, 'job_position')}
           placeholder='회사 직위 (직책, 근무 부서 등)'
