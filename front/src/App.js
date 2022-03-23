@@ -37,7 +37,8 @@ function App() {
       });
 
       console.log("%c sessionStorage에 토큰 있음.", "color: #d93d1a;");
-    } catch {
+    } catch (e) {
+      console.log(e);
       console.log("%c SessionStorage에 토큰 없음.", "color: #d93d1a;");
     }
     // fetchCurrentUser 과정이 끝났으므로, isFetchCompleted 상태를 true로 바꿔줌
