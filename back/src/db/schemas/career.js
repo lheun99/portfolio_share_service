@@ -30,11 +30,10 @@ const CareerSchema = new Schema(
     },
     to_date: {
       type: String,
-      required: true,
     },
-    checking: {
+    isCurrent: {
       type: Boolean,
-      required: true,
+      default: false,
     }
   },
   {

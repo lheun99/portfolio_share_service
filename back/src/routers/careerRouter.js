@@ -27,7 +27,8 @@ careerRouter.post(
       const job_position = req.body.job_position;
       const achievement = req.body.achievement;
       const from_date = req.body.from_date;
-      const to_date = req.body.to_date;
+      const to_date = req.body.to_date ?? null;
+      const isCurrent = req.body.isCurrent;
 
       const newCareer = await careerService.addCareer({
         user_id,
@@ -36,6 +37,7 @@ careerRouter.post(
         achievement,
         from_date,
         to_date,
+        isCurrent,
       });
 
       if (newCareer.errorMessage) {
@@ -74,8 +76,9 @@ careerRouter.put("/careers/:id", async (req, res, next) => {
     const achievement = req.body.achievement;
     const from_date = req.body.from_date ?? null;
     const to_date = req.body.to_date ?? null;
+    const isCurrent = req.body.isCurrent ?? null;
 
-    const toUpdate = { company, job_position, achievement, from_date, to_date };
+    const toUpdate = { company, job_position, achievement, from_date, to_date, isCurrent };
 
     const updatedCareer = await careerService.updateCareer({
       career_id,
