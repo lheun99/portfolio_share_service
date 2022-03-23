@@ -44,7 +44,7 @@ function UserEditForm({ user, setUser }) {
       setProfile(current => {
         const newValue = { 
           profileObj: "",
-          currentUrl: "https://kr.object.ncloudstorage.com/team3/default.png",
+          currentUrl: "https://team3.cdn.ntruss.com/default.png",
           preview: "",
         }
         return newValue;
