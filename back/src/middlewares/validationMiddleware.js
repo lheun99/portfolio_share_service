@@ -31,6 +31,15 @@ const isValidData = (type) => {
         body("title", "자격증명이 없습니다.").exists().isString(),
         body("description", "자격증 설명이 없습니다.").exists().isString(),
       ];
+
+    case "proceeding":
+      return [
+        body("title", "진행중인 프로젝트 이름이 없습니다.").exists().isString(),
+      ];
+    case "todo":
+      return [
+        body("todo", "할 일이 없습니다.").exists().isString(),
+      ];
   }
 };
 

@@ -5,6 +5,8 @@ import { awardRouter } from "./routers/awardRouter";
 import { educationRouter } from "./routers/educationRouter";
 import { projectAuthRouter } from "./routers/projectRouter";
 import { certificateAuthRouter } from "./routers/certificateRouter";
+import { proceedingAuthRouter } from "./routers/proceedingRouter";
+import { todoAuthRouter } from "./routers/todoRouter";
 import { errorMiddleware } from "./middlewares/errorMiddleware";
 
 
@@ -30,6 +32,8 @@ app.use(educationRouter);
 app.use(awardRouter);
 app.use(projectAuthRouter);
 app.use(certificateAuthRouter);
+app.use(proceedingAuthRouter);
+app.use(todoAuthRouter);
 
 
 
