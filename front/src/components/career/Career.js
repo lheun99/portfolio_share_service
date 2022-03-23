@@ -23,8 +23,8 @@ const Career = ({ portfolioOwnerId, isEditable }) => {
   }, [userId]);
 
   // 추가 가능 구현 함수 (EducationCardList에 추가할 값 post로 요청)
-  const createHandler = (company, job_position, achievement, from_date, to_date, checking) => {
-    const newTopic = { user_id: userId, company, job_position, achievement, from_date, to_date, checking};
+  const createHandler = (company, job_position, achievement, from_date, to_date, isCurrent) => {
+    const newTopic = { user_id: userId, company, job_position, achievement, from_date, to_date, isCurrent};
     let copied = [...topics];
     Api
       .post('career/create', newTopic)
@@ -40,15 +40,15 @@ const Career = ({ portfolioOwnerId, isEditable }) => {
   };
 
   // 수정 기능 구현 함수
-  const editHandler = (user_id, id, company, job_position, achievement, from_date, to_date, checking) => {
-    const editTopic = { user_id, id, company, job_position, achievement, from_date, to_date, checking };
+  const editHandler = (user_id, id, company, job_position, achievement, from_date, to_date, isCurrent) => {
+    const editTopic = { user_id, id, company, job_position, achievement, from_date, to_date, isCurrent };
     Api
       .put(`careers/${id}`, editTopic)
       .then(res => console.log(res.data));
 
     const mapped = topics.map((v) => {
       if (v.id === id) {
-        return { ...v, company, job_position, achievement, from_date, to_date, checking }
+        return { ...v, company, job_position, achievement, from_date, to_date, isCurrent }
       }
       else {
         return { ...v }

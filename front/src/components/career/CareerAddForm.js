@@ -11,6 +11,7 @@ const EducationForm = ({ onCreate, clickHandler }) => {
     achievement:'',
     from_date:new Date(),
     to_date:new Date(),
+    isCurrent:false,
   })
 
   const handleOnChange = (data, name) => {
@@ -39,30 +40,17 @@ const EducationForm = ({ onCreate, clickHandler }) => {
         return;
       }
       else {
-        if (radioCheck) {
-          onCreate(c, j, a, newFromDate, "(재직중)", radioCheck)
-          clickHandler();
-          setCareerInfo({
-            company:'',
-            job_position:'',
-            achievement:'',
-            from_date:new Date(),
-            to_date:new Date(),
-          })
-        }
-        else {
-          onCreate(c, j, a, newFromDate, newToDate, radioCheck);
-          clickHandler();
-          setCareerInfo({
-            company:'',
-            job_position:'',
-            achievement:'',
-            from_date:new Date(),
-            to_date:new Date(),
-          })
-        }
-      }
-    };
+        onCreate(c, j, a, newFromDate, newToDate, radioCheck)
+        clickHandler();
+        setCareerInfo({
+          company:'',
+          job_position:'',
+          achievement:'',
+          from_date:new Date(),
+          to_date:new Date(),
+          isCurrent:true,
+      })}
+    }
   };
 
   return (
@@ -81,7 +69,7 @@ const EducationForm = ({ onCreate, clickHandler }) => {
         <Form.Control
           type='text'
           name='job_positon'
-          value={careerInfo.job_positon}
+          value={careerInfo.job_position}
           onChange={(e) => handleOnChange(e.target.value, 'job_position')}
           placeholder='회사 직위 (직책, 근무 부서 등)'
         />

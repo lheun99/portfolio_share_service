@@ -123,7 +123,7 @@ careerRouter.delete("/careers/:id", async (req, res, next) => {
     const career_id = req.params.id;
     const deletedCareer = await careerService.deleteCareer({ career_id });
 
-    if (deletedCareer.errorMessage) {
+    if (deletedCareer?.errorMessage) {
       throw new Error(deletedCareer.errorMessage);
     }
 

@@ -4,7 +4,7 @@ import CareerEditForm from './CareerEditForm';
 
 // 경력 정보 조회 상세 값 컴포넌트
 const CareerCard = ({ value, editHandler, deleteHandler, isEditable }) => {
-  const { id, company, job_position, achievement, from_date, to_date } = value;
+  const { id, company, job_position, achievement, from_date, to_date, isCurrent } = value;
   const [isEditing, SetIsEditing] = useState(false);
   const [show, setShow] = useState(false)
 
@@ -34,7 +34,7 @@ const CareerCard = ({ value, editHandler, deleteHandler, isEditable }) => {
             <Card.Subtitle>{company}</Card.Subtitle>
             <Card.Text className="text-muted">{job_position}
               <br/> {achievement}
-              <br/> {from_date} ~ {to_date}</Card.Text>
+              <br/> {from_date} ~ {!isCurrent && to_date}</Card.Text>
           </Col>
 
           {isEditable ?

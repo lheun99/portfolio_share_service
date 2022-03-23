@@ -4,10 +4,18 @@ import DatePicker from "react-datepicker";
 
 // 편집 버튼 클릭 시 나타나는 수정용 form
 const CareerEdit = ({ item, onUpdate, editHandler }) => {
-  const { user_id, id,company, job_position, achievement, from_date, to_date } = item;
+  const { user_id, id, company, job_position, achievement, from_date, to_date, isCurrent } = item;
 
-  const [radioCheck, setRadioCheck] = useState(false)
-  const [careerInfo, setCareerInfo] = useState({item})
+  const [radioCheck, setRadioCheck] = useState(isCurrent)
+  const [careerInfo, setCareerInfo] = useState({
+    company,
+    job_position,
+    achievement,
+    from_date:new Date(from_date),
+    to_date:new Date(to_date),
+    isCurrent,
+  })
+
 
   const handleOnChange = (data, name) => {
     setCareerInfo(current => ({
@@ -22,17 +30,26 @@ const CareerEdit = ({ item, onUpdate, editHandler }) => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    let s = e.target.school.value;
-    let m = e.target.major.value;
-    let p = e.target.group1.value;
+    let c = careerInfo.company;
+    let j = careerInfo.job_position;
+    let a = careerInfo.achievement;
+    let f = careerInfo.from_date;
+    let t = careerInfo.to_date;
+    let newFromDate = f.getFullYear()+'-'+(f.getMonth()+1)+'-'+f.getDate();
+    let newToDate = t.getFullYear()+'-'+(t.getMonth()+1)+'-'+t.getDate();
+    
 
     // 폼 입력 값이 모두 존재할 때, Education 컴포넌트에서 받아온 PUT 요청 함수와 EducationCard에서 받아온 수정 form hide 처리용 함수를 실행
-    if (s && m && p) {
-      editHandler(user_id, id, s, m, p);
+    if (c && j && a && newFromDate && newToDate) {
+      if (!(f <= t)) {
+        alert('옳지않은 기간입니다. 다시 입력하세요.');
+        return;
+      }
+    else {
+      editHandler(user_id, id, c, j, a, newFromDate, newToDate, radioCheck)
       onUpdate();
-    };
-
-  };
+    }
+  }};
 
   return (
     <Form style={{ margin: 10, padding: 10, }} onSubmit={submitHandler}>
@@ -49,8 +66,8 @@ const CareerEdit = ({ item, onUpdate, editHandler }) => {
       <Form.Group className="mb-3">
         <Form.Control
           type='text'
-          name='job_positon'
-          value={careerInfo.job_positon}
+          name='job_position'
+          value={careerInfo.job_position}
           onChange={(e) => handleOnChange(e.target.value, 'job_position')}
           placeholder='회사 직위 (직책, 근무 부서 등)'
         />
