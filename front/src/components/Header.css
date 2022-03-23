@@ -1,0 +1,29 @@
+.item {
+  border-radius: 47px;
+}
+.item:hover {
+  background: rgba(255, 168, 65, 0.3);
+  border-radius: 47px;
+  font-weight: bold;
+}
+
+.fadein{
+  font-size: medium;
+  position: relative;
+  overflow: hidden;
+  animation: fadein 7s ease-in-out;
+
+
+}
+
+
+@keyframes fadein{
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+};

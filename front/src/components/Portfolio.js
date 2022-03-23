@@ -77,17 +77,19 @@ function Portfolio() {
   return (
     <Container fluid>
       <Row className="justify-content-md-center">
-        <Col lg={3} style={{margin: "0 15px 0 0"}}>
+        <Col lg={3} style={{margin: "158px 15px 0 0"}}>
           <User
             portfolioOwnerId={portfolioOwner.id}
             isEditable={portfolioOwner.id === userState.user?.id}
+            style={{marginTop:"20px"}}
           />
         </Col>
-        <Col style={{margin: "0 15px 0 15px"}}>
+        <Col style={{margin: "100px 15px 0 15px"}}>
           <Navbar>
-            <Container>
+            <Container style={{padding:0,}}>
               <Nav className="me-auto">
                 <Nav.Link 
+                  className="navi"
                   href="#all"
                   onClick = {(e) => {
                     e.preventDefault()
@@ -95,8 +97,9 @@ function Portfolio() {
                     setIsAward(true)
                     setIsProject(true)
                     setIsCertificate(true)
-                  }}>전체 보기</Nav.Link>
+                  }}><span class="material-icons" style={{verticalAlign:"middle",}}>all_inbox</span> 전체 보기</Nav.Link>
                 <Nav.Link 
+                  className="navi"
                   href="#education"
                   onClick = {(e) => {
                     e.preventDefault()
@@ -106,6 +109,7 @@ function Portfolio() {
                     setIsCertificate(false)
                   }}>학력</Nav.Link>
                 <Nav.Link 
+                  className="navi"
                   href="#award"
                   onClick = {(e) => {
                     e.preventDefault()
@@ -115,6 +119,7 @@ function Portfolio() {
                     setIsCertificate(false)
                   }}>수상 내역</Nav.Link>
                 <Nav.Link 
+                  className="navi"
                   href="#project"
                   onClick = {(e) => {
                     e.preventDefault()
@@ -123,7 +128,8 @@ function Portfolio() {
                     setIsProject(true)
                     setIsCertificate(false)
                   }}>프로젝트</Nav.Link>
-                <Nav.Link 
+                <Nav.Link
+                  className="navi" 
                   href="#certificate"
                   onClick = {(e) => {
                     e.preventDefault()
@@ -133,7 +139,7 @@ function Portfolio() {
                     setIsCertificate(true)
                   }}>자격증</Nav.Link>
               </Nav>
-              <Form className="d-flex">
+              {/* <Form className="d-flex">
                 <FormControl
                   type="search"
                   placeholder="Search"
@@ -141,7 +147,7 @@ function Portfolio() {
                   aria-label="Search"
                 />
                 <Button variant="outline-info">Search</Button>
-              </Form>
+              </Form> */}
             </Container>
           </Navbar>
 

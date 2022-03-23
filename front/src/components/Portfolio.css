@@ -28,3 +28,8 @@
   100% {
     transform: scale(0.8);
   }}
+
+  .navi:hover {
+    font-weight: bold;
+    border-bottom: 2px solid;
+  }
