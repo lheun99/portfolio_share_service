@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import { Form, Card, Row, Button, Col } from "react-bootstrap";
+import { DispatchContext } from "../../App";
 import * as Api from "../../api";
 
 import "./ProfilePage.css";
@@ -12,6 +13,8 @@ function ProfilePage() {
 
   const portfolioOwnerId = params.userId;
 
+  const dispatch = useContext(DispatchContext);
+
   useEffect(() => {
     // "users/유저id" 엔드포인트로 GET 요청을 하고, user를 response의 data로 세팅함.
     Api.get("users", portfolioOwnerId).then((res) => setUser(res.data));
@@ -19,8 +22,6 @@ function ProfilePage() {
 
 
   const withdrawal = async () => {
-    // 회원탈퇴 확인창
-    alert(`${user.name}님, 회원탈퇴가 완료되었습니다.`);
 
     // 해당 유저의 학력, 수상이력, 프로젝트, 자격증 삭제
     await Api.delete(`educationlist/${user.id}`);
@@ -30,8 +31,16 @@ function ProfilePage() {
 
     // 해당 유저 DELETE 요청 처리
     await Api.delete(`users/${user.id}`);
-    // 로그인 페이지로 돌아감
-    navigate("/login");
+
+    // 회원탈퇴 확인창
+    alert(`회원탈퇴가 완료되었습니다.`);
+
+    // sessionStorage 에 저장했던 JWT 토큰을 삭제함.
+    sessionStorage.removeItem("userToken");
+    // dispatch 함수를 이용해 로그아웃함.
+    dispatch({ type: "LOGOUT" });
+    // 기본 페이지로 돌아감.
+    navigate("/");
   };
 
   return (
