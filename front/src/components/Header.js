@@ -38,22 +38,22 @@ function Header() {
         <div style={{display:"flex", flexDirection:"row", fontFamily:"Poppins"}}>
           <Nav.Item>
             <Nav.Link className="item" style={{color:"#79889e"}} onClick={() => navigate("/")}>
-              <span class="material-icons" style={{verticalAlign:"middle",}}>contact_page</span> My page</Nav.Link>
+              <span className="material-icons" style={{verticalAlign:"middle",}}>contact_page</span> My page</Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link className="item" style={{color:"#79889e"}} onClick={() => navigate("/network")}>
-              <span class="material-icons" style={{verticalAlign:"middle",}}>explore</span> Mate</Nav.Link>
+              <span className="material-icons" style={{verticalAlign:"middle",}}>explore</span> Mate</Nav.Link>
           </Nav.Item >
           {isLogin && (
             <>
               <Nav.Item>
-                <Nav.Link className="item" style={{color:"#79889e"}}>
-                <span class="material-icons" style={{verticalAlign:"middle",}}>manage_accounts</span> My profile
+                <Nav.Link className="item" style={{color:"#79889e"}} onClick={() => navigate(`/users/${userState.user.id}/profilePage`)}>
+                <span className="material-icons" style={{verticalAlign:"middle",}}>manage_accounts</span> My profile
               </Nav.Link>
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link className="item" style={{color:"#FE4F70"}} onClick={logout}>
-                  {<span class="material-icons" style={{verticalAlign:"middle",}}>logout</span>} Logout
+                  {<span className="material-icons" style={{verticalAlign:"middle",}}>logout</span>} Logout
                 </Nav.Link>
               </Nav.Item>
             </>
