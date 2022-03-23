@@ -11,6 +11,7 @@ import Awards from "./award/Awards";
 import Project from './project/Project';
 import Certificate from "./certificate/Certificate";
 import Education from './education/Education';
+import Career from './career/Career';
 
 function Portfolio() {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ function Portfolio() {
   const [isAward, setIsAward] = useState(true)
   const [isProject, setIsProject] = useState(true)
   const [isCertificate, setIsCertificate] = useState(true)
+  const [isCareer, setIsCareer] = useState(true)
 
   const fetchPorfolioOwner = async (ownerId) => {
     // 유저 id를 가지고 "/users/유저id" 엔드포인트로 요청해 사용자 정보를 불러옴.
@@ -94,6 +96,7 @@ function Portfolio() {
                   onClick = {(e) => {
                     e.preventDefault()
                     setIsEducation(true)
+                    setIsCareer(true)
                     setIsAward(true)
                     setIsProject(true)
                     setIsCertificate(true)
@@ -104,16 +107,29 @@ function Portfolio() {
                   onClick = {(e) => {
                     e.preventDefault()
                     setIsEducation(true)
+                    setIsCareer(false)
                     setIsAward(false)
                     setIsProject(false)
                     setIsCertificate(false)
                   }}>학력</Nav.Link>
                 <Nav.Link 
                   className="navi"
+                  href="#career"
+                  onClick = {(e) => {
+                    e.preventDefault()
+                    setIsEducation(false)
+                    setIsCareer(true)
+                    setIsAward(false)
+                    setIsProject(false)
+                    setIsCertificate(false)
+                  }}>경력</Nav.Link>
+                <Nav.Link 
+                  className="navi"
                   href="#award"
                   onClick = {(e) => {
                     e.preventDefault()
                     setIsEducation(false)
+                    setIsCareer(false)
                     setIsAward(true)
                     setIsProject(false)
                     setIsCertificate(false)
@@ -124,6 +140,7 @@ function Portfolio() {
                   onClick = {(e) => {
                     e.preventDefault()
                     setIsEducation(false)
+                    setIsCareer(false)
                     setIsAward(false)
                     setIsProject(true)
                     setIsCertificate(false)
@@ -134,6 +151,7 @@ function Portfolio() {
                   onClick = {(e) => {
                     e.preventDefault()
                     setIsEducation(false)
+                    setIsCareer(false)
                     setIsAward(false)
                     setIsProject(false)
                     setIsCertificate(true)
@@ -152,6 +170,12 @@ function Portfolio() {
           </Navbar>
 
           {isEducation ? <><Education portfolioOwnerId={portfolioOwner.id}
+            isEditable={portfolioOwner.id === userState.user?.id}
+          />
+          <br/></> : <></>}
+
+          {isCareer ? <><Career
+            portfolioOwnerId={portfolioOwner.id}
             isEditable={portfolioOwner.id === userState.user?.id}
           />
           <br/></> : <></>}
