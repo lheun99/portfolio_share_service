@@ -64,7 +64,7 @@ function Network() {
 
   return (
     <Container fluid >
-      <div style={{ height: 100 }}></div>
+      <div style={{ height: 110 }}></div>
       <div style={{padding:10,}}>
         <Nav className="me-auto">
           <Nav.Link

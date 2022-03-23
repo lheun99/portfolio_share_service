@@ -51,7 +51,7 @@ function Projects() {
 
   return (
     <Container fluid>
-      <div style={{ height: 100 }}></div>
+      <div style={{ height: 110 }}></div>
       <Nav className="me-auto">
         <Nav.Item>
           <Nav.Link eventKey="disabled" disabled>
