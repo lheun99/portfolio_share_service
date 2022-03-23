@@ -1,16 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Form, Button, Col, Row } from 'react-bootstrap';
 
 // + 버튼 클릭 시 나타나는 create 폼 컴포넌트
 const EducationForm = ({ onCreate, clickHandler }) => {
-  const [schoolInput, setSchoolInput] = useState('');
+  // const [schoolInput, setSchoolInput] = useState('');
   const [majorInput, setMajorInput] = useState('');
+  const [univ, setUniv] = useState([]);
+  // const [filtered, setFiltered] = useState([]);
+  useEffect(() => {
+    const univData = require('./univ.json');
+    setUniv(univData.dataSearch.content.map((u) => u.schoolName));
 
-  // school value 값 변경 함수
-  const changeHandler1 = (e) => {
-    e.preventDefault();
-    setSchoolInput(e.target.value);
-  }
+  }, [])
 
   // major value 값 변경 함수
   const changeHandler2 = (e) => {
@@ -30,22 +31,18 @@ const EducationForm = ({ onCreate, clickHandler }) => {
     if (s && m && p) {
       onCreate(s, m, p);
       clickHandler();
-      setSchoolInput('');
+      // setSchoolInput('');
       setMajorInput('');
     };
   };
-
   return (
     <Form style={{ margin: 10, padding: 10, }} onSubmit={submitHandler}>
-      <Form.Group className="mb-3">
-        <Form.Control
-          type="text"
-          name='school'
-          value={schoolInput}
-          onChange={changeHandler1}
-          placeholder='학교 이름'
-        />
-      </Form.Group>
+      <input class="form-control" list="datalistOptions"  placeholder="학교 이름" name='school' style={{marginBottom:10}}></input>
+      <datalist id="datalistOptions" style={{width:100}}>
+        {univ.length > 0 && (
+          univ.map((u, idx) => <option key={idx} value={u}></option>)
+        )}
+      </datalist>
 
       <Form.Group className="mb-3">
         <Form.Control
@@ -56,8 +53,6 @@ const EducationForm = ({ onCreate, clickHandler }) => {
           placeholder='전공'
         />
       </Form.Group>
-
-
 
       <div key={"inline-radio"} className="mb-3">
         <Form.Check

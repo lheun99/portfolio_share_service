@@ -100,7 +100,7 @@ function Portfolio() {
                     setIsAward(true)
                     setIsProject(true)
                     setIsCertificate(true)
-                  }}><span class="material-icons" style={{verticalAlign:"middle",}}>all_inbox</span> 전체 보기</Nav.Link>
+                  }}><span className="material-icons" style={{verticalAlign:"middle",}}>all_inbox</span> 전체 보기</Nav.Link>
                 <Nav.Link 
                   className="navi"
                   href="#proceeding"
