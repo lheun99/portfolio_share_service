@@ -146,7 +146,7 @@ function UserEditForm({ user, setUser }) {
             <Form.Group controlId="userEditName" className="mb-3">
               <Form.Control
                 type="text"
-                value="이름을 입력하세요"
+                value={updateUser.name}
                 onChange={(e) => setUpdateUser({...updateUser, name:e.target.value})}
               />
             </Form.Group>
