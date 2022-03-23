@@ -45,7 +45,7 @@ const EducationCard = ({ value, editHandler, deleteHandler, isEditable }) => {
                   <span class="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>delete</span>
                 </Button>
               </ButtonGroup>
-              <Modal show={show}>
+              <Modal show={show} style={{zIndex:99999,}}>
               <Modal.Header>
               <Modal.Title>해당 내용을 삭제하시겠습니까?</Modal.Title>
               </Modal.Header>

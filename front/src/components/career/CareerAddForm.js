@@ -40,11 +40,18 @@ const EducationForm = ({ onCreate, clickHandler }) => {
       }
       else {
         if (radioCheck) {
-          onCreate(c, j, a, newFromDate, " ")
+          onCreate(c, j, a, newFromDate, "(재직중)", radioCheck)
+          clickHandler();
+          setCareerInfo({
+            company:'',
+            job_position:'',
+            achievement:'',
+            from_date:new Date(),
+            to_date:new Date(),
+          })
         }
         else {
-          console.log(newFromDate,newToDate)
-          onCreate(c, j, a, newFromDate, newToDate);
+          onCreate(c, j, a, newFromDate, newToDate, radioCheck);
           clickHandler();
           setCareerInfo({
             company:'',
@@ -94,9 +101,9 @@ const EducationForm = ({ onCreate, clickHandler }) => {
       <Form.Group className="mt-3 row">
         <div className="col-auto">
           <DatePicker selected={careerInfo.from_date} onChange={date => (handleOnChange(date, 'from_date'))}></DatePicker>
-        </div>
+        </div> 
         <div className="col-auto">
-          <DatePicker disabled={radioCheck} selected={careerInfo.to_date} onChange={date => (handleOnChange(date, 'to_date'))}></DatePicker>
+          <DatePicker disabled={radioCheck} selected={radioCheck ? null : careerInfo.to_date} onChange={date => (handleOnChange(date, 'to_date'))}></DatePicker>
         </div>
         <Col style={{margin:"auto",}}>
           <Form.Check 

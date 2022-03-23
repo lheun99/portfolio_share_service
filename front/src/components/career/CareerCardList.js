@@ -1,6 +1,6 @@
 import CareerCard from "./CareerCard";
 
-// 학력 정보 조회 list 컴포넌트
+// 경력 정보 조회 list 컴포넌트
 const CareerCardList = ({ topics, editHandler, deleteHandler, isEditable }) => {
   return (
     <>

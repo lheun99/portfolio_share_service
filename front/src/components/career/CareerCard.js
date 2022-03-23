@@ -2,7 +2,7 @@ import { Row, Col, Container, Card, Button, ButtonGroup, Modal } from "react-boo
 import { useState } from 'react';
 import CareerEditForm from './CareerEditForm';
 
-// 학력 정보 조회 상세 값 컴포넌트
+// 경력 정보 조회 상세 값 컴포넌트
 const CareerCard = ({ value, editHandler, deleteHandler, isEditable }) => {
   const { id, company, job_position, achievement, from_date, to_date } = value;
   const [isEditing, SetIsEditing] = useState(false);
@@ -13,7 +13,7 @@ const CareerCard = ({ value, editHandler, deleteHandler, isEditable }) => {
     SetIsEditing(!isEditing);
   };
 
-  // 삭제 처리 함수(Education 컴포넌트에서 받아온 delete 요청 함수 사용)
+  // 삭제 처리 함수(Career 컴포넌트에서 받아온 delete 요청 함수 사용)
   const handleDelete = (e) => {
     e.preventDefault();
     deleteHandler(id, e.target.value);
@@ -32,11 +32,13 @@ const CareerCard = ({ value, editHandler, deleteHandler, isEditable }) => {
         <Row>
           <Col sm={10} style={{margin:"auto"}}>
             <Card.Subtitle>{company}</Card.Subtitle>
-            <Card.Text className="text-muted">{job_position} <br/> {from_date} ~ {to_date}</Card.Text>
+            <Card.Text className="text-muted">{job_position}
+              <br/> {achievement}
+              <br/> {from_date} ~ {to_date}</Card.Text>
           </Col>
 
           {isEditable ?
-            <Col sm={2}>
+            <Col sm={2} style={{margin:"auto"}}>
               <ButtonGroup style={{ margin: 10, }} size='sm'>
                 <Button variant="outline-info" onClick={updateHandler}>
                   <span class="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>edit</span>
@@ -45,7 +47,7 @@ const CareerCard = ({ value, editHandler, deleteHandler, isEditable }) => {
                   <span class="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>delete</span>
                 </Button>
               </ButtonGroup>
-              <Modal show={show}>
+              <Modal show={show} style={{zIndex:99999,}}>
               <Modal.Header>
               <Modal.Title>해당 내용을 삭제하시겠습니까?</Modal.Title>
               </Modal.Header>

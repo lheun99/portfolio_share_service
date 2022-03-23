@@ -1,30 +1,22 @@
 import { useState } from 'react';
 import { Form, Button, Col, Row } from 'react-bootstrap';
+import DatePicker from "react-datepicker";
 
 // 편집 버튼 클릭 시 나타나는 수정용 form
-const EducationEdit = ({ item, onUpdate, editHandler }) => {
-  const { user_id, id, school, major, position } = item;
-  const [schoolInput, setSchoolInput] = useState(school);
-  const [majorInput, setMajorInput] = useState(major);
-  const [checking, setChecking] = useState(position);
+const CareerEdit = ({ item, onUpdate, editHandler }) => {
+  const { user_id, id,company, job_position, achievement, from_date, to_date } = item;
 
-  // 라디오 버튼 check 상태 변경 함수
-  const checkHandler = (e) => {
-    e.preventDefault();
-    setChecking(e.target.value);
-  };
+  const [radioCheck, setRadioCheck] = useState(false)
+  const [careerInfo, setCareerInfo] = useState({item})
 
-  // school value 값 수정 함수
-  const changeHandler1 = (e) => {
-    e.preventDefault();
-    setSchoolInput(e.target.value);
-  };
+  const handleOnChange = (data, name) => {
+    setCareerInfo(current => ({
+      ...current,
+      [name] : data
+    }))
+  }
 
-  // major value 값 수정 함수
-  const changeHandler2 = (e) => {
-    e.preventDefault();
-    setMajorInput(e.target.value);
-  };
+
 
   // 폼 제출 시 값 update 함수
   const submitHandler = (e) => {
@@ -47,66 +39,51 @@ const EducationEdit = ({ item, onUpdate, editHandler }) => {
       <Form.Group className="mb-3">
         <Form.Control
           type="text"
-          name='school'
-          value={schoolInput}
-          onChange={changeHandler1}
-          placeholder='학교명'
+          name='company'
+          value={careerInfo.company}
+          onChange={(e) => handleOnChange(e.target.value, 'company')}
+          placeholder='회사 이름'
         />
       </Form.Group>
 
       <Form.Group className="mb-3">
         <Form.Control
           type='text'
-          name='major'
-          value={majorInput}
-          onChange={changeHandler2}
-          placeholder='전공명'
+          name='job_positon'
+          value={careerInfo.job_positon}
+          onChange={(e) => handleOnChange(e.target.value, 'job_position')}
+          placeholder='회사 직위 (직책, 근무 부서 등)'
         />
       </Form.Group>
 
-      <div key={id} className="mb-3">
-        <Form.Check
-          inline
-          label="재학중"
-          value="재학중"
-          name="group1"
-          type="radio"
-          id="inline-radio-1"
-          checked={checking === "재학중" ? true : false}
-          onChange={checkHandler}
+      <Form.Group className="mb-3">
+        <Form.Control
+          type='text'
+          name='achievement'
+          value={careerInfo.achievement}
+          onChange={(e) => handleOnChange(e.target.value, 'achievement')}
+          placeholder='담당 업무'
         />
-        <Form.Check
-          inline
-          label="학사졸업"
-          value="학사졸업"
-          name="group1"
-          type="radio"
-          id="inline-radio-2"
-          checked={checking === "학사졸업" ? true : false}
-          onChange={checkHandler}
-        />
-        <Form.Check
-          inline
-          label="석사졸업"
-          value="석사졸업"
-          name="group1"
-          type="radio"
-          id="inline-radio-3"
-          checked={checking === "석사졸업" ? true : false}
-          onChange={checkHandler}
+      </Form.Group>
+      
 
-        />
-        <Form.Check
-          inline
-          label="박사졸업"
-          value="박사졸업"
-          name="group1"
-          type="radio"
-          id="inline-radio-4"
-          checked={checking === "박사졸업" ? true : false}
-          onChange={checkHandler}
-        />
-      </div>
+      <Form.Group className="mt-3 row">
+        <div className="col-auto">
+          <DatePicker selected={careerInfo.from_date} onChange={date => (handleOnChange(date, 'from_date'))}></DatePicker>
+        </div> 
+        <div className="col-auto">
+          <DatePicker disabled={radioCheck} selected={radioCheck ? null : careerInfo.to_date} onChange={date => (handleOnChange(date, 'to_date'))}></DatePicker>
+        </div>
+        <Col style={{margin:"auto",}}>
+          <Form.Check 
+            type="switch"
+            id="custom-switch"
+            label="재직중"
+            onChange={(e) => setRadioCheck(!radioCheck)}
+            checked={radioCheck}
+          />
+        </Col>
+      </Form.Group>
 
       <Form.Group as={Row} className="mt-3 text-center">
         <Col sm={{ span: 20 }}>
@@ -122,4 +99,4 @@ const EducationEdit = ({ item, onUpdate, editHandler }) => {
   )
 };
 
-export default EducationEdit;
+export default CareerEdit;

@@ -24,7 +24,7 @@ function Header() {
   };
 
   return (
-    <div style={{backgroundColor:"white", padding:"25px 10px", position: (isLogin) ? "fixed" : null, zIndex:99999, width:"-webkit-fill-available"}}>
+    <div style={{backgroundColor:"white", padding:"25px 10px", position: (isLogin) ? "fixed" : null, zIndex:99000, width:"-webkit-fill-available"}}>
       <Nav activeKey={location.pathname} style={{height:50, alignItems:"center", justifyContent:"space-between"}}>
         <Nav.Item /*className="me-auto mb-5"*/>
           <Nav.Link disabled className="fadein">

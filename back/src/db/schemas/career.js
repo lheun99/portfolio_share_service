@@ -32,6 +32,10 @@ const CareerSchema = new Schema(
       type: String,
       required: true,
     },
+    checking: {
+      type: Boolean,
+      required: true,
+    }
   },
   {
     timestamps: true,
