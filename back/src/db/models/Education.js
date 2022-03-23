@@ -20,10 +20,8 @@ class Education {
     return educations;
   }
   
-  // filter에 맞는 data의 변경할 필드(fieldToUpdate)에 변경할 내용(newValue)을 업데이트
-  static async update({ education_id, fieldToUpdate, newValue }) {
+  static async update({ education_id, toUpdate }) {
     const filter = { id: education_id };
-    const toUpdate = { [fieldToUpdate]: newValue };
     const option = { returnOriginal: false };
 
     const updatedEducation = await EducationModel.findOneAndUpdate(

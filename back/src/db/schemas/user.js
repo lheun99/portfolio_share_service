@@ -23,6 +23,10 @@ const UserSchema = new Schema(
       required: false,
       default: "설명이 아직 없습니다. 추가해 주세요.",
     },
+    profile: {
+      type: String,
+      default: "https://team3.kr.object.ncloudstorage.com/default.png",
+    }
   },
   {
     timestamps: true,
