@@ -112,7 +112,7 @@ function Portfolio() {
                   }}
                 >
                   <span
-                    class="material-icons"
+                    className="material-icons"
                     style={{ verticalAlign: "middle" }}
                   >
                     all_inbox

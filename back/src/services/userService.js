@@ -149,6 +149,12 @@ class userAuthService {
       newValue: toUpdate.youtube,
     });
 
+    if (toUpdate.projectNum) {
+      const fieldToUpdate = "projectNum";
+      const newValue = toUpdate.projectNum;
+      user = await User.update({ user_id, fieldToUpdate, newValue });
+    }
+
     return user;
   }
 

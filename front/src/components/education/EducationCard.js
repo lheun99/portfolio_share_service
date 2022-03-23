@@ -39,10 +39,10 @@ const EducationCard = ({ value, editHandler, deleteHandler, isEditable }) => {
             <Col sm={2}>
               <ButtonGroup style={{ margin: 10, }} size='sm'>
                 <Button variant="outline-info" onClick={updateHandler}>
-                  <span class="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>edit</span>
+                  <span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>edit</span>
                 </Button>
                 <Button variant="outline-danger" onClick={() => setShow(true)}>
-                  <span class="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>delete</span>
+                  <span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>delete</span>
                 </Button>
               </ButtonGroup>
               <Modal show={show}>

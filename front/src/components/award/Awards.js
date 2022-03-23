@@ -29,13 +29,13 @@ const Awards = ({portfolioOwnerId, isEditable}) => {
   return (
     <Card style={{width:"740px"}}>
       <Card.Body>
-        <Card.Title><span class="material-icons" style={{verticalAlign:"middle",}}>emoji_events</span> 수상이력</Card.Title>
+        <Card.Title><span className="material-icons" style={{verticalAlign:"middle",}}>emoji_events</span> 수상이력</Card.Title>
         {awards && (awards.map((award) => (
           <Award key={award.id} awards={awards} portfolioOwnerId={portfolioOwnerId} award={award} isEditable={isEditable} setAwards={setAwards} />)
         ))}
         <div style={{ textAlign: "center", padding:"16px" }}>
           {!isAdding && isEditable && <Button style={{borderRadius:100,}}size='sm' variant="primary" onClick={() => setIsAdding(true)}>
-          <span class="material-icons" style={{verticalAlign:'middle',fontSize:15,}}>add</span>
+          <span className="material-icons" style={{verticalAlign:'middle',fontSize:15,}}>add</span>
             </Button>}
         </div>
         {isAdding && <AwardAddForm awards={awards} portfolioOwnerId={portfolioOwnerId} setAwards={setAwards} setIsAdding={setIsAdding} />}

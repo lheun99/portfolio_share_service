@@ -70,7 +70,7 @@ const Education = ({ portfolioOwnerId, isEditable }) => {
   return (
     <Card style={{width:"740px"}}>
       <Card.Body>
-        <Card.Title><span class="material-icons" style={{verticalAlign:"middle",}}>school</span> 학력</Card.Title>
+        <Card.Title><span className="material-icons" style={{verticalAlign:"middle",}}>school</span> 학력</Card.Title>
         <EducationCardList 
           topics={topics} 
           editHandler={editHandler} 
@@ -86,7 +86,7 @@ const Education = ({ portfolioOwnerId, isEditable }) => {
           <div style={{ textAlign: 'center', padding:"16px" }}>
             {isEditable ? 
             <Button style={{borderRadius:100,}} size='sm' onClick={clickHandler}>
-              <span class="material-icons" style={{verticalAlign:'middle',fontSize:15,}}>add</span>
+              <span className="material-icons" style={{verticalAlign:'middle',fontSize:15,}}>add</span>
             </Button> : <></>}
           </div>}
       </Card.Body>

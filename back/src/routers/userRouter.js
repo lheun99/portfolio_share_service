@@ -111,6 +111,7 @@ userAuthRouter.put(
       const twitter = req.body.twitter;
       const instagram = req.body.instagram;
       const youtube = req.body.youtube;
+      const projectNum = req.body.projectNum;
 
       const toUpdate = {
         name,
@@ -124,6 +125,7 @@ userAuthRouter.put(
         instagram,
         youtube,
         profile,
+        projectNum
       };
 
       // 해당 사용자 아이디로 사용자 정보를 db에서 찾아 업데이트함. 업데이트 요소가 없을 시 생략함

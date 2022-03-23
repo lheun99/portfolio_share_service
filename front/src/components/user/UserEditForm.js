@@ -160,7 +160,7 @@ function UserEditForm({ user, setUser }) {
           <Form.Group controlId="userEditName" className="mb-3">
             <Form.Control
               type="text"
-              value={updateUser.name}
+              placeholder="이름을 입력하세요"
               onChange={(e) =>
                 setUpdateUser({ ...updateUser, name: e.target.value })
               }
