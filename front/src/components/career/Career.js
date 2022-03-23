@@ -41,7 +41,7 @@ const Career = ({ portfolioOwnerId, isEditable }) => {
   const editHandler = (user_id, id, company, job_position, achievement, from_date, to_date) => {
     const editTopic = { user_id, id, company, job_position, achievement, from_date, to_date };
     Api
-      .put(`educations/${id}`, editTopic)
+      .put(`careers/${id}`, editTopic)
       .then(res => console.log(res.data));
 
     const mapped = topics.map((v) => {

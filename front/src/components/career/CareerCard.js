@@ -4,7 +4,7 @@ import CareerEditForm from './CareerEditForm';
 
 // 학력 정보 조회 상세 값 컴포넌트
 const CareerCard = ({ value, editHandler, deleteHandler, isEditable }) => {
-  const { id, school, major, position } = value;
+  const { id, company, job_position, achievement, from_date, to_date } = value;
   const [isEditing, SetIsEditing] = useState(false);
   const [show, setShow] = useState(false)
 
@@ -31,8 +31,8 @@ const CareerCard = ({ value, editHandler, deleteHandler, isEditable }) => {
       <Container style={{padding: 10, margin:"10px 0", borderBottom: "rgba(70, 65, 65, 0.2) dotted"}}>
         <Row>
           <Col sm={10} style={{margin:"auto"}}>
-            <Card.Subtitle>{school}</Card.Subtitle>
-            <Card.Text className="text-muted">{major + ` (${position})`}</Card.Text>
+            <Card.Subtitle>{company}</Card.Subtitle>
+            <Card.Text className="text-muted">{job_position} <br/> {from_date} ~ {to_date}</Card.Text>
           </Col>
 
           {isEditable ?
