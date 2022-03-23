@@ -11,21 +11,22 @@ function UserEditForm({ user, setUser }) {
     const [isValidPassword, setIsValidPassword] = useState(false);
     const [isCorrectPassword, setIsCorrectPassword] = useState(false);
   
-    const [profile, setProfile] = useState({
-      profileObj: "",
-      preview: "",
-      currentUrl: user.profile,
-    });
+    const [profile, setProfile] = useState({});
   
     useEffect(() => {
       setUpdateUser({
-        name: "",
+        name: user.name,
         description: "",
         github: "",
         gitlab: "",
         twitter: "",
         instagram: "",
         youtube: "",
+      })
+      setProfile({
+        profileObj: "",
+        preview: "",
+        currentUrl: user.profile,
       })
     },[user])
   
@@ -133,7 +134,7 @@ function UserEditForm({ user, setUser }) {
               style={{ width: "10rem", height: "8rem" }}
               className="mb-3"
               src={profile.preview ? profile.preview : profile.currentUrl}
-              alt="사용자 프로필"
+              alt="변경할 프로필"
             />
           </Row>
           <label htmlFor="image_upload"><i className="fa-solid fa-camera"></i></label>
@@ -145,7 +146,7 @@ function UserEditForm({ user, setUser }) {
             <Form.Group controlId="userEditName" className="mb-3">
               <Form.Control
                 type="text"
-                placeholder="이름을 입력하세요"
+                value="이름을 입력하세요"
                 onChange={(e) => setUpdateUser({...updateUser, name:e.target.value})}
               />
             </Form.Group>
