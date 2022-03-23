@@ -50,18 +50,15 @@ class awardService {
     }
 
     // 수정해야하는 필드에 맞는 값을 업데이트
-    if (toUpdate.title) {
-      const fieldToUpdate = "title";
-      const newValue = toUpdate.title;
-      award = await Award.update({ award_id, fieldToUpdate, newValue });
+    if (!toUpdate.title) {
+      delete toUpdate[title];
     }
 
-    if (toUpdate.description) {
-      const fieldToUpdate = "description";
-      const newValue = toUpdate.description;
-      award = await Award.update({ award_id, fieldToUpdate, newValue });
+    if (!toUpdate.description) {
+      delete toUpdate[description];
     }
 
+    award = await Award.update({ award_id, toUpdate });
     return award;
   }
 
