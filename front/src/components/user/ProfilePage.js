@@ -46,8 +46,8 @@ function ProfilePage() {
               <Card.Img
                 style={{ width: "10rem", height: "8rem" }}
                 className="mb-3"
-                src="http://placekitten.com/200/200"
-                alt="랜덤 고양이 사진 (http://placekitten.com API 사용)"
+                src={user?.profile}
+                alt="사용자 프로필"
               />
             </Row>
             <Card.Title>{user?.name}</Card.Title>
@@ -90,6 +90,12 @@ function UserEditForm({ user, setUser }) {
   const [isValidPassword, setIsValidPassword] = useState(false);
   const [isCorrectPassword, setIsCorrectPassword] = useState(false);
 
+  const [profile, setProfile] = useState({
+    profileObj: "",
+    preview: "",
+    currentUrl: user.profile,
+  });
+
   useEffect(() => {
     setUpdateUser({
       name: "",
@@ -108,8 +114,77 @@ function UserEditForm({ user, setUser }) {
     }
   },[newPassword, isCorrectPassword])
 
+
+  // imageupload 함수
+  const setDefaultHandler = async (e) => {
+    e.preventDefault();
+
+    setProfile(current => {
+      const newValue = { 
+        profileObj: "",
+        currentUrl: "https://kr.object.ncloudstorage.com/team3/default.png",
+        preview: "",
+      }
+      return newValue;
+    });
+    
+  }
+
+  const changeHandler = (e) => {
+    e.preventDefault();
+
+    if (profile.preview) {
+      URL.revokeObjectURL(profile.preview);
+    }
+
+    setProfile(current => {
+      const newValue = {
+        ...current,
+        profileObj: e.target.files[0],
+        preview: URL.createObjectURL(e.target.files[0]),
+      }
+      return newValue;
+    })
+  }
+
+  // submit 함수
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // imageupload 코드
+    let updatedProfile = { data: profile.currentUrl };
+
+    if (profile.preview) {
+      URL.revokeObjectURL(profile.preview);
+    }
+
+    const prevImage = user.profile.includes("default") ? "" : user.profile;
+
+    if (profile.profileObj) {
+      const fd = new FormData();
+      fd.append('filename', profile.profileObj);
+      fd.append('prevImage', prevImage);
+      try {
+        updatedProfile = await Api.postImg("upload", fd);
+        setProfile(current => {
+          const newValue = {
+            profileObj: {},
+            currentUrl: updatedProfile.data,
+            preview: "",
+          }
+          return newValue;
+        });
+      } catch (err) {
+        console.log(err.response);
+      }
+    } else if (profile.currentUrl !== user.profile) {
+      const toDelete = user.profile.split("/").slice(-1)[0]
+      try {
+        await Api.delete('deleteImg', toDelete);
+      } catch(e) {
+        console.log(e);
+      }
+    }
 
     // "users/유저id" 엔드포인트로 PUT 요청함.
     const res = await Api.put(`users/${user.id}`, {
@@ -120,7 +195,8 @@ function UserEditForm({ user, setUser }) {
       twitter: updateUser.twitter,
       instagram: updateUser.instagram,
       youtube: updateUser.youtube,
-      password: updateUser.password
+      password: updateUser.password,
+      profile: updatedProfile.data,
     });
     // 해당 유저 정보로 user을 세팅함.
     setUser(res.data);
@@ -131,6 +207,18 @@ function UserEditForm({ user, setUser }) {
   return (
     <Card border="light">
       <Card.Body>
+        <Row className="justify-content-md-center"> 
+          <Card.Img
+            style={{ width: "10rem", height: "8rem" }}
+            className="mb-3"
+            src={profile.preview ? profile.preview : profile.currentUrl}
+            alt="사용자 프로필"
+          />
+        </Row>
+        <label htmlFor="image_upload"><i className="fa-solid fa-camera"></i></label>
+        <input type="file" id="image_upload" accept="image/*" onChange={changeHandler} style={{display:"none"}}/>
+        <label htmlFor="set_default"><i className="fa-solid fa-arrow-rotate-left"></i></label>
+        <input type="button" id="set_default" onClick={setDefaultHandler} style={{display:"none"}}/>
         <p>이름</p>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="userEditName" className="mb-3">
