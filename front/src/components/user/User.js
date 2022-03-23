@@ -21,7 +21,7 @@ function User({ portfolioOwnerId, isEditable }) {
             onClick={() =>
               isEditable ? navigate(`/users/${user.id}/profilePage`) : undefined
             }
-            style={{ width: "10rem", height: "8rem", cursor: "pointer" }}
+            style={{ width: "10rem", height: "8rem", cursor: "pointer", borderRadius:100,}}
             className="mb-3"
             src={user?.profile}
             alt="사용자 프로필"

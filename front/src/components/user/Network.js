@@ -63,113 +63,115 @@ function Network() {
   };
 
   return (
-    <Container fluid>
+    <Container fluid >
       <div style={{ height: 100 }}></div>
-      <Nav className="me-auto">
-        <Nav.Link
-          href="#all"
-          onClick={(e) => {
-            e.preventDefault();
-            setIsAll(true);
-            setIsFront(false);
-            setIsBack(false);
-            setIsData(false);
-            setIsAI(false);
-            setIsSearched(false);
-          }}
-        >
-          전체 보기
-        </Nav.Link>
+      <div style={{padding:10,}}>
+        <Nav className="me-auto">
+          <Nav.Link
+            href="#all"
+            onClick={(e) => {
+              e.preventDefault();
+              setIsAll(true);
+              setIsFront(false);
+              setIsBack(false);
+              setIsData(false);
+              setIsAI(false);
+              setIsSearched(false);
+            }}
+          >
+            전체 보기
+          </Nav.Link>
 
-        <NavDropdown title="직무별 보기" id="basic-nav-dropdown">
-          <NavDropdown.Item
-            href="#front"
-            onClick={(e) => {
-              e.preventDefault();
-              setIsAll(false);
-              setIsFront(true);
-              setIsBack(false);
-              setIsData(false);
-              setIsAI(false);
-              setIsSearched(false);
-            }}
-          >
-            프론트엔드
-          </NavDropdown.Item>
-          <NavDropdown.Item
-            href="#back"
-            onClick={(e) => {
-              e.preventDefault();
-              setIsAll(false);
-              setIsFront(false);
-              setIsBack(true);
-              setIsData(false);
-              setIsAI(false);
-              setIsSearched(false);
-            }}
-          >
-            백엔드
-          </NavDropdown.Item>
-          <NavDropdown.Item
-            href="#data"
-            onClick={(e) => {
-              e.preventDefault();
-              setIsAll(false);
-              setIsFront(false);
-              setIsBack(false);
-              setIsData(true);
-              setIsAI(false);
-              setIsSearched(false);
-            }}
-          >
-            데이터 분석
-          </NavDropdown.Item>
-          <NavDropdown.Item
-            href="#ai"
-            onClick={(e) => {
-              e.preventDefault();
-              setIsAll(false);
-              setIsFront(false);
-              setIsBack(false);
-              setIsData(false);
-              setIsAI(true);
-              setIsSearched(false);
-            }}
-          >
-            AI
-          </NavDropdown.Item>
-        </NavDropdown>
+          <NavDropdown title="직무별 보기" id="basic-nav-dropdown">
+            <NavDropdown.Item
+              href="#front"
+              onClick={(e) => {
+                e.preventDefault();
+                setIsAll(false);
+                setIsFront(true);
+                setIsBack(false);
+                setIsData(false);
+                setIsAI(false);
+                setIsSearched(false);
+              }}
+            >
+              프론트엔드
+            </NavDropdown.Item>
+            <NavDropdown.Item
+              href="#back"
+              onClick={(e) => {
+                e.preventDefault();
+                setIsAll(false);
+                setIsFront(false);
+                setIsBack(true);
+                setIsData(false);
+                setIsAI(false);
+                setIsSearched(false);
+              }}
+            >
+              백엔드
+            </NavDropdown.Item>
+            <NavDropdown.Item
+              href="#data"
+              onClick={(e) => {
+                e.preventDefault();
+                setIsAll(false);
+                setIsFront(false);
+                setIsBack(false);
+                setIsData(true);
+                setIsAI(false);
+                setIsSearched(false);
+              }}
+            >
+              데이터 분석
+            </NavDropdown.Item>
+            <NavDropdown.Item
+              href="#ai"
+              onClick={(e) => {
+                e.preventDefault();
+                setIsAll(false);
+                setIsFront(false);
+                setIsBack(false);
+                setIsData(false);
+                setIsAI(true);
+                setIsSearched(false);
+              }}
+            >
+              AI
+            </NavDropdown.Item>
+          </NavDropdown>
 
-        <Nav.Item>
-          <Form className="d-flex" onSubmit={handleSearch}>
-            <Form.Control
-              type="search"
-              placeholder="이름 검색"
-              className="me-2"
-              aria-label="Search"
-              onChange={handleQuery}
-            />
-            <Button variant="outline-info" onClick={handleSearch}>
-              🔍
-            </Button>
-          </Form>
-        </Nav.Item>
-        {isShearched ? (
-          <>
-            <Nav.Item>
-              <Nav.Link eventKey="disabled" disabled>
-                총 {filteredUsers.length}개가 검색되었습니다.
-              </Nav.Link>
-            </Nav.Item>
-          </>
-        ) : (
-          <>
-            <Nav.Item>
-              <Nav.Link eventKey="disabled" disabled></Nav.Link>
-            </Nav.Item>
-          </>
-        )}
-      </Nav>
+          <Nav.Item>
+            <Form className="d-flex" onSubmit={handleSearch} style={{alignItems:"center"}}>
+              <Form.Control
+                type="search"
+                placeholder="이름 검색"
+                className="me-2"
+                aria-label="Search"
+                onChange={handleQuery}
+              />
+              <Button style={{backgroundColor:'white', border:"none",padding:0,height:32,}} onClick={handleSearch}>
+                <span class="material-icons" style={{color:"grey",fontSize:32,}}>search</span>
+              </Button>
+            </Form>
+          </Nav.Item>
+          {isShearched ? (
+            <>
+              <Nav.Item>
+                <Nav.Link eventKey="disabled" disabled>
+                  총 {filteredUsers.length}개가 검색되었습니다.
+                </Nav.Link>
+              </Nav.Item>
+            </>
+          ) : (
+            <>
+              <Nav.Item>
+                <Nav.Link eventKey="disabled" disabled></Nav.Link>
+              </Nav.Item>
+            </>
+          )}
+        </Nav>
+      </div>
       {isShearched ? (
         <>
           <Row xs="auto" className="jusify-content-center">
@@ -181,7 +183,7 @@ function Network() {
       ) : (
         <></>
       )}
-      <Modal show={isShow}>
+      <Modal show={isShow} style={{zIndex:99999,}}>
         <Modal.Body>검색어를 입력하세요.</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
