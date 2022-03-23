@@ -15,8 +15,8 @@ function NetworkUserCard({ user }) {
           <Card.Img
             style={{ width: "10rem", height: "8rem" }}
             className="mb-3"
-            src="http://placekitten.com/200/200"
-            alt="랜덤 고양이 사진 (http://placekitten.com API 사용)"
+            src={user?.profile}
+            alt="사용자 프로필"
           />
         </Row>
         <Card.Title>{user?.name}</Card.Title>
