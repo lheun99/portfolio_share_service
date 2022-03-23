@@ -23,29 +23,38 @@ const UserSchema = new Schema(
       required: false,
       default: "설명이 아직 없습니다. 추가해 주세요.",
     },
+    job: {
+      type: String,
+      required: true,
+    },
     profile: {
       type: String,
       default: "https://team3.kr.object.ncloudstorage.com/default.png",
     },
     github: {
       type: String,
-      required: false
+      required: false,
     },
     gitlab: {
       type: String,
-      required: false
+      required: false,
     },
     twitter: {
       type: String,
-      required: false
+      required: false,
     },
     instagram: {
       type: String,
-      required: false
+      required: false,
     },
     youtube: {
       type: String,
-      required: false
+      required: false,
+    },
+    projectNum: {
+      type: Number,
+      required: false,
+      default: 0
     },
   },
   {

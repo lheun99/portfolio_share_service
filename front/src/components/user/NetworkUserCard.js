@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import { Card, Row } from "react-bootstrap";
+import { Card, Row, Badge } from "react-bootstrap";
 
 function NetworkUserCard({ user }) {
   const navigate = useNavigate();
 
   return (
-    <Card 
-      onClick={() => navigate(`/users/${user.id}`)} 
-      className="mb-2 ms-3 mr-5" 
+    <Card
+      onClick={() => navigate(`/users/${user.id}`)}
+      className="mb-2 ms-3 mr-5"
       style={{ width: "18rem", cursor: "pointer" }}
     >
       <Card.Body>
@@ -19,9 +19,14 @@ function NetworkUserCard({ user }) {
             alt="사용자 프로필"
           />
         </Row>
-        <Card.Title>{user?.name}</Card.Title>
+        <Card.Title>
+          {user?.name}
+          <Badge bg="info"> {user?.job}</Badge>
+        </Card.Title>
+
         <Card.Subtitle className="mb-2 text-muted">{user?.email}</Card.Subtitle>
         <Card.Text>{user?.description}</Card.Text>
+        <Card.Text><i className="fa-regular fa-file-lines"></i> {user?.projectNum}</Card.Text>
       </Card.Body>
     </Card>
   );

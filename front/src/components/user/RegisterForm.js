@@ -15,11 +15,13 @@ function RegisterForm() {
   const [confirmPassword, setConfirmPassword] = useState("");
   //useState로 name 상태를 생성함.
   const [name, setName] = useState("");
+  //useState로 job 상태를 생성함.
+  const [job, setJob] = useState("");
 
   //useState로 modal창의 상태를 생성함(회원가입 성공했을 시)
-  const [successShow, setSuccessShow] = useState(false)
+  const [successShow, setSuccessShow] = useState(false);
   //useState로 modal창의 상태를 생성함(회원가입 실패했을 시)
-  const [failShow, setFailShow] = useState(false)
+  const [failShow, setFailShow] = useState(false);
 
   //이메일이 abc@example.com 형태인지 regex를 이용해 확인함.
   const validateEmail = (email) => {
@@ -38,10 +40,15 @@ function RegisterForm() {
   const isPasswordSame = password === confirmPassword;
   // 이름이 2글자 이상인지 여부를 확인함.
   const isNameValid = name.length >= 2;
-
+  //관심직무가 선택되었는지 확인
+  const isJobValid = job.length > 0;
   // 위 4개 조건이 모두 동시에 만족되는지 여부를 확인함.
   const isFormValid =
-    isEmailValid && isPasswordValid && isPasswordSame && isNameValid;
+    isEmailValid &&
+    isPasswordValid &&
+    isPasswordSame &&
+    isNameValid &&
+    isJobValid;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,11 +59,12 @@ function RegisterForm() {
         email,
         password,
         name,
+        job,
       });
 
-      setSuccessShow(true)
+      setSuccessShow(true);
     } catch (err) {
-      setFailShow(true)
+      setFailShow(true);
       console.log("회원가입에 실패하였습니다.", err);
     }
   };
@@ -65,13 +73,12 @@ function RegisterForm() {
     e.preventDefault();
     setSuccessShow(false);
     navigate("/login");
-  }
+  };
 
   const failHandleClose = (e) => {
     e.preventDefault();
     setFailShow(false);
-  }
-
+  };
 
   return (
     <Container>
@@ -138,6 +145,22 @@ function RegisterForm() {
               )}
             </Form.Group>
 
+            <Form.Group controlId="registerJob" className="mt-3">
+              <Form.Label>관심 직무</Form.Label>
+              <Form.Select value={job} onChange={(e) => setJob(e.target.value)}>
+                <option value="">관심 직무를 선택해주세요.</option>
+                <option value="프론트엔드">프론트엔드</option>
+                <option value="백엔드">백엔드</option>
+                <option value="데이터 분석">데이터 분석</option>
+                <option value="AI">AI</option>
+              </Form.Select>
+              {!isJobValid && (
+                <Form.Text className="text-success">
+                  관심 직무를 선택해주세요.
+                </Form.Text>
+              )}
+            </Form.Group>
+
             <Form.Group as={Row} className="mt-3 text-center">
               <Col sm={{ span: 20 }}>
                 <Button variant="primary" type="submit" disabled={!isFormValid}>
@@ -148,36 +171,38 @@ function RegisterForm() {
 
             <Form.Group as={Row} className="mt-3 text-center">
               <Col sm={{ span: 20 }}>
-                <Button 
-                  variant="light" 
-                  onClick={() => navigate("/login")}>
+                <Button variant="light" onClick={() => navigate("/login")}>
                   로그인하기
                 </Button>
               </Col>
             </Form.Group>
           </Form>
           <Modal show={successShow}>
-          <Modal.Header closeButton>
-          <Modal.Title>회원가입을 축하합니다🎉</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>로그인 페이지로 이동합니다.</Modal.Body>
-          <Modal.Footer>
-          <Button variant="outline-info" onClick={successHandleClose}>
-              확인
-          </Button>
-          </Modal.Footer>
+            <Modal.Header closeButton>
+              <Modal.Title>회원가입을 축하합니다🎉</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>로그인 페이지로 이동합니다.</Modal.Body>
+            <Modal.Footer>
+              <Button variant="outline-info" onClick={successHandleClose}>
+                확인
+              </Button>
+            </Modal.Footer>
           </Modal>
 
           <Modal show={failShow}>
-          <Modal.Header closeButton>
-          <Modal.Title>회원가입에 실패하였습니다.</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>해당 이메일 주소로 가입된 유저가 있습니다.<br/>새로운 이메일 주소를 생성해주세요.</Modal.Body>
-          <Modal.Footer>
-          <Button variant="outline-info" onClick={failHandleClose}>
-              확인
-          </Button>
-          </Modal.Footer>
+            <Modal.Header closeButton>
+              <Modal.Title>회원가입에 실패하였습니다.</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              해당 이메일 주소로 가입된 유저가 있습니다.
+              <br />
+              새로운 이메일 주소를 생성해주세요.
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="outline-info" onClick={failHandleClose}>
+                확인
+              </Button>
+            </Modal.Footer>
           </Modal>
         </Col>
       </Row>

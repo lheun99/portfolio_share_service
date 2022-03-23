@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import Nav from "react-bootstrap/Nav";
+import { Nav } from "react-bootstrap";
 import { UserStateContext, DispatchContext } from "../App";
-import "./Header.css"
+import "./Header.css";
 
 function Header() {
   const navigate = useNavigate();
@@ -24,36 +24,109 @@ function Header() {
   };
 
   return (
-    <div style={{backgroundColor:"white", padding:"25px 10px", position: (isLogin) ? "fixed" : null, zIndex:99999, width:"-webkit-fill-available"}}>
-      <Nav activeKey={location.pathname} style={{height:50, alignItems:"center", justifyContent:"space-between"}}>
+    <div
+      style={{
+        backgroundColor: "white",
+        padding: "25px 10px",
+        position: isLogin ? "fixed" : null,
+        zIndex: 99999,
+        width: "-webkit-fill-available",
+      }}
+    >
+      <Nav
+        activeKey={location.pathname}
+        style={{
+          height: 50,
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
         <Nav.Item /*className="me-auto mb-5"*/>
           <Nav.Link disabled className="fadein">
-            <img
-              alt=""
-              src="img/communication.png"
-              width ="30"
-              height="30"
-            />{isLogin ? <> 환영합니다, {userState.user.name}님!</>: <> 안녕하세요, 포트폴리오 공유 서비스입니다.</>}</Nav.Link>
+            <img alt="" src="img/communication.png" width="30" height="30" />
+            {isLogin ? (
+              <> 환영합니다, {userState.user.name}님!</>
+            ) : (
+              <> 안녕하세요, 포트폴리오 공유 서비스입니다.</>
+            )}
+          </Nav.Link>
         </Nav.Item>
-        <div style={{display:"flex", flexDirection:"row", fontFamily:"Poppins"}}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            fontFamily: "Poppins",
+          }}
+        >
           <Nav.Item>
-            <Nav.Link className="item" style={{color:"#79889e"}} onClick={() => navigate("/")}>
-              <span className="material-icons" style={{verticalAlign:"middle",}}>contact_page</span> My page</Nav.Link>
+            <Nav.Link
+              className="item"
+              style={{ color: "#79889e" }}
+              onClick={() => navigate("/")}
+            >
+              <span
+                className="material-icons"
+                style={{ verticalAlign: "middle" }}
+              >
+                contact_page
+              </span>{" "}
+              My page
+            </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link className="item" style={{color:"#79889e"}} onClick={() => navigate("/network")}>
-              <span className="material-icons" style={{verticalAlign:"middle",}}>explore</span> Mate</Nav.Link>
-          </Nav.Item >
+            <Nav.Link
+              className="item"
+              style={{ color: "#79889e" }}
+              onClick={() => navigate("/network")}
+            >
+              <span
+                className="material-icons"
+                style={{ verticalAlign: "middle" }}
+              >
+                explore
+              </span>{" "}
+              Mate
+            </Nav.Link>
+          </Nav.Item>
           {isLogin && (
             <>
               <Nav.Item>
-                <Nav.Link className="item" style={{color:"#79889e"}} onClick={() => navigate(`/users/${userState.user.id}/profilePage`)}>
-                <span className="material-icons" style={{verticalAlign:"middle",}}>manage_accounts</span> My profile
-              </Nav.Link>
+                <Nav.Link onClick={() => navigate("/projects")}>
+                  Projects
+                </Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link className="item" style={{color:"#FE4F70"}} onClick={logout}>
-                  {<span className="material-icons" style={{verticalAlign:"middle",}}>logout</span>} Logout
+                <Nav.Link
+                  className="item"
+                  style={{ color: "#79889e" }}
+                  onClick={() =>
+                    navigate(`/users/${userState.user.id}/profilePage`)
+                  }
+                >
+                  <span
+                    className="material-icons"
+                    style={{ verticalAlign: "middle" }}
+                  >
+                    manage_accounts
+                  </span>{" "}
+                  My profile
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link
+                  className="item"
+                  style={{ color: "#FE4F70" }}
+                  onClick={logout}
+                >
+                  {
+                    <span
+                      className="material-icons"
+                      style={{ verticalAlign: "middle" }}
+                    >
+                      logout
+                    </span>
+                  }{" "}
+                  Logout
                 </Nav.Link>
               </Nav.Item>
             </>

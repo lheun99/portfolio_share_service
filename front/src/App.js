@@ -3,13 +3,14 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import * as Api from "./api";
 import { loginReducer } from "./reducer";
-import "./App.css"
+import "./App.css";
 
 import Header from "./components/Header";
 import LoginForm from "./components/user/LoginForm";
 import Network from "./components/user/Network";
 import RegisterForm from "./components/user/RegisterForm";
 import Portfolio from "./components/Portfolio";
+import Projects from "./components/search/Projects";
 import ProfilePage from "./components/user/ProfilePage";
 
 export const UserStateContext = createContext(null);
@@ -52,9 +53,17 @@ function App() {
 
   if (!isFetchCompleted) {
     return (
-      <div 
-        className="loading" 
-        style={{fontFamily:"'Poppins', sans-serif", fontWeight:"bold", fontSize:40, textAlign:"center", height:"100vh", lineHeight:"100vh"}}>
+      <div
+        className="loading"
+        style={{
+          fontFamily: "'Poppins', sans-serif",
+          fontWeight: "bold",
+          fontSize: 40,
+          textAlign: "center",
+          height: "100vh",
+          lineHeight: "100vh",
+        }}
+      >
         <span>L</span>
         <span>O</span>
         <span>A</span>
@@ -72,12 +81,16 @@ function App() {
         <Router>
           <Header />
           <Routes>
-            <Route path="/" exact element={<Portfolio/>} />
+            <Route path="/" exact element={<Portfolio />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegisterForm />} />
             <Route path="/users/:userId" element={<Portfolio />} />
-            <Route path="/users/:userId/profilePage" element={<ProfilePage />} />
+            <Route
+              path="/users/:userId/profilePage"
+              element={<ProfilePage />}
+            />
             <Route path="/network" element={<Network />} />
+            <Route path="/projects" element={<Projects />} />
             <Route path="*" element={<Portfolio />} />
           </Routes>
         </Router>

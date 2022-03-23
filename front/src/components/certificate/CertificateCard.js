@@ -15,12 +15,12 @@ const CertificateCard = ({ portfolioOwnerId, isEditable }) => {
 
     return (<Card style={{width:"740px"}}>
         <Card.Body>
-            <Card.Title><span class="material-icons" style={{verticalAlign:"middle",}}>badge</span> 자격증</Card.Title>
+            <Card.Title><span className="material-icons" style={{verticalAlign:"middle",}}>badge</span> 자격증</Card.Title>
             <CertificateList certificateList={certificateList} setCertificateList={setCertificateList} isEditable={isEditable} portfolioOwnerId={portfolioOwnerId}></CertificateList>
             {isEditable && (
                 <div style={{ textAlign: "center" }}>
                     {!isEditing && <Card.Body><Button style={{borderRadius:100,}} size='sm' variant="primary" onClick={() => setIsEditing(true)}>
-                        <span class="material-icons" style={{verticalAlign:'middle',fontSize:15,}}>add</span>
+                        <span className="material-icons" style={{verticalAlign:'middle',fontSize:15,}}>add</span>
                     </Button></Card.Body>}
                     {isEditing && <CertificateForm setIsEditing={setIsEditing} portfolioOwnerId={portfolioOwnerId} setCertificateList={setCertificateList}></CertificateForm>}
                 </div>

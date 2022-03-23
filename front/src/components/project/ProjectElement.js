@@ -152,8 +152,8 @@ function ProjectElement({ project, isEditable, setProjectList, portfolioOwnerId 
                     {isEditable && (
                         <Col sm={2} style={{margin:"auto"}}>
                             <ButtonGroup style={{margin: 10,}} size='sm'>
-                                <Button variant="outline-info" size="sm" onClick={() => setEdit(true)}><span class="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>edit</span></Button>
-                                <Button variant="outline-danger" size="sm" onClick={() => setShow(true)}><span class="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>delete</span></Button>
+                                <Button variant="outline-info" size="sm" onClick={() => setEdit(true)}><span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>edit</span></Button>
+                                <Button variant="outline-danger" size="sm" onClick={() => setShow(true)}><span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>delete</span></Button>
                             </ButtonGroup>
                             <Modal show={show}>
                             <Modal.Header>

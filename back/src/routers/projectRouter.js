@@ -90,6 +90,15 @@ projectAuthRouter.put("/projects/:id", async (req, res, next) => {
   }
 });
 
+projectAuthRouter.get("/projectslist", async (req, res, next) => {
+  try {
+    const projects = await projectAuthService.getAllProject();
+    res.status(200).send(projects);
+  } catch (error) {
+    next(error);
+  }
+});
+
 projectAuthRouter.get("/projectlist/:user_id", async (req, res, next) => {
   try {
     const user_id = req.params.user_id;
@@ -100,7 +109,6 @@ projectAuthRouter.get("/projectlist/:user_id", async (req, res, next) => {
   }
 });
 
-
 projectAuthRouter.delete("/projectlist/:user_id", async (req, res, next) => {
   try {
     // URI 파라미터에서 user_id 가져오기
@@ -108,11 +116,11 @@ projectAuthRouter.delete("/projectlist/:user_id", async (req, res, next) => {
     // userId의 project 데이터를 모두 삭제함
     await projectAuthService.deleteAllProject({ user_id });
 
-    res.status(200).json('success');
+    res.status(200).json("success");
   } catch (error) {
     next(error);
   }
-})
+});
 
 projectAuthRouter.delete("/projects/:id", async (req, res, next) => {
   try {
@@ -126,7 +134,6 @@ projectAuthRouter.delete("/projects/:id", async (req, res, next) => {
     }
 
     res.status(200).send("성공적으로 삭제가 완료되었습니다.");
-
   } catch (error) {
     next(error);
   }

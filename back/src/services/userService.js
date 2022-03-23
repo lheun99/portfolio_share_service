@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import jwt from "jsonwebtoken";
 
 class userAuthService {
-  static async addUser({ name, email, password }) {
+  static async addUser({ name, email, password, job }) {
     // 이메일 중복 확인
     const user = await User.findByEmail({ email });
     if (user) {
@@ -18,7 +18,7 @@ class userAuthService {
 
     // id 는 유니크 값 부여
     const id = uuidv4();
-    const newUser = { id, name, email, password: hashedPassword };
+    const newUser = { id, name, email, password: hashedPassword, job };
 
     // db에 저장
     const createdNewUser = await User.create({ newUser });
@@ -56,6 +56,7 @@ class userAuthService {
     const id = user.id;
     const name = user.name;
     const description = user.description;
+    const job = user.job;
 
     const loginUser = {
       token,
@@ -63,6 +64,7 @@ class userAuthService {
       email,
       name,
       description,
+      job,
       errorMessage: null,
     };
 
@@ -109,17 +111,49 @@ class userAuthService {
       user = await User.update({ user_id, fieldToUpdate, newValue });
     }
 
+    if (toUpdate.job) {
+      const fieldToUpdate = "job";
+      const newValue = toUpdate.job;
+      user = await User.update({ user_id, fieldToUpdate, newValue });
+    }
+
     if (toUpdate.profile) {
       const fieldToUpdate = "profile";
       const newValue = toUpdate.profile;
       user = await User.update({ user_id, fieldToUpdate, newValue });
     }
 
-    user = await User.update({ user_id, fieldToUpdate:"github", newValue:toUpdate.github });
-    user = await User.update({ user_id, fieldToUpdate:"gitlab", newValue:toUpdate.gitlab });
-    user = await User.update({ user_id, fieldToUpdate:"twitter", newValue:toUpdate.twitter });
-    user = await User.update({ user_id, fieldToUpdate:"instagram", newValue:toUpdate.instagram });
-    user = await User.update({ user_id, fieldToUpdate:"youtube", newValue:toUpdate.youtube });
+    user = await User.update({
+      user_id,
+      fieldToUpdate: "github",
+      newValue: toUpdate.github,
+    });
+    user = await User.update({
+      user_id,
+      fieldToUpdate: "gitlab",
+      newValue: toUpdate.gitlab,
+    });
+    user = await User.update({
+      user_id,
+      fieldToUpdate: "twitter",
+      newValue: toUpdate.twitter,
+    });
+    user = await User.update({
+      user_id,
+      fieldToUpdate: "instagram",
+      newValue: toUpdate.instagram,
+    });
+    user = await User.update({
+      user_id,
+      fieldToUpdate: "youtube",
+      newValue: toUpdate.youtube,
+    });
+
+    if (toUpdate.projectNum) {
+      const fieldToUpdate = "projectNum";
+      const newValue = toUpdate.projectNum;
+      user = await User.update({ user_id, fieldToUpdate, newValue });
+    }
 
     return user;
   }
@@ -135,12 +169,6 @@ class userAuthService {
     }
 
     return user;
-  }
-
-  static async deleteUser({ user_id }) {
-    // 해당 유저 삭제
-    const deletedUser = await User.delete({ user_id });
-    return deletedUser;
   }
 }
 

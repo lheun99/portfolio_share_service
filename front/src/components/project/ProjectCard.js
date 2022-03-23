@@ -14,12 +14,12 @@ const ProjectCard = ({ portfolioOwnerId, isEditable }) => {
 
     return (<Card style={{width:"740px"}}>
         <Card.Body>
-            <Card.Title><span class="material-icons" style={{verticalAlign:"middle",}}>storage</span> 프로젝트</Card.Title>
-            <ProjectList projectList={projectList} setProjectList={setProjectList} isEditable={isEditable} portfolioOwnerId={portfolioOwnerId}></ProjectList>
+            <Card.Title><span className="material-icons" style={{verticalAlign:"middle",}}>storage</span> 프로젝트</Card.Title>
+            <ProjectList portfolioOwnerId={portfolioOwnerId} projectList={projectList} setProjectList={setProjectList} isEditable={isEditable} portfolioOwnerId={portfolioOwnerId}></ProjectList>
             {isEditable && (
                 <div style={{ textAlign: "center"}}>
                     {!isEditing && <Card.Body><Button style={{borderRadius:100,}} size='sm' variant="primary" onClick={() => setIsEditing(true)}>
-                        <span class="material-icons" style={{verticalAlign:'middle',fontSize:15,}}>add</span>
+                        <span className="material-icons" style={{verticalAlign:'middle',fontSize:15,}}>add</span>
                     </Button></Card.Body>}
                     {isEditing && <ProjectForm setIsEditing={setIsEditing} setProjectList={setProjectList} portfolioOwnerId={portfolioOwnerId}></ProjectForm>}
                 </div>
