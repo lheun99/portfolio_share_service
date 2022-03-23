@@ -27,6 +27,30 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+    profile: {
+      type: String,
+      default: "https://team3.kr.object.ncloudstorage.com/default.png",
+    },
+    github: {
+      type: String,
+      required: false,
+    },
+    gitlab: {
+      type: String,
+      required: false,
+    },
+    twitter: {
+      type: String,
+      required: false,
+    },
+    instagram: {
+      type: String,
+      required: false,
+    },
+    youtube: {
+      type: String,
+      required: false,
+    },
   },
   {
     timestamps: true,

@@ -108,7 +108,7 @@ educationRouter.delete("/educations/:id", async (req, res, next) => {
       throw new Error(deletedEducation.message);
     }
 
-    res.status(200).send('success');
+    res.status(204).send('success');
   } catch (error) {
     next(error);
   }

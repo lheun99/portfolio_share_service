@@ -101,7 +101,7 @@ class userAuthService {
 
     if (toUpdate.password) {
       const fieldToUpdate = "password";
-      const newValue = toUpdate.password;
+      const newValue = await bcrypt.hash(toUpdate.password, 10);
       user = await User.update({ user_id, fieldToUpdate, newValue });
     }
 
@@ -116,6 +116,39 @@ class userAuthService {
       const newValue = toUpdate.job;
       user = await User.update({ user_id, fieldToUpdate, newValue });
     }
+
+    if (toUpdate.profile) {
+      const fieldToUpdate = "profile";
+      const newValue = toUpdate.profile;
+      user = await User.update({ user_id, fieldToUpdate, newValue });
+    }
+
+    user = await User.update({
+      user_id,
+      fieldToUpdate: "github",
+      newValue: toUpdate.github,
+    });
+    user = await User.update({
+      user_id,
+      fieldToUpdate: "gitlab",
+      newValue: toUpdate.gitlab,
+    });
+    user = await User.update({
+      user_id,
+      fieldToUpdate: "twitter",
+      newValue: toUpdate.twitter,
+    });
+    user = await User.update({
+      user_id,
+      fieldToUpdate: "instagram",
+      newValue: toUpdate.instagram,
+    });
+    user = await User.update({
+      user_id,
+      fieldToUpdate: "youtube",
+      newValue: toUpdate.youtube,
+    });
+
     return user;
   }
 

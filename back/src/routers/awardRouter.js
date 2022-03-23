@@ -91,7 +91,7 @@ awardRouter.delete("/awards/:id", async (req, res, next) => {
       throw new Error("정상적으로 삭제되지 않았습니다.");
     } 
 
-    res.status(200).send("success");
+    res.status(204).send("success");
   } catch (e) {
     next(e);
   }

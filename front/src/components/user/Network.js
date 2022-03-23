@@ -11,7 +11,7 @@ import {
 } from "react-bootstrap";
 
 import * as Api from "../../api";
-import UserCard from "./UserCard";
+import NetworkUserCard from "./NetworkUserCard";
 import { UserStateContext } from "../../App";
 
 function Network() {
@@ -173,7 +173,7 @@ function Network() {
         <>
           <Row xs="auto" className="jusify-content-center">
             {filteredUsers.map((user) => (
-              <UserCard key={user.id} user={user} isNetwork />
+              <NetworkUserCard key={user.id} user={user} isNetwork />
             ))}
           </Row>
         </>
@@ -192,7 +192,7 @@ function Network() {
         <>
           <Row xs="auto" className="jusify-content-center">
             {users.map((user) => (
-              <UserCard key={user.id} user={user} isNetwork />
+              <NetworkUserCard key={user.id} user={user} isNetwork />
             ))}
           </Row>
         </>
@@ -205,7 +205,7 @@ function Network() {
             {users
               .filter((user) => user.job === "프론트엔드")
               .map((user) => (
-                <UserCard key={user.id} user={user} isNetwork />
+                <NetworkUserCard key={user.id} user={user} isNetwork />
               ))}
           </Row>
         </>
@@ -218,7 +218,7 @@ function Network() {
             {users
               .filter((user) => user.job === "백엔드")
               .map((user) => (
-                <UserCard key={user.id} user={user} isNetwork />
+                <NetworkUserCard key={user.id} user={user} isNetwork />
               ))}
           </Row>
         </>
@@ -231,7 +231,7 @@ function Network() {
             {users
               .filter((user) => user.job === "데이터 분석")
               .map((user) => (
-                <UserCard key={user.id} user={user} isNetwork />
+                <NetworkUserCard key={user.id} user={user} isNetwork />
               ))}
           </Row>
         </>
@@ -244,13 +244,20 @@ function Network() {
             {users
               .filter((user) => user.job === "AI")
               .map((user) => (
-                <UserCard key={user.id} user={user} isNetwork />
+                <NetworkUserCard key={user.id} user={user} isNetwork />
               ))}
           </Row>
         </>
       ) : (
         <></>
       )}
+
+      {/* <div style={{height:100,}}></div>
+      <Row xs="auto" className="jusify-content-center" style={{justifyContent:"center"}}>
+        {users.map((user) => (
+          <NetworkUserCard key={user.id} user={user} />
+        ))}
+      </Row> */}
     </Container>
   );
 }

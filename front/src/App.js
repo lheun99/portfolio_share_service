@@ -11,6 +11,7 @@ import Network from "./components/user/Network";
 import RegisterForm from "./components/user/RegisterForm";
 import Portfolio from "./components/Portfolio";
 import Projects from "./components/search/Projects";
+import ProfilePage from "./components/user/ProfilePage";
 
 export const UserStateContext = createContext(null);
 export const DispatchContext = createContext(null);
@@ -84,6 +85,10 @@ function App() {
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegisterForm />} />
             <Route path="/users/:userId" element={<Portfolio />} />
+            <Route
+              path="/users/:userId/profilePage"
+              element={<ProfilePage />}
+            />
             <Route path="/network" element={<Network />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="*" element={<Portfolio />} />

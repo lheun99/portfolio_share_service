@@ -5,6 +5,9 @@ import { awardRouter } from "./routers/awardRouter";
 import { educationRouter } from "./routers/educationRouter";
 import { projectAuthRouter } from "./routers/projectRouter";
 import { certificateAuthRouter } from "./routers/certificateRouter";
+import { uploadRouter } from "./routers/uploadRouter";
+import { proceedingAuthRouter } from "./routers/proceedingRouter";
+import { todoAuthRouter } from "./routers/todoRouter";
 import { errorMiddleware } from "./middlewares/errorMiddleware";
 
 
@@ -30,7 +33,9 @@ app.use(educationRouter);
 app.use(awardRouter);
 app.use(projectAuthRouter);
 app.use(certificateAuthRouter);
-
+app.use(uploadRouter);
+app.use(proceedingAuthRouter);
+app.use(todoAuthRouter);
 
 
 // 순서 중요 (router 에서 next() 시 아래의 에러 핸들링  middleware로 전달됨)

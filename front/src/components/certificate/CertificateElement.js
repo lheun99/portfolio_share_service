@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Card, Button, ButtonGroup, Container, Row, Col, Form } from "react-bootstrap";
+import { Card, Button, ButtonGroup, Container, Row, Col, Form, Modal } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import * as Api from '../../api';
 import { UserStateContext } from "../../App";
@@ -83,10 +83,11 @@ const CertificateEdit = ({ title, description, when_date, setEdit, id, setCertif
 
 function CertificateElement({ certificate, isEditable, setCertificateList }) {
     const [edit, setEdit] = useState(false);
+    const [show, setShow] = useState(false)
 
-    const handleDelete = async (e) => {
+    const handleDelete = (e) => {
         e.preventDefault();
-        await Api.delete('certificates', certificate.id);
+        Api.delete('certificates', certificate.id);
         let del_idx = 0;
         setCertificateList(current => {
             for (let i = 0; i < current.length; i++) {
@@ -99,6 +100,7 @@ function CertificateElement({ certificate, isEditable, setCertificateList }) {
             const newCertificate = [...current];
             return newCertificate;
         })
+        setShow(false)
     }
 
 
@@ -110,20 +112,40 @@ function CertificateElement({ certificate, isEditable, setCertificateList }) {
                             setEdit={setEdit}
                             id={certificate.id}
                             setCertificateList={setCertificateList}></CertificateEdit> : 
-            <Container style={{ margin: 10, padding: 10, }}>
+            <Container style={{padding: 10, margin:"10px 0", borderBottom: "rgba(70, 65, 65, 0.2) dotted"}}>
                 <Row>
-                    <Col sm={10}>
+                    <Col sm={10} style={{margin:"auto"}}>
                         <Card.Subtitle>{certificate.title}</Card.Subtitle>
-                        <Card.Text className="mb-2 text-muted">{certificate.description} <br /> {certificate.when_date}</Card.Text>
+                        <Card.Text className="text-muted">{certificate.description} <br /> {certificate.when_date}</Card.Text>
                     </Col>
+                    <Col sm={2} style={{margin:"auto"}}>
                     {isEditable && (
-                        <Col sm={2}>
+                        <>
                             <ButtonGroup style={{margin: 10,}} size='sm'>
-                                <Button variant="outline-info" size="sm" onClick={() => setEdit(true)}>편집</Button>
-                                <Button variant="outline-danger" size="sm" onClick={handleDelete}>삭제</Button>
+                                <Button variant="outline-info" size="sm" onClick={() => setEdit(true)}>
+                                    <span class="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>edit</span>
+                                </Button>
+                                <Button variant="outline-danger" size="sm" onClick={()=> setShow(true)}>
+                                    <span class="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>delete</span>
+                                </Button>
                             </ButtonGroup>
-                        </Col>
-                    )}
+                            <Modal show={show}>
+                            <Modal.Header>
+                            <Modal.Title>해당 내용을 삭제하시겠습니까?</Modal.Title>
+                            </Modal.Header>
+                            <br />
+                            <Modal.Footer style={{justifyContent:"center"}}>
+                            <Button variant="outline-danger" onClick={handleDelete}>
+                                삭제
+                            </Button>
+                            <Button variant="outline-info" onClick={()=>setShow(false)}>
+                                    취소
+                                </Button>
+                            </Modal.Footer>
+                            </Modal>
+                        </>
+                        )}
+                    </Col>
                 </Row>
             </Container>
         )

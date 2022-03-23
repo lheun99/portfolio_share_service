@@ -11,6 +11,7 @@ import Awards from "./award/Awards";
 import Project from "./project/Project";
 import Certificate from "./certificate/Certificate";
 import Education from "./education/Education";
+import Proceeding from "./proceeding/Proceeding";
 
 function Portfolio() {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ function Portfolio() {
   const [isAward, setIsAward] = useState(true);
   const [isProject, setIsProject] = useState(true);
   const [isCertificate, setIsCertificate] = useState(true);
+  const [isProceeding, setIsProceeding] = useState(true);
 
   const fetchPorfolioOwner = async (ownerId) => {
     // 유저 id를 가지고 "/users/유저id" 엔드포인트로 요청해 사용자 정보를 불러옴.
@@ -85,32 +87,57 @@ function Portfolio() {
   return (
     <Container fluid>
       <Row className="justify-content-md-center">
-        <Col lg={3} style={{ margin: "0 15px 0 0" }}>
+        <Col lg={3} style={{ margin: "158px 15px 0 0" }}>
           <User
             portfolioOwnerId={portfolioOwner.id}
             isEditable={portfolioOwner.id === userState.user?.id}
+            style={{ marginTop: "20px" }}
           />
         </Col>
-        <Col style={{ margin: "0 15px 0 15px" }}>
+
+        <Col style={{ margin: "100px 15px 0 15px" }}>
           <Navbar>
-            <Container>
+            <Container style={{ padding: 0 }}>
               <Nav className="me-auto">
                 <Nav.Link
+                  className="navi"
                   href="#all"
                   onClick={(e) => {
                     e.preventDefault();
+                    setIsProceeding(true);
                     setIsEducation(true);
                     setIsAward(true);
                     setIsProject(true);
                     setIsCertificate(true);
                   }}
                 >
+                  <span
+                    class="material-icons"
+                    style={{ verticalAlign: "middle" }}
+                  >
+                    all_inbox
+                  </span>{" "}
                   전체 보기
+                </Nav.Link>
+                <Nav.Link
+                  className="navi"
+                  href="#proceeding"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsProceeding(true);
+                    setIsEducation(false);
+                    setIsAward(false);
+                    setIsProject(false);
+                    setIsCertificate(false);
+                  }}
+                >
+                  진행중인 프로젝트
                 </Nav.Link>
                 <Nav.Link
                   href="#education"
                   onClick={(e) => {
                     e.preventDefault();
+                    setIsProceeding(false);
                     setIsEducation(true);
                     setIsAward(false);
                     setIsProject(false);
@@ -120,9 +147,11 @@ function Portfolio() {
                   학력
                 </Nav.Link>
                 <Nav.Link
+                  className="navi"
                   href="#award"
                   onClick={(e) => {
                     e.preventDefault();
+                    setIsProceeding(false);
                     setIsEducation(false);
                     setIsAward(true);
                     setIsProject(false);
@@ -132,9 +161,11 @@ function Portfolio() {
                   수상 내역
                 </Nav.Link>
                 <Nav.Link
+                  className="navi"
                   href="#project"
                   onClick={(e) => {
                     e.preventDefault();
+                    setIsProceeding(false);
                     setIsEducation(false);
                     setIsAward(false);
                     setIsProject(true);
@@ -144,9 +175,11 @@ function Portfolio() {
                   프로젝트
                 </Nav.Link>
                 <Nav.Link
+                  className="navi"
                   href="#certificate"
                   onClick={(e) => {
                     e.preventDefault();
+                    setIsProceeding(false);
                     setIsEducation(false);
                     setIsAward(false);
                     setIsProject(false);
@@ -156,8 +189,32 @@ function Portfolio() {
                   자격증
                 </Nav.Link>
               </Nav>
+              {/* <Form className="d-flex">
+                <FormControl
+                  type="search"
+                  placeholder="Search"
+                  className="me-2"
+                  aria-label="Search"
+                />
+                <Button variant="outline-info">Search</Button>
+              </Form> */}
             </Container>
           </Navbar>
+          {!isEducation &&
+          !isAward &&
+          !isProject &&
+          !isCertificate &&
+          isProceeding ? (
+            <>
+              <Proceeding
+                portfolioOwnerId={portfolioOwner.id}
+                isEditable={portfolioOwner.id === userState.user?.id}
+              />
+              <br />
+            </>
+          ) : (
+            <></>
+          )}
 
           {isEducation ? (
             <>
