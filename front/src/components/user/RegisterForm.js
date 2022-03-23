@@ -147,7 +147,7 @@ function RegisterForm() {
 
             <Form.Group controlId="registerJob" className="mt-3">
               <Form.Label>관심 직무</Form.Label>
-              <Form.Select onChange={(e) => setJob(e.target.value)}>
+              <Form.Select value={job} onChange={(e) => setJob(e.target.value)}>
                 <option value="">관심 직무를 선택해주세요.</option>
                 <option value="프론트엔드">프론트엔드</option>
                 <option value="백엔드">백엔드</option>

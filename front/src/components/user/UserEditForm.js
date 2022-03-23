@@ -16,6 +16,7 @@ function UserEditForm({ user, setUser }) {
     setUpdateUser({
       name: user.name,
       description: "",
+      job: "",
       github: "",
       gitlab: "",
       twitter: "",
@@ -109,6 +110,7 @@ function UserEditForm({ user, setUser }) {
     const res = await Api.put(`users/${user.id}`, {
       name: updateUser.name,
       description: updateUser.description,
+      job: updateUser.job,
       github: updateUser.github,
       gitlab: updateUser.gitlab,
       twitter: updateUser.twitter,
@@ -185,6 +187,21 @@ function UserEditForm({ user, setUser }) {
                 setUpdateUser({ ...updateUser, description: e.target.value })
               }
             />
+          </Form.Group>
+
+          <p>직무</p>
+          <Form.Group controlId="userEditJob" className="mb-3">
+            <Form.Select
+              onChange={(e) =>
+                setUpdateUser({ ...updateUser, job: e.target.value })
+              }
+            >
+              <option value="">관심 직무를 선택해주세요.</option>
+              <option value="프론트엔드">프론트엔드</option>
+              <option value="백엔드">백엔드</option>
+              <option value="데이터 분석">데이터 분석</option>
+              <option value="AI">AI</option>
+            </Form.Select>
           </Form.Group>
 
           <p>소셜 링크</p>

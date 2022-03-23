@@ -1,6 +1,6 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Card, Row, Button, Col } from "react-bootstrap";
+import { Card, Row, Button, Col, Badge } from "react-bootstrap";
 import { DispatchContext } from "../../App";
 import * as Api from "../../api";
 import UserEditForm from "./UserEditForm";
@@ -21,10 +21,8 @@ function ProfilePage() {
     Api.get("users", portfolioOwnerId).then((res) => setUser(res.data));
   }, [portfolioOwnerId]);
 
-
   const withdrawal = async () => {
-
-    if(!window.confirm("정말로 회원탈퇴하시겠습니까?")) return;
+    if (!window.confirm("정말로 회원탈퇴하시겠습니까?")) return;
 
     // 해당 유저의 학력, 수상이력, 프로젝트, 자격증 삭제
     await Api.delete(`educationlist/${user.id}`);
@@ -49,10 +47,7 @@ function ProfilePage() {
   return (
     <div className="profilePage">
       <div className="profileCard">
-        <Card
-          className="mb-2 ms-3 mr-5" 
-          style={{ width: "18rem" }}
-        >
+        <Card className="mb-2 ms-3 mr-5" style={{ width: "18rem" }}>
           <Card.Body>
             <Row className="justify-content-md-center">
               <Card.Img
@@ -62,26 +57,66 @@ function ProfilePage() {
                 alt="사용자 프로필"
               />
             </Row>
-            <Card.Title>{user?.name}</Card.Title>
-            <Card.Subtitle className="mb-2 text-muted">{user?.email}</Card.Subtitle>
+            <Card.Title>
+              {user?.name}
+              <Badge bg="info"> {user?.job}</Badge>
+            </Card.Title>
+            <Card.Subtitle className="mb-2 text-muted">
+              {user?.email}
+            </Card.Subtitle>
             <Card.Text>{user?.description}</Card.Text>
-            <Card.Text><a href={user?.github} style={{color: "black", textDecoration: "none"}}><i className="fa-brands fa-github"></i> {user?.github}</a></Card.Text>
-            <Card.Text><a href={user?.gitlab} style={{color: "black", textDecoration: "none"}}><i className="fa-brands fa-gitlab"></i> {user?.gitlab}</a></Card.Text>
-            <Card.Text><a href={user?.twitter} style={{color: "black", textDecoration: "none"}}><i className="fa-brands fa-twitter"></i> {user?.twitter}</a></Card.Text>
-            <Card.Text><a href={user?.instagram} style={{color: "black", textDecoration: "none"}}><i className="fa-brands fa-instagram"></i> {user?.instagram}</a></Card.Text>
-            <Card.Text><a href={user?.youtube} style={{color: "black", textDecoration: "none"}}><i className="fa-brands fa-youtube"></i> {user?.youtube}</a></Card.Text>
+            <Card.Text>
+              <a
+                href={user?.github}
+                style={{ color: "black", textDecoration: "none" }}
+              >
+                <i className="fa-brands fa-github"></i> {user?.github}
+              </a>
+            </Card.Text>
+            <Card.Text>
+              <a
+                href={user?.gitlab}
+                style={{ color: "black", textDecoration: "none" }}
+              >
+                <i className="fa-brands fa-gitlab"></i> {user?.gitlab}
+              </a>
+            </Card.Text>
+            <Card.Text>
+              <a
+                href={user?.twitter}
+                style={{ color: "black", textDecoration: "none" }}
+              >
+                <i className="fa-brands fa-twitter"></i> {user?.twitter}
+              </a>
+            </Card.Text>
+            <Card.Text>
+              <a
+                href={user?.instagram}
+                style={{ color: "black", textDecoration: "none" }}
+              >
+                <i className="fa-brands fa-instagram"></i> {user?.instagram}
+              </a>
+            </Card.Text>
+            <Card.Text>
+              <a
+                href={user?.youtube}
+                style={{ color: "black", textDecoration: "none" }}
+              >
+                <i className="fa-brands fa-youtube"></i> {user?.youtube}
+              </a>
+            </Card.Text>
 
             <Col>
               <Row className="mt-3 text-center text-info">
-                  <Col sm={{ span: 20 }}>
+                <Col sm={{ span: 20 }}>
                   <Button
-                      variant="outline-danger"
-                      size="sm"
-                      onClick={withdrawal}
+                    variant="outline-danger"
+                    size="sm"
+                    onClick={withdrawal}
                   >
-                      회원탈퇴
+                    회원탈퇴
                   </Button>
-                  </Col>
+                </Col>
               </Row>
             </Col>
           </Card.Body>
