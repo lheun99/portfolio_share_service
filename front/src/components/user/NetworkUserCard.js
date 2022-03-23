@@ -22,6 +22,7 @@ function NetworkUserCard({ user }) {
         <Card.Title>{user?.name}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">{user?.email}</Card.Subtitle>
         <Card.Text>{user?.description}</Card.Text>
+        <Card.Text><i className="fa-regular fa-file-lines"></i> {user?.projectNum}</Card.Text>
       </Card.Body>
     </Card>
   );
