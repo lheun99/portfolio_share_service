@@ -120,6 +120,7 @@ function Portfolio() {
                     e.preventDefault();
                     setIsProceeding(true);
                     setIsEducation(false);
+                    setIsCareer(false);
                     setIsAward(false);
                     setIsProject(false);
                     setIsCertificate(false);
@@ -145,13 +146,13 @@ function Portfolio() {
                   className="navi"
                   href="#career"
                   onClick = {(e) => {
-                    e.preventDefault()
-                    setIsProceeding(false)
-                    setIsEducation(false)
-                    setIsCareer(true)
-                    setIsAward(false)
-                    setIsProject(false)
-                    setIsCertificate(false)
+                    e.preventDefault();
+                    setIsProceeding(false);
+                    setIsEducation(false);
+                    setIsCareer(true);
+                    setIsAward(false);
+                    setIsProject(false);
+                    setIsCertificate(false);
                   }}>경력</Nav.Link>
                 <Nav.Link 
                   className="navi"
