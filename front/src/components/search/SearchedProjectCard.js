@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Card, Row } from "react-bootstrap";
 
-function SearchProjctCard({ project, setIsEditing, isEditable, isNetwork }) {
+function SearchedProjectCard({ project, setIsEditing, isEditable, isNetwork }) {
   const navigate = useNavigate();
 
   return (
@@ -26,4 +26,4 @@ function SearchProjctCard({ project, setIsEditing, isEditable, isNetwork }) {
   );
 }
 
-export default SearchProjctCard;
+export default SearchedProjectCard;
