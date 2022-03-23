@@ -1,10 +1,10 @@
 import { Row, Col, Container, Card, Button, ButtonGroup, Modal } from "react-bootstrap";
 import { useState } from 'react';
-import EducationEditForm from './EducationEditForm';
+import CareerEditForm from './CareerEditForm';
 
-// 학력 정보 조회 상세 값 컴포넌트
-const EducationCard = ({ value, editHandler, deleteHandler, isEditable }) => {
-  const { id, school, major, position } = value;
+// 경력 정보 조회 상세 값 컴포넌트
+const CareerCard = ({ value, editHandler, deleteHandler, isEditable }) => {
+  const { id, company, job_position, achievement, from_date, to_date, isCurrent } = value;
   const [isEditing, SetIsEditing] = useState(false);
   const [show, setShow] = useState(false)
 
@@ -13,7 +13,7 @@ const EducationCard = ({ value, editHandler, deleteHandler, isEditable }) => {
     SetIsEditing(!isEditing);
   };
 
-  // 삭제 처리 함수(Education 컴포넌트에서 받아온 delete 요청 함수 사용)
+  // 삭제 처리 함수(Career 컴포넌트에서 받아온 delete 요청 함수 사용)
   const handleDelete = (e) => {
     e.preventDefault();
     deleteHandler(id, e.target.value);
@@ -24,25 +24,27 @@ const EducationCard = ({ value, editHandler, deleteHandler, isEditable }) => {
   // 로그인 유저는 자신의 페이지만 추가/편집/삭제 가능  
   return (
     isEditing ?
-      <EducationEditForm
+      <CareerEditForm
         item={value}
         editHandler={editHandler}
         onUpdate={updateHandler} /> :
       <Container style={{padding: 10, margin:"10px 0", borderBottom: "rgba(70, 65, 65, 0.2) dotted"}}>
         <Row>
           <Col sm={10} style={{margin:"auto"}}>
-            <Card.Subtitle>{school}</Card.Subtitle>
-            <Card.Text className="text-muted">{major + ` (${position})`}</Card.Text>
+            <Card.Subtitle>{company}</Card.Subtitle>
+            <Card.Text className="text-muted">{job_position}
+              <br/> {achievement}
+              <br/> {from_date} ~ {!isCurrent && to_date}</Card.Text>
           </Col>
 
           {isEditable ?
-            <Col sm={2}>
+            <Col sm={2} style={{margin:"auto"}}>
               <ButtonGroup style={{ margin: 10, }} size='sm'>
                 <Button variant="outline-info" onClick={updateHandler}>
-                  <span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>edit</span>
+                  <span class="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>edit</span>
                 </Button>
                 <Button variant="outline-danger" onClick={() => setShow(true)}>
-                  <span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>delete</span>
+                  <span class="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>delete</span>
                 </Button>
               </ButtonGroup>
               <Modal show={show} style={{zIndex:99999,}}>
@@ -65,4 +67,4 @@ const EducationCard = ({ value, editHandler, deleteHandler, isEditable }) => {
   );
 };
 
-export default EducationCard;
+export default CareerCard;

@@ -12,6 +12,7 @@ import Project from "./project/Project";
 import Certificate from "./certificate/Certificate";
 import Education from "./education/Education";
 import Proceeding from "./proceeding/Proceeding";
+import Career from './career/Career';
 
 function Portfolio() {
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ function Portfolio() {
   const [isProject, setIsProject] = useState(true);
   const [isCertificate, setIsCertificate] = useState(true);
   const [isProceeding, setIsProceeding] = useState(true);
+  const [isCareer, setIsCareer] = useState(true)
 
   const fetchPorfolioOwner = async (ownerId) => {
     // 유저 id를 가지고 "/users/유저id" 엔드포인트로 요청해 사용자 정보를 불러옴.
@@ -106,6 +108,7 @@ function Portfolio() {
                     e.preventDefault()
                     setIsProceeding(true)
                     setIsEducation(true)
+                    setIsCareer(true)
                     setIsAward(true)
                     setIsProject(true)
                     setIsCertificate(true)
@@ -133,11 +136,24 @@ function Portfolio() {
                     setIsAward(false);
                     setIsProject(false);
                     setIsCertificate(false);
+                    setIsCareer(false);
                   }}
                 >
                   학력
                 </Nav.Link>
                 <Nav.Link
+                  className="navi"
+                  href="#career"
+                  onClick = {(e) => {
+                    e.preventDefault()
+                    setIsProceeding(false)
+                    setIsEducation(false)
+                    setIsCareer(true)
+                    setIsAward(false)
+                    setIsProject(false)
+                    setIsCertificate(false)
+                  }}>경력</Nav.Link>
+                <Nav.Link 
                   className="navi"
                   href="#award"
                   onClick={(e) => {
@@ -147,6 +163,7 @@ function Portfolio() {
                     setIsAward(true);
                     setIsProject(false);
                     setIsCertificate(false);
+                    setIsCareer(false);
                   }}
                 >
                   수상 내역
@@ -160,11 +177,12 @@ function Portfolio() {
                     setIsEducation(false);
                     setIsAward(false);
                     setIsProject(true);
+                    setIsCareer(false);
                     setIsCertificate(false);
                   }}
                 >
                   프로젝트
-                </Nav.Link>
+                  </Nav.Link>
                 <Nav.Link
                   className="navi"
                   href="#certificate"
@@ -174,6 +192,7 @@ function Portfolio() {
                     setIsEducation(false);
                     setIsAward(false);
                     setIsProject(false);
+                    setIsCareer(false)
                     setIsCertificate(true);
                   }}
                 >
@@ -219,17 +238,17 @@ function Portfolio() {
             <></>
           )}
 
-          {isAward ? (
-            <>
-              <Awards
-                portfolioOwnerId={portfolioOwner.id}
-                isEditable={portfolioOwner.id === userState.user?.id}
-              />
-              <br />
-            </>
-          ) : (
-            <></>
-          )}
+          {isCareer ? <><Career
+            portfolioOwnerId={portfolioOwner.id}
+            isEditable={portfolioOwner.id === userState.user?.id}
+          />
+          <br/></> : <></>}
+
+          {isAward ? <><Awards
+            portfolioOwnerId={portfolioOwner.id}
+            isEditable={portfolioOwner.id === userState.user?.id}
+          />
+          <br/></> : <></>}
 
           {isProject ? (
             <>
