@@ -85,7 +85,10 @@ function ProfilePage() {
 
 function UserEditForm({ user, setUser }) {
   const [updateUser, setUpdateUser] = useState({});
-  const [isPassword, setIsPassword] = useState(false);
+
+  const [newPassword, setNewPassword] = useState('');
+  const [isValidPassword, setIsValidPassword] = useState(false);
+  const [isCorrectPassword, setIsCorrectPassword] = useState(false);
 
   useEffect(() => {
     setUpdateUser({
@@ -95,9 +98,15 @@ function UserEditForm({ user, setUser }) {
       gitlab: "",
       twitter: "",
       instagram: "",
-      youtube: ""
+      youtube: "",
     })
   },[user])
+
+  useEffect(() => {
+    if(isCorrectPassword){
+     setUpdateUser({...updateUser, password:newPassword})
+    }
+  },[newPassword, isCorrectPassword])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -194,32 +203,43 @@ function UserEditForm({ user, setUser }) {
           </Form.Group>
 
           <p>비밀번호</p>
-          <p style={{fontSize: '11px'}}>기존 비밀번호 입력 후 새로운 비밀번호를 입력하면 변경됩니다.</p>
+          {!isValidPassword && <p style={{fontSize: '11px', color:'red'}}>비밀번호는 4글자 이상이어야 합니다.</p>}
           <Form.Group controlId="checkPassword" className="mb-3">
             <Form.Control
               type="password"
-              placeholder="기존 비밀번호를 입력하세요"
+              placeholder="새로운 비밀번호를 입력하세요"
               className="mb-2"
               onChange={(e) => {
-                if(e.target.value === '1234') {
-                  setIsPassword(true);
+                if(e.target.value.length >= 4){
+                  setIsValidPassword(true);
+                } else {
+                  setIsValidPassword(false);
                 }
+                setNewPassword(e.target.value);
               }}
             />
           </Form.Group>
+          <p>비밀번호 재확인</p>
+          {isValidPassword && !isCorrectPassword && <p style={{fontSize: '11px', color:'red'}}>비밀번호가 일치하지 않습니다.</p>}
           <Form.Group controlId="userEditPassword" className="mb-3">
             <Form.Control
               type="password"
-              placeholder={isPassword ? "새로운 비밀번호를 입력하세요" : "기존 비밀번호를 입력하셔야 변경가능합니다"}
+              placeholder="비밀번호를 다시 한번 입력하세요"
               className="mb-2"
-              disabled={!isPassword}
-              onChange={(e) => setUpdateUser({...updateUser, password:e.target.value})}
+              onChange={(e) => {
+                if(newPassword === e.target.value) {
+                  setIsCorrectPassword(true)
+                }else {
+                  setIsCorrectPassword(false)
+                }
+              }}
+              disabled={!isValidPassword}
             />
           </Form.Group>
 
           <Form.Group as={Row} className="mt-3 text-center">
             <Col sm={{ span: 20 }}>
-              <Button variant="primary" type="submit" className="me-3">
+              <Button variant="primary" type="submit" className="me-3" disabled={!isCorrectPassword && newPassword}>
                 설정 저장
               </Button>
             </Col>
