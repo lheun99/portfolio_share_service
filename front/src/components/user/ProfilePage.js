@@ -53,11 +53,11 @@ function ProfilePage() {
             <Card.Title>{user?.name}</Card.Title>
             <Card.Subtitle className="mb-2 text-muted">{user?.email}</Card.Subtitle>
             <Card.Text>{user?.description}</Card.Text>
-            <Card.Text><a href={user?.github} style={{color: "black", textDecoration: "none"}}><i className="fa-brands fa-github"></i> {user?.github}</a></Card.Text>
-            <Card.Text><a href={user?.gitlab} style={{color: "black", textDecoration: "none"}}><i className="fa-brands fa-gitlab"></i> {user?.gitlab}</a></Card.Text>
-            <Card.Text><a href={user?.twitter} style={{color: "black", textDecoration: "none"}}><i className="fa-brands fa-twitter"></i> {user?.twitter}</a></Card.Text>
-            <Card.Text><a href={user?.instagram} style={{color: "black", textDecoration: "none"}}><i className="fa-brands fa-instagram"></i> {user?.instagram}</a></Card.Text>
-            <Card.Text><a href={user?.youtube} style={{color: "black", textDecoration: "none"}}><i className="fa-brands fa-youtube"></i> {user?.youtube}</a></Card.Text>
+            <Card.Text><a href={user?.github} target='__blank' style={{color: "black", textDecoration: "none"}}><i className="fa-brands fa-github"></i> {user?.github}</a></Card.Text>
+            <Card.Text><a href={user?.gitlab} target='__blank' style={{color: "black", textDecoration: "none"}}><i className="fa-brands fa-gitlab"></i> {user?.gitlab}</a></Card.Text>
+            <Card.Text><a href={user?.twitter} target='__blank' style={{color: "black", textDecoration: "none"}}><i className="fa-brands fa-twitter"></i> {user?.twitter}</a></Card.Text>
+            <Card.Text><a href={user?.instagram} target='__blank' style={{color: "black", textDecoration: "none"}}><i className="fa-brands fa-instagram"></i> {user?.instagram}</a></Card.Text>
+            <Card.Text><a href={user?.youtube} target='__blank' style={{color: "black", textDecoration: "none"}}><i className="fa-brands fa-youtube"></i> {user?.youtube}</a></Card.Text>
 
             <Col>
               <Row className="mt-3 text-center text-info">

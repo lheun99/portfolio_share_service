@@ -32,11 +32,11 @@ function User({ portfolioOwnerId, isEditable }) {
         <Card.Subtitle className="mb-2 text-muted">{user?.email}</Card.Subtitle>
         <Card.Text>{user?.description}</Card.Text>
         <Row>
-          <Col>{user?.github && <a href={user?.github} style={{color: "black"}}><i className="fa-brands fa-github"></i></a>}</Col>
-          <Col>{user?.gitlab && <a href={user?.gitlab} style={{color: "black"}}><i className="fa-brands fa-gitlab"></i></a>}</Col>
-          <Col>{user?.twitter && <a href={user?.twitter} style={{color: "black"}}><i className="fa-brands fa-twitter"></i></a>}</Col>
-          <Col>{user?.instagram && <a href={user?.instagram} style={{color: "black"}}><i className="fa-brands fa-instagram"></i></a>}</Col>
-          <Col>{user?.youtube && <a href={user?.youtube} style={{color: "black"}}><i className="fa-brands fa-youtube"></i></a>}</Col>
+          <Col>{user?.github && <a href={user?.github} target='__blank' style={{color: "black"}}><i className="fa-brands fa-github"></i></a>}</Col>
+          <Col>{user?.gitlab && <a href={user?.gitlab} target='__blank' style={{color: "black"}}><i className="fa-brands fa-gitlab"></i></a>}</Col>
+          <Col>{user?.twitter && <a href={user?.twitter} target='__blank' style={{color: "black"}}><i className="fa-brands fa-twitter"></i></a>}</Col>
+          <Col>{user?.instagram && <a href={user?.instagram} target='__blank' style={{color: "black"}}><i className="fa-brands fa-instagram"></i></a>}</Col>
+          <Col>{user?.youtube && <a href={user?.youtube} target='__blank' style={{color: "black"}}><i className="fa-brands fa-youtube"></i></a>}</Col>
         </Row>
       </Card.Body>
     </Card>
