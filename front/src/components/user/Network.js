@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Container, Row } from "react-bootstrap";
 
 import * as Api from "../../api";
-import UserCard from "./UserCard";
+import NetworkUserCard from "./NetworkUserCard";
 import { UserStateContext } from "../../App";
 
 function Network() {
@@ -27,7 +27,7 @@ function Network() {
       <div style={{height:100,}}></div>
       <Row xs="auto" className="jusify-content-center" style={{justifyContent:"center"}}>
         {users.map((user) => (
-          <UserCard key={user.id} user={user} isNetwork />
+          <NetworkUserCard key={user.id} user={user} />
         ))}
       </Row>
     </Container>

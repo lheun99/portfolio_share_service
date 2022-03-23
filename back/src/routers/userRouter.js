@@ -102,8 +102,13 @@ userAuthRouter.put(
       const password = req.body.password ?? null;
       const description = req.body.description ?? null;
       const profile = req.body.profile ?? null;
+      const github = req.body.github;
+      const gitlab = req.body.gitlab;
+      const twitter = req.body.twitter;
+      const instagram = req.body.instagram;
+      const youtube = req.body.youtube;
 
-      const toUpdate = { name, email, password, description, profile };
+      const toUpdate = { name, email, password, description, github, gitlab, twitter, instagram, youtube, profile };
 
       // 해당 사용자 아이디로 사용자 정보를 db에서 찾아 업데이트함. 업데이트 요소가 없을 시 생략함
       const updatedUser = await userAuthService.setUser({ user_id, toUpdate });
