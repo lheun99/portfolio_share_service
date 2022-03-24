@@ -13,7 +13,7 @@ function SearchedProjectCard({ project, setIsEditing, isEditable, isNetwork }) {
       <Card.Body>
         <Row className="justify-content-md-center"></Row>
         <Card.Title>{project?.title}</Card.Title>
-        <Card.Text>{project?.description}</Card.Text>
+        <Card.Text style={{borderTop:"grey solid 1px", padding:5,}}>{project?.description}</Card.Text>
       </Card.Body>
     </Card>
   );

@@ -65,8 +65,8 @@ function Network() {
   return (
     <Container fluid >
       <div style={{ height: 110 }}></div>
-      <div style={{padding:10,}}>
-        <Nav className="me-auto" style={{width:1217, justifyContent:"center"}}>
+      <div style={{}}>
+        <Nav className="me-auto" style={{paddingBottom: 20, justifyContent:"center",}}>
           <Nav.Link
             href="#all"
             onClick={(e) => {
@@ -157,7 +157,7 @@ function Network() {
           </Nav.Item>
           {isShearched ? (
             <>
-              <Nav.Item>
+              <Nav.Item style={{width:"85vh",}}>
                 <Nav.Link eventKey="disabled" disabled>
                   총 {filteredUsers.length}개가 검색되었습니다.
                 </Nav.Link>
@@ -165,7 +165,7 @@ function Network() {
             </>
           ) : (
             <>
-              <Nav.Item>
+              <Nav.Item style={{width:"85vh",}}>
                 <Nav.Link eventKey="disabled" disabled></Nav.Link>
               </Nav.Item>
             </>
@@ -174,7 +174,7 @@ function Network() {
       </div>
       {isShearched ? (
         <div style={{display:"flex", flexDirection:"row", justifyContent:"center", }}>
-          <Row xs="auto" className="jusify-content-center" style={{width:1217,}}>
+          <Row xs="auto" style={{width:1217, justifyContent:"flex-start"}}>
             {filteredUsers.map((user) => (
               <NetworkUserCard key={user.id} user={user} isNetwork />
             ))}
@@ -193,7 +193,7 @@ function Network() {
       </Modal>
       {isAll ? (
         <div style={{display:"flex", flexDirection:"row", justifyContent:"center", }}>
-          <Row xs="auto" className="jusify-content-center" style={{width:1217,}}>
+          <Row xs="auto" style={{width:1217,justifyContent:"flex-start"}}>
             {users.map((user) => (
               <NetworkUserCard key={user.id} user={user} isNetwork />
             ))}
@@ -204,7 +204,7 @@ function Network() {
       )}
       {isFront ? (
         <div style={{display:"flex", flexDirection:"row", justifyContent:"center", }}>
-          <Row xs="auto" className="jusify-content-center" style={{width:1217,}}>
+          <Row xs="auto" style={{width:1217,justifyContent:"flex-start"}}>
             {users
               .filter((user) => user.job === "프론트엔드")
               .map((user) => (
@@ -217,7 +217,7 @@ function Network() {
       )}
       {isBack ? (
         <div style={{display:"flex", flexDirection:"row", justifyContent:"center", }}>
-          <Row xs="auto" className="jusify-content-center" style={{width:1217,}}>
+          <Row xs="auto" style={{width:1217,justifyContent:"flex-start"}}>
             {users
               .filter((user) => user.job === "백엔드")
               .map((user) => (
@@ -230,7 +230,7 @@ function Network() {
       )}
       {isData ? (
         <div style={{display:"flex", flexDirection:"row", justifyContent:"center", }}>
-          <Row xs="auto" className="jusify-content-center" style={{width:1217,}}>
+          <Row xs="auto" style={{width:1217, justifyContent:"flex-start"}}>
             {users
               .filter((user) => user.job === "데이터 분석")
               .map((user) => (
@@ -243,7 +243,7 @@ function Network() {
       )}
       {isAI ? (
         <div style={{display:"flex", flexDirection:"row", justifyContent:"center", }}>
-          <Row xs="auto" className="jusify-content-center" style={{width:1217,}}>
+          <Row xs="auto" style={{width:1217, justifyContent:"flex-start"}}>
             {users
               .filter((user) => user.job === "AI")
               .map((user) => (

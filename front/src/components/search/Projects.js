@@ -52,29 +52,34 @@ function Projects() {
   return (
     <Container fluid>
       <div style={{ height: 110 }}></div>
-      <Nav className="me-auto">
-        <Nav.Item>
+      <Nav className="me-auto" style={{paddingBottom:20, justifyContent:"center",}}>
+        {/* <Nav.Item>
           <Nav.Link eventKey="disabled" disabled>
             관심 프로젝트를 검색
           </Nav.Link>
-        </Nav.Item>
+        </Nav.Item> */}
         <Nav.Item>
           <Form className="d-flex" onSubmit={handleSearch}>
-            <Form.Control
-              type="search"
-              placeholder="프로젝트 검색"
-              className="me-2"
-              aria-label="Search"
-              onChange={handleQuery}
-            />
-            <Button variant="outline-info" onClick={handleSearch}>
-              🔍
+            <Form.Group style={{marginRight:"10px"}}>
+              <Form.Control
+                type="search"
+                placeholder="프로젝트 검색"
+                className="me-2"
+                aria-label="Search"
+                onChange={handleQuery}
+              />
+              {!query && (<Form.Text className="text-success">
+                    관심 있는 프로젝트를 검색합니다.
+              </Form.Text>)}
+            </Form.Group>
+            <Button style={{backgroundColor:'white', border:"none",padding:"5px 0 0 0",height:32,}} onClick={handleSearch}>
+                <span className="material-icons" style={{color:"grey",fontSize:32,}}>search</span>
             </Button>
           </Form>
         </Nav.Item>
         {isShearched ? (
           <>
-            <Nav.Item>
+            <Nav.Item style={{width:900,}}>
               <Nav.Link eventKey="disabled" disabled>
                 총 {filteredProjects.length}개가 검색되었습니다.
               </Nav.Link>
@@ -82,15 +87,15 @@ function Projects() {
           </>
         ) : (
           <>
-            <Nav.Item>
+            <Nav.Item style={{width:900,}}>
               <Nav.Link eventKey="disabled" disabled></Nav.Link>
             </Nav.Item>
           </>
         )}
       </Nav>
       {isAll ? (
-        <>
-          <Row xs="auto" className="jusify-content-center">
+        <div style={{display:"flex", flexDirection:"row", justifyContent:"center", }}>
+          <Row xs="auto" style={{width:1217, justifyContent:"flex-start"}}>
             {projects.map((project) => (
               <SearchedProjectCard
                 key={project.id}
@@ -99,7 +104,7 @@ function Projects() {
               />
             ))}
           </Row>
-        </>
+        </div>
       ) : (
         <></>
       )}
