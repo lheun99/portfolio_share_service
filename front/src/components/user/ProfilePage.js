@@ -152,7 +152,13 @@ function ProfilePage() {
         </Card>
       </div>
       <div className="EditProfile">
-        <h4>프로필 카드 설정</h4>
+        <span
+          className="material-icons"
+          style={{ verticalAlign: "middle" }}
+        >
+          manage_accounts
+        </span>{" "}
+        <span style={{ fontSize: '24px' }}>프로필 카드 설정</span>
         <UserEditForm user={user} setUser={setUser} />
       </div>
     </div>
