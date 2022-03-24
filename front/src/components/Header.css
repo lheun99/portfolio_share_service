@@ -6,6 +6,12 @@
   border-radius: 47px;
   font-weight: bold;
 }
+.itemColor {
+  color: #79889e;
+}
+.itemColor:hover {
+  color: blue;
+}
 
 .fadein{
   font-size: medium;
