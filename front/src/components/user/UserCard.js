@@ -16,7 +16,9 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
     await Api.delete(`projectlist/${user.id}`);
     await Api.delete(`certificatelist/${user.id}`);
     await Api.delete(`careerlist/${user.id}`);
-    await Api.delete("deleteImg/", userProfile);
+    await Api.delete("proceedinglist", user.id);
+    await Api.delete("todolist", user.id);
+    await Api.delete("deleteImg", userProfile);
     // 해당 유저 DELETE 요청 처리
     await Api.delete(`users/${user.id}`);
     // token 삭제
