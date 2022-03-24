@@ -11,6 +11,7 @@ import { careerService } from "../services/careerService";
 const careerRouter = Router();
 careerRouter.use(login_required);
 
+// POST /career/create : 경력 추가
 careerRouter.post(
   "/career/create",
   isValidData("career"),
@@ -50,6 +51,7 @@ careerRouter.post(
   }
 );
 
+// GET /careers/:id : 경력 조회
 careerRouter.get("/careers/:id", async (req, res, next) => {
   try {
     const career_id = req.params.id;
@@ -67,20 +69,32 @@ careerRouter.get("/careers/:id", async (req, res, next) => {
   }
 });
 
+// GET /careerlist/:user_id : user의 전체 경력 조회
+careerRouter.get("/careerlist/:user_id", async (req, res, next) => {
+  try {
+    const user_id = req.params.user_id;
+    const careers = await careerService.getCareers({ user_id });
+    res.status(200).json(careers);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// PUT /careers/:id : 경력 수정
 careerRouter.put("/careers/:id", async (req, res, next) => {
   try {
     const career_id = req.params.id;
 
     const company = req.body.company ?? null;
     const job_position = req.body.job_position ?? null;
-    const achievement = req.body.achievement;
+    const achievement = req.body.achievement ?? null;
     const from_date = req.body.from_date ?? null;
     const to_date = req.body.to_date ?? null;
     const isCurrent = req.body.isCurrent ?? null;
 
     const toUpdate = { company, job_position, achievement, from_date, to_date, isCurrent };
 
-    const updatedCareer = await careerService.updateCareer({
+    const updatedCareer = await careerService.setCareer({
       career_id,
       toUpdate,
     });
@@ -94,30 +108,7 @@ careerRouter.put("/careers/:id", async (req, res, next) => {
   }
 });
 
-careerRouter.get("/careerlist/:user_id", async (req, res, next) => {
-  try {
-    const user_id = req.params.user_id;
-    const careers = await careerService.getCareer({ user_id });
-    res.status(200).json(careers);
-  } catch (error) {
-    next(error);
-  }
-});
-
-
-careerRouter.delete("/careerlist/:user_id", async (req, res, next) => {
-  try {
-    // URI 파라미터에서 user_id 가져오기
-    const { user_id } = req.params;
-    // userId의 career 데이터를 모두 삭제함
-    await careerService.deleteAllCareer({ user_id });
-
-    res.status(204).send('success');
-  } catch (error) {
-    next(error);
-  }
-})
-
+// DELETE /careers/:id : 경력 삭제
 careerRouter.delete("/careers/:id", async (req, res, next) => {
   try {
     const career_id = req.params.id;
@@ -133,5 +124,19 @@ careerRouter.delete("/careers/:id", async (req, res, next) => {
     next(error);
   }
 });
+
+// DELETE /careerlist/:user_id : user의 전체 경력 삭제
+careerRouter.delete("/careerlist/:user_id", async (req, res, next) => {
+  try {
+    // URI 파라미터에서 user_id 가져오기
+    const { user_id } = req.params;
+    // userId의 career 데이터를 모두 삭제함
+    await careerService.deleteAllCareer({ user_id });
+
+    res.status(204).send('success');
+  } catch (error) {
+    next(error);
+  }
+})
 
 export { careerRouter };

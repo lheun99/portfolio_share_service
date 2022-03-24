@@ -1,3 +1,4 @@
+import { use } from "express/lib/router";
 import { useState, useEffect } from "react";
 import { Form, Card, Row, Button, Col } from "react-bootstrap";
 import * as Api from "../../api";
@@ -15,13 +16,13 @@ function UserEditForm({ user, setUser }) {
   useEffect(() => {
     setUpdateUser({
       name: user.name,
-      description: "",
-      job: "",
-      github: "",
-      gitlab: "",
-      twitter: "",
-      instagram: "",
-      youtube: "",
+      description: user.description,
+      job: user.job,
+      github: user.github,
+      gitlab: user.gitlab,
+      twitter: user.twitter,
+      instagram: user.instagram,
+      youtube: user.youtube,
     });
     setProfile({
       profileObj: "",
@@ -130,7 +131,7 @@ function UserEditForm({ user, setUser }) {
       <Card.Body>
         <Row className="justify-content-md-center">
           <Card.Img
-            style={{ width: "10rem", height: "8rem" }}
+            style={{ width: "9rem", height: "9rem", borderRadius:"100px", margin:0, padding:0, }}
             className="mb-3"
             src={profile.preview ? profile.preview : profile.currentUrl}
             alt="변경할 프로필"
@@ -161,9 +162,9 @@ function UserEditForm({ user, setUser }) {
             <Form.Control
               type="text"
               placeholder="이름을 입력하세요"
+              value={updateUser.name || ""}
               onChange={(e) =>
-                setUpdateUser({ ...updateUser, name: e.target.value })
-              }
+                setUpdateUser({ ...updateUser, name: e.target.value })}
             />
           </Form.Group>
 
@@ -183,6 +184,7 @@ function UserEditForm({ user, setUser }) {
             <Form.Control
               type="text"
               placeholder="소개를 입력하세요"
+              value={updateUser.description || ""}
               onChange={(e) =>
                 setUpdateUser({ ...updateUser, description: e.target.value })
               }
@@ -195,12 +197,14 @@ function UserEditForm({ user, setUser }) {
               onChange={(e) =>
                 setUpdateUser({ ...updateUser, job: e.target.value })
               }
+              value={updateUser.job || ""}
             >
               <option value="">관심 직무를 선택해주세요.</option>
               <option value="프론트엔드">프론트엔드</option>
               <option value="백엔드">백엔드</option>
               <option value="데이터 분석">데이터 분석</option>
               <option value="AI">AI</option>
+              <option value="기타">기타</option>
             </Form.Select>
           </Form.Group>
 
@@ -209,6 +213,7 @@ function UserEditForm({ user, setUser }) {
             <Form.Control
               type="text"
               placeholder="GitHub 주소를 입력하세요"
+              value={updateUser.github || ""}
               onChange={(e) =>
                 setUpdateUser({ ...updateUser, github: e.target.value })
               }
@@ -219,6 +224,7 @@ function UserEditForm({ user, setUser }) {
               type="text"
               placeholder="GitLab 주소를 입력하세요"
               className="mb-2"
+              value={updateUser.gitlab || ""}
               onChange={(e) =>
                 setUpdateUser({ ...updateUser, gitlab: e.target.value })
               }
@@ -229,6 +235,7 @@ function UserEditForm({ user, setUser }) {
               type="text"
               placeholder="Twitter 주소를 입력하세요"
               className="mb-2"
+              value={updateUser.twitter || ""}
               onChange={(e) =>
                 setUpdateUser({ ...updateUser, twitter: e.target.value })
               }
@@ -239,6 +246,7 @@ function UserEditForm({ user, setUser }) {
               type="text"
               placeholder="Instagram 주소를 입력하세요"
               className="mb-2"
+              value={updateUser.instagram || ""}
               onChange={(e) =>
                 setUpdateUser({ ...updateUser, instagram: e.target.value })
               }
@@ -249,6 +257,7 @@ function UserEditForm({ user, setUser }) {
               type="text"
               placeholder="Youtube 주소를 입력하세요"
               className="mb-2"
+              value={updateUser.youtube || ""}
               onChange={(e) =>
                 setUpdateUser({ ...updateUser, youtube: e.target.value })
               }

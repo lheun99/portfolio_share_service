@@ -127,6 +127,18 @@ function LoginForm() {
                 </Button>
               </Col>
             </Form.Group>
+            <Form.Group as={Row} className="mt-3 text-center">
+              <Col sm={{ span: 20 }}>
+                <button style={{ 
+                    border: "none",
+                    backgroundColor: "transparent",
+                  }} 
+                  onClick={() => navigate("/password-reset")}
+                  >
+                  비밀번호를 잊으셨나요?
+                </button>
+              </Col>
+            </Form.Group>
           </Form>
           <Modal show={show}>
           <Modal.Header closeButton>

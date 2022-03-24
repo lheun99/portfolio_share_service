@@ -9,6 +9,7 @@ import { careerRouter } from "./routers/careerRouter";
 import { uploadRouter } from "./routers/uploadRouter";
 import { proceedingAuthRouter } from "./routers/proceedingRouter";
 import { todoAuthRouter } from "./routers/todoRouter";
+import { passwordResetRouter } from "./routers/passwordResetRouter";
 import { errorMiddleware } from "./middlewares/errorMiddleware";
 
 
@@ -30,6 +31,7 @@ app.get("/", (req, res) => {
 
 // router, service 구현 (userAuthRouter는 맨 위에 있어야 함.)
 app.use(userAuthRouter);
+app.use(passwordResetRouter);
 app.use(educationRouter);
 app.use(awardRouter);
 app.use(projectAuthRouter);

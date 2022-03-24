@@ -86,75 +86,14 @@ class userAuthService {
       return { errorMessage };
     }
 
-    // 업데이트 대상에 name이 있다면, 즉 name 값이 null 이 아니라면 업데이트 진행
-    if (toUpdate.name) {
-      const fieldToUpdate = "name";
-      const newValue = toUpdate.name;
-      user = await User.update({ user_id, fieldToUpdate, newValue });
-    }
+    // 수정해야하는 필드에 맞는 값을 업데이트
+    const toUpdateField = Object.keys(toUpdate);
 
-    if (toUpdate.email) {
-      const fieldToUpdate = "email";
-      const newValue = toUpdate.email;
-      user = await User.update({ user_id, fieldToUpdate, newValue });
-    }
-
-    if (toUpdate.password) {
-      const fieldToUpdate = "password";
-      const newValue = await bcrypt.hash(toUpdate.password, 10);
-      user = await User.update({ user_id, fieldToUpdate, newValue });
-    }
-
-    if (toUpdate.description) {
-      const fieldToUpdate = "description";
-      const newValue = toUpdate.description;
-      user = await User.update({ user_id, fieldToUpdate, newValue });
-    }
-
-    if (toUpdate.job) {
-      const fieldToUpdate = "job";
-      const newValue = toUpdate.job;
-      user = await User.update({ user_id, fieldToUpdate, newValue });
-    }
-
-    if (toUpdate.profile) {
-      const fieldToUpdate = "profile";
-      const newValue = toUpdate.profile;
-      user = await User.update({ user_id, fieldToUpdate, newValue });
-    }
-
-    user = await User.update({
-      user_id,
-      fieldToUpdate: "github",
-      newValue: toUpdate.github,
-    });
-    user = await User.update({
-      user_id,
-      fieldToUpdate: "gitlab",
-      newValue: toUpdate.gitlab,
-    });
-    user = await User.update({
-      user_id,
-      fieldToUpdate: "twitter",
-      newValue: toUpdate.twitter,
-    });
-    user = await User.update({
-      user_id,
-      fieldToUpdate: "instagram",
-      newValue: toUpdate.instagram,
-    });
-    user = await User.update({
-      user_id,
-      fieldToUpdate: "youtube",
-      newValue: toUpdate.youtube,
+    toUpdateField.forEach(key => {
+      if (!toUpdate[key]) delete toUpdate[key];
     });
 
-    if (toUpdate.projectNum) {
-      const fieldToUpdate = "projectNum";
-      const newValue = toUpdate.projectNum;
-      user = await User.update({ user_id, fieldToUpdate, newValue });
-    }
-
+    user = await User.update({ user_id, toUpdate });
     return user;
   }
 
@@ -170,6 +109,30 @@ class userAuthService {
 
     return user;
   }
+
+  static async resetPassword({ email, tempPassword }) {
+    let user = await User.findByEmail({ email });
+
+    if (!user) {
+      const errorMessage =
+        "해당 이메일은 존재하지 않습니다. 다시 한 번 확인해 주세요.";
+      return { errorMessage };
+    }
+
+    const hashedPassword = await bcrypt.hash(tempPassword, 10); 
+    const toUpdate = { password: hashedPassword };
+    
+    user = await User.update({ user_id, toUpdate });
+    
+    return user;
+  }
+
+  static async deleteUser({ user_id }) {
+    // 해당 유저 삭제
+    const deletedUser = await User.delete({ user_id });
+    return deletedUser;
+  }
+
 }
 
 export { userAuthService };

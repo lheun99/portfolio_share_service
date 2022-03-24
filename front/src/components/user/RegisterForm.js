@@ -153,6 +153,7 @@ function RegisterForm() {
                 <option value="백엔드">백엔드</option>
                 <option value="데이터 분석">데이터 분석</option>
                 <option value="AI">AI</option>
+                <option value="기타">기타</option>
               </Form.Select>
               {!isJobValid && (
                 <Form.Text className="text-success">
