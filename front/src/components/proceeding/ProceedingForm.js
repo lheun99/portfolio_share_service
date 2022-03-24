@@ -46,9 +46,8 @@ const ProceedingForm = ({ setIsForm, portfolioOwnerId, setProceedingList }) => {
     setIsForm(false);
   }
 
-
   return (
-    <Form style={{ margin: 10, padding: 10, }} onSubmit={handleSubmit}>
+    <Form style={{ margin: 10, padding: 10, width:"740px"}} onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Control
           type="text"

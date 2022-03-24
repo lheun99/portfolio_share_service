@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
 
 class projectAuthService {
+  // 프로젝트 추가
   static async addProject({
     user_id,
     title,
@@ -35,6 +36,7 @@ class projectAuthService {
     return createdNewProject;
   }
 
+  // 프로젝트 상세 정보 조회
   static async getProjectInfo({ project_id }) {
     const project = await Project.findByProjectId({ project_id });
 
@@ -47,6 +49,19 @@ class projectAuthService {
     return project;
   }
 
+  // 유저의 전체 프로젝트 조회
+  static async getProjects({ user_id }) {
+    const projects = await Project.findByUserId({ user_id });
+    return projects;
+  }
+
+  // 프로젝트 전체 조회(유저 상관x)
+  static async getAllProject() {
+    const projects = await Project.findAllProject();
+    return projects;
+  }
+  
+  // 프로젝트 수정
   static async setProject({ project_id, toUpdate }) {
     let project = await Project.findByProjectId({ project_id });
 
@@ -65,22 +80,8 @@ class projectAuthService {
     project = await Project.update({ project_id, toUpdate });
     return project;
   }
-
-  static async getAllProject() {
-    const projects = await Project.findAllProject();
-    return projects;
-  }
-
-  static async getProjects({ user_id }) {
-    const projects = await Project.findByUserId({ user_id });
-    return projects;
-  }
-
-  static async deleteAllProject({ user_id }) {
-    const deleteProjects = await Project.deleteAll({ user_id });
-    return;
-  }
   
+  // 프로젝트 삭제
   static async deleteProject({ project_id }) {
     const deletedProject = await Project.deleteProject({
       project_id,
@@ -93,6 +94,12 @@ class projectAuthService {
     }
 
     return deletedProject;
+  }
+
+  // 유저의 전체 프로젝트 삭제
+  static async deleteAllProject({ user_id }) {
+    const deleteProjects = await Project.deleteAll({ user_id });
+    return;
   }
 }
 

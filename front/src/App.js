@@ -12,6 +12,7 @@ import RegisterForm from "./components/user/RegisterForm";
 import Portfolio from "./components/Portfolio";
 import Projects from "./components/search/Projects";
 import ProfilePage from "./components/user/ProfilePage";
+import Carousel from "./components/carousel/Carousel";
 import PasswordResetForm from "./components/user/PasswordResetForm";
 
 export const UserStateContext = createContext(null);
@@ -83,6 +84,7 @@ function App() {
         <Router>
           <Header />
           <Routes>
+            <Route path="/carousel" exact element={<Carousel />} />
             <Route path="/" exact element={<Portfolio />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegisterForm />} />

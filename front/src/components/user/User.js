@@ -8,6 +8,22 @@ function User({ portfolioOwnerId, isEditable }) {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
+  const colorChange = () => {
+    if (user?.job === "프론트엔드") {
+      return "info";
+    } else if (user?.job === "백엔드") {
+      return "dark";
+    } else if (user?.job === "데이터 분석") {
+      return "success";
+    } else if (user?.job === "AI") {
+      return "warning";
+    } else if (user?.job === "기타") {
+      return "secondary";
+    } else {
+      return null;
+    }
+  };
+
   useEffect(() => {
     // "users/유저id" 엔드포인트로 GET 요청을 하고, user를 response의 data로 세팅함.
     Api.get("users", portfolioOwnerId).then((res) => setUser(res.data));
@@ -21,15 +37,24 @@ function User({ portfolioOwnerId, isEditable }) {
             onClick={() =>
               isEditable ? navigate(`/users/${user.id}/profilePage`) : undefined
             }
-            style={{ width: "10rem", height: "8rem", cursor: "pointer", borderRadius:100,}}
+            style={{ width: "9rem", height: "9rem", cursor: "pointer", borderRadius:72,margin:0,padding:0,}}
             className="mb-3"
             src={user?.profile}
             alt="사용자 프로필"
           />
         </Row>
-        <Card.Title>
+        <Card.Title style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+            }}>
           {user?.name}
-          <Badge bg="info"> {user?.job}</Badge>
+          <h6 style={{ margin: "auto 5px" }}>
+            <Badge pill bg={colorChange()}>
+              {" "}
+              {user?.job}
+            </Badge>
+          </h6>
         </Card.Title>
         <Card.Subtitle className="mb-2 text-muted">{user?.email}</Card.Subtitle>
         <Card.Text>{user?.description}</Card.Text>

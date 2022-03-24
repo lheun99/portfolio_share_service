@@ -151,7 +151,7 @@ function Network() {
                 onChange={handleQuery}
               />
               <Button style={{backgroundColor:'white', border:"none",padding:0,height:32,}} onClick={handleSearch}>
-                <span class="material-icons" style={{color:"grey",fontSize:32,}}>search</span>
+                <span className="material-icons" style={{color:"grey",fontSize:32,}}>search</span>
               </Button>
             </Form>
           </Nav.Item>

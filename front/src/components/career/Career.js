@@ -72,7 +72,7 @@ const Career = ({ portfolioOwnerId, isEditable }) => {
   return (
     <Card style={{width:"740px"}}>
       <Card.Body>
-        <Card.Title><span class="material-icons" style={{verticalAlign:"middle",}}>work</span> 경력</Card.Title>
+        <Card.Title><span className="material-icons" style={{verticalAlign:"middle",}}>work</span> 경력</Card.Title>
         <CareerCardList 
           topics={topics} 
           editHandler={editHandler} 

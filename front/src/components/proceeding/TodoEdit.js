@@ -31,7 +31,7 @@ const TodoEdit = ({setTodoEdit, workitem, setWorkItemList}) => {
     }
 
     return (
-        <Form style={{ margin: 10, padding: 10, }} onSubmit={handleOnSubmit}>
+        <Form style={{ margin: 10, padding: 10}} onSubmit={handleOnSubmit}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Control
                     type="text"
