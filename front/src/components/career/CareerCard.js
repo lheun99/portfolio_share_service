@@ -34,7 +34,7 @@ const CareerCard = ({ value, editHandler, deleteHandler, isEditable }) => {
             <Card.Subtitle>{company}</Card.Subtitle>
             <Card.Text className="text-muted">{job_position}
               <br/> {achievement}
-              <br/> {from_date} ~ {!isCurrent && to_date}</Card.Text>
+              <br/> {from_date} ~ {to_date}</Card.Text>
           </Col>
 
           {isEditable ?

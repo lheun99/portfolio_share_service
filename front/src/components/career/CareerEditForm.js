@@ -38,6 +38,11 @@ const CareerEdit = ({ item, onUpdate, editHandler }) => {
     let newFromDate = f.getFullYear()+'-'+(f.getMonth()+1)+'-'+f.getDate();
     let newToDate = t.getFullYear()+'-'+(t.getMonth()+1)+'-'+t.getDate();
     
+    if (radioCheck) {
+      editHandler(user_id, id, c, j, a, newFromDate, '재직중', radioCheck)
+      onUpdate();
+      return;
+    }
 
     // 폼 입력 값이 모두 존재할 때, Career 컴포넌트에서 받아온 PUT 요청 함수와 CareerCard에서 받아온 수정 form hide 처리용 함수를 실행
     if (c && j && a && newFromDate && newToDate) {
@@ -89,7 +94,7 @@ const CareerEdit = ({ item, onUpdate, editHandler }) => {
           <DatePicker selected={careerInfo.from_date} onChange={date => (handleOnChange(date, 'from_date'))}></DatePicker>
         </div> 
         <div className="col-auto">
-          <DatePicker disabled={radioCheck} selected={radioCheck ? null : careerInfo.to_date} onChange={date => (handleOnChange(date, 'to_date'))}></DatePicker>
+          <DatePicker disabled={radioCheck} selected={radioCheck ? null : (isCurrent ? new Date() : careerInfo.to_date)} onChange={date => (handleOnChange(date, 'to_date'))}></DatePicker>
         </div>
         <Col style={{margin:"auto",}}>
           <Form.Check 

@@ -47,7 +47,7 @@ const EducationEdit = ({ item, onUpdate, editHandler }) => {
   return (
     <Form style={{ margin: 10, padding: 10, }} onSubmit={submitHandler}>
       <input className="form-control" list="datalistOptions"  placeholder="학교 이름" name='school' style={{marginBottom:10}} value={schoolInput} onChange={(e) => {setSchoolInput(e.target.value)}}></input>
-      <datalist id="datalistOptions" style={{width:100}}>
+      <datalist id="datalistOptions">
         {univ.length > 0 && (
           univ.map((u, idx) => <option key={idx} value={u}></option>)
         )}
