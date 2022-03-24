@@ -46,7 +46,7 @@ function Header() {
           <Nav.Item>
             <Nav.Link
               className="item"
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/carousel")}
             >
               <div 
                 className="itemColor"
@@ -55,32 +55,89 @@ function Header() {
                   className="material-icons"
                   style={{ verticalAlign: "middle" }}
                 >
-                  contact_page
+                  home
                 </span>{" "}
-                My page
+                Home
               </div>
             </Nav.Link>
           </Nav.Item>
-          <Nav.Item>
-            <Nav.Link
-              className="item"
-              onClick={() => navigate("/network")}
-            >
-              <div 
-                className="itemColor"
-              >
-                <span
-                  className="material-icons"
-                  style={{ verticalAlign: "middle" }}
+          {!isLogin && (
+            <>
+              <Nav.Item>
+                <Nav.Link
+                  className="item"
+                  onClick={() => navigate("/login")}
                 >
-                  explore
-                </span>{" "}
-                Mate
-              </div>
-            </Nav.Link>
-          </Nav.Item>
+                  <div 
+                    className="itemColor"
+                  >
+                    <span
+                      className="material-icons"
+                      style={{ verticalAlign: "middle" }}
+                    >
+                      login
+                    </span>{" "}
+                    Login
+                  </div>
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link
+                  className="item"
+                  onClick={() => navigate("/register")}
+                >
+                  <div 
+                    className="itemColor"
+                  >
+                    <span
+                      className="material-icons"
+                      style={{ verticalAlign: "middle" }}
+                    >
+                      how_to_reg
+                    </span>{" "}
+                    회원가입
+                  </div>
+                </Nav.Link>
+              </Nav.Item></>
+          )}
           {isLogin && (
             <>
+              <Nav.Item>
+                <Nav.Link
+                  className="item"
+                  onClick={() => navigate("/")}
+                >
+                  <div 
+                    className="itemColor"
+                  >
+                    <span
+                      className="material-icons"
+                      style={{ verticalAlign: "middle" }}
+                    >
+                      contact_page
+                    </span>{" "}
+                    My page
+                  </div>
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link
+                  className="item"
+                  onClick={() => navigate("/network")}
+                >
+                  <div 
+                    className="itemColor"
+                  >
+                    <span
+                      className="material-icons"
+                      style={{ verticalAlign: "middle" }}
+                    >
+                      explore
+                    </span>{" "}
+                    Mate
+                  </div>
+                </Nav.Link>
+              </Nav.Item>
               <Nav.Item>
                 <Nav.Link
                   className="item"
