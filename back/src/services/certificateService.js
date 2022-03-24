@@ -49,35 +49,14 @@ class certificateAuthService {
       return { errorMessage };
     }
 
-    if (toUpdate.title) {
-      const fieldToUpdate = "title";
-      const newValue = toUpdate.title;
-      certificate = await Certificate.update({
-        certificate_id,
-        fieldToUpdate,
-        newValue,
-      });
-    }
+    // 수정해야하는 필드에 맞는 값을 업데이트
+    const toUpdateField = Object.keys(toUpdate);
 
-    if (toUpdate.description) {
-      const fieldToUpdate = "description";
-      const newValue = toUpdate.description;
-      certificate = await Certificate.update({
-        certificate_id,
-        fieldToUpdate,
-        newValue,
-      });
-    }
+    toUpdateField.forEach(key => {
+      if (!toUpdate[key]) delete toUpdate[key];
+    });
 
-    if (toUpdate.when_date) {
-      const fieldToUpdate = "when_date";
-      const newValue = toUpdate.when_date;
-      certificate = await Certificate.update({
-        certificate_id,
-        fieldToUpdate,
-        newValue,
-      });
-    }
+    certificate = await Certificate.update({ certificate_id, toUpdate });
     return certificate;
   }
 
@@ -86,11 +65,11 @@ class certificateAuthService {
     return certificates;
   }
 
-
   static async deleteAllCertificate({ user_id }) {
     const deleteCertificates = await Certificate.deleteAll({ user_id });
     return;
   }
+  
   static async deleteCertificate({ certificate_id }) {
     const deletedCertificate = await Certificate.deleteCertificate({
       certificate_id,

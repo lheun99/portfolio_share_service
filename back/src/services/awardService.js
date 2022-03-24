@@ -39,7 +39,7 @@ class awardService {
     return awards;
   }
 
-  static async updateAward({ award_id, toUpdate }) {
+  static async setAward({ award_id, toUpdate }) {
     let award = await Award.findById({ award_id });
 
     // db에서 찾지 못한 경우, 에러 메시지 반환
@@ -50,13 +50,11 @@ class awardService {
     }
 
     // 수정해야하는 필드에 맞는 값을 업데이트
-    if (!toUpdate.title) {
-      delete toUpdate[title];
-    }
+    const toUpdateField = Object.keys(toUpdate);
 
-    if (!toUpdate.description) {
-      delete toUpdate[description];
-    }
+    toUpdateField.forEach(key => {
+      if (!toUpdate[key]) delete toUpdate[key];
+    });
 
     award = await Award.update({ award_id, toUpdate });
     return award;

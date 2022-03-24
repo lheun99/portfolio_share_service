@@ -54,10 +54,9 @@ awardRouter.put("/awards/:id", async (req, res, next) => {
     const award_id = req.params.id;
     const title = req.body.title ?? null;
     const description = req.body.description ?? null;
-
     const toUpdate = { title, description };
 
-    const updatedAward = await awardService.updateAward({ award_id, toUpdate });
+    const updatedAward = await awardService.setAward({ award_id, toUpdate });
 
     if (updatedAward.errorMessage) {
       throw new Error(updatedAward.errorMessage);

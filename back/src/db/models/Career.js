@@ -11,6 +11,11 @@ class Career {
     return career;
   }
 
+  static async findByUserId({ user_id }) {
+    const careers = await CareerModel.find({ user_id });
+    return careers;
+  }
+
   static async update({ career_id, toUpdate }) {
     const filter = { id: career_id };
     const option = { returnOriginal: false };
@@ -23,21 +28,14 @@ class Career {
     return updatedCareer;
   }
 
-  static async findByUserId({ user_id }) {
-    const careers = await CareerModel.find({ user_id });
-    return careers;
+  static async delete({ career_id }) {
+    const deletedCareer = await CareerModel.deleteOne({ id: career_id });
+    return deletedCareer;
   }
-
 
   static async deleteAll({ user_id }) {
     const deletedCareers = await CareerModel.deleteMany({ user_id: user_id });
     return deletedCareers;
-  }
-  
-  static async delete({ career_id }) {
-    const deletedCareer = await CareerModel.deleteOne({ id: career_id });
-    return deletedCareer;
-
   }
 }
 
