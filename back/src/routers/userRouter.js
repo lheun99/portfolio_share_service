@@ -161,4 +161,24 @@ userAuthRouter.get(
   }
 );
 
+userAuthRouter.delete(
+  "/users/:id",
+  login_required,
+  async function (req, res, next) {
+    try {
+      const user_id = req.params.id;
+      const deletedUser = await userAuthService.deleteUser({ user_id });
+
+      if (deletedUser.deletedCount !== 1) {
+        throw new Error("정상적으로 삭제되지 않았습니다.");
+      } 
+  
+
+      res.status(200).send("success");
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
 export { userAuthRouter };
