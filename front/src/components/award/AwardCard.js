@@ -36,7 +36,7 @@ const AwardCard = ({ awards, award, setIsEditing, isEditable, setAwards }) => {
                   size="sm"
                   onClick={() => setIsEditing(true)}
                 >
-                  <span class="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>edit</span>
+                  <span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>edit</span>
                 </Button>
             )}
             {isEditable && (
@@ -46,7 +46,7 @@ const AwardCard = ({ awards, award, setIsEditing, isEditable, setAwards }) => {
                     size="sm"
                     onClick={() => setShow(true)}
                   >
-                    <span class="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>delete</span>
+                    <span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>delete</span>
                   </Button>
                   <Modal show={show} style={{zIndex:99999,}}>
                   <Modal.Header>

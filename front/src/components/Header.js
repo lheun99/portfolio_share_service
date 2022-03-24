@@ -46,55 +46,77 @@ function Header() {
           <Nav.Item>
             <Nav.Link
               className="item"
-              style={{ color: "#79889e" }}
               onClick={() => navigate("/")}
             >
-              <span
-                className="material-icons"
-                style={{ verticalAlign: "middle" }}
+              <div 
+                className="itemColor"
               >
-                contact_page
-              </span>{" "}
-              My page
+                <span
+                  className="material-icons"
+                  style={{ verticalAlign: "middle" }}
+                >
+                  contact_page
+                </span>{" "}
+                My page
+              </div>
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link
               className="item"
-              style={{ color: "#79889e" }}
               onClick={() => navigate("/network")}
             >
-              <span
-                className="material-icons"
-                style={{ verticalAlign: "middle" }}
+              <div 
+                className="itemColor"
               >
-                explore
-              </span>{" "}
-              Mate
+                <span
+                  className="material-icons"
+                  style={{ verticalAlign: "middle" }}
+                >
+                  explore
+                </span>{" "}
+                Mate
+              </div>
             </Nav.Link>
           </Nav.Item>
           {isLogin && (
             <>
               <Nav.Item>
-                <Nav.Link onClick={() => navigate("/projects")}>
-                  Projects
+                <Nav.Link
+                  className="item"
+                  onClick={() => navigate("/projects")}
+                >
+                  <div 
+                    className="itemColor"
+                  >
+                    <span
+                      className="material-icons"
+                      style={{ verticalAlign: "middle" }}
+                    >
+                      folder
+                    </span>{" "}
+                    Projects
+                  </div>
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link
                   className="item"
-                  style={{ color: "#79889e" }}
                   onClick={() =>
                     navigate(`/users/${userState.user.id}/profilePage`)
                   }
                 >
-                  <span
-                    className="material-icons"
-                    style={{ verticalAlign: "middle" }}
+                  <div 
+                    className="itemColor"
                   >
-                    manage_accounts
-                  </span>{" "}
-                  My profile
+                    <span
+                      className="material-icons"
+                      style={{ verticalAlign: "middle" }}
+                    >
+                      manage_accounts
+                    </span>{" "}
+                    My profile
+                  </div>
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>

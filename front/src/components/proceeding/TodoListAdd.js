@@ -36,7 +36,7 @@ const TodoAddForm = ({ setAdd, proceeding, setWorkItemList }) => {
     }
 
     return (
-        <Form style={{ margin: 10, padding: 10, }} onSubmit={handleSubmit}>
+        <Form style={{ margin: 10, padding: 10}} onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Control
                     type="text"
@@ -183,7 +183,7 @@ const TodoListAdd = ({ proceeding, setProceedingList, isEditable }) => {
 
     return (
         <>
-            <Card>
+            <Card style={{width:"740px"}}>
                 <Card.Body>
                     <Row>
                         {edit ? <ProceedingEdit proceeding={proceeding} setEdit={setEdit} setProceedingList={setProceedingList}></ProceedingEdit> : (

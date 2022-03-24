@@ -103,23 +103,28 @@ function PasswordResetForm() {
                   임시 비밀번호 발급
                 </Button>
               </Col>
+              <Col sm={{ span: 20 }} style={{marginTop:10,}}>
+                <Button style={{backgroundColor:"white", border:"none", color:"grey"}} onClick={successHandleClose}>
+                  로그인 페이지로 돌아가기
+                </Button>
+              </Col>
             </Form.Group>
           </Form>
 
           <Modal show={successShow}>
-            <Modal.Header closeButton>
+            <Modal.Header>
               <Modal.Title>이메일이 발송되었습니다🎉</Modal.Title>
             </Modal.Header>
             <Modal.Body>로그인 페이지로 이동합니다.</Modal.Body>
             <Modal.Footer>
-              <Button variant="outline-info" onClick={successHandleClose}>
+              <Button onClick={successHandleClose}>
                 확인
               </Button>
             </Modal.Footer>
           </Modal>
 
           <Modal show={failShow}>
-            <Modal.Header closeButton>
+            <Modal.Header>
               <Modal.Title> 이메일 전송에 실패하였습니다.</Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -128,7 +133,7 @@ function PasswordResetForm() {
               다시 입력해주세요.
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="outline-info" onClick={failHandleClose}>
+              <Button onClick={failHandleClose}>
                 확인
               </Button>
             </Modal.Footer>

@@ -131,7 +131,7 @@ function UserEditForm({ user, setUser }) {
       <Card.Body>
         <Row className="justify-content-md-center">
           <Card.Img
-            style={{ width: "10rem", height: "8rem" }}
+            style={{ width: "9rem", height: "9rem", borderRadius:"100px", margin:0, padding:0, }}
             className="mb-3"
             src={profile.preview ? profile.preview : profile.currentUrl}
             alt="변경할 프로필"
