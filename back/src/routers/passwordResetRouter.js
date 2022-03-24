@@ -9,6 +9,7 @@ dotenv.config();
 
 const passwordResetRouter = Router();
 
+// POST /password-reset : 임시 비밀번호 발급 후(user data에 반영) 이메일 전송
 passwordResetRouter.post("/password-reset", 
   async (req, res, next) => {
     try {

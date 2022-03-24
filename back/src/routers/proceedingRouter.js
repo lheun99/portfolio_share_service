@@ -11,6 +11,7 @@ import { proceedingAuthService } from "../services/proceedingService";
 const proceedingAuthRouter = Router();
 proceedingAuthRouter.use(login_required);
 
+// POST /proceeding/create : 진행중인 프로젝트 추가
 proceedingAuthRouter.post(
   "/proceeding/create",
   isValidData("proceeding"),
@@ -43,6 +44,7 @@ proceedingAuthRouter.post(
   }
 );
 
+// GET /proceedinglist/:user_id : user의 전체 진행중인 프로젝트 조회
 proceedingAuthRouter.get("/proceedinglist/:user_id", async (req, res, next) => {
     try {
       const user_id = req.params.user_id;
@@ -51,9 +53,10 @@ proceedingAuthRouter.get("/proceedinglist/:user_id", async (req, res, next) => {
     } catch (error) {
       next(error);
     }
-  });
+});
 
-  proceedingAuthRouter.put("/proceedings/:id", async (req, res, next) => {
+// PUT /proceedings/:id : 진행중인 프로젝트 수정
+proceedingAuthRouter.put("/proceedings/:id", async (req, res, next) => {
   try {
     const proceeding_id = req.params.id;
     const title = req.body.title ?? null;
@@ -75,6 +78,7 @@ proceedingAuthRouter.get("/proceedinglist/:user_id", async (req, res, next) => {
   }
 });
 
+// DELETE /proceedings/:id : 진행중인 프로젝트 삭제
 proceedingAuthRouter.delete("/proceedings/:id", async (req, res, next) => {
   try {
     const proceeding_id = req.params.id;
@@ -93,6 +97,7 @@ proceedingAuthRouter.delete("/proceedings/:id", async (req, res, next) => {
   }
 });
 
+// DELETE /proceedinglist/:user_id : user의 전체 진행중인 프로젝트 삭제
 proceedingAuthRouter.delete("/proceedinglist/:user_id", async (req, res, next) => {
   try {
     // URI 파라미터에서 user_id 가져오기
