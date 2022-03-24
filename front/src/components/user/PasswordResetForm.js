@@ -39,7 +39,6 @@ function PasswordResetForm() {
 
     try {
       // "user/register" 엔드포인트로 post요청함.
-      console.log("여기 작동");
       await Api.postPW("password-reset", {
         email,
         name,
