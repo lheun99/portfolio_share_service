@@ -103,6 +103,11 @@ class userAuthService {
       const errorMessage = "가입 내역이 없습니다. 다시 한 번 확인해 주세요.";
       return { errorMessage };
     }
+    
+    // 변경 사항에 password 있을 시 암호화 해서 저장
+    if (toUpdate.password) {
+      toUpdate["password"] = await bcrypt.hash(toUpdate.password, 10);
+    }
 
     // 수정해야하는 필드에 맞는 값을 업데이트
     const toUpdateField = Object.keys(toUpdate);
@@ -128,7 +133,10 @@ class userAuthService {
     const hashedPassword = await bcrypt.hash(tempPassword, 10); 
     const toUpdate = { password: hashedPassword };
     
-    user = await User.update({ user_id, toUpdate });
+    user = await User.update({ 
+      user_id: user.id, 
+      toUpdate 
+    });
     
     return user;
   }
