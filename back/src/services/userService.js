@@ -111,6 +111,8 @@ class userAuthService {
       if (!toUpdate[key]) delete toUpdate[key];
     });
 
+    toUpdate.projectNum = toUpdate.projectNum ? toUpdate.projectNum : 0;
+
     user = await User.update({ user_id, toUpdate });
     return user;
   }
