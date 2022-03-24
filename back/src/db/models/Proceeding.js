@@ -2,14 +2,14 @@ import { ProceedingModel } from "../schemas/proceeding";
 import { UserModel } from "../schemas/user";
 
 class Proceeding {
-  static async findUserById({ user_id }) {
-    const user = await UserModel.findOne({ id: user_id });
-    return user;
-  }
-
   static async create({ newProceeding }) {
     const createdNewProceeding = await ProceedingModel.create(newProceeding);
     return createdNewProceeding;
+  }
+  
+  static async findUserById({ user_id }) {
+    const user = await UserModel.findOne({ id: user_id });
+    return user;
   }
 
   static async findByUserId({ user_id }) {
@@ -21,14 +21,13 @@ class Proceeding {
     return proceeding;
   }
 
-  static async update({ proceeding_id, fieldToUpdate, newValue }) {
+  static async update({ proceeding_id, toUpdate }) {
     const filter = { id: proceeding_id };
-    const update = { [fieldToUpdate]: newValue };
     const option = { returnOriginal: false };
 
     const updatedProceeding = await ProceedingModel.findOneAndUpdate(
       filter,
-      update,
+      toUpdate,
       option
     );
     return updatedProceeding;
@@ -40,6 +39,12 @@ class Proceeding {
     });
     return deletedProceeding;
 
+  }
+
+  // user_id를 이용하여 data 삭제
+  static async deleteAll({ user_id }) {
+    const deletedProceedings = await ProceedingModel.deleteMany({ user_id: user_id });
+    return deletedProceedings;
   }
 }
 

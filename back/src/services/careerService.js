@@ -21,7 +21,7 @@ class careerService {
   }
 
   // 경력 사항 수정
-  static async updateCareer({ career_id, toUpdate }) {
+  static async setCareer({ career_id, toUpdate }) {
     let career = await Career.findById({ career_id })
 
     if (!career) {
@@ -29,36 +29,19 @@ class careerService {
       return { errorMessage };
     }
     
-    if (!toUpdate.name) {
-      delete toUpdate["company"];
-    }
+    // 수정해야하는 필드에 맞는 값을 업데이트
+    const toUpdateField = Object.keys(toUpdate);
 
-    if (!toUpdate.job_position) {
-      delete toUpdate["job_position"];
-    }
-
-    if (!toUpdate.achievement) {
-      delete toUpdate["achievement"];
-    }
-
-    if (!toUpdate.from_date) {
-      delete toUpdate["from_date"];
-    }
-
-    if (!toUpdate.to_date) {
-      delete toUpdate["to_date"];
-    }
-
-    if (!toUpdate.isCurrent) {
-      delete toUpdate["isCurrent"];
-    }
+    toUpdateField.forEach(key => {
+      if (!toUpdate[key]) delete toUpdate[key];
+    });
     
     career = await Career.update({ career_id, toUpdate });
     return career;
   }
 
   // 해당 유저의 경력 사항 불러오기
-  static async getCareer({ user_id }) {
+  static async getCareers({ user_id }) {
     const careers = await Career.findByUserId({ user_id });
     return careers;
   }

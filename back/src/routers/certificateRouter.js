@@ -91,7 +91,7 @@ certificateAuthRouter.get(
   "/certificatelist/:user_id",
   async (req, res, next) => {
     try {
-      const user_id = req.params.user_id;
+      const { user_id } = req.params;
       const certificates = await certificateAuthService.getCertificates({
         user_id,
       });

@@ -73,14 +73,14 @@ careerRouter.put("/careers/:id", async (req, res, next) => {
 
     const company = req.body.company ?? null;
     const job_position = req.body.job_position ?? null;
-    const achievement = req.body.achievement;
+    const achievement = req.body.achievement ?? null;
     const from_date = req.body.from_date ?? null;
     const to_date = req.body.to_date ?? null;
     const isCurrent = req.body.isCurrent ?? null;
 
     const toUpdate = { company, job_position, achievement, from_date, to_date, isCurrent };
 
-    const updatedCareer = await careerService.updateCareer({
+    const updatedCareer = await careerService.setCareer({
       career_id,
       toUpdate,
     });
@@ -97,7 +97,7 @@ careerRouter.put("/careers/:id", async (req, res, next) => {
 careerRouter.get("/careerlist/:user_id", async (req, res, next) => {
   try {
     const user_id = req.params.user_id;
-    const careers = await careerService.getCareer({ user_id });
+    const careers = await careerService.getCareers({ user_id });
     res.status(200).json(careers);
   } catch (error) {
     next(error);

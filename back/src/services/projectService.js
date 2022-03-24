@@ -55,34 +55,14 @@ class projectAuthService {
         "프로젝트가 존재하지 않습니다. 다시 한 번 확인해 주세요.";
       return { errorMessage };
     }
-    if (toUpdate.title) {
-      const fieldToUpdate = "title";
-      const newValue = toUpdate.title;
-      project = await Project.update({ project_id, fieldToUpdate, newValue });
-    }
-    if (toUpdate.description) {
-      const fieldToUpdate = "description";
-      const newValue = toUpdate.description;
-      project = await Project.update({ project_id, fieldToUpdate, newValue });
-    }
+    // 수정해야하는 필드에 맞는 값을 업데이트
+    const toUpdateField = Object.keys(toUpdate);
 
-    project = await Project.update({
-      project_id,
-      fieldToUpdate: "link",
-      newValue: toUpdate.link,
+    toUpdateField.forEach(key => {
+      if (!toUpdate[key]) delete toUpdate[key];
     });
 
-    if (toUpdate.from_date) {
-      const fieldToUpdate = "from_date";
-      const newValue = toUpdate.from_date;
-      project = await Project.update({ project_id, fieldToUpdate, newValue });
-    }
-
-    if (toUpdate.to_date) {
-      const fieldToUpdate = "to_date";
-      const newValue = toUpdate.to_date;
-      project = await Project.update({ project_id, fieldToUpdate, newValue });
-    }
+    project = await Project.update({ project_id, toUpdate });
     return project;
   }
 
@@ -95,10 +75,12 @@ class projectAuthService {
     const projects = await Project.findByUserId({ user_id });
     return projects;
   }
+
   static async deleteAllProject({ user_id }) {
     const deleteProjects = await Project.deleteAll({ user_id });
     return;
   }
+  
   static async deleteProject({ project_id }) {
     const deletedProject = await Project.deleteProject({
       project_id,

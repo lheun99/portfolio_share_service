@@ -24,7 +24,7 @@ class educationService {
   }
 
   // 학력 사항 수정
-  static async updateEducation({ education_id, toUpdate }) {
+  static async setEducation({ education_id, toUpdate }) {
     let education = await Education.findById({ education_id })
 
     if (!education) {
@@ -32,24 +32,19 @@ class educationService {
       return { errorMessage };
     }
     
-    if (!toUpdate.school) {
-      delete toUpdate[school];
-    }
+    // 수정해야하는 필드에 맞는 값을 업데이트
+    const toUpdateField = Object.keys(toUpdate);
 
-    if (!toUpdate.major) {
-      delete toUpdate[major];
-    }
-
-    if (!toUpdate.position) {
-      delete toUpdate[position];
-    }
+    toUpdateField.forEach(key => {
+      if (!toUpdate[key]) delete toUpdate[key];
+    });
     
     education = await Education.update({ education_id, toUpdate });
     return education;
   }
 
   // 해당 유저의 학력 사항 불러오기
-  static async getEducation({ user_id }) {
+  static async getEducations({ user_id }) {
     const education = await Education.findByUserId({ user_id });
     return education;
   }

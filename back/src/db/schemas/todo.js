@@ -1,7 +1,8 @@
 import { Schema, model } from "mongoose";
 
 
-const TodoSchema = new Schema({
+const TodoSchema = new Schema(
+  {
     id : {
         type:String,
         required:true
