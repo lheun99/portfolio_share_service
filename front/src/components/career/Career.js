@@ -88,7 +88,7 @@ const Career = ({ portfolioOwnerId, isEditable }) => {
           <div style={{ textAlign: 'center', padding:"16px" }}>
             {isEditable ? 
             <Button style={{borderRadius:100,}} size='sm' onClick={clickHandler}>
-              <span class="material-icons" style={{verticalAlign:'middle',fontSize:15,}}>add</span>
+              <span className="material-icons" style={{verticalAlign:'middle',fontSize:15,}}>add</span>
             </Button> : <></>}
           </div>}
       </Card.Body>
