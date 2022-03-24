@@ -9,15 +9,20 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
     // 회원탈퇴 확인창
     alert(`${user.name}님, 회원탈퇴가 완료되었습니다.`);
 
+    const userProfile = user.profile.split("/").slice(-1)[0];
     // 해당 유저의 학력, 수상이력, 프로젝트, 자격증 삭제
     await Api.delete(`educationlist/${user.id}`);
     await Api.delete(`awardlist/${user.id}`);
     await Api.delete(`projectlist/${user.id}`);
     await Api.delete(`certificatelist/${user.id}`);
     await Api.delete(`careerlist/${user.id}`);
-
+    await Api.delete("proceedinglist", user.id);
+    await Api.delete("todolist", user.id);
+    await Api.delete("deleteImg", userProfile);
     // 해당 유저 DELETE 요청 처리
     await Api.delete(`users/${user.id}`);
+    // token 삭제
+    sessionStorage.removeItem('userToken');
     // 로그인 페이지로 돌아감
     navigate("/login");
   };
