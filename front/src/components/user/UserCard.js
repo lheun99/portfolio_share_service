@@ -32,7 +32,7 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
         <Row className="justify-content-md-center">
           
           <Card.Img
-            style={{ width: "10rem", height: "8rem" }}
+            style={{ width: "9rem", height: "9rem", borderRadius:100, margin:0, padding:0,}}
             className="mb-3"
             src={user?.profile}
             alt="사용자 프로필"
