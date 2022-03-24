@@ -2,10 +2,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    justify-content: center;
 }
 .profilePage{
     display: flex;
-    column-gap: 10%;
+    column-gap: 0%;
     padding: 13px 5%;
 }
 .profileCard{
