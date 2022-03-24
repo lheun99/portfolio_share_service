@@ -8,7 +8,7 @@ import { awardService } from "../services/awardService";
 const awardRouter = Router();
 awardRouter.use(login_required);
 
-// POST: /award/create => 수상 내역 추가
+// POST /award/create : 수상 내역 추가
 awardRouter.post("/award/create", 
 isValidData("award"),
 invalidCallback,
@@ -32,7 +32,7 @@ invalidCallback,
     }
 });
 
-// GET: /awards/:id => id에 해당하는 수상 내역 조회
+// GET /awards/:id : 수상 내역 조회
 awardRouter.get("/awards/:id", async (req, res, next) => {
   try {
     const award_id = req.params.id;
@@ -48,7 +48,19 @@ awardRouter.get("/awards/:id", async (req, res, next) => {
   };
 });
 
-// PUT: /awards/:id => id에 해당하는 수상 내역 업데이트
+// GET /awardlist/:user_id : user의 전체 수상 내역 조회
+awardRouter.get("/awardlist/:user_id", async (req, res, next) => {
+  try {
+    const { user_id } = req.params;
+    const awardList = await awardService.getAwards({ user_id });
+
+    res.status(200).json(awardList);
+  } catch (e) {
+    next(e);
+  }
+});
+
+// PUT /awards/:id : 수상 내역 수정
 awardRouter.put("/awards/:id", async (req, res, next) => {
   try {
     const award_id = req.params.id;
@@ -68,19 +80,7 @@ awardRouter.put("/awards/:id", async (req, res, next) => {
   }
 });
 
-// GET: /awardlist/:user_id => 해당 유저의 수상 내역 전체 조회
-awardRouter.get("/awardlist/:user_id", async (req, res, next) => {
-  try {
-    const { user_id } = req.params;
-    const awardList = await awardService.getAwards({ user_id });
-
-    res.status(200).json(awardList);
-  } catch (e) {
-    next(e);
-  }
-});
-
-// DELETE: /awards/:id => id에 해당하는 수상 내역 삭제
+// DELETE /awards/:id : 수상 내역 삭제
 awardRouter.delete("/awards/:id", async (req, res, next) => {
   try {
     const award_id = req.params.id;
@@ -96,6 +96,7 @@ awardRouter.delete("/awards/:id", async (req, res, next) => {
   }
 });
 
+// DELETE /awardlist/:user_id : user의 전체 수상 내역 삭제
 awardRouter.delete("/awardlist/:user_id", async (req, res, next) => {
   try {
     // URI 파라미터에서 user_id 가져오기

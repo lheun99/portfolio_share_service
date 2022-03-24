@@ -115,6 +115,7 @@ educationRouter.delete("/educations/:id", async (req, res, next) => {
 }
 );
 
+// DELETE /educationlist/:user_id : user의 education 데이터 전체 삭제
 educationRouter.delete("/educationlist/:user_id", async (req, res, next) => {
   try {
     // URI 파라미터에서 user_id 가져오기

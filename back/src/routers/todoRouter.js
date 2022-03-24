@@ -11,6 +11,7 @@ import { todoAuthService } from "../services/todoService";
 const todoAuthRouter = Router();
 todoAuthRouter.use(login_required);
 
+// POST /todo/create : 할 일 추가
 todoAuthRouter.post(
   "/todo/create",
   isValidData("todo"),
@@ -44,17 +45,19 @@ todoAuthRouter.post(
   }
 );
 
+// GET /todolist/:preceeding_id : 진행중인 프로젝트의 할 일 조회
 todoAuthRouter.get("/todolist/:proceeding_id", async (req, res, next) => {
-    try {
-      const proceeding_id = req.params.proceeding_id;
-      const todos = await todoAuthService.getTodos({ proceeding_id });
-      res.status(200).send(todos);
-    } catch (error) {
-      next(error);
-    }
-  });
+  try {
+    const proceeding_id = req.params.proceeding_id;
+    const todos = await todoAuthService.getTodos({ proceeding_id });
+    res.status(200).send(todos);
+  } catch (error) {
+    next(error);
+  }
+});
 
-  todoAuthRouter.put("/todo/:id", async (req, res, next) => {
+// PUT /todo/:id : 할 일 수정
+todoAuthRouter.put("/todo/:id", async (req, res, next) => {
   try {
     const todo_id = req.params.id;
 
@@ -76,6 +79,7 @@ todoAuthRouter.get("/todolist/:proceeding_id", async (req, res, next) => {
   }
 });
 
+// DELETE /todo/:id : 할 일 삭제
 todoAuthRouter.delete("/todo/:id", async (req, res, next) => {
   try {
     const todo_id = req.params.id;
@@ -94,6 +98,7 @@ todoAuthRouter.delete("/todo/:id", async (req, res, next) => {
   }
 });
 
+// DELETE /todolist/:user_id : user의 전체 할 일 삭제
 todoAuthRouter.delete("/todolist/:user_id", async (req, res, next) => {
   try {
     // URI 파라미터에서 user_id 가져오기
