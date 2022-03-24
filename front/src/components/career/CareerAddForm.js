@@ -33,6 +33,19 @@ const EducationForm = ({ onCreate, clickHandler }) => {
     let newFromDate = f.getFullYear()+'-'+(f.getMonth()+1)+'-'+f.getDate();
     let newToDate = t.getFullYear()+'-'+(t.getMonth()+1)+'-'+t.getDate();
     
+    if (radioCheck) {
+      onCreate(c, j, a, newFromDate, "재직중", radioCheck)
+      setCareerInfo({
+        company: '',
+        job_position: '',
+        achievement: '',
+        from_date: new Date(),
+        to_date: new Date(),
+        isCurrent: true,
+      })
+      return;
+    }
+
     // 입력값이 모두 존재할 때, create 폼 제출 및 값 POST 요청, 폼 내부 초기화, "+" 버튼 show 처리
     if (c && j && a && newFromDate && newToDate) {
       if (!(f <= t)) {
