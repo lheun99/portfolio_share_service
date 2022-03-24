@@ -130,6 +130,7 @@ function Portfolio() {
                   진행중인 프로젝트
                 </Nav.Link>
                 <Nav.Link
+                  className="navi"
                   href="#education"
                   onClick={(e) => {
                     e.preventDefault();
