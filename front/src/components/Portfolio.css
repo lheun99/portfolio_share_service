@@ -33,3 +33,31 @@
     font-weight: bold;
     border-bottom: 2px solid;
   }
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    justify-content: center;
+}
+.portfolioPage{
+    display: flex;
+    column-gap: 0%;
+    padding: 13px 5%;
+}
+.portfolioCard{
+    flex-basis: 25%;
+    position: sticky;
+    top: 70px;
+    align-self: flex-start;
+    padding: 20px;
+    margin-top: 100px;
+    border-radius: 4px;
+}
+.portfolioContent{
+    flex-basis: 50%;
+    position: sticky;
+    margin-top: 100px;
+    align-self: flex-start;
+    margin-left: 50px;
+}

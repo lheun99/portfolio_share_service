@@ -88,197 +88,195 @@ function Portfolio() {
   }
 
   return (
-    <Container fluid>
-      <Row className="justify-content-md-center">
-        <Col lg={3} style={{ margin: "158px 15px 0 0" }}>
-          <User
-            portfolioOwnerId={portfolioOwner.id}
-            isEditable={portfolioOwner.id === userState.user?.id}
-            style={{ marginTop: "20px" }}
-          />
-        </Col>
-
-        <Col style={{ margin: "100px 15px 0 15px" }}>
-          <Navbar>
-            <Container style={{ padding: 0 }}>
-              <Nav className="me-auto">
-                <Nav.Link
-                  className="navi"
-                  href="#all"
-                  onClick = {(e) => {
-                    e.preventDefault()
-                    setIsProceeding(true)
-                    setIsEducation(true)
-                    setIsCareer(true)
-                    setIsAward(true)
-                    setIsProject(true)
-                    setIsCertificate(true)
-                  }}><span className="material-icons" style={{verticalAlign:"middle",}}>all_inbox</span> 전체 보기</Nav.Link>
-                <Nav.Link
-                  className="navi"
-                  href="#proceeding"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setIsProceeding(true);
-                    setIsEducation(false);
-                    setIsCareer(false);
-                    setIsAward(false);
-                    setIsProject(false);
-                    setIsCertificate(false);
-                  }}
-                >
-                  진행중인 프로젝트
+    <div className="portfolioPage">
+      <div className="portfolioCard">
+        <User
+          portfolioOwnerId={portfolioOwner.id}
+          isEditable={portfolioOwner.id === userState.user?.id}
+          style={{ marginTop: "20px" }}
+        />
+      </div>
+      <div className="portfolioContent">
+        <Navbar>
+          <Container style={{ padding: 0 }}>
+            <Nav className="me-auto">
+              <Nav.Link
+                className="navi"
+                href="#all"
+                onClick = {(e) => {
+                  e.preventDefault()
+                  setIsProceeding(true)
+                  setIsEducation(true)
+                  setIsCareer(true)
+                  setIsAward(true)
+                  setIsProject(true)
+                  setIsCertificate(true)
+                }}><span className="material-icons" style={{verticalAlign:"middle",}}>all_inbox</span> 전체 보기</Nav.Link>
+              <Nav.Link
+                className="navi"
+                href="#proceeding"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsProceeding(true);
+                  setIsEducation(false);
+                  setIsCareer(false);
+                  setIsAward(false);
+                  setIsProject(false);
+                  setIsCertificate(false);
+                }}
+              >
+                진행중인 프로젝트
+              </Nav.Link>
+              <Nav.Link
+                className="navi"
+                href="#education"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsProceeding(false);
+                  setIsEducation(true);
+                  setIsAward(false);
+                  setIsProject(false);
+                  setIsCertificate(false);
+                  setIsCareer(false);
+                }}
+              >
+                학력
+              </Nav.Link>
+              <Nav.Link
+                className="navi"
+                href="#career"
+                onClick = {(e) => {
+                  e.preventDefault();
+                  setIsProceeding(false);
+                  setIsEducation(false);
+                  setIsCareer(true);
+                  setIsAward(false);
+                  setIsProject(false);
+                  setIsCertificate(false);
+                }}>경력</Nav.Link>
+              <Nav.Link 
+                className="navi"
+                href="#award"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsProceeding(false);
+                  setIsEducation(false);
+                  setIsAward(true);
+                  setIsProject(false);
+                  setIsCertificate(false);
+                  setIsCareer(false);
+                }}
+              >
+                수상 내역
+              </Nav.Link>
+              <Nav.Link
+                className="navi"
+                href="#project"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsProceeding(false);
+                  setIsEducation(false);
+                  setIsAward(false);
+                  setIsProject(true);
+                  setIsCareer(false);
+                  setIsCertificate(false);
+                }}
+              >
+                프로젝트
                 </Nav.Link>
-                <Nav.Link
-                  className="navi"
-                  href="#education"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setIsProceeding(false);
-                    setIsEducation(true);
-                    setIsAward(false);
-                    setIsProject(false);
-                    setIsCertificate(false);
-                    setIsCareer(false);
-                  }}
-                >
-                  학력
-                </Nav.Link>
-                <Nav.Link
-                  className="navi"
-                  href="#career"
-                  onClick = {(e) => {
-                    e.preventDefault();
-                    setIsProceeding(false);
-                    setIsEducation(false);
-                    setIsCareer(true);
-                    setIsAward(false);
-                    setIsProject(false);
-                    setIsCertificate(false);
-                  }}>경력</Nav.Link>
-                <Nav.Link 
-                  className="navi"
-                  href="#award"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setIsProceeding(false);
-                    setIsEducation(false);
-                    setIsAward(true);
-                    setIsProject(false);
-                    setIsCertificate(false);
-                    setIsCareer(false);
-                  }}
-                >
-                  수상 내역
-                </Nav.Link>
-                <Nav.Link
-                  className="navi"
-                  href="#project"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setIsProceeding(false);
-                    setIsEducation(false);
-                    setIsAward(false);
-                    setIsProject(true);
-                    setIsCareer(false);
-                    setIsCertificate(false);
-                  }}
-                >
-                  프로젝트
-                  </Nav.Link>
-                <Nav.Link
-                  className="navi"
-                  href="#certificate"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setIsProceeding(false);
-                    setIsEducation(false);
-                    setIsAward(false);
-                    setIsProject(false);
-                    setIsCareer(false)
-                    setIsCertificate(true);
-                  }}
-                >
-                  자격증
-                </Nav.Link>
-              </Nav>
-              {/* <Form className="d-flex">
-                <FormControl
-                  type="search"
-                  placeholder="Search"
-                  className="me-2"
-                  aria-label="Search"
-                />
-                <Button variant="outline-info">Search</Button>
-              </Form> */}
-            </Container>
-          </Navbar>
-          {!isEducation &&
-          !isAward &&
-          !isProject &&
-          !isCertificate &&
-          isProceeding ? (
-            <>
-              <Proceeding
-                portfolioOwnerId={portfolioOwner.id}
-                isEditable={portfolioOwner.id === userState.user?.id}
+              <Nav.Link
+                className="navi"
+                href="#certificate"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsProceeding(false);
+                  setIsEducation(false);
+                  setIsAward(false);
+                  setIsProject(false);
+                  setIsCareer(false)
+                  setIsCertificate(true);
+                }}
+              >
+                자격증
+              </Nav.Link>
+            </Nav>
+            {/* <Form className="d-flex">
+              <FormControl
+                type="search"
+                placeholder="Search"
+                className="me-2"
+                aria-label="Search"
               />
-              <br />
-            </>
-          ) : (
-            <></>
-          )}
+              <Button variant="outline-info">Search</Button>
+            </Form> */}
+          </Container>
+        </Navbar>
+        {!isEducation &&
+        !isAward &&
+        !isProject &&
+        !isCertificate &&
+        isProceeding ? (
+          <>
+            <Proceeding
+              portfolioOwnerId={portfolioOwner.id}
+              isEditable={portfolioOwner.id === userState.user?.id}
+            />
+            <br />
+          </>
+        ) : (
+          <></>
+        )}
 
-          {isEducation ? (
-            <>
-              <Education
-                portfolioOwnerId={portfolioOwner.id}
-                isEditable={portfolioOwner.id === userState.user?.id}
-              />
-              <br />
-            </>
-          ) : (
-            <></>
-          )}
+        {isEducation ? (
+          <>
+            <Education
+              portfolioOwnerId={portfolioOwner.id}
+              isEditable={portfolioOwner.id === userState.user?.id}
+            />
+            <br />
+          </>
+        ) : (
+          <></>
+        )}
 
-          {isCareer ? <><Career
-            portfolioOwnerId={portfolioOwner.id}
-            isEditable={portfolioOwner.id === userState.user?.id}
-          />
-          <br/></> : <></>}
+        {isCareer ? <><Career
+          portfolioOwnerId={portfolioOwner.id}
+          isEditable={portfolioOwner.id === userState.user?.id}
+        />
+        <br/></> : <></>}
 
-          {isAward ? <><Awards
-            portfolioOwnerId={portfolioOwner.id}
-            isEditable={portfolioOwner.id === userState.user?.id}
-          />
-          <br/></> : <></>}
+        {isAward ? <><Awards
+          portfolioOwnerId={portfolioOwner.id}
+          isEditable={portfolioOwner.id === userState.user?.id}
+        />
+        <br/></> : <></>}
 
-          {isProject ? (
-            <>
-              <Project
-                portfolioOwnerId={portfolioOwner.id}
-                isEditable={portfolioOwner.id === userState.user?.id}
-              />
-              <br />
-            </>
-          ) : (
-            <></>
-          )}
+        {isProject ? (
+          <>
+            <Project
+              portfolioOwnerId={portfolioOwner.id}
+              isEditable={portfolioOwner.id === userState.user?.id}
+            />
+            <br />
+          </>
+        ) : (
+          <></>
+        )}
 
-          {isCertificate ? (
-            <>
-              <Certificate
-                portfolioOwnerId={portfolioOwner.id}
-                isEditable={portfolioOwner.id === userState.user?.id}
-              />
-              <br />
-            </>
-          ) : (
-            <></>
-          )}
-        </Col>
-      </Row>
-    </Container>
+        {isCertificate ? (
+          <>
+            <Certificate
+              portfolioOwnerId={portfolioOwner.id}
+              isEditable={portfolioOwner.id === userState.user?.id}
+            />
+            <br />
+          </>
+        ) : (
+          <></>
+        )}
+
+      </div>
+    </div>
   );
 }
 
