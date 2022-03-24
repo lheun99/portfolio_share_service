@@ -37,7 +37,7 @@ const ProceedingEdit = ({proceeding, setEdit, setProceedingList}) => {
           }
         
 
-        const res = await Api.put(`procedding/${proceeding.id}`, data);
+        const res = await Api.put(`proceedings/${proceeding.id}`, data);
 
         setProceedingList(current => {
             const newProceeding = [...current];
