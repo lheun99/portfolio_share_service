@@ -24,7 +24,7 @@ const AwardCard = ({ awards, award, setIsEditing, isEditable, setAwards }) => {
   return (
     <Container style={{padding: 10, margin:"10px 0", borderBottom: "rgba(70, 65, 65, 0.2) dotted"}}>
       <Row>
-        <Col sm={10} style={{margin:"auto"}}>
+        <Col sm={10}>
           <Card.Subtitle>{award?.title}</Card.Subtitle>
           <Card.Text className="text-muted">{award?.description}</Card.Text>
         </Col>

@@ -145,7 +145,7 @@ function ProjectElement({ project, isEditable, setProjectList, portfolioOwnerId 
             setProjectList={setProjectList}></ProjectEdit> :
             <Container style={{padding: 10, margin:"10px 0", borderBottom: "rgba(70, 65, 65, 0.2) dotted"}}>
                 <Row>
-                    <Col sm={10} style={{margin:"auto"}}>
+                    <Col sm={10}>
                         <Card.Subtitle>{project.title}</Card.Subtitle>
                         <Card.Text className="text-muted">{project.description} <br /> {project.link && <a href={project.link}>{project.link}</a>} <br /> {project.from_date} ~ {project.to_date}</Card.Text>
                     </Col>
