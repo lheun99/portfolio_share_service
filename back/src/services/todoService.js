@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
 
 class todoAuthService {
+  // 진행중인 프로젝트의 할 일 추가
   static async addTodo({ user_id, proceeding_id, todo, finish }) {
     const user = await Todo.findUserById({ user_id });
     if (user.length === 0) {
@@ -24,12 +25,14 @@ class todoAuthService {
     
     return createdNewTodo;
   }
-
+  
+  // 진행중인 프로젝트의 할 일 조회
   static async getTodos({ proceeding_id }) {
     const todos = await Todo.findByProceedingId({ proceeding_id });
       return todos;
   }
 
+  // 진행중인 프로젝트의 할 일 수정
   static async setTodo({ todo_id, toUpdate }) {
     let todo = await Todo.findByTodoId({ todo_id });
 
@@ -49,6 +52,7 @@ class todoAuthService {
     return todo;
   }
 
+  // 진행중인 프로젝트의 할 일 삭제
   static async deleteTodo({ todo_id }) {
     const deletedTodo = await Todo.deleteTodo({ todo_id });
 
@@ -61,6 +65,7 @@ class todoAuthService {
     return deletedTodo;
   }
 
+  // 해당 유저의 진행중인 프로젝트 내 할 일 전체 삭제
   static async deleteAllTodo({ user_id }) {
     const deleteTodos = await Todo.deleteAll({ user_id });
     return;
