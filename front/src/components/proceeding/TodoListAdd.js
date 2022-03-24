@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useContext } from "react";
-import { Row, Col, Button, Card, ProgressBar, Form } from "react-bootstrap";
+import { Row, Col, Button, Card, ProgressBar, Form, Container, Modal, ButtonGroup } from "react-bootstrap";
 // import DatePicker from "react-datepicker";
 import * as Api from '../../api';
 import { UserStateContext } from "../../App";
@@ -65,6 +65,8 @@ const TodoAddForm = ({ setAdd, proceeding, setWorkItemList }) => {
 const WorkItem = ({ workitem, setPercent, itemLength, index, setWorkItemList, isEditable }) => {
     const [check, setCheck] = useState(workitem.finish);
     const [todoEdit, setTodoEdit] = useState(false);
+    const [show, setShow] = useState(false);
+
     useEffect(() => {
         setWorkItemList((current) => {
             const newList = [...current];
@@ -103,6 +105,8 @@ const WorkItem = ({ workitem, setPercent, itemLength, index, setWorkItemList, is
             const newTodo = [...current];
             return newTodo;
         })
+
+        setShow(false);
     }
 
     return (
@@ -122,16 +126,53 @@ const WorkItem = ({ workitem, setPercent, itemLength, index, setWorkItemList, is
                         defaultChecked={check}
                         disabled={!isEditable}
                         onClick={handleCheck}
+                        style={{verticalAlign:"middle",fontSize:10,}}
                     />
                 </Col>
-                {isEditable && (
-                        <>
-                            <Col sm={1}>
-                                <Button variant="outline-info" onClick={() => setTodoEdit(true)} size="sm">편집</Button>
-                            </Col>
-                            <Col sm={1}><Button variant="danger" size="sm" onClick={handleDelete}>삭제</Button></Col>
-                        </>
-                )}
+                <Col sm={2}>
+                    <ButtonGroup style={{ margin: 10, }} size='sm'>
+                        {isEditable && (
+                            <Button
+                            variant="outline-info"
+                            size="sm"
+                            onClick={() => setTodoEdit(true)}
+                            >
+                            <span class="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>edit</span>
+                            </Button>
+                        )}
+                        {isEditable && (
+                            <>
+                            <Button
+                                variant="outline-danger"
+                                size="sm"
+                                onClick={() => setShow(true)}
+                            >
+                                <span class="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>delete</span>
+                            </Button>
+                            <Modal
+                                show={show}
+                                style={{zIndex:99999,}}
+                            >
+                            <Modal.Header>
+                            <Modal.Title>해당 내용을 삭제하시겠습니까?</Modal.Title>
+                            </Modal.Header>
+                            <br />
+                            <Modal.Footer style={{justifyContent:"center"}}>
+                            <Button variant="outline-danger" onClick={handleDelete}>
+                                삭제
+                            </Button>
+                            <Button
+                                variant="outline-info"
+                                onClick={()=>setShow(false)}
+                            >
+                                    취소
+                                </Button>
+                            </Modal.Footer>
+                            </Modal>
+                            </>
+                        )}
+                    </ButtonGroup>
+                </Col>
             </Row>
         </Form>)}
         </>
@@ -144,9 +185,10 @@ const TodoListAdd = ({ proceeding, setProceedingList, isEditable }) => {
     const [workItemList, setWorkItemList] = useState([]);
     const [percent, setPercent] = useState(0);
     const [edit, setEdit] = useState(false);
+    const [show, setShow] = useState(false)
 
     const handleDelete = async () => {
-        await Api.delete('proceeding', proceeding.id);
+        await Api.delete('proceedings', proceeding.id);
         let del_idx = 0;
         setProceedingList(current => {
             for (let i = 0; i < current.length; i++) {
@@ -159,6 +201,8 @@ const TodoListAdd = ({ proceeding, setProceedingList, isEditable }) => {
             const newProceeding = [...current];
             return newProceeding;
         })
+
+        setShow(false);
     }
 
     useEffect(() => {
@@ -183,30 +227,76 @@ const TodoListAdd = ({ proceeding, setProceedingList, isEditable }) => {
 
     return (
         <>
-            <Card>
-                <Card.Body>
-                    <Row>
-                        {edit ? <ProceedingEdit proceeding={proceeding} setEdit={setEdit} setProceedingList={setProceedingList}></ProceedingEdit> : (
-                            <>
-                                <Col sm={9}>
-                                    <Card.Title>{percent === 100 ? `${proceeding.title}(완료)` : proceeding.title}</Card.Title>
-                                    <Card.Text>{`${proceeding.start_date} ~ ${proceeding.end_date}`}</Card.Text>
-                                </Col>
-                                {isEditable &&<Col sm={1}><Button variant="info" onClick={() => setEdit(true)}>편집</Button></Col>}
-                                <Col sm={1}><Button variant="info" onClick={() => setIsWork(current => !current)}>할일</Button></Col>
-                                {isEditable && <Col sm={1}><Button variant="danger" onClick={handleDelete}>삭제</Button></Col>}
-                            </>
-                        )}
-                    </Row>
-                    <ProgressBar style={{ marginTop: 10 }} animated now={percent} label={`${percent}%`} variant={percent === 100 ? "success" : ""} />
-                    {isWork ? <> {workItemList.length > 0 ? workItemList.map((workitem, index) => <WorkItem key={index} workitem={workitem} setPercent={setPercent} itemLength={itemLength} index={index} setWorkItemList={setWorkItemList} isEditable={isEditable}></WorkItem>) :
-                        <div style={{ textAlign: "center", marginTop: 10 }}>
-                            <p>할 일 추가!!</p>
-                        </div>}
-                        {add && <TodoAddForm setAdd={setAdd} proceeding={proceeding} setWorkItemList={setWorkItemList}></TodoAddForm>}
-                        <div style={{ textAlign: "center", marginTop: 10 }}><Card.Body>{isEditable && <Button size='sm' variant="primary" onClick={() => setAdd(true)}>+</Button>}</Card.Body></div></> : <></>}
-                </Card.Body>
-            </Card>
+            <Container style={{padding: 10, margin:"10px 0", borderBottom: "rgba(70, 65, 65, 0.2) dotted"}}>
+                <Row>
+                    {edit ? <ProceedingEdit proceeding={proceeding} setEdit={setEdit} setProceedingList={setProceedingList}></ProceedingEdit> : (
+                        <>
+                            <Col sm={9}>
+                                <Card.Subtitle>{percent === 100 ? `${proceeding.title}(완료)` : proceeding.title}</Card.Subtitle>
+                                <Card.Text className="text-muted">{`${proceeding.start_date} ~ ${proceeding.end_date}`}</Card.Text>
+                            </Col>
+                            <Col sm={3}>
+                                <ButtonGroup style={{ margin: 10, }} size='sm'>
+                                    <Button
+                                        variant="outline-info"
+                                        size="sm"
+                                        onClick={() => setIsWork(current => !current)}
+                                    >
+                                        <span class="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>library_add_check</span>
+                                    </Button>
+                                    {isEditable && (
+                                        <Button
+                                        variant="outline-info"
+                                        size="sm"
+                                        onClick={() => setEdit(true)}
+                                        >
+                                        <span class="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>edit</span>
+                                        </Button>
+                                    )}
+                                    {isEditable && (
+                                        <>
+                                        <Button
+                                            variant="outline-danger"
+                                            size="sm"
+                                            onClick={() => setShow(true)}
+                                        >
+                                            <span class="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>delete</span>
+                                        </Button>
+                                        <Modal
+                                            show={show}
+                                            style={{zIndex:99999,}}
+                                        >
+                                        <Modal.Header>
+                                        <Modal.Title>해당 내용을 삭제하시겠습니까?</Modal.Title>
+                                        </Modal.Header>
+                                        <br />
+                                        <Modal.Footer style={{justifyContent:"center"}}>
+                                        <Button variant="outline-danger" onClick={handleDelete}>
+                                            삭제
+                                        </Button>
+                                        <Button
+                                            variant="outline-info"
+                                            onClick={()=>setShow(false)}
+                                        >
+                                                취소
+                                            </Button>
+                                        </Modal.Footer>
+                                        </Modal>
+                                        </>
+                                    )}
+                                </ButtonGroup>
+                            </Col>
+                        </>
+                    )}
+                </Row>
+                <ProgressBar style={{ marginTop: 10 }} animated now={percent} label={`${percent}%`} variant={percent === 100 ? "success" : ""} />
+                {isWork ? <> {workItemList.length > 0 ? workItemList.map((workitem, index) => <WorkItem key={index} workitem={workitem} setPercent={setPercent} itemLength={itemLength} index={index} setWorkItemList={setWorkItemList} isEditable={isEditable}></WorkItem>) :
+                    <div style={{ textAlign: "center", marginTop: 10 }}>
+                        <p>할 일이 없습니다.</p>
+                    </div>}
+                    {add && <TodoAddForm setAdd={setAdd} proceeding={proceeding} setWorkItemList={setWorkItemList}></TodoAddForm>}
+                    <div style={{ textAlign: "center", marginTop: 10 }}><Card.Body>{isEditable && <Button size='sm' variant="secondary" style={{borderRadius:100,}} onClick={() => setAdd(true)}>+</Button>}</Card.Body></div></> : <></>}
+            </Container>
         </>
     )
 }
