@@ -41,6 +41,8 @@ function ProfilePage() {
   const withdrawal = async () => {
     if (!window.confirm("정말로 회원탈퇴하시겠습니까?")) return;
 
+    const userProfile = user.profile.split("/").slice(-1)[0];
+
     // 해당 유저의 education, award, project, certificate, career, proceeding, todo 삭제
     await Api.delete(`educationlist/${user.id}`);
     await Api.delete(`awardlist/${user.id}`);
@@ -49,6 +51,7 @@ function ProfilePage() {
     await Api.delete(`careerlist/${user.id}`);
     await Api.delete(`proceedinglist/${user.id}`);
     await Api.delete(`todolist/${user.id}`);
+    await Api.delete("deleteImg", userProfile);
 
     // 해당 유저 DELETE 요청 처리
     await Api.delete(`users/${user.id}`);
