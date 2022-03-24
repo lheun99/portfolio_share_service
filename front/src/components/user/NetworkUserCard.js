@@ -29,7 +29,7 @@ function NetworkUserCard({ user }) {
       <Card.Body>
         <Row className="justify-content-md-center">
           <Card.Img
-            style={{ width: "9.4rem", height: "8.45rem", borderRadius: 100 }}
+            style={{ width: "9rem", height: "9rem", borderRadius: 100, margin:0, padding:0, }}
             className="mb-3"
             src={user?.profile}
             alt="사용자 프로필"
@@ -38,23 +38,23 @@ function NetworkUserCard({ user }) {
         <Card.Title
           style={{
             display: "flex",
-            flexDirection: "row",
+            flexDirection: "column",
             alignItems: "center",
           }}
         >
           {user?.name}
+        </Card.Title>
+
+        <Card.Subtitle className="mb-2 text-muted" style={{textAlign:"center"}}>{user?.email}</Card.Subtitle>
+        <Card.Text style={{borderTop:"grey solid 1px", padding:5, height:60,}}>{user?.description}</Card.Text>
+        <Card.Text style={{display:"flex", flexDirection:"row", alignItems:"center",justifyContent:"space-between"}}>
           <h6 style={{ margin: "auto 5px" }}>
             <Badge pill bg={colorChange()}>
               {" "}
               {user?.job}
             </Badge>
           </h6>
-        </Card.Title>
-
-        <Card.Subtitle className="mb-2 text-muted">{user?.email}</Card.Subtitle>
-        <Card.Text>{user?.description}</Card.Text>
-        <Card.Text>
-          <i className="fa-regular fa-file-lines"></i> {user?.projectNum}
+          <div><i className="fa-regular fa-file-lines"></i> {user?.projectNum}</div>
         </Card.Text>
       </Card.Body>
     </Card>
