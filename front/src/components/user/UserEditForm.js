@@ -14,20 +14,21 @@ function UserEditForm({ user, setUser }) {
   const [profile, setProfile] = useState({});
 
   useEffect(() => {
-    setUpdateUser({
-      name: user.name,
-      description: user.description,
-      job: user.job,
-      github: user.github,
-      gitlab: user.gitlab,
-      twitter: user.twitter,
-      instagram: user.instagram,
-      youtube: user.youtube,
-    });
-    setProfile({
-      profileObj: "",
-      preview: "",
-      currentUrl: user.profile,
+    if(Object.keys(user).length > 0)
+      setUpdateUser({
+        name: user.name,
+        description: user.description,
+        job: user.job,
+        github: user.github,
+        gitlab: user.gitlab,
+        twitter: user.twitter,
+        instagram: user.instagram,
+        youtube: user.youtube,
+      });
+      setProfile({
+        profileObj: "",
+        preview: "",
+        currentUrl: user.profile,
     });
   }, [user]);
 
@@ -129,36 +130,74 @@ function UserEditForm({ user, setUser }) {
   return (
     <Card border="light">
       <Card.Body>
-        <Row className="justify-content-md-center">
-          <Card.Img
-            style={{ width: "9rem", height: "9rem", borderRadius:"100px", margin:0, padding:0, }}
-            className="mb-3"
-            src={profile.preview ? profile.preview : profile.currentUrl}
-            alt="변경할 프로필"
+        <div
+          className="text-muted"
+          style={{ borderBottom: "rgba(70, 65, 65, 0.2) solid thin", margin: "20px 0 10px 0" }}
+        >
+          <span class="material-icons" style={{ verticalAlign: "middle" }}>
+            image
+          </span>{" "}
+          프로필 이미지
+        </div>
+        <div
+          className="text-muted"
+          style={{ fontSize: "10px" }}
+        >
+          프로필 이미지는 여러분을 표현하는 가장 첫 단계입니다.<br />
+          자신을 표현하는 프로필 이미지를 설정해보세요!
+        </div>
+        <div style={{ padding: '10px', margin: '0 30% 0 30%'}}>
+          <Row className="justify-content-md-center">
+            <Card.Img
+              style={{ width: "9rem", height: "9rem", borderRadius:"100px", margin:0, padding:0, }}
+              className="mb-3"
+              src={profile.preview ? profile.preview : profile.currentUrl}
+              alt="변경할 프로필"
+            />
+          </Row>
+          <label htmlFor="image_upload">
+            <i
+              className="fa-solid fa-camera"
+              style={{ paddingRight: '10px', cursor: 'pointer' }}
+            ></i>
+          </label>
+          <input
+            type="file"
+            id="image_upload"
+            accept="image/*"
+            onChange={changeHandler}
+            style={{ display: "none", cursor: 'pointer' }}
           />
-        </Row>
-        <label htmlFor="image_upload">
-          <i className="fa-solid fa-camera"></i>
-        </label>
-        <input
-          type="file"
-          id="image_upload"
-          accept="image/*"
-          onChange={changeHandler}
-          style={{ display: "none" }}
-        />
-        <label htmlFor="set_default">
-          <i className="fa-solid fa-arrow-rotate-left"></i>
-        </label>
-        <input
-          type="button"
-          id="set_default"
-          onClick={setDefaultHandler}
-          style={{ display: "none" }}
-        />
-        <p>이름</p>
+          <label htmlFor="set_default">
+            <i className="fa-solid fa-arrow-rotate-left"></i>
+          </label>
+          <input
+            type="button"
+            id="set_default"
+            onClick={setDefaultHandler}
+            style={{ display: "none" }}
+          />
+        </div>
         <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="userEditName" className="mb-3">
+          <div
+            className="text-muted"
+            style={{ borderBottom: "rgba(70, 65, 65, 0.2) solid thin", margin: "0 0 10px 0" }}
+          >
+            <span class="material-icons" style={{ verticalAlign: "middle" }}>
+              badge
+            </span>{" "}
+            이름
+          </div>
+          <div
+            className="text-muted"
+            style={{ fontSize: "10px", marginBottom: '10px' }}
+          >
+            당신의 이름을 설정해주세요!
+          </div>
+          <Form.Group
+            controlId="userEditName"
+            className="mb-3"
+          >
             <Form.Control
               type="text"
               placeholder="이름을 입력하세요"
@@ -168,8 +207,21 @@ function UserEditForm({ user, setUser }) {
             />
           </Form.Group>
 
-          <p>이메일</p>
-          <p style={{ fontSize: "11px" }}>이메일은 변경 불가능합니다.</p>
+          <div
+            className="text-muted"
+            style={{ borderBottom: "rgba(70, 65, 65, 0.2) solid thin", margin: "30px 0 10px 0" }}
+          >
+            <span class="material-icons" style={{ verticalAlign: "middle" }}>
+              email
+            </span>{" "}
+            이메일
+          </div>
+          <div
+            className="text-muted"
+            style={{ fontSize: "10px", marginBottom: '10px' }}
+          >
+            이메일은 변경 불가능합니다!
+          </div>
           <Form.Group controlId="userEmail" className="mb-3">
             <Form.Control
               type="email"
@@ -179,7 +231,22 @@ function UserEditForm({ user, setUser }) {
             />
           </Form.Group>
 
-          <p>소개</p>
+          <div
+            className="text-muted"
+            style={{ borderBottom: "rgba(70, 65, 65, 0.2) solid thin", margin: "30px 0 10px 0" }}
+          >
+            <span class="material-icons" style={{ verticalAlign: "middle" }}>
+              person_search
+            </span>{" "}
+            소개
+          </div>
+          <div
+            className="text-muted"
+            style={{ fontSize: "10px", marginBottom: '10px' }}
+          >
+            프로필은 다양한 사람들과 공유되고 있습니다.<br />
+            자기 자신을 소개해주세요!
+          </div>
           <Form.Group controlId="userEditDescription" className="mb-3">
             <Form.Control
               type="text"
@@ -191,7 +258,22 @@ function UserEditForm({ user, setUser }) {
             />
           </Form.Group>
 
-          <p>직무</p>
+          <div
+            className="text-muted"
+            style={{ borderBottom: "rgba(70, 65, 65, 0.2) solid thin", margin: "30px 0 10px 0" }}
+          >
+            <span class="material-icons" style={{ verticalAlign: "middle" }}>
+              computer
+            </span>{" "}
+            직무
+          </div>
+          <div
+            className="text-muted"
+            style={{ fontSize: "10px", marginBottom: '10px' }}
+          >
+            이곳에는 다양한 관심사를 가진 사람들이 모여있습니다.<br />
+            당신이 가장 관심 있는 직무를 선택해주세요!
+          </div>
           <Form.Group controlId="userEditJob" className="mb-3">
             <Form.Select
               onChange={(e) =>
@@ -208,7 +290,22 @@ function UserEditForm({ user, setUser }) {
             </Form.Select>
           </Form.Group>
 
-          <p>소셜 링크</p>
+          <div
+            className="text-muted"
+            style={{ borderBottom: "rgba(70, 65, 65, 0.2) solid thin", margin: "30px 0 10px 0" }}
+          >
+            <span class="material-icons" style={{ verticalAlign: "middle" }}>
+              share
+            </span>{" "}
+            소셜 링크
+          </div>
+          <div
+            className="text-muted"
+            style={{ fontSize: "10px", marginBottom: '10px' }}
+          >
+            깃헙, 인스타그램 또는 유튜브를 운영중이신가요?<br />
+            기존 사용중인 플랫폼 링크를 추가하세요!
+          </div>
           <Form.Group controlId="userEditSocialLinkGitHub" className="mb-3">
             <Form.Control
               type="text"
@@ -264,7 +361,21 @@ function UserEditForm({ user, setUser }) {
             />
           </Form.Group>
 
-          <p>비밀번호</p>
+          <div
+            className="text-muted"
+            style={{ borderBottom: "rgba(70, 65, 65, 0.2) solid thin", margin: "30px 0 10px 0" }}
+          >
+            <span class="material-icons" style={{ verticalAlign: "middle" }}>
+              lock
+            </span>{" "}
+            비밀번호
+          </div>
+          <div
+            className="text-muted"
+            style={{ fontSize: "10px", marginBottom: '10px' }}
+          >
+            비밀번호도 변경 가능합니다!
+          </div>
           {!isValidPassword && (
             <p style={{ fontSize: "11px", color: "red" }}>
               비밀번호는 4글자 이상이어야 합니다.
@@ -285,7 +396,12 @@ function UserEditForm({ user, setUser }) {
               }}
             />
           </Form.Group>
-          <p>비밀번호 재확인</p>
+          <div
+            className="text-muted"
+            style={{ marginBottom: "10px", fontSize: "12px" }}
+          >
+            비밀번호 재확인
+          </div>
           {isValidPassword && !isCorrectPassword && (
             <p style={{ fontSize: "11px", color: "red" }}>
               비밀번호가 일치하지 않습니다.
