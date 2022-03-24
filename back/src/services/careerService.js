@@ -2,6 +2,7 @@ import { Career, User } from "../db";
 import { v4 as uuidv4 } from "uuid";
 
 class careerService {
+  // 경력 사항 추가
   static async addCareer({ user_id, company, job_position, achievement, from_date, to_date, isCurrent }) {
     // user 확인
     const user = await User.findById({ user_id });
@@ -18,6 +19,23 @@ class careerService {
     createdNewCareer.errorMessage = null; 
 
     return createdNewCareer;
+  }
+
+  // 해당 경력 사항의 상세 정보 불러오기
+  static async getCareerInfo({ career_id }) {
+    const career = await Career.findById({ career_id });
+
+    if (!career) {
+      const message = "해당 사항이 이미 삭제되었거나 존재하지 않습니다.";
+      return { message };
+    }
+    return career;
+  }
+  
+  // 해당 유저의 경력 사항 불러오기
+  static async getCareers({ user_id }) {
+    const careers = await Career.findByUserId({ user_id });
+    return careers;
   }
 
   // 경력 사항 수정
@@ -37,23 +55,6 @@ class careerService {
     });
     
     career = await Career.update({ career_id, toUpdate });
-    return career;
-  }
-
-  // 해당 유저의 경력 사항 불러오기
-  static async getCareers({ user_id }) {
-    const careers = await Career.findByUserId({ user_id });
-    return careers;
-  }
-
-  // 해당 경력 사항의 상세 정보 불러오기
-  static async getCareerInfo({ career_id }) {
-    const career = await Career.findById({ career_id });
-
-    if (!career) {
-      const message = "해당 사항이 이미 삭제되었거나 존재하지 않습니다.";
-      return { message };
-    }
     return career;
   }
 

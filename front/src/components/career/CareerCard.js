@@ -30,7 +30,7 @@ const CareerCard = ({ value, editHandler, deleteHandler, isEditable }) => {
         onUpdate={updateHandler} /> :
       <Container style={{padding: 10, margin:"10px 0", borderBottom: "rgba(70, 65, 65, 0.2) dotted"}}>
         <Row>
-          <Col sm={10} style={{margin:"auto"}}>
+          <Col sm={10}>
             <Card.Subtitle>{company}</Card.Subtitle>
             <Card.Text className="text-muted">{job_position}
               <br/> {achievement}

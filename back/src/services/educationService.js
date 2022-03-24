@@ -23,6 +23,23 @@ class educationService {
     return createdNewEducation;
   }
 
+  // 해당 학력 사항의 상세 정보 불러오기
+  static async getEducationInfo({ education_id }) {
+    const education = await Education.findById({ education_id });
+
+    if (!education) {
+      const message = "해당 사항이 이미 삭제되었거나 존재하지 않습니다.";
+      return { message };
+    }
+    return education;
+  }
+
+  // 해당 유저의 학력 사항 불러오기
+  static async getEducations({ user_id }) {
+    const education = await Education.findByUserId({ user_id });
+    return education;
+  }
+
   // 학력 사항 수정
   static async setEducation({ education_id, toUpdate }) {
     let education = await Education.findById({ education_id })
@@ -42,24 +59,7 @@ class educationService {
     education = await Education.update({ education_id, toUpdate });
     return education;
   }
-
-  // 해당 유저의 학력 사항 불러오기
-  static async getEducations({ user_id }) {
-    const education = await Education.findByUserId({ user_id });
-    return education;
-  }
-
-  // 해당 학력 사항의 상세 정보 불러오기
-  static async getEducationInfo({ education_id }) {
-    const education = await Education.findById({ education_id });
-
-    if (!education) {
-      const message = "해당 사항이 이미 삭제되었거나 존재하지 않습니다.";
-      return { message };
-    }
-    return education;
-  }
-
+  
   // 학력 사항 삭제
   static async deleteEducation({ education_id }) {
     const deletedEducation = await Education.delete({ education_id });

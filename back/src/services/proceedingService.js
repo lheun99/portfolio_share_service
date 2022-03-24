@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
 
 class proceedingAuthService {
+  // 진행중인 프로젝트 추가
   static async addProceeding({ user_id, title, start_date, end_date }) {
       const user = await Proceeding.findUserById({ user_id });
       if (user.length === 0) {
@@ -25,11 +26,13 @@ class proceedingAuthService {
       return createdNewProceeding;
   }
 
+  // 유저의 진행중인 프로젝트 조회
   static async getProceedings({ user_id }) {
       const proceedings = await Proceeding.findByUserId({ user_id });
       return proceedings;
   }
 
+  // 진행중인 프로젝트 수정
   static async setProceeding({ proceeding_id, toUpdate }) {
     let proceeding = await Proceeding.findByProceedingId({ proceeding_id });
 
@@ -51,6 +54,7 @@ class proceedingAuthService {
     return proceeding;
   }
 
+  // 진행중인 프로젝트 삭제
   static async deleteProceeding({ proceeding_id }) {
     const deletedProceeding = await Proceeding.deleteProceeding({
       proceeding_id,

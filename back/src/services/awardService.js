@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 
 
 class awardService {
+  // 수상 내역 추가
   static async addAward({ user_id, title, description }) {
     // user_id가 유효하지 않은 경우
     const user = await User.findById({ user_id });
@@ -22,6 +23,7 @@ class awardService {
     return createdNewAward;
   }
 
+  // 수상 내역 상세 정보 조회
   static async getAwardInfo({ award_id }) {
     // db에 해당 수상 내역 존재 여부 확인
     const award = await Award.findById({ award_id });
@@ -34,11 +36,13 @@ class awardService {
     return award;
   }
 
+  // user의 수상 내역 조회
   static async getAwards({ user_id }) {
     const awards = await Award.findByUserId({ user_id });
     return awards;
   }
 
+  // 수상 내역 수정
   static async setAward({ award_id, toUpdate }) {
     let award = await Award.findById({ award_id });
 
@@ -60,12 +64,14 @@ class awardService {
     return award;
   }
 
+  // 수상 내역 삭제
   static async deleteAward({ award_id }) {
     // 해당 내역 삭제
     const deletedAward = await Award.delete({ award_id });
     return deletedAward;
   }
 
+  // user의 전체 수상 내역 삭제
   static async deleteAllAward({ user_id }) {
     const deletedAwards = await Award.deleteAll({ user_id });
     return;
