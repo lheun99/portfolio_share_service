@@ -66,7 +66,7 @@ function Network() {
     <Container fluid >
       <div style={{ height: 110 }}></div>
       <div style={{padding:10,}}>
-        <Nav className="me-auto">
+        <Nav className="me-auto" style={{width:1217, justifyContent:"center"}}>
           <Nav.Link
             href="#all"
             onClick={(e) => {
@@ -173,13 +173,13 @@ function Network() {
         </Nav>
       </div>
       {isShearched ? (
-        <>
-          <Row xs="auto" className="jusify-content-center">
+        <div style={{display:"flex", flexDirection:"row", justifyContent:"center", }}>
+          <Row xs="auto" className="jusify-content-center" style={{width:1217,}}>
             {filteredUsers.map((user) => (
               <NetworkUserCard key={user.id} user={user} isNetwork />
             ))}
           </Row>
-        </>
+        </div>
       ) : (
         <></>
       )}
@@ -192,65 +192,65 @@ function Network() {
         </Modal.Footer>
       </Modal>
       {isAll ? (
-        <>
-          <Row xs="auto" className="jusify-content-center">
+        <div style={{display:"flex", flexDirection:"row", justifyContent:"center", }}>
+          <Row xs="auto" className="jusify-content-center" style={{width:1217,}}>
             {users.map((user) => (
               <NetworkUserCard key={user.id} user={user} isNetwork />
             ))}
           </Row>
-        </>
+        </div>
       ) : (
         <></>
       )}
       {isFront ? (
-        <>
-          <Row xs="auto" className="jusify-content-center">
+        <div style={{display:"flex", flexDirection:"row", justifyContent:"center", }}>
+          <Row xs="auto" className="jusify-content-center" style={{width:1217,}}>
             {users
               .filter((user) => user.job === "프론트엔드")
               .map((user) => (
                 <NetworkUserCard key={user.id} user={user} isNetwork />
               ))}
           </Row>
-        </>
+        </div>
       ) : (
         <></>
       )}
       {isBack ? (
-        <>
-          <Row xs="auto" className="jusify-content-center">
+        <div style={{display:"flex", flexDirection:"row", justifyContent:"center", }}>
+          <Row xs="auto" className="jusify-content-center" style={{width:1217,}}>
             {users
               .filter((user) => user.job === "백엔드")
               .map((user) => (
                 <NetworkUserCard key={user.id} user={user} isNetwork />
               ))}
           </Row>
-        </>
+        </div>
       ) : (
         <></>
       )}
       {isData ? (
-        <>
-          <Row xs="auto" className="jusify-content-center">
+        <div style={{display:"flex", flexDirection:"row", justifyContent:"center", }}>
+          <Row xs="auto" className="jusify-content-center" style={{width:1217,}}>
             {users
               .filter((user) => user.job === "데이터 분석")
               .map((user) => (
                 <NetworkUserCard key={user.id} user={user} isNetwork />
               ))}
           </Row>
-        </>
+        </div>
       ) : (
         <></>
       )}
       {isAI ? (
-        <>
-          <Row xs="auto" className="jusify-content-center">
+        <div style={{display:"flex", flexDirection:"row", justifyContent:"center", }}>
+          <Row xs="auto" className="jusify-content-center" style={{width:1217,}}>
             {users
               .filter((user) => user.job === "AI")
               .map((user) => (
                 <NetworkUserCard key={user.id} user={user} isNetwork />
               ))}
           </Row>
-        </>
+        </div>
       ) : (
         <></>
       )}

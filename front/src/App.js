@@ -6,6 +6,7 @@ import { loginReducer } from "./reducer";
 import "./App.css";
 
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import LoginForm from "./components/user/LoginForm";
 import Network from "./components/user/Network";
 import RegisterForm from "./components/user/RegisterForm";
@@ -79,28 +80,31 @@ function App() {
   }
 
   return (
-    <DispatchContext.Provider value={dispatch}>
-      <UserStateContext.Provider value={userState}>
-        <Router>
-          <Header />
-          <Routes>
-            <Route path="/carousel" exact element={<Carousel />} />
-            <Route path="/" exact element={<Portfolio />} />
-            <Route path="/login" element={<LoginForm />} />
-            <Route path="/register" element={<RegisterForm />} />
-            <Route path="/users/:userId" element={<Portfolio />} />
-            <Route
-              path="/users/:userId/profilePage"
-              element={<ProfilePage />}
-            />
-            <Route path="/network" element={<Network />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/password-reset" element={<PasswordResetForm />}/>
-            <Route path="*" element={<Portfolio />} />
-          </Routes>
-        </Router>
-      </UserStateContext.Provider>
-    </DispatchContext.Provider>
+    <>
+      <DispatchContext.Provider value={dispatch}>
+        <UserStateContext.Provider value={userState}>
+          <Router>
+            <Header />
+            <Routes>
+              <Route path="/carousel" exact element={<Carousel />} />
+              <Route path="/" exact element={<Portfolio />} />
+              <Route path="/login" element={<LoginForm />} />
+              <Route path="/register" element={<RegisterForm />} />
+              <Route path="/users/:userId" element={<Portfolio />} />
+              <Route
+                path="/users/:userId/profilePage"
+                element={<ProfilePage />}
+              />
+              <Route path="/network" element={<Network />} />
+              <Route path="/projects" element={<Projects />} />
+              <Route path="/password-reset" element={<PasswordResetForm />}/>
+              <Route path="*" element={<Portfolio />} />
+            </Routes>
+          </Router>
+        </UserStateContext.Provider>
+      </DispatchContext.Provider>
+      <Footer />
+    </>
   );
 }
 
