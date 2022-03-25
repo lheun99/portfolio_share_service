@@ -12,7 +12,7 @@ import Project from "./project/Project";
 import Certificate from "./certificate/Certificate";
 import Education from "./education/Education";
 import Proceeding from "./proceeding/Proceeding";
-import Career from './career/Career';
+import Career from "./career/Career";
 
 function Portfolio() {
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ function Portfolio() {
   const [isProject, setIsProject] = useState(true);
   const [isCertificate, setIsCertificate] = useState(true);
   const [isProceeding, setIsProceeding] = useState(true);
-  const [isCareer, setIsCareer] = useState(true)
+  const [isCareer, setIsCareer] = useState(true);
 
   const fetchPorfolioOwner = async (ownerId) => {
     // 유저 id를 가지고 "/users/유저id" 엔드포인트로 요청해 사용자 정보를 불러옴.
@@ -89,9 +89,9 @@ function Portfolio() {
 
   return (
     <>
-      <div style={{height:110,}}></div>
+      <div style={{ height: 110 }}></div>
       <div id="banner_mypage">
-        <h2 style={{fontWeight:"bolder",fontFamily:"Poppins sans-serif"}}>My page</h2>
+        <h2 style={{ fontWeight: "bolder" }}>My page</h2>
         <h4>나만의 페이지를 작성해보세요</h4>
       </div>
       <div className="portfolioPage">
@@ -109,15 +109,24 @@ function Portfolio() {
                 <Nav.Link
                   className="navi"
                   href="#all"
-                  onClick = {(e) => {
-                    e.preventDefault()
-                    setIsProceeding(true)
-                    setIsEducation(true)
-                    setIsCareer(true)
-                    setIsAward(true)
-                    setIsProject(true)
-                    setIsCertificate(true)
-                  }}><span className="material-icons" style={{verticalAlign:"middle",}}>all_inbox</span> 전체 보기</Nav.Link>
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsProceeding(true);
+                    setIsEducation(true);
+                    setIsCareer(true);
+                    setIsAward(true);
+                    setIsProject(true);
+                    setIsCertificate(true);
+                  }}
+                >
+                  <span
+                    className="material-icons"
+                    style={{ verticalAlign: "middle" }}
+                  >
+                    all_inbox
+                  </span>{" "}
+                  전체 보기
+                </Nav.Link>
                 <Nav.Link
                   className="navi"
                   href="#proceeding"
@@ -151,7 +160,7 @@ function Portfolio() {
                 <Nav.Link
                   className="navi"
                   href="#career"
-                  onClick = {(e) => {
+                  onClick={(e) => {
                     e.preventDefault();
                     setIsProceeding(false);
                     setIsEducation(false);
@@ -159,8 +168,11 @@ function Portfolio() {
                     setIsAward(false);
                     setIsProject(false);
                     setIsCertificate(false);
-                  }}>경력</Nav.Link>
-                <Nav.Link 
+                  }}
+                >
+                  경력
+                </Nav.Link>
+                <Nav.Link
                   className="navi"
                   href="#award"
                   onClick={(e) => {
@@ -189,7 +201,7 @@ function Portfolio() {
                   }}
                 >
                   프로젝트
-                  </Nav.Link>
+                </Nav.Link>
                 <Nav.Link
                   className="navi"
                   href="#certificate"
@@ -199,7 +211,7 @@ function Portfolio() {
                     setIsEducation(false);
                     setIsAward(false);
                     setIsProject(false);
-                    setIsCareer(false)
+                    setIsCareer(false);
                     setIsCertificate(true);
                   }}
                 >
@@ -245,17 +257,29 @@ function Portfolio() {
             <></>
           )}
 
-          {isCareer ? <><Career
-            portfolioOwnerId={portfolioOwner.id}
-            isEditable={portfolioOwner.id === userState.user?.id}
-          />
-          <br/></> : <></>}
+          {isCareer ? (
+            <>
+              <Career
+                portfolioOwnerId={portfolioOwner.id}
+                isEditable={portfolioOwner.id === userState.user?.id}
+              />
+              <br />
+            </>
+          ) : (
+            <></>
+          )}
 
-          {isAward ? <><Awards
-            portfolioOwnerId={portfolioOwner.id}
-            isEditable={portfolioOwner.id === userState.user?.id}
-          />
-          <br/></> : <></>}
+          {isAward ? (
+            <>
+              <Awards
+                portfolioOwnerId={portfolioOwner.id}
+                isEditable={portfolioOwner.id === userState.user?.id}
+              />
+              <br />
+            </>
+          ) : (
+            <></>
+          )}
 
           {isProject ? (
             <>
@@ -280,7 +304,6 @@ function Portfolio() {
           ) : (
             <></>
           )}
-
         </div>
       </div>
     </>
