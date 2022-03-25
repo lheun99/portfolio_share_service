@@ -7,14 +7,13 @@ function ProjectElement({ project, isEditable, setProjectList, portfolioOwnerId,
     const [edit, setEdit] = useState(false);
     const [show, setShow] = useState(false);
     const [check, setCheck] = useState(isLiked);
-    const [likeCount, setLikeCount] = useState(project.likes);
 
     const clickHandler = (e) => {
         e.preventDefault();
         setCheck(current => !current);
         Api.post('setlike', { user_id: portfolioOwnerId, project_id: project.id})
             .then((res) => {
-                if (res.status === 200) {
+                if (res.status === 201) {
                     setLikes(current => {
                         return { ...current, [res.data.project_id]: true }
                     })
@@ -66,7 +65,7 @@ function ProjectElement({ project, isEditable, setProjectList, portfolioOwnerId,
                             <div>
                                 <button onClick={clickHandler} style={{ border: "none", backgroundColor:"transparent" }}>
                                     <i className="fa-solid fa-heart" style={{ color: check ? "red" : "gray" }}/></button>
-                                {likeCount}
+                                {project.likes}
                             </div>
                         </Card.Text>
                     </Col>
