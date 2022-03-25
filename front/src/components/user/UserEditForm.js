@@ -134,7 +134,7 @@ function UserEditForm({ user, setUser }) {
           className="text-muted"
           style={{ borderBottom: "rgba(70, 65, 65, 0.2) solid thin", margin: "20px 0 10px 0" }}
         >
-          <span class="material-icons" style={{ verticalAlign: "middle" }}>
+          <span className="material-icons" style={{ verticalAlign: "middle" }}>
             image
           </span>{" "}
           프로필 이미지
@@ -183,7 +183,7 @@ function UserEditForm({ user, setUser }) {
             className="text-muted"
             style={{ borderBottom: "rgba(70, 65, 65, 0.2) solid thin", margin: "0 0 10px 0" }}
           >
-            <span class="material-icons" style={{ verticalAlign: "middle" }}>
+            <span className="material-icons" style={{ verticalAlign: "middle" }}>
               badge
             </span>{" "}
             이름
@@ -211,7 +211,7 @@ function UserEditForm({ user, setUser }) {
             className="text-muted"
             style={{ borderBottom: "rgba(70, 65, 65, 0.2) solid thin", margin: "30px 0 10px 0" }}
           >
-            <span class="material-icons" style={{ verticalAlign: "middle" }}>
+            <span className="material-icons" style={{ verticalAlign: "middle" }}>
               email
             </span>{" "}
             이메일
@@ -235,7 +235,7 @@ function UserEditForm({ user, setUser }) {
             className="text-muted"
             style={{ borderBottom: "rgba(70, 65, 65, 0.2) solid thin", margin: "30px 0 10px 0" }}
           >
-            <span class="material-icons" style={{ verticalAlign: "middle" }}>
+            <span className="material-icons" style={{ verticalAlign: "middle" }}>
               person_search
             </span>{" "}
             소개
@@ -262,7 +262,7 @@ function UserEditForm({ user, setUser }) {
             className="text-muted"
             style={{ borderBottom: "rgba(70, 65, 65, 0.2) solid thin", margin: "30px 0 10px 0" }}
           >
-            <span class="material-icons" style={{ verticalAlign: "middle" }}>
+            <span className="material-icons" style={{ verticalAlign: "middle" }}>
               computer
             </span>{" "}
             직무
@@ -294,7 +294,7 @@ function UserEditForm({ user, setUser }) {
             className="text-muted"
             style={{ borderBottom: "rgba(70, 65, 65, 0.2) solid thin", margin: "30px 0 10px 0" }}
           >
-            <span class="material-icons" style={{ verticalAlign: "middle" }}>
+            <span className="material-icons" style={{ verticalAlign: "middle" }}>
               share
             </span>{" "}
             소셜 링크
@@ -365,7 +365,7 @@ function UserEditForm({ user, setUser }) {
             className="text-muted"
             style={{ borderBottom: "rgba(70, 65, 65, 0.2) solid thin", margin: "30px 0 10px 0" }}
           >
-            <span class="material-icons" style={{ verticalAlign: "middle" }}>
+            <span className="material-icons" style={{ verticalAlign: "middle" }}>
               lock
             </span>{" "}
             비밀번호

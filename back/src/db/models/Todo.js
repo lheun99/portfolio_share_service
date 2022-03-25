@@ -47,6 +47,11 @@ class Todo {
     return deletedTodos;
   }
 
+  static async deleteProceedingTodo({ proceeding_id }) {
+    const deletedTodos = await TodoModel.deleteMany({ proceeding_id: proceeding_id });
+    return deletedTodos;
+  }
+
 }
 
 export { Todo };

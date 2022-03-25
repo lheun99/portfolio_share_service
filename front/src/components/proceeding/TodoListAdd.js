@@ -76,15 +76,14 @@ const WorkItem = ({ workitem, setPercent, itemLength, index, setWorkItemList, is
     }, [check, setWorkItemList, index]);
 
     const handleCheck = (e) => {
-        if (e.target.defaultChecked === true) {
+        if (check === true) {
             setPercent(current => current - (100 / itemLength))
             setCheck(current => !current);
         }
-        else if (e.target.defaultChecked === false) {
+        else if (check === false) {
             setPercent(current => current + (100 / itemLength))
             setCheck(current => !current);
         }
-        console.log(workitem);
         const data = {todo:workitem.todo, finish:!workitem.finish}
         Api.put(`todo/${workitem.id}`, data);
 
@@ -118,60 +117,61 @@ const WorkItem = ({ workitem, setPercent, itemLength, index, setWorkItemList, is
                         {workitem.todo}
                     </Form.Text>
                 </Col>
-                <Col sm={1}>
-                    <Form.Check
-                        type='checkbox'
-                        id='finish-checkbox'
-                        label='완료'
-                        defaultChecked={check}
-                        disabled={!isEditable}
-                        onClick={handleCheck}
-                        style={{verticalAlign:"middle",fontSize:10,}}
-                    />
-                </Col>
                 <Col sm={2}>
-                    <ButtonGroup style={{ margin: 10, }} size='sm'>
-                        {isEditable && (
-                            <Button
+                <ButtonGroup style={{ margin: 10, }} size='sm'>
+                    {isEditable && (
+                        <Button
                             variant="outline-info"
                             size="sm"
-                            onClick={() => setTodoEdit(true)}
+                            disabled={!isEditable}
+                            
+                            onClick={handleCheck}
                             >
-                            <span class="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>edit</span>
+                            <span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>done</span>
+                        </Button>
+                    )}
+                    {isEditable && (
+                        <Button
+                        variant="outline-info"
+                        size="sm"
+                        onClick={() => setTodoEdit(true)}
+                        >
+                        <span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>edit</span>
+                        </Button>
+                    )}
+                    {isEditable && (
+                        <>
+                        <Button
+                            variant="outline-danger"
+                            size="sm"
+                            onClick={() => setShow(true)}
+                        >
+                            <span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>delete</span>
+                        </Button>
+                        <Modal
+                            show={show}
+                            style={{zIndex:99999,}}
+                        >
+                        <Modal.Header>
+                        <Modal.Title>해당 내용을 삭제하시겠습니까?</Modal.Title>
+                        </Modal.Header>
+                        <br />
+                        <Modal.Footer style={{justifyContent:"center"}}>
+                        <Button variant="outline-danger" onClick={handleDelete}>
+                            삭제
+                        </Button>
+                        <Button
+                            variant="outline-info"
+                            onClick={()=>setShow(false)}
+                        >
+                                취소
                             </Button>
-                        )}
-                        {isEditable && (
-                            <>
-                            <Button
-                                variant="outline-danger"
-                                size="sm"
-                                onClick={() => setShow(true)}
-                            >
-                                <span class="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>delete</span>
-                            </Button>
-                            <Modal
-                                show={show}
-                                style={{zIndex:99999,}}
-                            >
-                            <Modal.Header>
-                            <Modal.Title>해당 내용을 삭제하시겠습니까?</Modal.Title>
-                            </Modal.Header>
-                            <br />
-                            <Modal.Footer style={{justifyContent:"center"}}>
-                            <Button variant="outline-danger" onClick={handleDelete}>
-                                삭제
-                            </Button>
-                            <Button
-                                variant="outline-info"
-                                onClick={()=>setShow(false)}
-                            >
-                                    취소
-                                </Button>
-                            </Modal.Footer>
-                            </Modal>
-                            </>
-                        )}
-                    </ButtonGroup>
+                        </Modal.Footer>
+                        </Modal>
+                        </>
+                    )}
+                </ButtonGroup>
+
                 </Col>
             </Row>
         </Form>)}
@@ -188,6 +188,7 @@ const TodoListAdd = ({ proceeding, setProceedingList, isEditable }) => {
     const [show, setShow] = useState(false)
 
     const handleDelete = async () => {
+        await Api.delete('proceedingtodo', proceeding.id);
         await Api.delete('proceedings', proceeding.id);
         let del_idx = 0;
         setProceedingList(current => {
@@ -242,7 +243,7 @@ const TodoListAdd = ({ proceeding, setProceedingList, isEditable }) => {
                                         size="sm"
                                         onClick={() => setIsWork(current => !current)}
                                     >
-                                        <span class="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>library_add_check</span>
+                                        <span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>library_add_check</span>
                                     </Button>
                                     {isEditable && (
                                         <Button
@@ -250,7 +251,7 @@ const TodoListAdd = ({ proceeding, setProceedingList, isEditable }) => {
                                         size="sm"
                                         onClick={() => setEdit(true)}
                                         >
-                                        <span class="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>edit</span>
+                                        <span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>edit</span>
                                         </Button>
                                     )}
                                     {isEditable && (
@@ -260,7 +261,7 @@ const TodoListAdd = ({ proceeding, setProceedingList, isEditable }) => {
                                             size="sm"
                                             onClick={() => setShow(true)}
                                         >
-                                            <span class="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>delete</span>
+                                            <span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>delete</span>
                                         </Button>
                                         <Modal
                                             show={show}
