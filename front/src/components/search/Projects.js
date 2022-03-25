@@ -50,7 +50,7 @@ function Projects() {
   };
 
   return (
-    <Container fluid style={{padding:0,}}>
+    <Container fluid style={{ padding: 0 }}>
       <div style={{ height: 110 }}></div>
       <div id="projects-banner">
         <h2 style={{fontWeight:"bolder",fontFamily:"Poppins sans-serif"}}>Projects</h2>
@@ -72,18 +72,33 @@ function Projects() {
                 aria-label="Search"
                 onChange={handleQuery}
               />
-              {!query && (<Form.Text className="text-success">
-                    관심 있는 프로젝트를 검색합니다.
-              </Form.Text>)}
+              {!query && (
+                <Form.Text className="text-success">
+                  관심 있는 프로젝트를 검색합니다.
+                </Form.Text>
+              )}
             </Form.Group>
-            <Button style={{backgroundColor:'white', border:"none",padding:"5px 0 0 0",height:32,}} onClick={handleSearch}>
-                <span className="material-icons" style={{color:"grey",fontSize:32,}}>search</span>
+            <Button
+              style={{
+                backgroundColor: "white",
+                border: "none",
+                padding: "5px 0 0 0",
+                height: 32,
+              }}
+              onClick={handleSearch}
+            >
+              <span
+                className="material-icons"
+                style={{ color: "grey", fontSize: 32 }}
+              >
+                search
+              </span>
             </Button>
           </Form>
         </Nav.Item>
         {isShearched ? (
           <>
-            <Nav.Item style={{width:900,}}>
+            <Nav.Item style={{ width: 900 }}>
               <Nav.Link eventKey="disabled" disabled>
                 총 {filteredProjects.length}개가 검색되었습니다.
               </Nav.Link>
@@ -91,15 +106,21 @@ function Projects() {
           </>
         ) : (
           <>
-            <Nav.Item style={{width:900,}}>
+            <Nav.Item style={{ width: 900 }}>
               <Nav.Link eventKey="disabled" disabled></Nav.Link>
             </Nav.Item>
           </>
         )}
       </Nav>
       {isAll ? (
-        <div style={{display:"flex", flexDirection:"row", justifyContent:"center", }}>
-          <Row xs="auto" style={{width:1217, justifyContent:"flex-start"}}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+          }}
+        >
+          <Row xs="auto" style={{ width: 1217, justifyContent: "flex-start" }}>
             {projects.map((project) => (
               <SearchedProjectCard
                 key={project.id}
@@ -127,7 +148,7 @@ function Projects() {
       ) : (
         <></>
       )}
-      <Modal show={isShow}>
+      <Modal show={isShow} style={{ zIndex: 99999 }}>
         <Modal.Body>검색어를 입력하세요.</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

@@ -14,7 +14,6 @@ function ProfilePage() {
   const [show, setShow] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
-
   const colorChange = () => {
     if (user?.job === "프론트엔드") {
       return "info";
@@ -37,16 +36,14 @@ function ProfilePage() {
 
   useEffect(() => {
     // "users/유저id" 엔드포인트로 GET 요청을 하고, user를 response의 data로 세팅함.
-    Api.get("users", portfolioOwnerId)
-      .then(res => {
-          setUser(res.data)
-      });
+    Api.get("users", portfolioOwnerId).then((res) => {
+      setUser(res.data);
+    });
 
     return () => {
       setShow(false);
       // setShowConfirm(false);
-    } 
-    
+    };
   }, [portfolioOwnerId]);
 
   const withdrawal = async () => {
@@ -78,32 +75,42 @@ function ProfilePage() {
 
   return (
     <>
-      <div style={{height:110,}}></div>
+      <div style={{ height: 110 }}></div>
       <div id="banner_myprofile">
-        <h2 style={{fontWeight:"bolder",fontFamily:"Poppins sans-serif"}}>My profile</h2>
+        <h2 style={{ fontWeight: "bolder" }}>My profile</h2>
         <h4>나만의 프로필을 설정해보세요</h4>
       </div>
       <div className="profilePage">
         <div className="profileCard">
-          <Card
-            className="mb-2 ms-3 mr-5"
-            style={{ width: "18rem" }}
-          >
+          <Card className="mb-2 ms-3 mr-5" style={{ width: "18rem" }}>
             <Card.Body>
               <Row className="justify-content-md-center">
                 <Card.Img
-                  style={{ width: "9rem", height: "9rem", borderRadius:100, margin:0, padding:0, }}
+                  style={{
+                    width: "9rem",
+                    height: "9rem",
+                    borderRadius: 100,
+                    margin: 0,
+                    padding: 0,
+                  }}
                   className="mb-3"
                   src={user?.profile}
                   alt="사용자 프로필"
                 />
               </Row>
-              <Card.Title style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+              <Card.Title
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
                 {user?.name}
               </Card.Title>
               <Card.Subtitle
                 className="mb-2 text-muted"
-                style={{textAlign:"center"}}
+                style={{ textAlign: "center" }}
               >
                 {user?.email}
                 <h6 style={{ margin: "2px 5px" }}>
@@ -113,7 +120,7 @@ function ProfilePage() {
                   </Badge>
                 </h6>
               </Card.Subtitle>
-              <Card.Text style={{borderTop:"grey solid 1px", padding:5,}}>
+              <Card.Text style={{ borderTop: "grey solid 1px", padding: 5 }}>
                 {user?.description}
               </Card.Text>
               <Card.Text>
@@ -190,12 +197,18 @@ function ProfilePage() {
                         회원탈퇴
                     </Button>
                     <Button
-                        variant="primary"
+                        variant="secondary"
                         onClick={()=>setShow(false)}
                     >
                             취소
                         </Button>
-                    </Modal.Footer>
+                        <Button
+                          variant="outline-info"
+                          onClick={() => setShow(false)}
+                        >
+                          취소
+                        </Button>
+                      </Modal.Footer>
                     </Modal>
                     <Modal
                       show={showConfirm}
@@ -225,21 +238,15 @@ function ProfilePage() {
           </Card>
         </div>
         <div className="EditProfile">
-          <span
-            className="material-icons"
-            style={{ verticalAlign: "middle" }}
-          >
+          <span className="material-icons" style={{ verticalAlign: "middle" }}>
             manage_accounts
           </span>{" "}
-          <span style={{ fontSize: '24px' }}>
-            프로필 카드 설정
-          </span>
+          <span style={{ fontSize: "24px" }}>프로필 카드 설정</span>
           <UserEditForm user={user} setUser={setUser} />
         </div>
       </div>
     </>
   );
 }
-
 
 export default ProfilePage;
