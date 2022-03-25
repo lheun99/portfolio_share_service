@@ -67,12 +67,14 @@ function Network() {
     <Container fluid style={{ padding: 0 }}>
       <div style={{ height: 110 }}></div>
       <div id="mate-banner">
-        <h2 style={{fontWeight:"bolder",fontFamily:"Poppins sans-serif"}}>Mate</h2>
+        <h2 style={{fontWeight:"bolder",}}>Mate</h2>
         <h4>코딩 친구를 사귀고 서로 정보를 공유해보세요</h4>
       </div>
       <div style={{}}>
         <Nav className="me-auto" style={{padding: "40px 0 20px 0", justifyContent:"center",}}>
-          <Nav.Link style={{color:"black"}}
+          <Nav.Link 
+            style={{color:"black"}}
+            id="mate-all"
             href="#all"
             onClick={(e) => {
               e.preventDefault();

@@ -53,7 +53,7 @@ function Projects() {
     <Container fluid style={{ padding: 0 }}>
       <div style={{ height: 110 }}></div>
       <div id="projects-banner">
-        <h2 style={{fontWeight:"bolder",fontFamily:"Poppins sans-serif"}}>Projects</h2>
+        <h2 style={{fontWeight:"bolder",}}>Projects</h2>
         <h4>관심 있는 프로젝트를 한 눈에</h4>
       </div>
       <Nav className="me-auto" style={{padding:"40px 0 20px 0", justifyContent:"center",}}>
