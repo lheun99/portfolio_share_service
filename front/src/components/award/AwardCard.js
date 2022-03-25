@@ -32,7 +32,7 @@ const AwardCard = ({ awards, award, setIsEditing, isEditable, setAwards }) => {
           <ButtonGroup style={{ margin: 10, }} size='sm'>
             {isEditable && (
                 <Button
-                  variant="outline-info"
+                  variant="secondary"
                   size="sm"
                   onClick={() => setIsEditing(true)}
                 >
@@ -42,7 +42,7 @@ const AwardCard = ({ awards, award, setIsEditing, isEditable, setAwards }) => {
             {isEditable && (
                 <>
                   <Button
-                    variant="outline-danger"
+                    variant="danger"
                     size="sm"
                     onClick={() => setShow(true)}
                   >

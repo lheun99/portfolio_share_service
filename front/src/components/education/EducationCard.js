@@ -30,7 +30,7 @@ const EducationCard = ({ value, editHandler, deleteHandler, isEditable }) => {
         onUpdate={updateHandler} /> :
       <Container style={{padding: 10, margin:"10px 0", borderBottom: "rgba(70, 65, 65, 0.2) dotted"}}>
         <Row>
-          <Col sm={10}>
+          <Col>
             <Card.Subtitle>{school}</Card.Subtitle>
             <Card.Text className="text-muted">{major + ` (${position})`}</Card.Text>
           </Col>

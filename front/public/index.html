@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="height:100%">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
@@ -18,7 +18,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
     <!-- 아이콘 추가 -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="index.css" rel="stylesheet">
+
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -35,15 +35,15 @@
     -->
     <title>React App</title>
   </head>
-  <body>
+  <body style="min-height: 100%">
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="whole-content">
-      <div id="root"></div>
-      <footer>
-        <div class="footer">
+    <div id="whole-content" style="min-height: 100vh; display: flex; flex-direction: column">
+      <div id="root" style="flex: 1"></div>
+      <footer style="width: 100%; position: relative; bottom: 0">
+        <div style="text-align: center; opacity: 0.8;">
           Copyright © 2022 전지적코딩시점. All rights reserved.
           </div>
-          <div class="footer">
+          <div style="text-align: center; opacity: 0.8;">
             엘리스 AI 4기
           </div>
       </footer>

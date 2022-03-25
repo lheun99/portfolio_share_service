@@ -124,7 +124,6 @@ const WorkItem = ({ workitem, setPercent, itemLength, index, setWorkItemList, is
                             variant="outline-info"
                             size="sm"
                             disabled={!isEditable}
-                            
                             onClick={handleCheck}
                             >
                             <span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>done</span>
@@ -136,7 +135,7 @@ const WorkItem = ({ workitem, setPercent, itemLength, index, setWorkItemList, is
                         size="sm"
                         onClick={() => setTodoEdit(true)}
                         >
-                        <span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>edit</span>
+                        <span class="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>edit</span>
                         </Button>
                     )}
                     {isEditable && (
@@ -146,7 +145,7 @@ const WorkItem = ({ workitem, setPercent, itemLength, index, setWorkItemList, is
                             size="sm"
                             onClick={() => setShow(true)}
                         >
-                            <span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>delete</span>
+                            <span class="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>delete</span>
                         </Button>
                         <Modal
                             show={show}
@@ -243,7 +242,7 @@ const TodoListAdd = ({ proceeding, setProceedingList, isEditable }) => {
                                         size="sm"
                                         onClick={() => setIsWork(current => !current)}
                                     >
-                                        <span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>library_add_check</span>
+                                        <span class="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>library_add_check</span>
                                     </Button>
                                     {isEditable && (
                                         <Button
@@ -251,7 +250,7 @@ const TodoListAdd = ({ proceeding, setProceedingList, isEditable }) => {
                                         size="sm"
                                         onClick={() => setEdit(true)}
                                         >
-                                        <span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>edit</span>
+                                        <span class="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>edit</span>
                                         </Button>
                                     )}
                                     {isEditable && (
@@ -261,7 +260,7 @@ const TodoListAdd = ({ proceeding, setProceedingList, isEditable }) => {
                                             size="sm"
                                             onClick={() => setShow(true)}
                                         >
-                                            <span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>delete</span>
+                                            <span class="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>delete</span>
                                         </Button>
                                         <Modal
                                             show={show}

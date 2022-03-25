@@ -145,15 +145,15 @@ function ProjectElement({ project, isEditable, setProjectList, portfolioOwnerId 
             setProjectList={setProjectList}></ProjectEdit> :
             <Container style={{padding: 10, margin:"10px 0", borderBottom: "rgba(70, 65, 65, 0.2) dotted"}}>
                 <Row>
-                    <Col sm={10}>
+                    <Col>
                         <Card.Subtitle>{project.title}</Card.Subtitle>
                         <Card.Text className="text-muted">{project.description} <br /> {project.link && <a href={project.link}>{project.link}</a>} <br /> {project.from_date} ~ {project.to_date}</Card.Text>
                     </Col>
                     {isEditable && (
                         <Col sm={2} style={{margin:"auto"}}>
                             <ButtonGroup style={{margin: 10,}} size='sm'>
-                                <Button variant="outline-info" size="sm" onClick={() => setEdit(true)}><span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>edit</span></Button>
-                                <Button variant="outline-danger" size="sm" onClick={() => setShow(true)}><span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>delete</span></Button>
+                                <Button variant="secondary" size="sm" onClick={() => setEdit(true)}><span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>edit</span></Button>
+                                <Button variant="danger" size="sm" onClick={() => setShow(true)}><span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>delete</span></Button>
                             </ButtonGroup>
                             <Modal show={show} style={{zIndex:99999,}}>
                             <Modal.Header>
