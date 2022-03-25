@@ -98,7 +98,7 @@ function Projects() {
         </Nav.Item>
         {isShearched ? (
           <>
-            <Nav.Item style={{ width: 900 }}>
+            <Nav.Item>
               <Nav.Link eventKey="disabled" disabled>
                 총 {filteredProjects.length}개가 검색되었습니다.
               </Nav.Link>
@@ -106,7 +106,7 @@ function Projects() {
           </>
         ) : (
           <>
-            <Nav.Item style={{ width: 900 }}>
+            <Nav.Item>
               <Nav.Link eventKey="disabled" disabled></Nav.Link>
             </Nav.Item>
           </>
