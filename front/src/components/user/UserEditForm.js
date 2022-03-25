@@ -9,6 +9,7 @@ function UserEditForm({ user, setUser }) {
   const [newPassword, setNewPassword] = useState("");
   const [isValidPassword, setIsValidPassword] = useState(false);
   const [isCorrectPassword, setIsCorrectPassword] = useState(false);
+  const [isValidName, setIsValidName] = useState(true);
 
   const [profile, setProfile] = useState({});
 
@@ -203,6 +204,11 @@ function UserEditForm({ user, setUser }) {
           >
             당신의 이름을 설정해주세요!
           </div>
+          {!isValidName && (
+            <p style={{ fontSize: "11px", color: "red" }}>
+              이름은 2글자 이상이어야 합니다.
+            </p>
+          )}
           <Form.Group
             controlId="userEditName"
             className="mb-3"
@@ -211,8 +217,14 @@ function UserEditForm({ user, setUser }) {
               type="text"
               placeholder="이름을 입력하세요"
               value={updateUser.name || ""}
-              onChange={(e) =>
-                setUpdateUser({ ...updateUser, name: e.target.value })}
+              onChange={(e) => {
+                if(e.target.value.length >= 2) {
+                  setIsValidName(true);
+                } else {
+                  setIsValidName(false);
+                }
+                setUpdateUser({ ...updateUser, name: e.target.value });
+              }}
             />
           </Form.Group>
 
@@ -486,7 +498,7 @@ function UserEditForm({ user, setUser }) {
                 variant="primary"
                 type="submit"
                 className="me-3"
-                disabled={!isCorrectPassword && newPassword}
+                disabled={(!isCorrectPassword && newPassword) || !isValidName}
               >
                 설정 저장
               </Button>
