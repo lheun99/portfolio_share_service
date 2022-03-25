@@ -28,7 +28,7 @@ function SearchedProjectCard({ project, setIsEditing, isEditable, isNetwork }) {
     >
       <Card.Body>
         <Row className="justify-content-md-center"></Row>
-        <Card.Title>{project?.title}</Card.Title>
+        <Card.Title style={{height:"40%",display:"flex",flexDirection:"row", alignItems:"center"}}>{project?.title}</Card.Title>
         <Card.Text style={{borderTop:"grey solid 1px", padding:5,}}>{project?.description}</Card.Text>
       </Card.Body>
       <Card.Text style={{display:"flex", flexDirection:"row", alignItems:"center",justifyContent:"space-between",padding:"16px",}}>
