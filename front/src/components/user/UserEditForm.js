@@ -141,7 +141,7 @@ function UserEditForm({ user, setUser }) {
         </div>
         <div
           className="text-muted"
-          style={{ fontSize: "10px" }}
+          style={{ fontSize: "12px" }}
         >
           프로필 이미지는 여러분을 표현하는 가장 첫 단계입니다.<br />
           자신을 표현하는 프로필 이미지를 설정해보세요!
@@ -190,7 +190,7 @@ function UserEditForm({ user, setUser }) {
           </div>
           <div
             className="text-muted"
-            style={{ fontSize: "10px", marginBottom: '10px' }}
+            style={{ fontSize: "12px", marginBottom: '10px' }}
           >
             당신의 이름을 설정해주세요!
           </div>
@@ -218,7 +218,7 @@ function UserEditForm({ user, setUser }) {
           </div>
           <div
             className="text-muted"
-            style={{ fontSize: "10px", marginBottom: '10px' }}
+            style={{ fontSize: "12px", marginBottom: '10px' }}
           >
             이메일은 변경 불가능합니다!
           </div>
@@ -242,7 +242,7 @@ function UserEditForm({ user, setUser }) {
           </div>
           <div
             className="text-muted"
-            style={{ fontSize: "10px", marginBottom: '10px' }}
+            style={{ fontSize: "12px", marginBottom: '10px' }}
           >
             프로필은 다양한 사람들과 공유되고 있습니다.<br />
             자기 자신을 소개해주세요!
@@ -269,7 +269,7 @@ function UserEditForm({ user, setUser }) {
           </div>
           <div
             className="text-muted"
-            style={{ fontSize: "10px", marginBottom: '10px' }}
+            style={{ fontSize: "12px", marginBottom: '10px' }}
           >
             이곳에는 다양한 관심사를 가진 사람들이 모여있습니다.<br />
             당신이 가장 관심 있는 직무를 선택해주세요!
@@ -301,7 +301,7 @@ function UserEditForm({ user, setUser }) {
           </div>
           <div
             className="text-muted"
-            style={{ fontSize: "10px", marginBottom: '10px' }}
+            style={{ fontSize: "12px", marginBottom: '10px' }}
           >
             깃헙, 인스타그램 또는 유튜브를 운영중이신가요?<br />
             기존 사용중인 플랫폼 링크를 추가하세요!
@@ -372,7 +372,7 @@ function UserEditForm({ user, setUser }) {
           </div>
           <div
             className="text-muted"
-            style={{ fontSize: "10px", marginBottom: '10px' }}
+            style={{ fontSize: "12px", marginBottom: '10px' }}
           >
             비밀번호도 변경 가능합니다!
           </div>
