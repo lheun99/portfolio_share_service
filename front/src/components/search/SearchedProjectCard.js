@@ -14,6 +14,9 @@ function SearchedProjectCard({ project, setIsEditing, isEditable, isNetwork }) {
         <Row className="justify-content-md-center"></Row>
         <Card.Title>{project?.title}</Card.Title>
         <Card.Text style={{borderTop:"grey solid 1px", padding:5,}}>{project?.description}</Card.Text>
+        <Card.Text style={{display:"flex", flexDirection:"row", alignItems:"right",justifyContent:"space-between"}}>
+          <div style={{right: 0}}><i className="fa-solid fa-heart" style={{color: "red"}}></i> {!project.likes ?? " "}</div>
+        </Card.Text>
       </Card.Body>
     </Card>
   );
