@@ -66,13 +66,13 @@ function Network() {
   return (
     <Container fluid style={{padding:0,}}>
       <div style={{ height: 110 }}></div>
-      <div id="banner">
+      <div id="mate-banner">
         <h2 style={{fontWeight:"bolder",fontFamily:"Poppins sans-serif"}}>Mate</h2>
         <h4>코딩 친구를 사귀고 서로 정보를 공유해보세요</h4>
       </div>
       <div style={{}}>
-        <Nav className="me-auto" style={{padding: "20px 0", justifyContent:"center",}}>
-          <Nav.Link
+        <Nav className="me-auto" style={{padding: "40px 0 20px 0", justifyContent:"center",}}>
+          <Nav.Link style={{color:"black"}}
             href="#all"
             onClick={(e) => {
               e.preventDefault();
@@ -147,7 +147,7 @@ function Network() {
           </NavDropdown>
 
           <Nav.Item>
-            <Form className="d-flex" onSubmit={handleSearch} style={{alignItems:"center"}}>
+            <Form className="d-flex" onSubmit={handleSearch} style={{alignItems:"center",width:500,}}>
               <Form.Control
                 type="search"
                 placeholder="이름 검색"

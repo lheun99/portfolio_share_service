@@ -25,8 +25,7 @@ function Header() {
 
   return (
     <div id="header" style={{backgroundColor:"white", padding:0, position: (isLogin) ? "fixed" : null, zIndex:99000, width:"-webkit-fill-available"}}>
-      <div className="line"></div>
-      <Nav activeKey={location.pathname} style={{backgroundColor:"white", borderRadius:50, height:80, alignItems:"center", justifyContent:"space-between"}}>
+      <Nav activeKey={location.pathname} style={{backgroundColor:"white", borderRadius:50, height:110, alignItems:"center", justifyContent:"space-between"}}>
         <Nav.Item /*className="me-auto mb-5"*/style={{display:"flex",flexDirection:"row", alignItems:"center",}}>
           <Nav.Link disabled>
             <img alt="" src={require("./logo.png")} width="200px" height="60px" />
@@ -204,7 +203,6 @@ function Header() {
           )}
         </div>
       </Nav>
-      <div className="line"></div>
     </div>
   );
 }

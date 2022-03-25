@@ -86,7 +86,7 @@ function RegisterForm() {
       <Container>
         <Row>
           <Col lg={8}>
-            <Form style={{padding:10, marginTop: "50px", backgroundColor:"white"}} onSubmit={handleSubmit}>
+            <Form style={{padding:30, marginTop: "50px", backgroundColor:"rgba(255, 255, 255, 0.6)",borderRadius:20,}} onSubmit={handleSubmit}>
               <Form.Group controlId="registerEmail">
                 <Form.Label>이메일 주소</Form.Label>
                 <Form.Control
@@ -174,26 +174,26 @@ function RegisterForm() {
 
               <Form.Group as={Row} className="mt-3 text-center">
                 <Col sm={{ span: 20 }}>
-                  <Button variant="light" onClick={() => navigate("/login")}>
+                  <Button style={{backgroundColor:"rgba(255, 255, 255, 0)",border:"none",color:"black"}} onClick={() => navigate("/login")}>
                     로그인하기
                   </Button>
                 </Col>
               </Form.Group>
             </Form>
             <Modal show={successShow}>
-              <Modal.Header closeButton>
+              <Modal.Header>
                 <Modal.Title>회원가입을 축하합니다🎉</Modal.Title>
               </Modal.Header>
               <Modal.Body>로그인 페이지로 이동합니다.</Modal.Body>
               <Modal.Footer>
-                <Button variant="outline-info" onClick={successHandleClose}>
+                <Button onClick={successHandleClose}>
                   확인
                 </Button>
               </Modal.Footer>
             </Modal>
 
             <Modal show={failShow}>
-              <Modal.Header closeButton>
+              <Modal.Header>
                 <Modal.Title>회원가입에 실패하였습니다.</Modal.Title>
               </Modal.Header>
               <Modal.Body>
@@ -202,7 +202,7 @@ function RegisterForm() {
                 새로운 이메일 주소를 생성해주세요.
               </Modal.Body>
               <Modal.Footer>
-                <Button variant="outline-info" onClick={failHandleClose}>
+                <Button onClick={failHandleClose}>
                   확인
                 </Button>
               </Modal.Footer>

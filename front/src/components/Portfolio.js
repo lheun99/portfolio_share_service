@@ -213,7 +213,7 @@ function Portfolio() {
                   className="me-2"
                   aria-label="Search"
                 />
-                <Button variant="outline-info">Search</Button>
+                <Button variant="primary">Search</Button>
               </Form> */}
             </Container>
           </Navbar>

@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Nav, Form, Button, Modal } from "react-bootstrap";
-
+import "./Projects.css"
 import * as Api from "../../api";
 import { UserStateContext } from "../../App";
 import SearchedProjectCard from "./SearchedProjectCard";
@@ -52,11 +52,11 @@ function Projects() {
   return (
     <Container fluid style={{padding:0,}}>
       <div style={{ height: 110 }}></div>
-      <div id="banner">
+      <div id="projects-banner">
         <h2 style={{fontWeight:"bolder",fontFamily:"Poppins sans-serif"}}>Projects</h2>
         <h4>관심 있는 프로젝트를 한 눈에</h4>
       </div>
-      <Nav className="me-auto" style={{padding:"20px 0", justifyContent:"center",}}>
+      <Nav className="me-auto" style={{padding:"40px 0 20px 0", justifyContent:"center",}}>
         {/* <Nav.Item>
           <Nav.Link eventKey="disabled" disabled>
             관심 프로젝트를 검색
@@ -64,7 +64,7 @@ function Projects() {
         </Nav.Item> */}
         <Nav.Item>
           <Form className="d-flex" onSubmit={handleSearch}>
-            <Form.Group style={{marginRight:"10px"}}>
+            <Form.Group style={{marginRight:"10px",width:500,}}>
               <Form.Control
                 type="search"
                 placeholder="프로젝트 검색"

@@ -71,7 +71,7 @@ function LoginForm() {
       <Container style={{margin:110, }}>
         <Row>
           <Col lg={8}>
-            <Form style={{padding:10, backgroundColor:"white"}} onSubmit={handleSubmit}>
+            <Form style={{padding:30, backgroundColor:"rgba(255, 255, 255, 0.6)",borderRadius:20,}} onSubmit={handleSubmit}>
               <Form.Group controlId="loginEmail">
                 <Form.Label>
                   이메일 주소
@@ -116,7 +116,7 @@ function LoginForm() {
 
               <Form.Group as={Row} className="mt-3 text-center">
                 <Col sm={{ span: 20 }}>
-                  <Button variant="light" onClick={() => navigate("/register")}>
+                  <Button style={{backgroundColor:"rgba(255, 255, 255, 0)",border:"none",color:"black"}} onClick={() => navigate("/register")}>
                     회원가입하기
                   </Button>
                 </Col>
@@ -135,7 +135,7 @@ function LoginForm() {
               </Form.Group>
             </Form>
             <Modal show={show}>
-            <Modal.Header closeButton>
+            <Modal.Header>
             <Modal.Title>
               로그인에 실패했습니다.
             </Modal.Title>
@@ -144,7 +144,7 @@ function LoginForm() {
               이메일 주소 또는 비밀번호를 다시 확인해주세요.
             </Modal.Body>
             <Modal.Footer>
-            <Button variant="outline-info" onClick={handleClose}>
+            <Button onClick={handleClose}>
                 확인
             </Button>
             </Modal.Footer>

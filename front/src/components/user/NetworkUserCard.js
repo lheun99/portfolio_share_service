@@ -48,7 +48,7 @@ function NetworkUserCard({ user }) {
         </Card.Title>
 
         <Card.Subtitle className="mb-2 text-muted" style={{textAlign:"center"}}>{user?.email}</Card.Subtitle>
-        <Card.Text style={{borderTop:"grey solid 1px", padding:5, height:60,}}>{user?.description}</Card.Text>
+        <Card.Text style={{borderTop:"grey solid 1px", padding:5,}}>{user?.description}</Card.Text>
       </Card.Body>
       <Card.Text style={{display:"flex", flexDirection:"row", alignItems:"center",justifyContent:"space-between",padding:16,}}>
           <h6 style={{ margin: "auto 5px" }}>

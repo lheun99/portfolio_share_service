@@ -72,13 +72,13 @@ const AwardCard = ({ awards, award, setIsEditing, isEditable, setAwards }) => {
                   <br />
                   <Modal.Footer style={{justifyContent:"center"}}>
                   <Button
-                    variant="outline-danger"
+                    variant="danger"
                     onClick={handleDelete}
                   >
                       삭제
                   </Button>
                   <Button
-                    variant="outline-info"
+                    variant="secondary"
                     onClick={()=>setShow(false)}
                   >
                         취소

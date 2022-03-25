@@ -184,13 +184,13 @@ function ProfilePage() {
                     <br />
                     <Modal.Footer style={{justifyContent:"center"}}>
                     <Button
-                      variant="outline-danger"
+                      variant="danger"
                       onClick={withdrawal}
                     >
                         회원탈퇴
                     </Button>
                     <Button
-                        variant="outline-info"
+                        variant="primary"
                         onClick={()=>setShow(false)}
                     >
                             취소
@@ -211,7 +211,7 @@ function ProfilePage() {
                     </Modal.Body>
                     <Modal.Footer style={{justifyContent:"center"}}>
                     <Button
-                      variant="outline-info"
+                      variant="primary"
                       onClick={() => setShowConfirm(false)}
                     >
                         확인

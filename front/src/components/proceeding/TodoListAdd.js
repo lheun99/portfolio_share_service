@@ -104,11 +104,11 @@ const TodoListAdd = ({ proceeding, setProceedingList, isEditable }) => {
                                         </Modal.Header>
                                         <br />
                                         <Modal.Footer style={{justifyContent:"center"}}>
-                                        <Button variant="outline-danger" onClick={handleDelete}>
+                                        <Button variant="danger" onClick={handleDelete}>
                                             삭제
                                         </Button>
                                         <Button
-                                            variant="outline-info"
+                                            variant="secondary"
                                             onClick={()=>setShow(false)}
                                         >
                                                 취소

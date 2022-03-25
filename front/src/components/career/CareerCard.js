@@ -53,10 +53,10 @@ const CareerCard = ({ value, editHandler, deleteHandler, isEditable }) => {
               </Modal.Header>
               <br />
               <Modal.Footer style={{justifyContent:"center"}}>
-              <Button variant="outline-danger" onClick={handleDelete}>
+              <Button variant="danger" onClick={handleDelete}>
                   삭제
               </Button>
-              <Button variant="outline-info" onClick={()=>setShow(false)}>
+              <Button variant="secondary" onClick={()=>setShow(false)}>
                     취소
                 </Button>
               </Modal.Footer>
