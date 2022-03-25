@@ -13,7 +13,7 @@ const TodoListAdd = ({ proceeding, setProceedingList, isEditable }) => {
     const [workItemList, setWorkItemList] = useState([]);
     const [percent, setPercent] = useState(0);
     const [edit, setEdit] = useState(false);
-    const [show, setShow] = useState(false)
+    const [show, setShow] = useState(false);
 
     const handleDelete = async () => {
         await Api.delete('proceedingtodo', proceeding.id);
