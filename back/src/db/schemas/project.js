@@ -35,8 +35,17 @@ const ProjectSchema = new Schema(
   },
   {
     timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
   }
 );
+
+ProjectSchema.virtual('user', {
+  ref: 'User',
+  localField: 'user_id',
+  foreignField: 'id',
+  justOne: true,
+});
 
 const ProjectModel = model("Project", ProjectSchema);
 
