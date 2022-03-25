@@ -17,7 +17,7 @@ class Like {
   }
 
   static async findByUserId({ user_id }) {
-    const likes = await LikeModel.find({ user_id });
+    const likes = await LikeModel.find({ user_id }).select({_id: 0, project_id: 1});
     return likes;
   }
 
