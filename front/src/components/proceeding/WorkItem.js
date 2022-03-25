@@ -19,6 +19,10 @@ const WorkItem = ({ workitem, setPercent, itemLength, index, setWorkItemList, is
             newList[index].finish = check;
             return newList;
         })
+
+        return () => {
+            setShow(false)
+        }
     }, [check, setWorkItemList, index]);
 
     const handleCheck = (e) => {
