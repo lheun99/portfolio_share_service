@@ -103,8 +103,22 @@ todoAuthRouter.delete("/todolist/:user_id", async (req, res, next) => {
   try {
     // URI 파라미터에서 user_id 가져오기
     const { user_id } = req.params;
+    console.log(user_id);
     // userId의 Todo 데이터를 모두 삭제함
     await todoAuthService.deleteAllTodo({ user_id });
+
+    res.status(200).json('success');
+  } catch (error) {
+    next(error);
+  }
+});
+
+todoAuthRouter.delete("/proceedingtodo/:proceeding_id", async (req, res, next) => {
+  try {
+    // URI 파라미터에서 user_id 가져오기
+    const { proceeding_id } = req.params;
+    // userId의 Todo 데이터를 모두 삭제함
+    await todoAuthService.deleteOneTodoList({ proceeding_id });
 
     res.status(200).json('success');
   } catch (error) {

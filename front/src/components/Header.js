@@ -24,15 +24,18 @@ function Header() {
   };
 
   return (
-    <div style={{backgroundColor:"white", padding:"25px 10px", position: (isLogin) ? "fixed" : null, zIndex:99000, width:"-webkit-fill-available"}}>
-      <Nav activeKey={location.pathname} style={{height:50, alignItems:"center", justifyContent:"space-between"}}>
-        <Nav.Item /*className="me-auto mb-5"*/>
-          <Nav.Link disabled className="fadein">
-            <img alt="" src="img/communication.png" width="30" height="30" />
-            {isLogin ? (
+    <div id="header" style={{backgroundColor:"white", padding:0, position: (isLogin) ? "fixed" : null, zIndex:99000, width:"-webkit-fill-available"}}>
+      <div className="line"></div>
+      <Nav activeKey={location.pathname} style={{backgroundColor:"white", borderRadius:50, height:80, alignItems:"center", justifyContent:"space-between"}}>
+        <Nav.Item /*className="me-auto mb-5"*/style={{display:"flex",flexDirection:"row", alignItems:"center",}}>
+          <Nav.Link disabled>
+            <img alt="" src={require("./logo.png")} width="140px" height="60px" />
+          </Nav.Link>
+          <Nav.Link disabled id="fadein">
+          {isLogin ? (
               <> 환영합니다, {userState.user.name}님!</>
             ) : (
-              <> 안녕하세요, 포트폴리오 공유 서비스입니다.</>
+              <></>
             )}
           </Nav.Link>
         </Nav.Item>
@@ -46,7 +49,7 @@ function Header() {
           <Nav.Item>
             <Nav.Link
               className="item"
-              onClick={() => navigate("/carousel")}
+              onClick={() => navigate("/home")}
             >
               <div 
                 className="itemColor"
@@ -197,6 +200,7 @@ function Header() {
           )}
         </div>
       </Nav>
+      <div className="line"></div>
     </div>
   );
 }

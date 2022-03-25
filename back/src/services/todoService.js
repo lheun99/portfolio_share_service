@@ -68,7 +68,12 @@ class todoAuthService {
   // 해당 유저의 진행중인 프로젝트 내 할 일 전체 삭제
   static async deleteAllTodo({ user_id }) {
     const deleteTodos = await Todo.deleteAll({ user_id });
-    return;
+    return deleteTodos;
+  }
+
+  static async deleteOneTodoList({ proceeding_id }) {
+    const deleteTodos = await Todo.deleteProceedingTodo({ proceeding_id });
+    return deleteTodos;
   }
 }
 

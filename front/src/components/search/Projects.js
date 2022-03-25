@@ -52,7 +52,7 @@ function Projects() {
   return (
     <Container fluid>
       <div style={{ height: 110 }}></div>
-      <Nav className="me-auto" style={{paddingBottom:20, justifyContent:"center",}}>
+      <Nav className="me-auto" style={{padding:"20px 0", justifyContent:"center",}}>
         {/* <Nav.Item>
           <Nav.Link eventKey="disabled" disabled>
             관심 프로젝트를 검색

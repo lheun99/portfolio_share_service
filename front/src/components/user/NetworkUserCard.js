@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Card, Row, Badge } from "react-bootstrap";
+import "./NetworkUserCard.css"
 
 function NetworkUserCard({ user }) {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ function NetworkUserCard({ user }) {
 
   return (
     <Card
+      id="card"
       onClick={() => navigate(`/users/${user.id}`)}
       className="mb-2 ms-3 mr-5"
       style={{ width: "18rem", cursor: "pointer" }}
@@ -47,7 +49,8 @@ function NetworkUserCard({ user }) {
 
         <Card.Subtitle className="mb-2 text-muted" style={{textAlign:"center"}}>{user?.email}</Card.Subtitle>
         <Card.Text style={{borderTop:"grey solid 1px", padding:5, height:60,}}>{user?.description}</Card.Text>
-        <Card.Text style={{display:"flex", flexDirection:"row", alignItems:"center",justifyContent:"space-between"}}>
+      </Card.Body>
+      <Card.Text style={{display:"flex", flexDirection:"row", alignItems:"center",justifyContent:"space-between",padding:16,}}>
           <h6 style={{ margin: "auto 5px" }}>
             <Badge pill bg={colorChange()}>
               {" "}
@@ -56,7 +59,6 @@ function NetworkUserCard({ user }) {
           </h6>
           <div><i className="fa-regular fa-file-lines"></i> {user?.projectNum}</div>
         </Card.Text>
-      </Card.Body>
     </Card>
   );
 }

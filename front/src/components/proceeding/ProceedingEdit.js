@@ -34,7 +34,7 @@ const ProceedingEdit = ({proceeding, setEdit, setProceedingList}) => {
         const data = { user_id: userState.user.id, title:proceedingInfo.title,
             start_date: proceedingInfo.start_date.getFullYear()+'-'+(proceedingInfo.start_date.getMonth()+1)+'-'+proceedingInfo.start_date.getDate(), 
             end_date: proceedingInfo.end_date.getFullYear()+'-'+(proceedingInfo.end_date.getMonth()+1)+'-'+proceedingInfo.end_date.getDate() 
-          }
+        }
         
 
         const res = await Api.put(`proceedings/${proceeding.id}`, data);
