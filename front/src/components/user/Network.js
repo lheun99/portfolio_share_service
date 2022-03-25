@@ -157,7 +157,7 @@ function Network() {
           </Nav.Item>
           {isShearched ? (
             <>
-              <Nav.Item style={{width:"85vh",}}>
+              <Nav.Item style={{width:730,}}>
                 <Nav.Link eventKey="disabled" disabled>
                   총 {filteredUsers.length}개가 검색되었습니다.
                 </Nav.Link>
@@ -165,7 +165,7 @@ function Network() {
             </>
           ) : (
             <>
-              <Nav.Item style={{width:"85vh",}}>
+              <Nav.Item style={{width:730,}}>
                 <Nav.Link eventKey="disabled" disabled></Nav.Link>
               </Nav.Item>
             </>
