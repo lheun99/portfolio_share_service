@@ -24,9 +24,9 @@ likeRouter.post(
       const like = await likeService.setLike({ user_id, project_id });
 
       if (like.errorMessage) {
-        throw new Error(like.errorMessage);
+        res.status(400).json({type: "delete", project_id});
       }
-      res.status(200).send("success");
+      res.status(201).json({ type: "success", project_id });
     } catch (error) {
       next(error);
     }
@@ -53,7 +53,7 @@ likeRouter.post("/like", async (req, res, next) => {
     const newLike = await likeService.addLike({ user_id, project_id });
 
     if (newLike.errorMessage) {
-        throw new Error(newLike.errorMessage);
+        res.status(400).send("fail");
     }
     
     res.status(201).send("success");
