@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useMemo, useContext } from "react";
 import { Row, Col, Button, Card, ProgressBar, Form, Container, Modal, ButtonGroup } from "react-bootstrap";
-// import DatePicker from "react-datepicker";
 import * as Api from '../../api';
 import { UserStateContext } from "../../App";
 import ProceedingEdit from './ProceedingEdit';
 import "./proceeding.css";
+
 import TodoEdit from './TodoEdit';
 
 const TodoAddForm = ({ setAdd, proceeding, setWorkItemList }) => {
@@ -63,9 +63,13 @@ const TodoAddForm = ({ setAdd, proceeding, setWorkItemList }) => {
 }
 
 const WorkItem = ({ workitem, setPercent, itemLength, index, setWorkItemList, isEditable }) => {
-    const [check, setCheck] = useState(workitem.finish);
+    const [check, setCheck] = useState();
     const [todoEdit, setTodoEdit] = useState(false);
     const [show, setShow] = useState(false);
+
+    useEffect(() => {
+        setCheck(workitem.finish);
+    }, [workitem])
 
     useEffect(() => {
         setWorkItemList((current) => {
@@ -89,10 +93,10 @@ const WorkItem = ({ workitem, setPercent, itemLength, index, setWorkItemList, is
 
         setTodoEdit(false);
     }
-
     const handleDelete = async () => {
         await Api.delete('todo', workitem.id);
         let del_idx = 0;
+        
         setWorkItemList(current => {
             for (let i = 0; i < current.length; i++) {
                 if (current[i].id === workitem.id) {
@@ -104,6 +108,7 @@ const WorkItem = ({ workitem, setPercent, itemLength, index, setWorkItemList, is
             const newTodo = [...current];
             return newTodo;
         })
+        
 
         setShow(false);
     }
@@ -210,6 +215,9 @@ const TodoListAdd = ({ proceeding, setProceedingList, isEditable }) => {
             .then(res => {
                 setWorkItemList(res.data)
             });
+        return () => {
+            setShow(false);
+        }
     }, [proceeding.id])
 
     const itemLength = useMemo(() => {
