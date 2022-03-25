@@ -13,20 +13,20 @@ const Award = ({ awards, portfolioOwnerId, award, isEditable, setAwards}) => {
     <>
         {isEditing ? (
             <AwardEditForm
-            awards={awards}
-            award={award}
-            setIsEditing={setIsEditing}
-            setAwards={setAwards}
-            portfolioOwnerId={portfolioOwnerId}
+              awards={awards}
+              award={award}
+              setIsEditing={setIsEditing}
+              setAwards={setAwards}
+              portfolioOwnerId={portfolioOwnerId}
             />
         ) : (
             <AwardCard
-            awards={awards}
-            award={award}
-            setIsEditing={setIsEditing}
-            isEditable={isEditable}
-            setAwards={setAwards}
-            portfolioOwnerId={portfolioOwnerId}
+              awards={awards}
+              award={award}
+              setIsEditing={setIsEditing}
+              isEditable={isEditable}
+              setAwards={setAwards}
+              portfolioOwnerId={portfolioOwnerId}
             />
         )}
     </>
