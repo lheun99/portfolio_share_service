@@ -122,10 +122,10 @@ function CertificateElement({ certificate, isEditable, setCertificateList }) {
                     {isEditable && (
                         <>
                             <ButtonGroup style={{margin: 10,}} size='sm'>
-                                <Button variant="outline-info" size="sm" onClick={() => setEdit(true)}>
+                                <Button variant="secondary" size="sm" onClick={() => setEdit(true)}>
                                     <span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>edit</span>
                                 </Button>
-                                <Button variant="outline-danger" size="sm" onClick={()=> setShow(true)}>
+                                <Button variant="danger" size="sm" onClick={()=> setShow(true)}>
                                     <span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>delete</span>
                                 </Button>
                             </ButtonGroup>

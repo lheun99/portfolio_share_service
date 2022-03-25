@@ -133,7 +133,7 @@ const WorkItem = ({ workitem, setPercent, itemLength, index, setWorkItemList, is
                     <ButtonGroup style={{ margin: 10, }} size='sm'>
                         {isEditable && (
                             <Button
-                            variant="outline-info"
+                            variant="secondary"
                             size="sm"
                             onClick={() => setTodoEdit(true)}
                             >
@@ -143,7 +143,7 @@ const WorkItem = ({ workitem, setPercent, itemLength, index, setWorkItemList, is
                         {isEditable && (
                             <>
                             <Button
-                                variant="outline-danger"
+                                variant="danger"
                                 size="sm"
                                 onClick={() => setShow(true)}
                             >
@@ -238,7 +238,7 @@ const TodoListAdd = ({ proceeding, setProceedingList, isEditable }) => {
                             <Col sm={3}>
                                 <ButtonGroup style={{ margin: 10, }} size='sm'>
                                     <Button
-                                        variant="outline-info"
+                                        variant="success"
                                         size="sm"
                                         onClick={() => setIsWork(current => !current)}
                                     >
@@ -246,7 +246,7 @@ const TodoListAdd = ({ proceeding, setProceedingList, isEditable }) => {
                                     </Button>
                                     {isEditable && (
                                         <Button
-                                        variant="outline-info"
+                                        variant="secondary"
                                         size="sm"
                                         onClick={() => setEdit(true)}
                                         >
@@ -256,7 +256,7 @@ const TodoListAdd = ({ proceeding, setProceedingList, isEditable }) => {
                                     {isEditable && (
                                         <>
                                         <Button
-                                            variant="outline-danger"
+                                            variant="danger"
                                             size="sm"
                                             onClick={() => setShow(true)}
                                         >

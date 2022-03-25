@@ -40,10 +40,10 @@ const CareerCard = ({ value, editHandler, deleteHandler, isEditable }) => {
           {isEditable ?
             <Col sm={2} style={{margin:"auto"}}>
               <ButtonGroup style={{ margin: 10, }} size='sm'>
-                <Button variant="outline-info" onClick={updateHandler}>
+                <Button variant="secondary" onClick={updateHandler}>
                   <span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>edit</span>
                 </Button>
-                <Button variant="outline-danger" onClick={() => setShow(true)}>
+                <Button variant="danger" onClick={() => setShow(true)}>
                   <span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>delete</span>
                 </Button>
               </ButtonGroup>
