@@ -6,14 +6,13 @@ import { loginReducer } from "./reducer";
 import "./App.css";
 
 import Header from "./components/Header";
-import Footer from "./components/Footer";
 import LoginForm from "./components/user/LoginForm";
 import Network from "./components/user/Network";
 import RegisterForm from "./components/user/RegisterForm";
 import Portfolio from "./components/Portfolio";
 import Projects from "./components/search/Projects";
 import ProfilePage from "./components/user/ProfilePage";
-import Carousel from "./components/carousel/Carousel";
+import ControlledCarousel from "./components/carousel/Carousel";
 import PasswordResetForm from "./components/user/PasswordResetForm";
 
 export const UserStateContext = createContext(null);
@@ -86,7 +85,7 @@ function App() {
           <Router>
             <Header />
             <Routes>
-              <Route path="/home" exact element={<Carousel />} />
+              <Route path="/home" exact element={<ControlledCarousel />} />
               <Route path="/" exact element={<Portfolio />} />
               <Route path="/login" element={<LoginForm />} />
               <Route path="/register" element={<RegisterForm />} />

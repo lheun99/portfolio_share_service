@@ -29,11 +29,15 @@ function Header() {
       <Nav activeKey={location.pathname} style={{backgroundColor:"white", borderRadius:50, height:80, alignItems:"center", justifyContent:"space-between"}}>
         <Nav.Item /*className="me-auto mb-5"*/style={{display:"flex",flexDirection:"row", alignItems:"center",}}>
           <Nav.Link disabled>
-            <img alt="" src={require("./logo.png")} width="140px" height="60px" />
+            <img alt="" src={require("./logo.png")} width="200px" height="60px" />
           </Nav.Link>
-          <Nav.Link disabled id="fadein">
+          <Nav.Link disabled >
           {isLogin ? (
-              <> 환영합니다, {userState.user.name}님!</>
+            <>
+              <span id="fadein"> 환영합니다, </span>
+              <span style={{fontWeight:"bold"}}>{userState.user.name}</span>
+              <span>님!</span>
+            </>
             ) : (
               <></>
             )}
@@ -108,24 +112,6 @@ function Header() {
               <Nav.Item>
                 <Nav.Link
                   className="item"
-                  onClick={() => navigate("/")}
-                >
-                  <div 
-                    className="itemColor"
-                  >
-                    <span
-                      className="material-icons"
-                      style={{ verticalAlign: "middle" }}
-                    >
-                      contact_page
-                    </span>{" "}
-                    My page
-                  </div>
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link
-                  className="item"
                   onClick={() => navigate("/network")}
                 >
                   <div 
@@ -156,6 +142,24 @@ function Header() {
                       folder
                     </span>{" "}
                     Projects
+                  </div>
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link
+                  className="item"
+                  onClick={() => navigate("/")}
+                >
+                  <div 
+                    className="itemColor"
+                  >
+                    <span
+                      className="material-icons"
+                      style={{ verticalAlign: "middle" }}
+                    >
+                      contact_page
+                    </span>{" "}
+                    My page
                   </div>
                 </Nav.Link>
               </Nav.Item>

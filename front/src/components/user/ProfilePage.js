@@ -68,104 +68,111 @@ function ProfilePage() {
   };
 
   return (
-    <div className="profilePage">
-      <div className="profileCard">
-        <Card className="mb-2 ms-3 mr-5" style={{ width: "18rem" }}>
-          <Card.Body>
-            <Row className="justify-content-md-center">
-              <Card.Img
-                style={{ width: "9rem", height: "9rem", borderRadius:100, margin:0, padding:0, }}
-                className="mb-3"
-                src={user?.profile}
-                alt="사용자 프로필"
-              />
-            </Row>
-            <Card.Title style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center",
-            }}>
-              {user?.name}
-            </Card.Title>
-            <Card.Subtitle className="mb-2 text-muted" style={{textAlign:"center"}}>
-              {user?.email}
-              <h6 style={{ margin: "2px 5px" }}>
-                <Badge pill bg={colorChange()}>
-                  {" "}
-                  {user?.job}
-                </Badge>
-              </h6>
-            </Card.Subtitle>
-            <Card.Text style={{borderTop:"grey solid 1px", padding:5,}}>{user?.description}</Card.Text>
-            <Card.Text>
-              <a
-                href={user?.github}
-                style={{ color: "black", textDecoration: "none" }}
-              >
-                <i className="fa-brands fa-github"></i> {user?.github}
-              </a>
-            </Card.Text>
-            <Card.Text>
-              <a
-                href={user?.gitlab}
-                style={{ color: "black", textDecoration: "none" }}
-              >
-                <i className="fa-brands fa-gitlab"></i> {user?.gitlab}
-              </a>
-            </Card.Text>
-            <Card.Text>
-              <a
-                href={user?.twitter}
-                style={{ color: "black", textDecoration: "none" }}
-              >
-                <i className="fa-brands fa-twitter"></i> {user?.twitter}
-              </a>
-            </Card.Text>
-            <Card.Text>
-              <a
-                href={user?.instagram}
-                style={{ color: "black", textDecoration: "none" }}
-              >
-                <i className="fa-brands fa-instagram"></i> {user?.instagram}
-              </a>
-            </Card.Text>
-            <Card.Text>
-              <a
-                href={user?.youtube}
-                style={{ color: "black", textDecoration: "none" }}
-              >
-                <i className="fa-brands fa-youtube"></i> {user?.youtube}
-              </a>
-            </Card.Text>
-
-            <Col>
-              <Row className="mt-3 text-center text-info">
-                <Col sm={{ span: 20 }}>
-                  <Button
-                    variant="outline-danger"
-                    size="sm"
-                    onClick={withdrawal}
-                  >
-                    회원탈퇴
-                  </Button>
-                </Col>
+    <>
+      <div style={{height:110,}}></div>
+      <div id="banner_myprofile">
+        <h2 style={{fontWeight:"bolder",fontFamily:"Poppins sans-serif"}}>My profile</h2>
+        <h4>나만의 프로필을 설정해보세요</h4>
+      </div>
+      <div className="profilePage">
+        <div className="profileCard">
+          <Card className="mb-2 ms-3 mr-5" style={{ width: "18rem" }}>
+            <Card.Body>
+              <Row className="justify-content-md-center">
+                <Card.Img
+                  style={{ width: "9rem", height: "9rem", borderRadius:100, margin:0, padding:0, }}
+                  className="mb-3"
+                  src={user?.profile}
+                  alt="사용자 프로필"
+                />
               </Row>
-            </Col>
-          </Card.Body>
-        </Card>
+              <Card.Title style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+              }}>
+                {user?.name}
+              </Card.Title>
+              <Card.Subtitle className="mb-2 text-muted" style={{textAlign:"center"}}>
+                {user?.email}
+                <h6 style={{ margin: "2px 5px" }}>
+                  <Badge pill bg={colorChange()}>
+                    {" "}
+                    {user?.job}
+                  </Badge>
+                </h6>
+              </Card.Subtitle>
+              <Card.Text style={{borderTop:"grey solid 1px", padding:5,}}>{user?.description}</Card.Text>
+              <Card.Text>
+                <a
+                  href={user?.github}
+                  style={{ color: "black", textDecoration: "none" }}
+                >
+                  <i className="fa-brands fa-github"></i> {user?.github}
+                </a>
+              </Card.Text>
+              <Card.Text>
+                <a
+                  href={user?.gitlab}
+                  style={{ color: "black", textDecoration: "none" }}
+                >
+                  <i className="fa-brands fa-gitlab"></i> {user?.gitlab}
+                </a>
+              </Card.Text>
+              <Card.Text>
+                <a
+                  href={user?.twitter}
+                  style={{ color: "black", textDecoration: "none" }}
+                >
+                  <i className="fa-brands fa-twitter"></i> {user?.twitter}
+                </a>
+              </Card.Text>
+              <Card.Text>
+                <a
+                  href={user?.instagram}
+                  style={{ color: "black", textDecoration: "none" }}
+                >
+                  <i className="fa-brands fa-instagram"></i> {user?.instagram}
+                </a>
+              </Card.Text>
+              <Card.Text>
+                <a
+                  href={user?.youtube}
+                  style={{ color: "black", textDecoration: "none" }}
+                >
+                  <i className="fa-brands fa-youtube"></i> {user?.youtube}
+                </a>
+              </Card.Text>
+
+              <Col>
+                <Row className="mt-3 text-center text-info">
+                  <Col sm={{ span: 20 }}>
+                    <Button
+                      variant="outline-danger"
+                      size="sm"
+                      onClick={withdrawal}
+                    >
+                      회원탈퇴
+                    </Button>
+                  </Col>
+                </Row>
+              </Col>
+            </Card.Body>
+          </Card>
+        </div>
+        <div className="EditProfile">
+          <span
+            className="material-icons"
+            style={{ verticalAlign: "middle" }}
+          >
+            manage_accounts
+          </span>{" "}
+          <span style={{ fontSize: '24px' }}>프로필 카드 설정</span>
+          <UserEditForm user={user} setUser={setUser} />
+        </div>
       </div>
-      <div className="EditProfile">
-        <span
-          className="material-icons"
-          style={{ verticalAlign: "middle" }}
-        >
-          manage_accounts
-        </span>{" "}
-        <span style={{ fontSize: '24px' }}>프로필 카드 설정</span>
-        <UserEditForm user={user} setUser={setUser} />
-      </div>
-    </div>
+    </>
   );
 }
 

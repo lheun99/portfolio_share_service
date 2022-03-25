@@ -5,18 +5,21 @@
   background-size: 50px 100px;
 } */
 
-.line {
+/* .line {
   background-color: rgba(255, 205, 119, 0.9);
   background-image: linear-gradient(30deg, rgba(254, 109, 115, 0.9) 12%, transparent 12.9%, transparent 87%, rgba(254, 109, 115, 0.9) 87.9%, rgba(254, 109, 115, 0.9)), linear-gradient(150deg, rgba(254, 109, 115, 0.9) 12%, transparent 12.9%, transparent 87%, rgba(254, 109, 115, 0.9) 87.9%, rgba(254, 109, 115, 0.9)), linear-gradient(30deg, rgba(254, 109, 115, 0.9) 12%, transparent 12.9%, transparent 87%, rgba(254, 109, 115, 0.9) 87.9%, rgba(254, 109, 115, 0.9)), linear-gradient(150deg, rgba(254, 109, 115, 0.9) 12%, transparent 12.9%, transparent 87%, rgba(254, 109, 115, 0.9) 87.9%, rgba(254, 109, 115, 0.9)), linear-gradient(60deg, rgba(65, 155, 224, 0.9) 25%, transparent 25.9%, transparent 75%, rgba(65, 155, 224, 0.9) 75%, rgba(65, 155, 224, 0.9)), linear-gradient(60deg, rgba(65, 155, 224, 0.9) 25%, transparent 25.9%, transparent 75%, rgba(65, 155, 224, 0.9) 75%, rgba(65, 155, 224, 0.9));
   background-position: 0 0, 0 0, 25px 50px, 25px 50px, 0 0, 25px 50px;
   background-size: 50px 100px;
   height: 10px;
-}
+} */
 .item {
   border-radius: 47px;
 }
 .item:hover {
-  background: rgba(0, 113, 247, 0.9);
+  background-color: rgba(255, 205, 119, 0.15);
+  background-image: linear-gradient(30deg, rgba(254, 109, 115, 0.15) 12%, transparent 12.9%, transparent 87%, rgba(254, 109, 115, 0.15) 87.9%, rgba(254, 109, 115, 0.15)), linear-gradient(150deg, rgba(254, 109, 115, 0.15) 12%, transparent 12.9%, transparent 87%, rgba(254, 109, 115, 0.15) 87.9%, rgba(254, 109, 115, 0.15)), linear-gradient(30deg, rgba(254, 109, 115, 0.15) 12%, transparent 12.9%, transparent 87%, rgba(254, 109, 115, 0.15) 87.9%, rgba(254, 109, 115, 0.15)), linear-gradient(150deg, rgba(254, 109, 115, 0.15) 12%, transparent 12.9%, transparent 87%, rgba(254, 109, 115, 0.15) 87.9%, rgba(254, 109, 115, 0.15)), linear-gradient(60deg, rgba(65, 155, 224, 0.15) 25%, transparent 25.9%, transparent 75%, rgba(65, 155, 224, 0.15) 75%, rgba(65, 155, 224, 0.15)), linear-gradient(60deg, rgba(65, 155, 224, 0.15) 25%, transparent 25.9%, transparent 75%, rgba(65, 155, 224, 0.15) 75%, rgba(65, 155, 224, 0.15));
+  background-position: 0 0, 0 0, 25px 50px, 25px 50px, 0 0, 25px 50px;
+  background-size: 50px 100px;
   border-radius: 47px;
   font-weight: bold;
 }
@@ -24,7 +27,7 @@
   color: #79889e;
 }
 .itemColor:hover {
-  color: blue;
+  color: black;
 }
 
 .fadein{
@@ -32,8 +35,6 @@
   position: relative;
   overflow: hidden;
   animation: fadein 7s ease-in-out;
-
-
 }
 
 

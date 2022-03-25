@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Container, Col, Row, Form, Button, Modal } from "react-bootstrap";
 
 import * as Api from "../../api";
+import "./RegisterForm.css"
 
 function RegisterForm() {
   const navigate = useNavigate();
@@ -81,10 +82,10 @@ function RegisterForm() {
   };
 
   return (
-    <Container>
+    <Container id="register-container">
       <Row className="justify-content-md-center mt-5">
         <Col lg={8}>
-          <Form onSubmit={handleSubmit}>
+          <Form style={{padding:10,backgroundColor:"white"}} onSubmit={handleSubmit}>
             <Form.Group controlId="registerEmail">
               <Form.Label>이메일 주소</Form.Label>
               <Form.Control

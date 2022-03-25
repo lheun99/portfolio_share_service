@@ -13,6 +13,7 @@ import {
 import * as Api from "../../api";
 import NetworkUserCard from "./NetworkUserCard";
 import { UserStateContext } from "../../App";
+import "./Network.css";
 
 function Network() {
   const navigate = useNavigate();
@@ -63,8 +64,12 @@ function Network() {
   };
 
   return (
-    <Container fluid >
+    <Container fluid style={{padding:0,}}>
       <div style={{ height: 110 }}></div>
+      <div id="banner">
+        <h2 style={{fontWeight:"bolder",fontFamily:"Poppins sans-serif"}}>Mate</h2>
+        <h4>코딩 친구를 사귀고 서로 정보를 공유해보세요</h4>
+      </div>
       <div style={{}}>
         <Nav className="me-auto" style={{padding: "20px 0", justifyContent:"center",}}>
           <Nav.Link
