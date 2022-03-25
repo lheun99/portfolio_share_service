@@ -1,0 +1,27 @@
+* {
+    margin:0;
+    padding: 0;
+}
+html {
+    height: 100%;
+}
+body {
+    min-height: 100%;
+}
+#whole-content {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+#root {
+    flex: 1;
+}
+footer {
+    width: 100%;
+
+    position: relative;
+    bottom: 0;
+}
+.footer{
+    text-align: center;
+}

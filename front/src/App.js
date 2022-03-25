@@ -103,7 +103,7 @@ function App() {
           </Router>
         </UserStateContext.Provider>
       </DispatchContext.Provider>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
