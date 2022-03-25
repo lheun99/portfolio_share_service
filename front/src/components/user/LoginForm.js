@@ -67,9 +67,9 @@ function LoginForm() {
   }
 
   return (
-    <Container>
+    <Container style={{margin:110,}}>
       <Row className="justify-content-md-center mt-5">
-        <Col style={{textAlign: "-webkit-center",}}>
+        {/* <Col style={{textAlign: "-webkit-center",}}>
           <Card style={{ width: '330px', alignItems:"center" }}>
             <Card.Img variant="top" src="img/curriculum.png" style={{paddingTop:10, width:"130px", height:"140px"}}/>
             <Card.Body style={{textAlign:"initial"}}>
@@ -79,7 +79,7 @@ function LoginForm() {
               </Card.Text>
             </Card.Body>
           </Card>
-        </Col>
+        </Col> */}
         <Col lg={8}>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="loginEmail">

@@ -86,7 +86,7 @@ function App() {
           <Router>
             <Header />
             <Routes>
-              <Route path="/carousel" exact element={<Carousel />} />
+              <Route path="/home" exact element={<Carousel />} />
               <Route path="/" exact element={<Portfolio />} />
               <Route path="/login" element={<LoginForm />} />
               <Route path="/register" element={<RegisterForm />} />
