@@ -48,7 +48,7 @@ function SearchedProjectCard({ project, setIsEditing, isEditable, isNetwork }) {
         </Card.Text>
       </Card.Body>
       <Card.Text style={{margin: "20px 0 0 20px"}}><div><i className="fa-solid fa-heart" style={{ color:  "#faa6a0" }}/>
-             {project.likes}</div></Card.Text>
+            &nbsp; {project.likes}</div></Card.Text>
       <Card.Text
         style={{
           display: "flex",
