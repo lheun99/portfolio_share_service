@@ -97,8 +97,9 @@ projectAuthRouter.put("/projects/:id", async (req, res, next) => {
     const link = req.body.link ?? null;
     const from_date = req.body.from_date ?? null;
     const to_date = req.body.to_date ?? null;
+    const projectLikes = req.body.projectLikes ?? null;
 
-    const toUpdate = { title, description, link, from_date, to_date };
+    const toUpdate = { title, description, link, from_date, to_date, projectLikes };
 
     const updatedProject = await projectAuthService.setProject({
       project_id,

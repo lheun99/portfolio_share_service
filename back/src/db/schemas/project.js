@@ -32,6 +32,11 @@ const ProjectSchema = new Schema(
       type: String,
       required: true,
     },
+    projectLikes: {
+      type: Number,
+      required: false,
+      default: 0
+    },
   },
   {
     timestamps: true,

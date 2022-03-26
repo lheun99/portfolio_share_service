@@ -1,31 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Card, Button, ButtonGroup, Container, Row, Col, Modal } from "react-bootstrap";
 import * as Api from '../../api';
 import ProjectEdit from './ProjectEdit';
+import { UserStateContext } from "../../App";
 
-function ProjectElement({ project, isEditable, setProjectList, portfolioOwnerId, setLikes, isLiked }) {
+function ProjectElement({ project, isEditable, setProjectList, portfolioOwnerId, likes, setLikes, isLiked }) {
     const [edit, setEdit] = useState(false);
     const [show, setShow] = useState(false);
-    const [check, setCheck] = useState(isLiked);
+    const [likeAdd, setLikeAdd] = useState(false);
+
+    useEffect(() => {
+        setLikeAdd(false);
+    },[])
+
+    const userState = useContext(UserStateContext);
 
     const clickHandler = (e) => {
         e.preventDefault();
-        setCheck(current => !current);
-        Api.post('setlike', { user_id: portfolioOwnerId, project_id: project.id})
-            .then((res) => {
-                if (res.status === 201) {
-                    setLikes(current => {
-                        return { ...current, [res.data.project_id]: true }
-                    })
-                } else {
-                    setLikes(current => {
-                        const newList = { ...current };
-                        delete newList[res.data.project_id];
-                        return newList;
-                    })
-                }
-            })
-            .catch((err) => console.log(err.message));
+
+        if(isLiked===false){
+            Api.post('setlike', { user_id: userState.user.id, project_id: project.id})
+                .then((res) => {
+                    let myLikes = [...likes];
+                    myLikes.push(project.id);
+                    setLikes(myLikes);
+                })
+                .catch((err) => console.log(err.message));
+
+            Api.put(`projects/${project.id}`, {projectLikes: project.projectLikes+1});
+            setLikeAdd(true);
+        } else{
+            console.log('좋아요 취소는 불가능합니다!')
+        }
     }
 
     const handleDelete = (e) => {
@@ -64,8 +70,8 @@ function ProjectElement({ project, isEditable, setProjectList, portfolioOwnerId,
                         <Card.Text style={{display:"flex", flexDirection:"row", alignItems:"center",justifyContent:"space-between",padding:16,}}>
                             <div>
                                 <button onClick={clickHandler} style={{ border: "none", backgroundColor:"transparent" }}>
-                                    <i className="fa-solid fa-heart" style={{ color: check ? "red" : "gray" }}/></button>
-                                {project.likes}
+                                    <i className="fa-solid fa-heart" style={{ color: isLiked ? "red" : "gray" }}/></button>
+                                {likeAdd ? project.projectLikes+1 : project.projectLikes}
                             </div>
                         </Card.Text>
                     </Col>
