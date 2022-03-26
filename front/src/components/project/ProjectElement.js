@@ -47,7 +47,6 @@ function ProjectElement({ project, isEditable, setProjectList }) {
                         <Card.Text style={{display:"flex", flexDirection:"row", alignItems:"center",justifyContent:"space-between",padding:16,}}>
                             <LikeButton userId={userState.user?.id} projectId={project.id} />
                         </Card.Text>
-                        <Card.Text className="text-muted">{project.description} <br /> {project.link && <a id="project-link" href={project.link} target="_blank" rel="noopener noreferrer">{project.link}</a>} <br /> {project.from_date} ~ {project.to_date}</Card.Text>
 
                     </Col>
                     {isEditable && (
