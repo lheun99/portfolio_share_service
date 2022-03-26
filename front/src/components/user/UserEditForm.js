@@ -131,7 +131,7 @@ function UserEditForm({ user, setUser }) {
     setUser(res.data);
 
     alert("프로필 정보가 수정되었습니다.");
-    navigate(`/users/${user.id}/profilePage`);
+    window.location.replace("/");
   };
 
   // 프로필 페이지의 프로필 카드 설정 부분
