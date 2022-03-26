@@ -224,9 +224,9 @@ function ProfilePage() {
                       style={{zIndex:99999,}}
                     >
                       <Modal.Header>
-                        <Modal.Title>
-                          회원탈퇴가 완료되었습니다.
-                        </Modal.Title>
+                      <Modal.Title>
+                        회원탈퇴가 완료되었습니다.
+                      </Modal.Title>
                       </Modal.Header>
                       <Modal.Body>
                         그동안 이용해주셔서 감사합니다.
