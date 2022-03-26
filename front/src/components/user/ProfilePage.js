@@ -49,8 +49,7 @@ function ProfilePage() {
   const withdrawal = async () => {
     const userProfile = user.profile.split("/").slice(-1)[0];
 
-    setShow(false);
-    setShowConfirm(true);
+    setShowConfirm(false)
 
     // 해당 유저의 education, award, project, certificate, career, proceeding, todo 삭제
     await Api.delete(`educationlist/${user.id}`);
@@ -207,7 +206,10 @@ function ProfilePage() {
                       <Modal.Footer style={{justifyContent:"center"}}>
                         <Button
                           variant="danger"
-                          onClick={withdrawal}
+                          onClick={()=> {
+                            setShow(false);
+                            setShowConfirm(true);
+                          }}
                         >
                           회원탈퇴
                         </Button>
@@ -233,7 +235,7 @@ function ProfilePage() {
                       </Modal.Body>
                       <Modal.Footer style={{justifyContent:"center"}}>
                         <Button
-                          onClick={() => setShowConfirm(false)}
+                          onClick={withdrawal}
                         >
                           확인
                         </Button>
