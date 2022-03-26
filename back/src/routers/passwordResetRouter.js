@@ -43,10 +43,15 @@ passwordResetRouter.post("/password-reset",
         }))
     
         const mailOptions = {
-            from: "엘리스 포트폴리오 <dl1rud2dbs3@naver.com>",
+            from: "전지적 개발자 시점 <dl1rud2dbs3@naver.com>",
             to: email,
-            subject: "엘리스 포트폴리오 임시 비밀번호 발급",
+            subject: "전지적 개발자 시점 임시 비밀번호 발급",
             template: "index",
+            attachments: [{
+                filename: 'logo.png',
+                path: __dirname +'/logo.png',
+                cid: 'logo'
+            }],
             context: {
                 name,
                 tempPassword,

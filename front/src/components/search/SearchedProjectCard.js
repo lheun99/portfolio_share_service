@@ -47,21 +47,25 @@ function SearchedProjectCard({ project, setIsEditing, isEditable, isNetwork }) {
           {project?.description}
         </Card.Text>
       </Card.Body>
+      <Card.Text style={{margin: "10px 0 0 20px"}}><div><i className="fa-solid fa-heart" style={{ color:  "gray" }}/>
+            추천 {project.likes}</div></Card.Text>
       <Card.Text
         style={{
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: "16px",
+          padding: "10px 16px 16px 16px",
         }}
       >
-        <h6 style={{ margin: "auto 5px" }}>
+        
+        <h6 style={{ margin: "0px 5px" }}>
           <Badge pill bg={colorChange()}>
             {" "}
             {project?.user.job}
           </Badge>
         </h6>
+        
         <div style={{ fontWeight: "bold" }}>@{project?.user.name}</div>
       </Card.Text>
     </Card>

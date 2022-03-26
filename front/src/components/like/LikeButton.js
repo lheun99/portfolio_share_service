@@ -32,9 +32,9 @@ function LikeButton({ userId, projectId }) {
 
     return (
         <div>
-            <button onClick={clickHandler} style={{ border: "none", backgroundColor:"transparent" }}>
+            <button id="like" onClick={clickHandler} style={{ border: "none", backgroundColor:"transparent" }}>
                 <i className="fa-solid fa-heart" style={{ color: isLiked ? "red" : "gray" }}/></button>
-            {project.likes}
+            추천 {project.likes}
         </div>
     );    
 }

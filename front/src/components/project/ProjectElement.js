@@ -3,7 +3,7 @@ import { Card, Button, ButtonGroup, Container, Row, Col, Modal } from "react-boo
 import * as Api from '../../api';
 import ProjectEdit from './ProjectEdit';
 import "./ProjectElement.css";
-import LikeButton from '../like/Like';
+import LikeButton from '../like/LikeButton';
 import { UserStateContext } from "../../App";
 
 function ProjectElement({ project, isEditable, setProjectList }) {
