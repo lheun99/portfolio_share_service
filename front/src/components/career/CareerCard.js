@@ -4,7 +4,7 @@ import CareerEditForm from './CareerEditForm';
 
 // 경력 정보 조회 상세 값 컴포넌트
 const CareerCard = ({ value, editHandler, deleteHandler, isEditable }) => {
-  const { id, company, job_position, achievement, from_date, to_date, isCurrent } = value;
+  const { id, company, job_position, achievement, from_date, to_date,} = value;
   const [isEditing, SetIsEditing] = useState(false);
   const [show, setShow] = useState(false)
 
@@ -41,25 +41,31 @@ const CareerCard = ({ value, editHandler, deleteHandler, isEditable }) => {
             <Col sm={2} style={{margin:"auto"}}>
               <ButtonGroup style={{ margin: 10, }} size='sm'>
                 <Button variant="secondary" onClick={updateHandler}>
-                  <span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>edit</span>
+                  <span 
+                    className="material-icons" 
+                    style={{verticalAlign:"middle",fontSize:20,}}
+                  >edit</span>
                 </Button>
                 <Button variant="danger" onClick={() => setShow(true)}>
-                  <span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>delete</span>
+                  <span 
+                    className="material-icons" 
+                    style={{verticalAlign:"middle",fontSize:20,}}
+                  >delete</span>
                 </Button>
               </ButtonGroup>
               <Modal show={show} style={{zIndex:99999,}}>
-              <Modal.Header>
-              <Modal.Title>해당 내용을 삭제하시겠습니까?</Modal.Title>
-              </Modal.Header>
-              <br />
-              <Modal.Footer style={{justifyContent:"center"}}>
-              <Button variant="danger" onClick={handleDelete}>
-                  삭제
-              </Button>
-              <Button variant="secondary" onClick={()=>setShow(false)}>
-                    취소
-                </Button>
-              </Modal.Footer>
+                <Modal.Header>
+                  <Modal.Title>해당 내용을 삭제하시겠습니까?</Modal.Title>
+                </Modal.Header>
+                <br />
+                <Modal.Footer style={{justifyContent:"center"}}>
+                  <Button variant="danger" onClick={handleDelete}>
+                      삭제
+                  </Button>
+                  <Button variant="secondary" onClick={()=>setShow(false)}>
+                        취소
+                  </Button>
+                </Modal.Footer>
               </Modal>
             </Col> : <></>}
         </Row>

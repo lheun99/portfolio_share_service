@@ -19,6 +19,8 @@ function SearchedProjectCard({ project, setIsEditing, isEditable, isNetwork }) {
       return null;
     }
   };
+
+
   return (
     <Card
       id="card"
@@ -39,7 +41,7 @@ function SearchedProjectCard({ project, setIsEditing, isEditable, isNetwork }) {
           {project?.title}
         </Card.Title>
         <Card.Text
-          className="project-discripton"
+          className="project-description"
           style={{ borderTop: "grey solid 1px", padding: 5 }}
         >
           {project?.description}

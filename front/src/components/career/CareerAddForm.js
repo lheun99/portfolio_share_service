@@ -102,10 +102,17 @@ const CareerAddForm = ({ onCreate, clickHandler }) => {
 
       <Form.Group className="mt-3 row">
         <div className="col-auto">
-          <DatePicker selected={careerInfo.from_date} onChange={date => (handleOnChange(date, 'from_date'))}></DatePicker>
+          <DatePicker 
+            selected={careerInfo.from_date} 
+            onChange={date => (handleOnChange(date, 'from_date'))}
+          ></DatePicker>
         </div> 
         <div className="col-auto">
-          <DatePicker disabled={radioCheck} selected={radioCheck ? null : careerInfo.to_date} onChange={date => (handleOnChange(date, 'to_date'))}></DatePicker>
+          <DatePicker 
+            disabled={radioCheck} 
+            selected={radioCheck ? null : careerInfo.to_date} 
+            onChange={date => (handleOnChange(date, 'to_date'))}
+          ></DatePicker>
         </div>
         <Col style={{margin:"auto",}}>
           <Form.Check 
