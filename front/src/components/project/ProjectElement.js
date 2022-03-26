@@ -39,7 +39,7 @@ function ProjectElement({ project, isEditable, setProjectList, portfolioOwnerId 
                 <Row>
                     <Col>
                         <Card.Subtitle>{project.title}</Card.Subtitle>
-                        <Card.Text className="text-muted">{project.description} <br /> {project.link && <a id="project-link" href={project.link}>{project.link}</a>} <br /> {project.from_date} ~ {project.to_date}</Card.Text>
+                        <Card.Text className="text-muted">{project.description} <br /> {project.link && <a id="project-link" href={project.link} target="_blank" rel="noopener noreferrer">{project.link}</a>} <br /> {project.from_date} ~ {project.to_date}</Card.Text>
                     </Col>
                     {isEditable && (
                         <Col sm={2} style={{margin:"auto"}}>
