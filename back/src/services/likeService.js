@@ -7,10 +7,10 @@ class likeService {
     if (like) {
       const deletedLike = await Like.delete({ like_id: like._id });
 
-      deletedLike.errorMessage = 
-        (deletedLike.deletedCount === 1) ? null : "좋아요 취소 오류입니다.";
+      if (deletedLike.deletedCount !== 1) 
+        return { errorMessage: "좋아요 취소 오류입니다." }
       
-      return deletedLike;
+      return;
 
     } else {
       const newLike = { user_id, project_id };

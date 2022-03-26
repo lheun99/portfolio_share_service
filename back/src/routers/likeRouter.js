@@ -1,10 +1,6 @@
 import is from "@sindresorhus/is";
 import { Router } from "express";
 import { login_required } from "../middlewares/login_required";
-import {
-  isValidData,
-  invalidCallback,
-} from "../middlewares/validationMiddleware";
 import { likeService } from "../services/likeService";
 
 const likeRouter = Router();
@@ -23,10 +19,14 @@ likeRouter.post(
       const { user_id, project_id } = req.body;
       const like = await likeService.setLike({ user_id, project_id });
 
-      if (like.errorMessage) {
-        res.status(400).json({type: "delete", project_id});
+      if (!like) {
+        res.status(200).json({type: "delete", project_id});
+      } else if (like.errorMessage) {
+        throw new Error(like.errorMessage);
+      } else {
+        res.status(201).json({ type: "create", project_id });
       }
-      res.status(201).json({ type: "success", project_id });
+
     } catch (error) {
       next(error);
     }
