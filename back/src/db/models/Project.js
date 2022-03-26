@@ -13,7 +13,7 @@ class Project {
   }
 
   static async findByProjectId({ project_id }) {
-    const project = await ProjectModel.findOne({ id: project_id }).populate('user', {name: 1, job: 1, _id: 0});
+    const project = await ProjectModel.findOne({ id: project_id }).populate('user', {name: 1, job: 1, _id: 0}).populate('likes');
     return project;
   }
 
