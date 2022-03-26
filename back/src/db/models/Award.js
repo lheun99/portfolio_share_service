@@ -20,16 +20,16 @@ class Award {
   }
 
   // 수상 내역 업데이트
-  static async update({ award_id, fieldToUpdate, newValue }) {
+  static async update({ award_id, toUpdate }) {
     const filter = { id: award_id };
-    const update = { [fieldToUpdate]: newValue };
     const option = { returnOriginal: false };
 
     const updatedAward = await AwardModel.findOneAndUpdate(
       filter,
-      update,
+      toUpdate,
       option
     );
+    
     return updatedAward;
   }
 
@@ -37,6 +37,12 @@ class Award {
   static async delete({ award_id }) {
     const deletedAward = await AwardModel.deleteOne({ id: award_id });
     return deletedAward;
+  }
+
+  // user_id를 이용하여 data 삭제
+  static async deleteAll({ user_id }) {
+    const deletedAwards = await AwardModel.deleteMany({ user_id: user_id });
+    return deletedAwards;
   }
 }
 
