@@ -1,10 +1,12 @@
 import { use } from "express/lib/router";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Form, Card, Row, Button, Col } from "react-bootstrap";
 import * as Api from "../../api";
 import "./ProfilePage.css";
 
 function UserEditForm({ user, setUser }) {
+  const navigate = useNavigate();
   const [updateUser, setUpdateUser] = useState({});
 
   const [newPassword, setNewPassword] = useState("");
@@ -125,6 +127,7 @@ function UserEditForm({ user, setUser }) {
     setUser(res.data);
 
     alert("프로필 정보가 수정되었습니다.");
+    navigate(`/users/${user.id}/profilePage`);
   };
 
   return (
