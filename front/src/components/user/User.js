@@ -79,6 +79,8 @@ function User({ portfolioOwnerId, isEditable }) {
             {user?.github && (
               <a
                 href={user?.github}
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{ color: "black" }}
               >
                 <i className="fa-brands fa-github"></i>
@@ -89,6 +91,8 @@ function User({ portfolioOwnerId, isEditable }) {
             {user?.gitlab && (
               <a
                 href={user?.gitlab}
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{ color: "black" }}
               >
                 <i className="fa-brands fa-gitlab"></i>
@@ -99,6 +103,8 @@ function User({ portfolioOwnerId, isEditable }) {
             {user?.twitter && (
               <a
                 href={user?.twitter}
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{ color: "black" }}
               >
                 <i className="fa-brands fa-twitter"></i>
@@ -109,6 +115,8 @@ function User({ portfolioOwnerId, isEditable }) {
             {user?.instagram && (
               <a
                 href={user?.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{ color: "black" }}
               >
                 <i className="fa-brands fa-instagram"></i>
@@ -119,6 +127,8 @@ function User({ portfolioOwnerId, isEditable }) {
             {user?.youtube && (
               <a
                 href={user?.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{ color: "black" }}
               >
                 <i className="fa-brands fa-youtube"></i>

@@ -126,45 +126,60 @@ function ProfilePage() {
               <Card.Text>
                 <a
                   href={user?.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   style={{ color: "black", textDecoration: "none" }}
                 >
                   <i className="fa-brands fa-github"></i>
+                  {" "}
                   {user?.github}
                 </a>
               </Card.Text>
               <Card.Text>
                 <a
                   href={user?.gitlab}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   style={{ color: "black", textDecoration: "none" }}
                 >
                   <i className="fa-brands fa-gitlab"></i>
+                  {" "}
                   {user?.gitlab}
                 </a>
               </Card.Text>
               <Card.Text>
                 <a
                   href={user?.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   style={{ color: "black", textDecoration: "none" }}
                 >
                   <i className="fa-brands fa-twitter"></i>
+                  {" "}
                   {user?.twitter}
                 </a>
               </Card.Text>
               <Card.Text>
                 <a
                   href={user?.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   style={{ color: "black", textDecoration: "none" }}
                 >
                   <i className="fa-brands fa-instagram"></i>
+                  {" "}
                   {user?.instagram}
                 </a>
               </Card.Text>
               <Card.Text>
                 <a
                   href={user?.youtube}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   style={{ color: "black", textDecoration: "none" }}
                 >
                   <i className="fa-brands fa-youtube"></i>
+                  {" "}
                   {user?.youtube}
                 </a>
               </Card.Text>
