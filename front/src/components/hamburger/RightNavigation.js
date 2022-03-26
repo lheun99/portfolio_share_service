@@ -3,7 +3,6 @@ import { UserStateContext } from "../../App";
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
 
-
 const Ul = styled.ul`
   margin:0;
   padding-right: 20px;
@@ -30,6 +29,7 @@ const Ul = styled.ul`
   @media (max-width: 1300px) {
     flex-flow: column nowrap;
     background-color: white;
+    opacity: 95%;
     position: fixed;
     transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(100%)'};
     top: 0;
@@ -45,8 +45,7 @@ const Ul = styled.ul`
 `;
 
 
-
-const RightNavigation = ({ open,logout, changeOpen }) => {
+const RightNavigation = ({ open, logout, changeOpen }) => {
   const userState = useContext(UserStateContext);
   const isLogin = !!userState.user;
   const navigate = useNavigate();
