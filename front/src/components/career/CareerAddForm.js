@@ -3,7 +3,7 @@ import { Form, Button, Col, Row } from 'react-bootstrap';
 import DatePicker from "react-datepicker";
 
 // + 버튼 클릭 시 나타나는 create 폼 컴포넌트
-const EducationForm = ({ onCreate, clickHandler }) => {
+const CareerAddForm = ({ onCreate, clickHandler }) => {
   const [radioCheck, setRadioCheck] = useState(false)
   const [careerInfo, setCareerInfo] = useState({
     company:'',
@@ -43,6 +43,7 @@ const EducationForm = ({ onCreate, clickHandler }) => {
         to_date: new Date(),
         isCurrent: true,
       })
+      clickHandler();
       return;
     }
 
@@ -101,10 +102,17 @@ const EducationForm = ({ onCreate, clickHandler }) => {
 
       <Form.Group className="mt-3 row">
         <div className="col-auto">
-          <DatePicker selected={careerInfo.from_date} onChange={date => (handleOnChange(date, 'from_date'))}></DatePicker>
+          <DatePicker 
+            selected={careerInfo.from_date} 
+            onChange={date => (handleOnChange(date, 'from_date'))}
+          ></DatePicker>
         </div> 
         <div className="col-auto">
-          <DatePicker disabled={radioCheck} selected={radioCheck ? null : careerInfo.to_date} onChange={date => (handleOnChange(date, 'to_date'))}></DatePicker>
+          <DatePicker 
+            disabled={radioCheck} 
+            selected={radioCheck ? null : careerInfo.to_date} 
+            onChange={date => (handleOnChange(date, 'to_date'))}
+          ></DatePicker>
         </div>
         <Col style={{margin:"auto",}}>
           <Form.Check 
@@ -131,4 +139,4 @@ const EducationForm = ({ onCreate, clickHandler }) => {
   );
 };
 
-export default EducationForm;
+export default CareerAddForm;

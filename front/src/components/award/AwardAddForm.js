@@ -32,35 +32,53 @@ const AwardAddForm = ({ portfolioOwnerId, awards, setAwards, setIsAdding}) => {
   // bootstrap Form을 이용하여 award의 title과 description을 입력받아 세팅함.
   // 확인 버튼은 submit, 취소 버튼은 setIsAdding을 false로 변경하여 추가를 끝냄.
   return (
-    <Form style={{margin:10, padding: 10,}} onSubmit={handleSubmit}>
-        <Form.Group controlId="useEditTitle" className="mb-3">
+    <Form
+      style={{margin:10, padding: 10,}}
+      onSubmit={handleSubmit}
+    >
+      <Form.Group
+        controlId="useEditTitle"
+        className="mb-3"
+      >
         <Form.Control
             type="text"
             value={title}
             placeholder="수상내역"
             onChange={(e) => setTitle(e.target.value)}
         />
-        </Form.Group>
+      </Form.Group>
 
-        <Form.Group controlId="userEditDescription">
+      <Form.Group controlId="userEditDescription">
         <Form.Control
             type="text"
             value={description}
             placeholder="상세내역"
             onChange={(e) => setDescription(e.target.value)}
         />
-        </Form.Group>
+      </Form.Group>
 
-        <Form.Group as={Row} className="mt-3 text-center">
+      <Form.Group
+        as={Row}
+        className="mt-3 text-center"
+      >
         <Col sm={{ span: 20 }}>
-            <Button size="sm" variant="primary" type="submit" className="me-3">
-            확인
+            <Button
+              size="sm"
+              variant="primary"
+              type="submit"
+              className="me-3"
+            >
+              확인
             </Button>
-            <Button size="sm" variant="secondary" onClick={() => setIsAdding(false)}>
-            취소
+            <Button
+              size="sm"
+              variant="secondary"
+              onClick={() => setIsAdding(false)}
+            >
+              취소
             </Button>
         </Col>
-        </Form.Group>
+      </Form.Group>
     </Form>
   );
 }

@@ -6,14 +6,13 @@ import { loginReducer } from "./reducer";
 import "./App.css";
 
 import Header from "./components/Header";
-import Footer from "./components/Footer";
 import LoginForm from "./components/user/LoginForm";
 import Network from "./components/user/Network";
 import RegisterForm from "./components/user/RegisterForm";
 import Portfolio from "./components/Portfolio";
 import Projects from "./components/search/Projects";
 import ProfilePage from "./components/user/ProfilePage";
-import Carousel from "./components/carousel/Carousel";
+import ControlledCarousel from "./components/carousel/Carousel";
 import PasswordResetForm from "./components/user/PasswordResetForm";
 
 export const UserStateContext = createContext(null);
@@ -24,6 +23,7 @@ function App() {
   const [userState, dispatch] = useReducer(loginReducer, {
     user: null,
   });
+  
 
   // 아래의 fetchCurrentUser 함수가 실행된 다음에 컴포넌트가 구현되도록 함.
   // 아래 코드를 보면 isFetchCompleted 가 true여야 컴포넌트가 구현됨.
@@ -60,7 +60,6 @@ function App() {
       <div
         className="loading"
         style={{
-          fontFamily: "'Poppins', sans-serif",
           fontWeight: "bold",
           fontSize: 40,
           textAlign: "center",
@@ -78,7 +77,7 @@ function App() {
       </div>
     );
   }
-
+  console.log(userState);
   return (
     <>
       <DispatchContext.Provider value={dispatch}>
@@ -86,7 +85,7 @@ function App() {
           <Router>
             <Header />
             <Routes>
-              <Route path="/carousel" exact element={<Carousel />} />
+              <Route path="/home" exact element={<ControlledCarousel />} />
               <Route path="/" exact element={<Portfolio />} />
               <Route path="/login" element={<LoginForm />} />
               <Route path="/register" element={<RegisterForm />} />
@@ -103,7 +102,6 @@ function App() {
           </Router>
         </UserStateContext.Provider>
       </DispatchContext.Provider>
-      {/* <Footer /> */}
     </>
   );
 }

@@ -41,14 +41,32 @@ const Career = ({ portfolioOwnerId, isEditable }) => {
 
   // 수정 기능 구현 함수
   const editHandler = (user_id, id, company, job_position, achievement, from_date, to_date, isCurrent) => {
-    const editTopic = { user_id, id, company, job_position, achievement, from_date, to_date, isCurrent };
+    const editTopic = { 
+      user_id, 
+      id, 
+      company, 
+      job_position, 
+      achievement, 
+      from_date, 
+      to_date, 
+      isCurrent 
+    };
+    
     Api
       .put(`careers/${id}`, editTopic)
       .then(res => console.log(res.data));
 
     const mapped = topics.map((v) => {
       if (v.id === id) {
-        return { ...v, company, job_position, achievement, from_date, to_date, isCurrent }
+        return { 
+          ...v, 
+          company, 
+          job_position, 
+          achievement, 
+          from_date, 
+          to_date, 
+          isCurrent 
+        }
       }
       else {
         return { ...v }

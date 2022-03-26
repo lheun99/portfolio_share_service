@@ -8,6 +8,7 @@ function User({ portfolioOwnerId, isEditable }) {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
+  // 직무에 따라 색깔 결정함.
   const colorChange = () => {
     if (user?.job === "프론트엔드") {
       return "info";
@@ -29,8 +30,13 @@ function User({ portfolioOwnerId, isEditable }) {
     Api.get("users", portfolioOwnerId).then((res) => setUser(res.data));
   }, [portfolioOwnerId]);
 
+  // 유저 카드 생성
+  // 프로필 이미지, 이름, email, 직무, 소개, 소셜 링크의 정보를 담고 있음.
   return (
-    <Card className="mb-2 ms-3 mr-5" style={{ width: "18rem" }}>
+    <Card
+      className="mb-2 ms-3 mr-5"
+      style={{ width: "18rem" }}
+    >
       <Card.Body>
         <Row className="justify-content-md-center">
           <Card.Img
@@ -43,15 +49,20 @@ function User({ portfolioOwnerId, isEditable }) {
             alt="사용자 프로필"
           />
         </Row>
-        <Card.Title style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center",
-            }}>
+        <Card.Title
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           {user?.name}
         </Card.Title>
-        <Card.Subtitle className="mb-2 text-muted" style={{textAlign:"center"}}>
+        <Card.Subtitle
+          className="mb-2 text-muted"
+          style={{textAlign:"center"}}
+        >
           {user?.email}
           <h6 style={{ margin: "2px 5px" }}>
             <Badge pill bg={colorChange()}>
@@ -60,39 +71,66 @@ function User({ portfolioOwnerId, isEditable }) {
             </Badge>
           </h6>
         </Card.Subtitle>
-        <Card.Text style={{borderTop:"grey solid 1px", padding:5,}}>{user?.description}</Card.Text>
+        <Card.Text style={{borderTop:"grey solid 1px", padding:5,}}>
+          {user?.description}
+        </Card.Text>
         <Row>
           <Col>
             {user?.github && (
-              <a href={user?.github} style={{ color: "black" }}>
+              <a
+                href={user?.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "black" }}
+              >
                 <i className="fa-brands fa-github"></i>
               </a>
             )}
           </Col>
           <Col>
             {user?.gitlab && (
-              <a href={user?.gitlab} style={{ color: "black" }}>
+              <a
+                href={user?.gitlab}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "black" }}
+              >
                 <i className="fa-brands fa-gitlab"></i>
               </a>
             )}
           </Col>
           <Col>
             {user?.twitter && (
-              <a href={user?.twitter} style={{ color: "black" }}>
+              <a
+                href={user?.twitter}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "black" }}
+              >
                 <i className="fa-brands fa-twitter"></i>
               </a>
             )}
           </Col>
           <Col>
             {user?.instagram && (
-              <a href={user?.instagram} style={{ color: "black" }}>
+              <a
+                href={user?.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "black" }}
+              >
                 <i className="fa-brands fa-instagram"></i>
               </a>
             )}
           </Col>
           <Col>
             {user?.youtube && (
-              <a href={user?.youtube} style={{ color: "black" }}>
+              <a
+                href={user?.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "black" }}
+              >
                 <i className="fa-brands fa-youtube"></i>
               </a>
             )}

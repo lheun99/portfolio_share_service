@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Nav, Form, Button, Modal } from "react-bootstrap";
-
+import "./Projects.css"
 import * as Api from "../../api";
 import { UserStateContext } from "../../App";
 import SearchedProjectCard from "./SearchedProjectCard";
@@ -50,17 +50,19 @@ function Projects() {
   };
 
   return (
-    <Container fluid>
+    <Container fluid style={{ padding: 0 }}>
       <div style={{ height: 110 }}></div>
-      <Nav className="me-auto" style={{paddingBottom:20, justifyContent:"center",}}>
-        {/* <Nav.Item>
-          <Nav.Link eventKey="disabled" disabled>
-            관심 프로젝트를 검색
-          </Nav.Link>
-        </Nav.Item> */}
+      <div id="projects-banner">
+        <h2 style={{fontWeight:"bolder",}}>Projects</h2>
+        <h4>관심 있는 프로젝트를 한 눈에</h4>
+      </div>
+      <Nav 
+        className="me-auto" 
+        style={{padding:"40px 0 20px 0", justifyContent:"center",}}
+      >
         <Nav.Item>
           <Form className="d-flex" onSubmit={handleSearch}>
-            <Form.Group style={{marginRight:"10px"}}>
+            <Form.Group style={{marginRight:"10px",width:500,}}>
               <Form.Control
                 type="search"
                 placeholder="프로젝트 검색"
@@ -68,34 +70,55 @@ function Projects() {
                 aria-label="Search"
                 onChange={handleQuery}
               />
-              {!query && (<Form.Text className="text-success">
-                    관심 있는 프로젝트를 검색합니다.
-              </Form.Text>)}
+              {!query && (
+                <Form.Text className="text-success">
+                  관심 있는 프로젝트를 검색합니다.
+                </Form.Text>
+              )}
             </Form.Group>
-            <Button style={{backgroundColor:'white', border:"none",padding:"5px 0 0 0",height:32,}} onClick={handleSearch}>
-                <span className="material-icons" style={{color:"grey",fontSize:32,}}>search</span>
+            <Button
+              style={{
+                backgroundColor: "white",
+                border: "none",
+                padding: "5px 0 0 0",
+                height: 32,
+              }}
+              onClick={handleSearch}
+            >
+              <span
+                className="material-icons"
+                style={{ color: "grey", fontSize: 32 }}
+              >
+                search
+              </span>
             </Button>
           </Form>
         </Nav.Item>
         {isShearched ? (
           <>
-            <Nav.Item style={{width:900,}}>
+            <Nav.Item>
               <Nav.Link eventKey="disabled" disabled>
-                총 {filteredProjects.length}개가 검색되었습니다.
+                총 <span style={{color:"#0d62fd"}}>{filteredProjects.length}</span>개가 검색되었습니다.
               </Nav.Link>
             </Nav.Item>
           </>
         ) : (
           <>
-            <Nav.Item style={{width:900,}}>
+            <Nav.Item>
               <Nav.Link eventKey="disabled" disabled></Nav.Link>
             </Nav.Item>
           </>
         )}
       </Nav>
       {isAll ? (
-        <div style={{display:"flex", flexDirection:"row", justifyContent:"center", }}>
-          <Row xs="auto" style={{width:1217, justifyContent:"flex-start"}}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+          }}
+        >
+          <Row xs="auto" style={{ width: 1217, justifyContent: "flex-start" }}>
             {projects.map((project) => (
               <SearchedProjectCard
                 key={project.id}
@@ -109,8 +132,14 @@ function Projects() {
         <></>
       )}
       {isShearched ? (
-        <>
-          <Row xs="auto" className="jusify-content-center">
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+          }}
+        >
+          <Row xs="auto" style={{ width: 1217, justifyContent: "flex-start" }}>
             {filteredProjects.map((project) => (
               <SearchedProjectCard
                 key={project.id}
@@ -119,14 +148,14 @@ function Projects() {
               />
             ))}
           </Row>
-        </>
+        </div>
       ) : (
         <></>
       )}
-      <Modal show={isShow}>
+      <Modal show={isShow} style={{ zIndex: 99999 }}>
         <Modal.Body>검색어를 입력하세요.</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button onClick={handleClose}>
             닫기
           </Button>
         </Modal.Footer>

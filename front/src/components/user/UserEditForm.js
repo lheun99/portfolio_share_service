@@ -1,4 +1,3 @@
-import { use } from "express/lib/router";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Card, Row, Button, Col } from "react-bootstrap";
@@ -12,9 +11,11 @@ function UserEditForm({ user, setUser }) {
   const [newPassword, setNewPassword] = useState("");
   const [isValidPassword, setIsValidPassword] = useState(false);
   const [isCorrectPassword, setIsCorrectPassword] = useState(false);
+  const [isValidName, setIsValidName] = useState(true);
 
   const [profile, setProfile] = useState({});
 
+  // 수정할 정보를 입력받기 전, 기존 user 정보를 세팅함.
   useEffect(() => {
     if(Object.keys(user).length > 0)
       setUpdateUser({
@@ -41,6 +42,7 @@ function UserEditForm({ user, setUser }) {
   }, [newPassword, isCorrectPassword]);
 
   // imageupload 함수
+  // default 이미지로 세팅함.
   const setDefaultHandler = async (e) => {
     e.preventDefault();
 
@@ -54,6 +56,7 @@ function UserEditForm({ user, setUser }) {
     });
   };
 
+  // 현재 값으로 이미지 세팅함.
   const changeHandler = (e) => {
     e.preventDefault();
 
@@ -73,7 +76,7 @@ function UserEditForm({ user, setUser }) {
 
   // submit 함수
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     // imageupload 코드
     let updatedProfile = { data: profile.currentUrl };
@@ -84,6 +87,7 @@ function UserEditForm({ user, setUser }) {
 
     const prevImage = user.profile.includes("default") ? "" : user.profile;
 
+    // Api postImg로 이미지를 업로드함.
     if (profile.profileObj) {
       const fd = new FormData();
       fd.append("filename", profile.profileObj);
@@ -130,6 +134,9 @@ function UserEditForm({ user, setUser }) {
     navigate(`/users/${user.id}/profilePage`);
   };
 
+  // 프로필 페이지의 프로필 카드 설정 부분
+  // 기존 유저값이 세팅되어 있고 새로운 값을 입력받아 수정함.
+  // 프로필 이미지, 이름, email, 소개, 직무, 소셜 링크, 비밀번호 변경 가능
   return (
     <Card border="light">
       <Card.Body>
@@ -137,7 +144,10 @@ function UserEditForm({ user, setUser }) {
           className="text-muted"
           style={{ borderBottom: "rgba(70, 65, 65, 0.2) solid thin", margin: "20px 0 10px 0" }}
         >
-          <span className="material-icons" style={{ verticalAlign: "middle" }}>
+          <span
+            className="material-icons"
+            style={{ verticalAlign: "middle" }}
+          >
             image
           </span>{" "}
           프로필 이미지
@@ -197,6 +207,11 @@ function UserEditForm({ user, setUser }) {
           >
             당신의 이름을 설정해주세요!
           </div>
+          {!isValidName && (
+            <p style={{ fontSize: "11px", color: "red" }}>
+              이름은 2글자 이상이어야 합니다.
+            </p>
+          )}
           <Form.Group
             controlId="userEditName"
             className="mb-3"
@@ -205,8 +220,14 @@ function UserEditForm({ user, setUser }) {
               type="text"
               placeholder="이름을 입력하세요"
               value={updateUser.name || ""}
-              onChange={(e) =>
-                setUpdateUser({ ...updateUser, name: e.target.value })}
+              onChange={(e) => {
+                if(e.target.value.length >= 2) {
+                  setIsValidName(true);
+                } else {
+                  setIsValidName(false);
+                }
+                setUpdateUser({ ...updateUser, name: e.target.value });
+              }}
             />
           </Form.Group>
 
@@ -214,7 +235,10 @@ function UserEditForm({ user, setUser }) {
             className="text-muted"
             style={{ borderBottom: "rgba(70, 65, 65, 0.2) solid thin", margin: "30px 0 10px 0" }}
           >
-            <span className="material-icons" style={{ verticalAlign: "middle" }}>
+            <span
+              className="material-icons"
+              style={{ verticalAlign: "middle" }}
+            >
               email
             </span>{" "}
             이메일
@@ -225,7 +249,10 @@ function UserEditForm({ user, setUser }) {
           >
             이메일은 변경 불가능합니다!
           </div>
-          <Form.Group controlId="userEmail" className="mb-3">
+          <Form.Group
+            controlId="userEmail"
+            className="mb-3"
+          >
             <Form.Control
               type="email"
               placeholder={user.email}
@@ -238,7 +265,10 @@ function UserEditForm({ user, setUser }) {
             className="text-muted"
             style={{ borderBottom: "rgba(70, 65, 65, 0.2) solid thin", margin: "30px 0 10px 0" }}
           >
-            <span className="material-icons" style={{ verticalAlign: "middle" }}>
+            <span
+              className="material-icons"
+              style={{ verticalAlign: "middle" }}
+            >
               person_search
             </span>{" "}
             소개
@@ -250,7 +280,10 @@ function UserEditForm({ user, setUser }) {
             프로필은 다양한 사람들과 공유되고 있습니다.<br />
             자기 자신을 소개해주세요!
           </div>
-          <Form.Group controlId="userEditDescription" className="mb-3">
+          <Form.Group
+            controlId="userEditDescription"
+            className="mb-3"
+          >
             <Form.Control
               type="text"
               placeholder="소개를 입력하세요"
@@ -265,7 +298,10 @@ function UserEditForm({ user, setUser }) {
             className="text-muted"
             style={{ borderBottom: "rgba(70, 65, 65, 0.2) solid thin", margin: "30px 0 10px 0" }}
           >
-            <span className="material-icons" style={{ verticalAlign: "middle" }}>
+            <span
+              className="material-icons"
+              style={{ verticalAlign: "middle" }}
+            >
               computer
             </span>{" "}
             직무
@@ -277,7 +313,10 @@ function UserEditForm({ user, setUser }) {
             이곳에는 다양한 관심사를 가진 사람들이 모여있습니다.<br />
             당신이 가장 관심 있는 직무를 선택해주세요!
           </div>
-          <Form.Group controlId="userEditJob" className="mb-3">
+          <Form.Group
+            controlId="userEditJob"
+            className="mb-3"
+          >
             <Form.Select
               onChange={(e) =>
                 setUpdateUser({ ...updateUser, job: e.target.value })
@@ -297,7 +336,10 @@ function UserEditForm({ user, setUser }) {
             className="text-muted"
             style={{ borderBottom: "rgba(70, 65, 65, 0.2) solid thin", margin: "30px 0 10px 0" }}
           >
-            <span className="material-icons" style={{ verticalAlign: "middle" }}>
+            <span
+              className="material-icons"
+              style={{ verticalAlign: "middle" }}
+            >
               share
             </span>{" "}
             소셜 링크
@@ -309,7 +351,10 @@ function UserEditForm({ user, setUser }) {
             깃헙, 인스타그램 또는 유튜브를 운영중이신가요?<br />
             기존 사용중인 플랫폼 링크를 추가하세요!
           </div>
-          <Form.Group controlId="userEditSocialLinkGitHub" className="mb-3">
+          <Form.Group
+            controlId="userEditSocialLinkGitHub"
+            className="mb-3"
+            >
             <Form.Control
               type="text"
               placeholder="GitHub 주소를 입력하세요"
@@ -319,7 +364,10 @@ function UserEditForm({ user, setUser }) {
               }
             />
           </Form.Group>
-          <Form.Group controlId="userEditSocialLinkGitLab" className="mb-3">
+          <Form.Group
+            controlId="userEditSocialLinkGitLab"
+            className="mb-3"
+          >
             <Form.Control
               type="text"
               placeholder="GitLab 주소를 입력하세요"
@@ -330,7 +378,10 @@ function UserEditForm({ user, setUser }) {
               }
             />
           </Form.Group>
-          <Form.Group controlId="userEditSocialLinkTwitter" className="mb-3">
+          <Form.Group
+            controlId="userEditSocialLinkTwitter"
+            className="mb-3"
+          >
             <Form.Control
               type="text"
               placeholder="Twitter 주소를 입력하세요"
@@ -341,7 +392,10 @@ function UserEditForm({ user, setUser }) {
               }
             />
           </Form.Group>
-          <Form.Group controlId="userEditSocialLinkInstagram" className="mb-3">
+          <Form.Group
+            controlId="userEditSocialLinkInstagram"
+            className="mb-3"
+          >
             <Form.Control
               type="text"
               placeholder="Instagram 주소를 입력하세요"
@@ -352,7 +406,10 @@ function UserEditForm({ user, setUser }) {
               }
             />
           </Form.Group>
-          <Form.Group controlId="userEditSocialLinkYoutube" className="mb-3">
+          <Form.Group
+            controlId="userEditSocialLinkYoutube"
+            className="mb-3"
+          >
             <Form.Control
               type="text"
               placeholder="Youtube 주소를 입력하세요"
@@ -368,7 +425,10 @@ function UserEditForm({ user, setUser }) {
             className="text-muted"
             style={{ borderBottom: "rgba(70, 65, 65, 0.2) solid thin", margin: "30px 0 10px 0" }}
           >
-            <span className="material-icons" style={{ verticalAlign: "middle" }}>
+            <span
+              className="material-icons"
+              style={{ verticalAlign: "middle" }}
+            >
               lock
             </span>{" "}
             비밀번호
@@ -384,7 +444,10 @@ function UserEditForm({ user, setUser }) {
               비밀번호는 4글자 이상이어야 합니다.
             </p>
           )}
-          <Form.Group controlId="checkPassword" className="mb-3">
+          <Form.Group
+            controlId="checkPassword"
+            className="mb-3"
+          >
             <Form.Control
               type="password"
               placeholder="새로운 비밀번호를 입력하세요"
@@ -410,7 +473,10 @@ function UserEditForm({ user, setUser }) {
               비밀번호가 일치하지 않습니다.
             </p>
           )}
-          <Form.Group controlId="userEditPassword" className="mb-3">
+          <Form.Group
+            controlId="userEditPassword"
+            className="mb-3"
+          >
             <Form.Control
               type="password"
               placeholder="비밀번호를 다시 한번 입력하세요"
@@ -426,13 +492,16 @@ function UserEditForm({ user, setUser }) {
             />
           </Form.Group>
 
-          <Form.Group as={Row} className="mt-3 text-center">
+          <Form.Group
+            as={Row}
+            className="mt-3 text-center"
+          >
             <Col sm={{ span: 20 }}>
               <Button
                 variant="primary"
                 type="submit"
                 className="me-3"
-                disabled={!isCorrectPassword && newPassword}
+                disabled={(!isCorrectPassword && newPassword) || !isValidName}
               >
                 설정 저장
               </Button>

@@ -21,6 +21,7 @@ const AwardCard = ({ awards, award, setIsEditing, isEditable, setAwards }) => {
   }
 
   // award 상세 목록 및 편집, 삭제 버튼 생성
+  // 삭제 버튼 클릭하면 Modal 나타나서 삭제 재확인하고 handleDelete 실행함.
   return (
     <Container style={{padding: 10, margin:"10px 0", borderBottom: "rgba(70, 65, 65, 0.2) dotted"}}>
       <Row>
@@ -29,14 +30,22 @@ const AwardCard = ({ awards, award, setIsEditing, isEditable, setAwards }) => {
           <Card.Text className="text-muted">{award?.description}</Card.Text>
         </Col>
         <Col sm={2}>
-          <ButtonGroup style={{ margin: 10, }} size='sm'>
+          <ButtonGroup
+            style={{ margin: 10, }}
+            size='sm'
+          >
             {isEditable && (
                 <Button
                   variant="secondary"
                   size="sm"
                   onClick={() => setIsEditing(true)}
                 >
-                  <span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>edit</span>
+                  <span
+                    className="material-icons"
+                    style={{verticalAlign:"middle",fontSize:20,}}
+                  >
+                    edit
+                  </span>
                 </Button>
             )}
             {isEditable && (
@@ -46,18 +55,32 @@ const AwardCard = ({ awards, award, setIsEditing, isEditable, setAwards }) => {
                     size="sm"
                     onClick={() => setShow(true)}
                   >
-                    <span className="material-icons" style={{verticalAlign:"middle",fontSize:20,}}>delete</span>
+                    <span
+                      className="material-icons"
+                      style={{verticalAlign:"middle",fontSize:20,}}
+                    >
+                      delete
+                    </span>
                   </Button>
-                  <Modal show={show} style={{zIndex:99999,}}>
+                  <Modal
+                    show={show}
+                    style={{zIndex:99999,}}
+                  >
                   <Modal.Header>
                   <Modal.Title>해당 내용을 삭제하시겠습니까?</Modal.Title>
                   </Modal.Header>
                   <br />
                   <Modal.Footer style={{justifyContent:"center"}}>
-                  <Button variant="outline-danger" onClick={handleDelete}>
+                  <Button
+                    variant="danger"
+                    onClick={handleDelete}
+                  >
                       삭제
                   </Button>
-                  <Button variant="outline-info" onClick={()=>setShow(false)}>
+                  <Button
+                    variant="secondary"
+                    onClick={()=>setShow(false)}
+                  >
                         취소
                     </Button>
                   </Modal.Footer>
