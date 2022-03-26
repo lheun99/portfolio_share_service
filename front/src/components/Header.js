@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Nav } from "react-bootstrap";
 import { UserStateContext, DispatchContext } from "../App";
 import "./Header.css";
+import Burger from "./hamburger/Burger";
 
 function Header() {
   const navigate = useNavigate();
@@ -46,161 +47,9 @@ function Header() {
           style={{
             display: "flex",
             flexDirection: "row",
-            // fontFamily: "Poppins",
           }}
         >
-          <Nav.Item>
-            <Nav.Link
-              className="item"
-              onClick={() => navigate("/home")}
-            >
-              <div 
-                className="itemColor"
-              >
-                <span
-                  className="material-icons"
-                  style={{ verticalAlign: "middle" }}
-                >
-                  home
-                </span>{" "}
-                Home
-              </div>
-            </Nav.Link>
-          </Nav.Item>
-          {!isLogin && (
-            <>
-              <Nav.Item>
-                <Nav.Link
-                  className="item"
-                  onClick={() => navigate("/login")}
-                >
-                  <div 
-                    className="itemColor"
-                  >
-                    <span
-                      className="material-icons"
-                      style={{ verticalAlign: "middle" }}
-                    >
-                      login
-                    </span>{" "}
-                    Login
-                  </div>
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link
-                  className="item"
-                  onClick={() => navigate("/register")}
-                >
-                  <div 
-                    className="itemColor"
-                  >
-                    <span
-                      className="material-icons"
-                      style={{ verticalAlign: "middle" }}
-                    >
-                      how_to_reg
-                    </span>{" "}
-                    회원가입
-                  </div>
-                </Nav.Link>
-              </Nav.Item></>
-          )}
-          {isLogin && (
-            <>
-              <Nav.Item>
-                <Nav.Link
-                  className="item"
-                  onClick={() => navigate("/network")}
-                >
-                  <div 
-                    className="itemColor"
-                  >
-                    <span
-                      className="material-icons"
-                      style={{ verticalAlign: "middle" }}
-                    >
-                      explore
-                    </span>{" "}
-                    Mate
-                  </div>
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link
-                  className="item"
-                  onClick={() => navigate("/projects")}
-                >
-                  <div 
-                    className="itemColor"
-                  >
-                    <span
-                      className="material-icons"
-                      style={{ verticalAlign: "middle" }}
-                    >
-                      folder
-                    </span>{" "}
-                    Projects
-                  </div>
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link
-                  className="item"
-                  onClick={() => navigate("/")}
-                >
-                  <div 
-                    className="itemColor"
-                  >
-                    <span
-                      className="material-icons"
-                      style={{ verticalAlign: "middle" }}
-                    >
-                      contact_page
-                    </span>{" "}
-                    My page
-                  </div>
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link
-                  className="item"
-                  onClick={() =>
-                    navigate(`/users/${userState.user.id}/profilePage`)
-                  }
-                >
-                  <div 
-                    className="itemColor"
-                  >
-                    <span
-                      className="material-icons"
-                      style={{ verticalAlign: "middle" }}
-                    >
-                      manage_accounts
-                    </span>{" "}
-                    My profile
-                  </div>
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link
-                  className="item"
-                  style={{ color: "#FE4F70" }}
-                  onClick={logout}
-                >
-                  {
-                    <span
-                      className="material-icons"
-                      style={{ verticalAlign: "middle" }}
-                    >
-                      logout
-                    </span>
-                  }{" "}
-                  Logout
-                </Nav.Link>
-              </Nav.Item>
-            </>
-          )}
+          <Burger logout={logout} />
         </div>
       </Nav>
     </div>
