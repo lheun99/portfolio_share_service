@@ -217,15 +217,6 @@ function Portfolio() {
                   자격증
                 </Nav.Link>
               </Nav>
-              {/* <Form className="d-flex">
-                <FormControl
-                  type="search"
-                  placeholder="Search"
-                  className="me-2"
-                  aria-label="Search"
-                />
-                <Button variant="primary">Search</Button>
-              </Form> */}
             </Container>
           </Navbar>
           {!isEducation &&

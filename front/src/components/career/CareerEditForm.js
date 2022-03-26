@@ -4,7 +4,16 @@ import DatePicker from "react-datepicker";
 
 // 편집 버튼 클릭 시 나타나는 수정용 form
 const CareerEdit = ({ item, onUpdate, editHandler }) => {
-  const { user_id, id, company, job_position, achievement, from_date, to_date, isCurrent } = item;
+  const { 
+    user_id, 
+    id, 
+    company, 
+    job_position, 
+    achievement, 
+    from_date, 
+    to_date, 
+    isCurrent 
+  } = item;
 
   const [radioCheck, setRadioCheck] = useState(isCurrent)
   const [careerInfo, setCareerInfo] = useState({
@@ -89,10 +98,17 @@ const CareerEdit = ({ item, onUpdate, editHandler }) => {
 
       <Form.Group className="mt-3 row">
         <div className="col-auto">
-          <DatePicker selected={careerInfo.from_date} onChange={date => (handleOnChange(date, 'from_date'))}></DatePicker>
+          <DatePicker 
+            selected={careerInfo.from_date} 
+            onChange={date => (handleOnChange(date, 'from_date'))}
+          ></DatePicker>
         </div> 
         <div className="col-auto">
-          <DatePicker disabled={radioCheck} selected={radioCheck ? null : (isCurrent ? new Date() : careerInfo.to_date)} onChange={date => (handleOnChange(date, 'to_date'))}></DatePicker>
+          <DatePicker 
+            disabled={radioCheck} 
+            selected={radioCheck ? null : (isCurrent ? new Date() : careerInfo.to_date)} 
+            onChange={date => (handleOnChange(date, 'to_date'))}
+          ></DatePicker>
         </div>
         <Col style={{margin:"auto",}}>
           <Form.Check 

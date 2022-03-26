@@ -60,7 +60,6 @@ function App() {
       <div
         className="loading"
         style={{
-          // fontFamily: "'Poppins', sans-serif",
           fontWeight: "bold",
           fontSize: 40,
           textAlign: "center",
@@ -78,7 +77,6 @@ function App() {
       </div>
     );
   }
-  console.log(userState);
   return (
     <>
       <DispatchContext.Provider value={dispatch}>
@@ -103,7 +101,6 @@ function App() {
           </Router>
         </UserStateContext.Provider>
       </DispatchContext.Provider>
-      {/* <Footer /> */}
     </>
   );
 }

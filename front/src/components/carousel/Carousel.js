@@ -1,10 +1,7 @@
 import React, { useContext, useState } from "react";
-// import Slider from "react-slick";
-import "./carousel.css";
 import { Carousel } from 'react-bootstrap';
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
 import { UserStateContext } from "../../App";
+import "./Carousel.css";
 
 
 

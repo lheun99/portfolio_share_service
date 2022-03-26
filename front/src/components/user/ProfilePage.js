@@ -49,8 +49,7 @@ function ProfilePage() {
   const withdrawal = async () => {
     const userProfile = user.profile.split("/").slice(-1)[0];
 
-    setShow(false);
-    setShowConfirm(true);
+    setShowConfirm(false)
 
     // 해당 유저의 education, award, project, certificate, career, proceeding, todo 삭제
     await Api.delete(`educationlist/${user.id}`);
@@ -76,7 +75,7 @@ function ProfilePage() {
   return (
     <>
       <div style={{ height: 110 }}></div>
-      <div id="banner_myprofile">
+      <div id="banner_profile">
         <h2 style={{ fontWeight: "bolder" }}>My profile</h2>
         <h4>나만의 프로필을 설정해보세요</h4>
       </div>
@@ -198,53 +197,49 @@ function ProfilePage() {
                       show={show}
                       style={{zIndex:99999,}}
                     >
-                    <Modal.Header>
-                    <Modal.Title>
-                      정말로 회원탈퇴하시겠습니까?
-                    </Modal.Title>
-                    </Modal.Header>
-                    <br />
-                    <Modal.Footer style={{justifyContent:"center"}}>
-                    <Button
-                      variant="danger"
-                      onClick={withdrawal}
-                    >
-                        회원탈퇴
-                    </Button>
-                    <Button
-                        variant="secondary"
-                        onClick={()=>setShow(false)}
-                    >
-                            취소
+                      <Modal.Header>
+                        <Modal.Title>
+                          정말로 회원탈퇴하시겠습니까?
+                        </Modal.Title>
+                      </Modal.Header>
+                      <br />
+                      <Modal.Footer style={{justifyContent:"center"}}>
+                        <Button
+                          variant="danger"
+                          onClick={()=> {
+                            setShow(false);
+                            setShowConfirm(true);
+                          }}
+                        >
+                          회원탈퇴
                         </Button>
                         <Button
-                          variant="outline-info"
-                          onClick={() => setShow(false)}
+                          variant="secondary"
+                          onClick={()=>setShow(false)}
                         >
                           취소
-                        </Button>
+                        </Button> 
                       </Modal.Footer>
                     </Modal>
                     <Modal
                       show={showConfirm}
                       style={{zIndex:99999,}}
                     >
-                    <Modal.Header closeButton>
-                    <Modal.Title>
-                      회원탈퇴가 완료되었습니다.
-                    </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                      그동안 이용해주셔서 감사합니다.
-                    </Modal.Body>
-                    <Modal.Footer style={{justifyContent:"center"}}>
-                    <Button
-                      variant="primary"
-                      onClick={() => setShowConfirm(false)}
-                    >
-                        확인
-                    </Button>
-                    </Modal.Footer>
+                      <Modal.Header>
+                      <Modal.Title>
+                        회원탈퇴가 완료되었습니다.
+                      </Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        그동안 이용해주셔서 감사합니다.
+                      </Modal.Body>
+                      <Modal.Footer style={{justifyContent:"center"}}>
+                        <Button
+                          onClick={withdrawal}
+                        >
+                          확인
+                        </Button>
+                      </Modal.Footer>
                     </Modal>
                   </Col>
                 </Row>
