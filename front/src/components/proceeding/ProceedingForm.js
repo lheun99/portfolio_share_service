@@ -5,15 +5,17 @@ import * as Api from '../../api';
 
 import { UserStateContext } from "../../App";
 
+// 자신이 진행중인 프로젝트를 추가하는 Form
 const ProceedingForm = ({ setIsForm, portfolioOwnerId, setProceedingList }) => {
 
+  // input에 값들을 useState를 사용해 객체로 관리
   const [proceedingInfo, setProceedingInfo] = useState({
     title:'',
     start_date:new Date(),
     end_date:new Date(),
   })
 
-
+  // input에 입력하는 값들을 지속적으로 업데이트 시킴
   const handleOnChange = (data, name) => {
     setProceedingInfo(current => ({
       ...current,
@@ -46,6 +48,7 @@ const ProceedingForm = ({ setIsForm, portfolioOwnerId, setProceedingList }) => {
     setIsForm(false);
   }
 
+  // 프로젝트 추가 Form
   return (
     <Form style={{ margin: 10, padding: 10}} onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="formBasicEmail">

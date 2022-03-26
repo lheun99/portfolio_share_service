@@ -13,7 +13,7 @@ const ProjectList = ({ portfolioOwnerId, projectList, setProjectList, isEditable
                 const projectId = cur.project_id;
                 acc[projectId] = true;
                 return acc;
-            }, {});
+            }, []);
             setLikes(likeObj);
         })
     },[portfolioOwnerId, projectList])

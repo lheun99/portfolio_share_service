@@ -4,6 +4,7 @@ import * as Api from '../../api';
 import CertificateList from './CertificateList';
 import CertificateForm from './CertificateForm';
 
+// 자격증 Card 구성
 const CertificateCard = ({ portfolioOwnerId, isEditable }) => {
 
     const [certificateList, setCertificateList] = useState([]);

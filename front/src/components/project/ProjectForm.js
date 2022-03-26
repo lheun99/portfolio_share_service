@@ -5,6 +5,7 @@ import * as Api from '../../api';
 
 import { UserStateContext } from "../../App";
 
+// 프로젝트 추가 Form
 const ProjectForm = ({ setIsEditing, setProjectList, portfolioOwnerId }) => {
 
   const [projectInfo, setProjectInfo] = useState({

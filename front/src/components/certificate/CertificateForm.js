@@ -5,6 +5,7 @@ import * as Api from '../../api';
 
 import { UserStateContext } from "../../App";
 
+// 자격증 추가 Form
 const CertificateForm = ({ setIsEditing, setCertificateList, portfolioOwnerId  }) => {
   const [certificateInfo, setCertificateInfo] = useState({
     title:'',

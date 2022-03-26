@@ -5,8 +5,9 @@ import * as Api from '../../api';
 
 import { UserStateContext } from "../../App";
 
-
+// 진행 중인 프로젝트 편집 form
 const ProceedingEdit = ({proceeding, setEdit, setProceedingList}) => {
+    // 편집 form이 열렸을때 기존의 데이터를 input 창에 보여줌
     const [proceedingInfo, setProceedingInfo] = useState({
         title: proceeding.title,
         start_date: new Date(proceeding.start_date),
@@ -14,6 +15,7 @@ const ProceedingEdit = ({proceeding, setEdit, setProceedingList}) => {
     })
     const userState = useContext(UserStateContext);
 
+    // input 창에 값을 입력했을때 지속적으로 업데이트 시킴
     const handleOnChange = (data, name) => {
         setProceedingInfo(current => ({
             ...current,
@@ -21,6 +23,8 @@ const ProceedingEdit = ({proceeding, setEdit, setProceedingList}) => {
         }))
     }
 
+    // 편집을 완료하고 저장할때 내용이 채워져있는지, 기간을 제대로 설정했는지 확인
+    // 확인 후 데이터를 저장 후 리렌더링
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (proceedingInfo.title === '') {
@@ -52,6 +56,7 @@ const ProceedingEdit = ({proceeding, setEdit, setProceedingList}) => {
         setEdit(false);
     }
 
+    // 편집 form의 전체적인 구조
     return (
         <Form style={{ margin: 10, padding: 10, width:"740px"}} onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">

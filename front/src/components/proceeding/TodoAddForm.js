@@ -3,11 +3,12 @@ import { Row, Col, Button, Form } from "react-bootstrap";
 import * as Api from '../../api';
 import { UserStateContext } from "../../App";
 
-
+// 프로젝트에서 해야할 일들을 추가하는 Form
 const TodoAddForm = ({ setAdd, proceeding, setWorkItemList }) => {
     const [work, setWork] = useState('');
     const userState = useContext(UserStateContext);
 
+    // 프로젝트에서 해야 할 일에 대한 목록을 저장
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (work === '') {
@@ -31,7 +32,7 @@ const TodoAddForm = ({ setAdd, proceeding, setWorkItemList }) => {
         setAdd(false);
 
     }
-
+    // 할 일 목록 추가하는 Form
     return (
         <Form style={{ margin: 10, padding: 10}} onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicEmail">

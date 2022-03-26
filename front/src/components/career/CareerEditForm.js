@@ -24,8 +24,6 @@ const CareerEdit = ({ item, onUpdate, editHandler }) => {
     }))
   }
 
-
-
   // 폼 제출 시 값 update 함수
   const submitHandler = (e) => {
     e.preventDefault();
@@ -101,7 +99,14 @@ const CareerEdit = ({ item, onUpdate, editHandler }) => {
             type="switch"
             id="custom-switch"
             label="재직중"
-            onChange={(e) => setRadioCheck(!radioCheck)}
+            onChange={(e) => {
+              setRadioCheck(!radioCheck)
+              setCareerInfo(cur => {
+                const newObj = {...cur};
+                newObj.isCurrent = !newObj.isCurrent;
+                return newObj;
+              })
+            }}
             checked={radioCheck}
           />
         </Col>

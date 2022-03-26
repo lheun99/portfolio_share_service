@@ -22,16 +22,16 @@ function ControlledCarousel() {
       {isLogin && (<div style={{height:110}}></div>)}
       <Carousel activeIndex={index} onSelect={handleSelect}>
         <Carousel.Item className="image">
-          <img src={require('./first.png')} />
+          <img src={require('./first.png')} alt="first"/>
         </Carousel.Item>
         <Carousel.Item className="image">
-        <img src={require('./second.png')} />
+        <img src={require('./second.png')} alt="second"/>
         </Carousel.Item>
         <Carousel.Item className="image">
-          <img src={require('./third.png')} />
+          <img src={require('./third.png')} alt="third"/>
         </Carousel.Item>
         <Carousel.Item className="image">
-          <img src={require('./fifth.png')} />
+          <img src={require('./fifth.png')} alt="fifth"/>
         </Carousel.Item>
       </Carousel>
     </>

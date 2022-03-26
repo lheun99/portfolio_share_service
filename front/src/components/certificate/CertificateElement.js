@@ -4,6 +4,7 @@ import * as Api from '../../api';
 
 import CertificateEdit from './CertificateEdit';
 
+// 자격증 카드를 구성하는 구조
 function CertificateElement({ certificate, isEditable, setCertificateList }) {
     const [edit, setEdit] = useState(false);
     const [show, setShow] = useState(false)
