@@ -68,10 +68,10 @@ function LoginForm() {
 
   return (
     <div id="loginform">
-      <Container style={{margin:110, }}>
+      <Container>
         <Row>
           <Col lg={8}>
-            <Form style={{padding:30, backgroundColor:"rgba(255, 255, 255, 0.6)",borderRadius:20,}} onSubmit={handleSubmit}>
+            <Form style={{margin:110,padding:30, backgroundColor:"rgba(255, 255, 255, 0.6)",borderRadius:20,}} onSubmit={handleSubmit}>
               <Form.Group controlId="loginEmail">
                 <Form.Label>
                   이메일 주소
