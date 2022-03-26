@@ -25,14 +25,12 @@ const CareerEdit = ({ item, onUpdate, editHandler }) => {
     isCurrent,
   })
 
-
   const handleOnChange = (data, name) => {
     setCareerInfo(current => ({
       ...current,
       [name] : data
     }))
   }
-
   // 폼 제출 시 값 update 함수
   const submitHandler = (e) => {
     e.preventDefault();
@@ -106,7 +104,7 @@ const CareerEdit = ({ item, onUpdate, editHandler }) => {
         <div className="col-auto">
           <DatePicker 
             disabled={radioCheck} 
-            selected={radioCheck ? null : (isCurrent ? new Date() : careerInfo.to_date)} 
+            selected={radioCheck ? null : careerInfo.to_date} 
             onChange={date => (handleOnChange(date, 'to_date'))}
           ></DatePicker>
         </div>
@@ -118,9 +116,10 @@ const CareerEdit = ({ item, onUpdate, editHandler }) => {
             onChange={(e) => {
               setRadioCheck(!radioCheck)
               setCareerInfo(cur => {
-                const newObj = {...cur};
-                newObj.isCurrent = !newObj.isCurrent;
-                return newObj;
+                const newObj = {...cur}
+                newObj.isCurrent = !radioCheck;
+                newObj.to_date = new Date();
+                return newObj
               })
             }}
             checked={radioCheck}
