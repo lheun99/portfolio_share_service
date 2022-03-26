@@ -47,8 +47,8 @@ function SearchedProjectCard({ project, setIsEditing, isEditable, isNetwork }) {
           {project?.description}
         </Card.Text>
       </Card.Body>
-      <Card.Text style={{margin: "10px 0 0 20px"}}><div><i className="fa-solid fa-heart" style={{ color:  "gray" }}/>
-            추천 {project.likes}</div></Card.Text>
+      <Card.Text style={{margin: "20px 0 0 20px"}}><div><i className="fa-solid fa-heart" style={{ color:  "#faa6a0" }}/>
+             {project.likes}</div></Card.Text>
       <Card.Text
         style={{
           display: "flex",
