@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import * as Api from '../../api';
 import { UserStateContext } from "../../App";
 
+// 프로젝트를 편집하는 Form
 const ProjectEdit = ({ title, description, link, from_date, to_date, setEdit, id, setProjectList }) => {
     const userState = useContext(UserStateContext);
     // 프로젝트 편집 기능
@@ -22,7 +23,7 @@ const ProjectEdit = ({ title, description, link, from_date, to_date, setEdit, id
           [name] : data
         }))
     }
-
+    // 프로젝트 내용 업데이트
     async function handleSubmit(e) {
         e.preventDefault();
 

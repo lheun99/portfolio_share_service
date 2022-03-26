@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import * as Api from '../../api';
 import { UserStateContext } from "../../App";
 
+// 자격증 내용 편집 Form
 const CertificateEdit = ({ title, description, when_date, setEdit, id, setCertificateList }) => {
     const userState = useContext(UserStateContext);
     const [certificateInfo, setCertificateInfo] = useState({

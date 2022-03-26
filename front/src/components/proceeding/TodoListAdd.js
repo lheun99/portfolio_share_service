@@ -7,6 +7,7 @@ import "./proceeding.css";
 import TodoAddForm from './TodoAddForm';
 import WorkItem from './WorkItem';
 
+// 진행중인 프로젝트 Card
 const TodoListAdd = ({ proceeding, setProceedingList, isEditable }) => {
     const [isWork, setIsWork] = useState(false);
     const [add, setAdd] = useState(false);
@@ -14,7 +15,8 @@ const TodoListAdd = ({ proceeding, setProceedingList, isEditable }) => {
     const [percent, setPercent] = useState(0);
     const [edit, setEdit] = useState(false);
     const [show, setShow] = useState(false);
-
+    
+    // 진행 중인 프로젝트가 삭제되면 해당 프로젝트 안의 할 일 목록도 같이 지워줌
     const handleDelete = async () => {
         await Api.delete('proceedingtodo', proceeding.id);
         await Api.delete('proceedings', proceeding.id);
@@ -34,7 +36,7 @@ const TodoListAdd = ({ proceeding, setProceedingList, isEditable }) => {
 
         setShow(false);
     }
-
+    // 해당 프로젝트의 할 일 목록을 읽어옴
     useEffect(() => {
         Api.get('todolist', proceeding.id)
             .then(res => {
@@ -45,9 +47,12 @@ const TodoListAdd = ({ proceeding, setProceedingList, isEditable }) => {
         }
     }, [proceeding.id])
 
+    // 할 일 목록의 개수를 계산
     const itemLength = useMemo(() => {
         return workItemList.length;
     }, [workItemList]);
+
+    // 할 일 목록을 읽어오고 해당 할 일이 완료된 상태인지 확인
     useEffect(() => {
         let count = 0;
         for (let i = 0; i < workItemList.length; i++) {

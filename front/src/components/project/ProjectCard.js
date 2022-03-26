@@ -4,9 +4,12 @@ import * as Api from '../../api';
 import ProjectList from './ProjectList';
 import ProjectForm from './ProjectForm';
 
+// 프로젝트를 보여주는 Card
 const ProjectCard = ({ portfolioOwnerId, isEditable }) => {
     const [projectList, setProjectList] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
+
+    // 프로젝트 리스트를 DB에서 가져옴
     useEffect(() => {
         Api.get('projectlist', portfolioOwnerId)
             .then(res => setProjectList(res.data));

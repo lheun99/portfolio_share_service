@@ -77,7 +77,6 @@ function App() {
       </div>
     );
   }
-  console.log(userState);
   return (
     <>
       <DispatchContext.Provider value={dispatch}>

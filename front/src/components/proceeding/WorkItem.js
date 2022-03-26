@@ -4,15 +4,18 @@ import * as Api from '../../api';
 import "./proceeding.css";
 import TodoEdit from './TodoEdit';
 
+// 할 일 목록의 각각의 할 일을 구성하는 Form
 const WorkItem = ({ workitem, setPercent, itemLength, index, setWorkItemList, isEditable }) => {
+    // const [check, setCheck] = useState(workitem.finish);
     const [check, setCheck] = useState();
     const [todoEdit, setTodoEdit] = useState(false);
     const [show, setShow] = useState(false);
-
+    // 해당 할 일의 완료 여부 저장
     useEffect(() => {
         setCheck(workitem.finish);
     }, [workitem])
 
+    // 할 일의 완료 여부가 true -> false, false -> true 로 갱신될때 실행
     useEffect(() => {
         setWorkItemList((current) => {
             const newList = [...current];
@@ -20,11 +23,13 @@ const WorkItem = ({ workitem, setPercent, itemLength, index, setWorkItemList, is
             return newList;
         })
 
+        // 모달창으로 인해 생기는 메모리 오류를 없애기 위해 모달창을 컴포넌트가 사라지면 닫아줘야함
         return () => {
             setShow(false)
         }
     }, [check, setWorkItemList, index]);
 
+    // 할 일 목록의 각각의 할일이 true -> false, false -> true될 때마다 해당 프로젝트의 진행률을 갱신
     const handleCheck = (e) => {
         if (check === true) {
             setPercent(current => current - (100 / itemLength))
@@ -34,15 +39,19 @@ const WorkItem = ({ workitem, setPercent, itemLength, index, setWorkItemList, is
             setPercent(current => current + (100 / itemLength))
             setCheck(current => !current);
         }
+        // 사이트를 재접속해도 진행률 유지를 위해 true -> false, false -> true될 때마다 해당 할 일의 완료 여부 DB 저장
         const data = {todo:workitem.todo, finish:!workitem.finish}
         Api.put(`todo/${workitem.id}`, data);
 
         setTodoEdit(false);
     }
+
+    // 한 개의 할 일을 삭제
     const handleDelete = async () => {
         await Api.delete('todo', workitem.id);
         let del_idx = 0;
         
+        // 삭제된 부분을 찾아 해당 부분을 제외하고 state에 저장
         setWorkItemList(current => {
             for (let i = 0; i < current.length; i++) {
                 if (current[i].id === workitem.id) {

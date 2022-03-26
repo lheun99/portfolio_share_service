@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Row, Col, Button, Form } from "react-bootstrap";
 import * as Api from '../../api';
 
-
+// 할 일 목록을 편집하는 Form
 const TodoEdit = ({setTodoEdit, workitem, setWorkItemList}) => {
     const [work, setWork] = useState(workitem.todo);
 
@@ -17,6 +17,7 @@ const TodoEdit = ({setTodoEdit, workitem, setWorkItemList}) => {
             finish:workitem.finish,
         };
         const res = await Api.put(`todo/${workitem.id}`, data);
+        // 편집한 부분을 찾아 업데이트
         setWorkItemList(current => {
             const newTodo = [...current];
             for (let i = 0; i < newTodo.length; i++) {
