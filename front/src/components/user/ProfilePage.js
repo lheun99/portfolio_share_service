@@ -217,12 +217,6 @@ function ProfilePage() {
                     >
                             취소
                         </Button>
-                        <Button
-                          variant="outline-info"
-                          onClick={() => setShow(false)}
-                        >
-                          취소
-                        </Button>
                       </Modal.Footer>
                     </Modal>
                     <Modal
