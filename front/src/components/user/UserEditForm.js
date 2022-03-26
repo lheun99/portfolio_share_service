@@ -76,7 +76,7 @@ function UserEditForm({ user, setUser }) {
 
   // submit 함수
   const handleSubmit = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
 
     // imageupload 코드
     let updatedProfile = { data: profile.currentUrl };
