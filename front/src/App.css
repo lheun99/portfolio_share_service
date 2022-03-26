@@ -1,25 +1,28 @@
+* {
+  font-family: "Lora", "Hahmlet", serif;
+}
 .loading span {
   display: inline-block;
-  margin: 0 -.075em;
-  animation: loading .7s infinite alternate;
+  margin: 0 -0.075em;
+  animation: loading 0.7s infinite alternate;
 }
 .loading span:nth-child(2) {
-  animation-delay: .1s;
+  animation-delay: 0.1s;
 }
 .loading span:nth-child(3) {
-  animation-delay: .2s;
+  animation-delay: 0.2s;
 }
 .loading span:nth-child(4) {
-  animation-delay: .3s;
+  animation-delay: 0.3s;
 }
 .loading span:nth-child(5) {
-  animation-delay: .4s;
+  animation-delay: 0.4s;
 }
 .loading span:nth-child(6) {
-  animation-delay: .5s;
+  animation-delay: 0.5s;
 }
 .loading span:nth-child(7) {
-  animation-delay: .6s;
+  animation-delay: 0.6s;
 }
 @keyframes loading {
   0% {
@@ -27,4 +30,5 @@
   }
   100% {
     transform: scale(0.8);
-  }}
+  }
+}

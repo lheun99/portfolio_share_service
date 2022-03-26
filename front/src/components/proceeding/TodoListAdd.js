@@ -13,7 +13,7 @@ const TodoListAdd = ({ proceeding, setProceedingList, isEditable }) => {
     const [workItemList, setWorkItemList] = useState([]);
     const [percent, setPercent] = useState(0);
     const [edit, setEdit] = useState(false);
-    const [show, setShow] = useState(false)
+    const [show, setShow] = useState(false);
 
     const handleDelete = async () => {
         await Api.delete('proceedingtodo', proceeding.id);
@@ -104,11 +104,11 @@ const TodoListAdd = ({ proceeding, setProceedingList, isEditable }) => {
                                         </Modal.Header>
                                         <br />
                                         <Modal.Footer style={{justifyContent:"center"}}>
-                                        <Button variant="outline-danger" onClick={handleDelete}>
+                                        <Button variant="danger" onClick={handleDelete}>
                                             삭제
                                         </Button>
                                         <Button
-                                            variant="outline-info"
+                                            variant="secondary"
                                             onClick={()=>setShow(false)}
                                         >
                                                 취소
