@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Form, Button, Col, Row } from 'react-bootstrap';
-import './education.css';
+import './EducationAddForm.css';
 // + 버튼 클릭 시 나타나는 create 폼 컴포넌트
 const EducationForm = ({ onCreate, clickHandler }) => {
   // const [schoolInput, setSchoolInput] = useState('');
@@ -38,7 +38,13 @@ const EducationForm = ({ onCreate, clickHandler }) => {
   return (
     <Form style={{ margin: 10, padding: 10, }} onSubmit={submitHandler}>
       <div>
-        <input className="form-control" type="text" list="datalistOptions"  placeholder="학교 이름" name='school' style={{marginBottom:10}}></input>
+        <input 
+          className="form-control" 
+          type="text" list="datalistOptions"  
+          placeholder="학교 이름" 
+          name='school' 
+          style={{marginBottom:10}}
+        ></input>
         <datalist id="datalistOptions">
           {univ.length > 0 && (
             univ.map((u, idx) => <option key={idx} value={u} ></option>)
