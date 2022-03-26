@@ -47,6 +47,13 @@ ProjectSchema.virtual('user', {
   justOne: true,
 });
 
+ProjectSchema.virtual('likes', {
+  ref: 'Like',
+  localField: 'id',
+  foreignField: 'project_id',
+  count: true,
+});
+
 const ProjectModel = model("Project", ProjectSchema);
 
 export { ProjectModel };

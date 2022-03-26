@@ -30,12 +30,15 @@ class Project {
   }
 
   static async findByUserId({ user_id }) {
-    const projects = await ProjectModel.find({ user_id });
+    const projects = await ProjectModel.find({ user_id }).populate('likes');
     return projects;
   }
 
   static async findAllProject() {
-    const projects = await ProjectModel.find({}).populate('user', {name: 1, job: 1, _id: 0});
+    const projects = 
+      await ProjectModel.find({})
+                        .populate('user', {name: 1, job: 1, _id: 0})
+                        .populate('likes');
     return projects;
   }
 
