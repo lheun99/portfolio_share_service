@@ -1,9 +1,0 @@
-#like {
-    cursor:pointer;
-    transition: transform 300ms ease;
-    font-size: 20px;
-}
-
-#like:hover{
-    transform: scale(1.2);
-}
