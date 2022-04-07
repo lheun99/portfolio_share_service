@@ -43,9 +43,13 @@ const deleteImg = async (req, res, next) => {
     objectKey = req.body.prevImage.split("/").slice(-1)[0];
   } else if (req.params.id) {
     objectKey = req.params.id;
+    
   }
   
-  if (objectKey) { 
+  objectKey = objectKey.indexOf("default") === -1 ? objectKey : null;
+
+  if (objectKey !== null) {
+    console.log("이전파일명", objectKey) 
     S3.deleteObject({
       Bucket : bucket_name,
       Key: objectKey,

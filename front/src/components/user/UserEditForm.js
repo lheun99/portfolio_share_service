@@ -30,7 +30,7 @@ function UserEditForm({ user, setUser }) {
       setProfile({
         profileObj: "",
         preview: "",
-        currentUrl: user.profile || defaultImage,
+        currentUrl: user.profile ?? defaultImage,
     });
   }, [user]);
 
@@ -91,7 +91,7 @@ function UserEditForm({ user, setUser }) {
       URL.revokeObjectURL(profile.preview);
     }
 
-    const prevImage = user.profile || null;
+    const prevImage = user.profile ?? null;
 
     // Api postImg로 이미지를 업로드함.
     if (profile.profileObj) {
@@ -111,7 +111,7 @@ function UserEditForm({ user, setUser }) {
       } catch (err) {
         console.log(err.response);
       }
-    } else if (profile.currentUrl == defaultImage && !user.profile) {
+    } else if (profile.currentUrl === defaultImage && profile.currentUrl !== user.profile) {
       const toDelete = user.profile.split("/").slice(-1)[0];
       try {
         await Api.delete("deleteImg", toDelete);
@@ -131,13 +131,13 @@ function UserEditForm({ user, setUser }) {
       instagram: updateUser.instagram,
       youtube: updateUser.youtube,
       password: updateUser.password,
-      profile: updatedProfile.data,
+      profile: updatedProfile.data === defaultImage ? "default" : updatedProfile.data,
     });
     // 해당 유저 정보로 user을 세팅함.
     setUser(res.data);
 
     alert("프로필 정보가 수정되었습니다.");
-    window.location.replace("/");
+    // window.location.replace("/");
   };
 
   // 프로필 페이지의 프로필 카드 설정 부분
