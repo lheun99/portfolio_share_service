@@ -7,6 +7,7 @@ function User({ portfolioOwnerId, isEditable }) {
   // useState 훅을 통해 user 상태를 생성함.
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
+  const defaultImage = "https://team3.cdn.ntruss.com/default.png";
 
   // 직무에 따라 색깔 결정함.
   const colorChange = () => {
@@ -45,7 +46,7 @@ function User({ portfolioOwnerId, isEditable }) {
             }
             style={{ width: "9rem", height: "9rem", cursor: "pointer", borderRadius:72,margin:0,padding:0,}}
             className="mb-3"
-            src={user?.profile}
+            src={user?.profile ?? defaultImage}
             alt="사용자 프로필"
           />
         </Row>

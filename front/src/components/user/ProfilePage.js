@@ -13,6 +13,7 @@ function ProfilePage() {
   const [user, setUser] = useState({});
   const [show, setShow] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const defaultImage = "https://team3.cdn.ntruss.com/default.png";
 
   const colorChange = () => {
     if (user?.job === "프론트엔드") {
@@ -93,7 +94,7 @@ function ProfilePage() {
                     padding: 0,
                   }}
                   className="mb-3"
-                  src={user?.profile}
+                  src={user?.profile ?? defaultImage}
                   alt="사용자 프로필"
                 />
               </Row>

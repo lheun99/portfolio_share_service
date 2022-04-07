@@ -4,6 +4,7 @@ import "./NetworkUserCard.css"
 
 function NetworkUserCard({ user }) {
   const navigate = useNavigate();
+  const defaultImage = "https://team3.cdn.ntruss.com/default.png";
 
   const colorChange = () => {
     if (user?.job === "프론트엔드") {
@@ -33,7 +34,7 @@ function NetworkUserCard({ user }) {
           <Card.Img
             style={{ width: "9rem", height: "9rem", borderRadius: 100, margin:0, padding:0, }}
             className="mb-3"
-            src={user?.profile}
+            src={user?.profile ?? defaultImage}
             alt="사용자 프로필"
           />
         </Row>

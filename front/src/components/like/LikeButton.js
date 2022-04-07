@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as Api from '../../api';
+import "./LikeButton.css";
 
 function LikeButton({ userId, projectId }) {
     const [project, setProject] = useState({});
@@ -34,7 +35,7 @@ function LikeButton({ userId, projectId }) {
         <div>
             <button id="like" onClick={clickHandler} style={{ border: "none", backgroundColor:"transparent" }}>
                 <i className="fa-solid fa-heart" style={{ color: isLiked ? "red" : "gray" }}/></button>
-            추천 {project.likes}
+            &nbsp; {project.likes}
         </div>
     );    
 }
