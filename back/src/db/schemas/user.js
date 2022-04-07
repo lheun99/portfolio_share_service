@@ -29,7 +29,7 @@ const UserSchema = new Schema(
     },
     profile: {
       type: String,
-      default: "https://team3.kr.object.ncloudstorage.com/default.png",
+      default: null,
     },
     github: {
       type: String,

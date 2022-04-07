@@ -43,7 +43,7 @@ passwordResetRouter.post("/password-reset",
         }))
     
         const mailOptions = {
-            from: "전지적 개발자 시점 <dl1rud2dbs3@naver.com>",
+            from: "전지적 개발자 시점 <example@naver.com>",
             to: email,
             subject: "전지적 개발자 시점 임시 비밀번호 발급",
             template: "index",

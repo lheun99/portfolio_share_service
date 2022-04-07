@@ -4,6 +4,7 @@ import * as Api from "../../api";
 import "./ProfilePage.css";
 
 function UserEditForm({ user, setUser }) {
+  const defaultImage = "https://team3.cdn.ntruss.com/default.png";
   const [updateUser, setUpdateUser] = useState({});
 
   const [newPassword, setNewPassword] = useState("");
@@ -29,7 +30,7 @@ function UserEditForm({ user, setUser }) {
       setProfile({
         profileObj: "",
         preview: "",
-        currentUrl: user.profile,
+        currentUrl: user.profile || defaultImage,
     });
   }, [user]);
 
@@ -40,21 +41,27 @@ function UserEditForm({ user, setUser }) {
   }, [newPassword, isCorrectPassword]);
 
   // imageupload 함수
-  // default 이미지로 세팅함.
+  // profileObj : 사용자가 업로드한 사진 객체
+  // currentUrl : 사용자의 현재 프로필 url 혹은 기본 이미지 url
+  // preview : 사용자가 업로드한 사진 미리보기 url (변경사항 저장 전까지 서버에 이미지 업로드 x)
+  
+  // default 이미지로 세팅함. 
+  // (currentUrl => default 이미지)
   const setDefaultHandler = async (e) => {
     e.preventDefault();
 
     setProfile((current) => {
       const newValue = {
         profileObj: "",
-        currentUrl: "https://team3.cdn.ntruss.com/default.png",
+        currentUrl: defaultImage,
         preview: "",
       };
       return newValue;
     });
   };
 
-  // 현재 값으로 이미지 세팅함.
+  // 현재 값으로 이미지 세팅함. 
+  // (profileObj => 업로드한 이미지 객체 , preview => 업로드 이미지 미리보기 url)
   const changeHandler = (e) => {
     e.preventDefault();
 
@@ -79,11 +86,12 @@ function UserEditForm({ user, setUser }) {
     // imageupload 코드
     let updatedProfile = { data: profile.currentUrl };
 
+    // 미리보기 url 삭제
     if (profile.preview) {
       URL.revokeObjectURL(profile.preview);
     }
 
-    const prevImage = user.profile.includes("default") ? "" : user.profile;
+    const prevImage = user.profile || null;
 
     // Api postImg로 이미지를 업로드함.
     if (profile.profileObj) {
@@ -103,7 +111,7 @@ function UserEditForm({ user, setUser }) {
       } catch (err) {
         console.log(err.response);
       }
-    } else if (profile.currentUrl !== user.profile) {
+    } else if (profile.currentUrl == defaultImage && !user.profile) {
       const toDelete = user.profile.split("/").slice(-1)[0];
       try {
         await Api.delete("deleteImg", toDelete);
