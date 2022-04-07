@@ -114,6 +114,7 @@ class userAuthService {
 
     toUpdateField.forEach(key => {
       if (!toUpdate[key]) delete toUpdate[key];
+      if (key === "profile" && toUpdate[key] === "default") toUpdate[key] = null;
     });
 
     toUpdate.projectNum = toUpdate.projectNum ? toUpdate.projectNum : 0;
